@@ -1,2 +1,0 @@
-# Battleship 3k
-
