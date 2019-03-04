@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class JDBCEksempel
+public class JDBCExample
 {
 	public static void main(String[] args)
 	{
@@ -14,9 +14,7 @@ public class JDBCEksempel
 		{
 			Statement statement = con.createStatement();
 			//ResultSet res = "select * from person order by fornavn"
-			statement.execute("insert into ansatt values (1, 'Magnus')");
-			statement.execute("insert into ansatt values (2, 'Åse')");
-			statement.execute("insert into ansatt values (3, 'Anne')");
+			statement.execute("alter table t set thing = 1 where thing = 1");
 		}
 		catch (Exception e)
 		{
