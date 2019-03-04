@@ -15,4 +15,33 @@ public class BattleshipUser {
         this.ratio = wonGames/lostGames;
     }
     
+    public String getUsername()
+    {
+        return username;
+    }
+    
+    public String getPassword()
+    {
+        return password;
+    }
+    
+    public String getEmail()
+    {
+        return email;
+    }
+    
+    public int getWonGames()
+    {
+        return wonGames;
+    }
+    
+    public int getLostGames()
+    {
+        return lostGames;
+    }
+    
+    public double getRatio()
+    {
+        return ratio;
+    }
 }
