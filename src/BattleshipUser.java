@@ -12,17 +12,12 @@ public class BattleshipUser {
         this.email = email;
         this.wonGames = wonGames;
         this.lostGames = lostGames;
-        this.ratio = wonGames/lostGames;
+        this.ratio = calculateRatio();
     }
     
     public String getUsername()
     {
         return username;
-    }
-    
-    public String getPassword()
-    {
-        return password;
     }
     
     public String getEmail()
@@ -43,5 +38,15 @@ public class BattleshipUser {
     public double getRatio()
     {
         return ratio;
+    }
+    
+    private double calculateRatio()
+    {
+    	if(lostGames + wonGames == 0)
+	    {
+	    	return 0;
+	    }
+	    
+	    return wonGames / (wonGames + lostGames);
     }
 }
