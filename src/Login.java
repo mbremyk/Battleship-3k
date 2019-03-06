@@ -3,6 +3,7 @@ import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 import java.sql.*;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,15 +17,15 @@ public abstract class Login {
 	//Funksjoner er static
     public static boolean registerUser(String username, String password, String email) throws Exception{
         if(!usernameExists(username) && !emailExists(email)){
-        	String salt = generateSalt();
-        	//password = saltPassword(password, salt);
+        	byte[] salt = generateSalt();
+        	byte[] hashedPassword = saltPassword(password, salt);
             try(Connection con = DriverManager.getConnection(databaseUrl)){
                 String query = "INSERT INTO BattleshipUser(username,password,email,salt) VALUES(?,?,?,?)";
                 PreparedStatement preparedStatement = con.prepareStatement(query);
                 preparedStatement.setString(1, username);
-	            preparedStatement.setString(2, password);
+	            preparedStatement.setBytes(2, hashedPassword);
 	            preparedStatement.setString(3, email);
-	            preparedStatement.setString(4, salt);
+	            preparedStatement.setBytes(4, salt);
                 preparedStatement.execute();
                 return true;
             }
@@ -43,11 +44,14 @@ public abstract class Login {
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
 	        preparedStatement.setString(1, username);
             ResultSet res = preparedStatement.executeQuery();
-            res.next();
-            String passwordHash = res.getString("password");
-            String salt = res.getString("salt");
-            if (/*saltPassword(password, salt).equals(passwordHash)*/password.equals(res.getString("password"))){
-                return new BattleshipUser(username,password,email,res.getInt("won_games"),res.getInt("lost_games"));
+            if(res.next())
+            {
+	            byte[] passwordHash = res.getBytes("password");
+	            byte[] salt = res.getBytes("salt");
+	            if (Arrays.equals(saltPassword(password, salt), passwordHash)/*password.equals(res.getString("password")*/)
+	            {
+		            return new BattleshipUser(username, password, email, res.getInt("won_games"), res.getInt("lost_games"));
+	            }
             }
         }
         catch(SQLException ex){
@@ -94,36 +98,34 @@ public abstract class Login {
     
 	//https://www.baeldung.com/java-password-hashing
 	//https://www.mkyong.com/java/how-do-convert-byte-array-to-string-in-java/
-    private static String saltPassword(String password, String _salt) throws Exception
+    private static byte[] saltPassword(String password, byte[] salt) throws Exception
     {
-	    byte[] salt = _salt.getBytes();
 	    KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 100, 16);
 	    SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 	    byte[] hash = factory.generateSecret(spec).getEncoded();
-	    return new String(hash);
+	    return hash;
     }
     
-    private static String generateSalt()
+    private static byte[] generateSalt()
     {
 	    SecureRandom secureRandom = new SecureRandom();
 	    byte[] salt = new byte[16];
 	    secureRandom.nextBytes(salt);
-	    return new String(salt);
+	    return salt;
     }
     
     public static void main(String[] args){
         //try{Class.forName("com.mysql.cj.jdbc.Driver");}catch(Exception e){e.printStackTrace();}
-        String username = "Magnus";
+        String username = "Tore";
         String password = "password";
-        String email = "magnus@mail.no";
+        String email = "tore@mail.no";
         try {
             boolean registered = Login.registerUser(username, password, email);
 	        System.out.println(registered);
-	        BattleshipUser bp = Login.login("Magnus","password", "magnus@mail.no");
+	        BattleshipUser bp = Login.login("Tore","password", "tore@mail.no");
 	        System.out.println(bp.getUsername());
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
-
