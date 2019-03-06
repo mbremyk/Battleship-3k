@@ -29,9 +29,13 @@ public abstract class Login {
                 preparedStatement.execute();
                 return true;
             }
-            catch(SQLException ex){
-	            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            catch(SQLException e){
+	            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
                 return false;
+            }
+            catch(Exception e)
+            {
+            	e.printStackTrace();
             }
         }
         return false;
@@ -54,8 +58,8 @@ public abstract class Login {
 	            }
             }
         }
-        catch(SQLException ex){
-	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        catch(SQLException e){
+	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }
@@ -90,8 +94,8 @@ public abstract class Login {
                 }
             }
         }
-        catch(SQLException ex){
-	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        catch(SQLException e){
+	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
@@ -124,8 +128,8 @@ public abstract class Login {
 	        System.out.println(registered);
 	        BattleshipUser bp = Login.login("Tore","password", "tore@mail.no");
 	        System.out.println(bp.getUsername());
-        } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
