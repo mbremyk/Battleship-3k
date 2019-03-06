@@ -4,8 +4,9 @@
  * Handles registering of new users, login of existing users and salting and hashing passwords
  *
  * @Author Brevik Magnus
- * @Author Bjerke homas
+ * @Author Bjerke Thomas
  * @Author Gulaker Kristian
+ * @Author Thorkildsen Torje
  */
 
 import javax.crypto.SecretKeyFactory;
@@ -24,7 +25,7 @@ import java.util.logging.Logger;
 public abstract class Login {
 	
 	private static String databaseUrl = "jdbc:mysql://mysql.stud.idi.ntnu.no:3306/thombje?user=thombje&password=TFWUfjmb";
-	
+
 	//Funksjoner er static
     public static boolean registerUser(String username, String password, String email) throws Exception{
         if(!usernameExists(username) && !emailExists(email)){
@@ -77,8 +78,9 @@ public abstract class Login {
     
     public static boolean usernameExists(String username) throws Exception{
         try(Connection con = DriverManager.getConnection(databaseUrl)){
-	        String query = "SELECT username FROM BattleshipUser";
+	        String query = "SELECT username FROM BattleshipUser";// WHERE username = ?";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
+	        //preparedStatement.setString(1, username);
 	        ResultSet res = preparedStatement.executeQuery();
             
             while(res.next()){
