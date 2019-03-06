@@ -9,6 +9,8 @@
  * @Author Thorkildsen Torje
  */
 
+package database;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
@@ -18,6 +20,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.*;
+
 
 /**
  * Login class
