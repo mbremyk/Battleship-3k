@@ -31,18 +31,19 @@ public abstract class Login {
 	private static String databaseUrl = "jdbc:mysql://mysql.stud.idi.ntnu.no:3306/thombje?user=thombje&password=TFWUfjmb";
 	
 	/**
+	 * Handles registering of a new user with the desired username, password, and email.
+	 * Hashes password using the generateSalt() and saltPassword() functions
 	 *
-	 * @param username
-	 * @param password
-	 * @param email
-	 * @return
-	 * @throws Exception
+	 * @param username String containing the desired username
+	 * @param password String containing the desired password
+	 * @param email String containing the desired email address
+	 * @return boolean representing whether the registering of a new user was successful or not. Returns true if user was registered, and false if a user with either the same email or the same password already exists
 	 */
-    public static boolean registerUser(String username, String password, String email) throws Exception{
+    public static boolean registerUser(String username, String password, String email){
         if(!usernameExists(username) && !emailExists(email)){
-        	byte[] salt = generateSalt();
-        	byte[] hashedPassword = saltPassword(password, salt);
             try(Connection con = DriverManager.getConnection(databaseUrl)){
+	            byte[] salt = generateSalt();
+	            byte[] hashedPassword = saltPassword(password, salt);
                 String query = "INSERT INTO BattleshipUser(username,password,email,salt) VALUES(?,?,?,?)";
                 PreparedStatement preparedStatement = con.prepareStatement(query);
                 preparedStatement.setString(1, username);
@@ -72,8 +73,7 @@ public abstract class Login {
 	 * @return
 	 * @throws Exception
 	 */
-	public static BattleshipUser login(String username, String password, String email) throws Exception{
-        Scanner scanner = new Scanner(System.in);
+	public static BattleshipUser login(String username, String password, String email) {
         try(Connection con = DriverManager.getConnection(databaseUrl)){
             String query = "SELECT * FROM BattleshipUser WHERE username = ?";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
@@ -92,6 +92,10 @@ public abstract class Login {
         catch(SQLException e){
 	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
+        catch (Exception e)
+        {
+	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+        }
         return null;
     }
 	
@@ -99,9 +103,8 @@ public abstract class Login {
 	 *
 	 * @param username
 	 * @return
-	 * @throws Exception
 	 */
-	public static boolean usernameExists(String username) throws Exception{
+	public static boolean usernameExists(String username) {
         try(Connection con = DriverManager.getConnection(databaseUrl)){
 	        String query = "SELECT username FROM BattleshipUser";// WHERE username = ?";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
@@ -126,7 +129,7 @@ public abstract class Login {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean emailExists(String email) throws Exception{
+	public static boolean emailExists(String email) {
         try(Connection con = DriverManager.getConnection(databaseUrl)){
 	        String query = "SELECT email FROM BattleshipUser";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
