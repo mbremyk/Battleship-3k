@@ -19,13 +19,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
+ * Login class
  */
 public abstract class Login {
 	
 	private static String databaseUrl = "jdbc:mysql://mysql.stud.idi.ntnu.no:3306/thombje?user=thombje&password=TFWUfjmb";
 	
-	//Funksjoner er static
+	/**
+	 *
+	 * @param username
+	 * @param password
+	 * @param email
+	 * @return
+	 * @throws Exception
+	 */
     public static boolean registerUser(String username, String password, String email) throws Exception{
         if(!usernameExists(username) && !emailExists(email)){
         	byte[] salt = generateSalt();
@@ -51,8 +58,16 @@ public abstract class Login {
         }
         return false;
     }
-    
-    public static BattleshipUser login(String username, String password, String email) throws Exception{
+	
+	/**
+	 *
+	 * @param username
+	 * @param password
+	 * @param email
+	 * @return
+	 * @throws Exception
+	 */
+	public static BattleshipUser login(String username, String password, String email) throws Exception{
         Scanner scanner = new Scanner(System.in);
         try(Connection con = DriverManager.getConnection(databaseUrl)){
             String query = "SELECT * FROM BattleshipUser WHERE username = ?";
@@ -74,8 +89,14 @@ public abstract class Login {
         }
         return null;
     }
-    
-    public static boolean usernameExists(String username) throws Exception{
+	
+	/**
+	 *
+	 * @param username
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean usernameExists(String username) throws Exception{
         try(Connection con = DriverManager.getConnection(databaseUrl)){
 	        String query = "SELECT username FROM BattleshipUser";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
@@ -92,8 +113,14 @@ public abstract class Login {
         }
         return false;
     }
-    
-    public static boolean emailExists(String email) throws Exception{
+	
+	/**
+	 *
+	 * @param email
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean emailExists(String email) throws Exception{
         try(Connection con = DriverManager.getConnection(databaseUrl)){
 	        String query = "SELECT email FROM BattleshipUser";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
@@ -110,9 +137,17 @@ public abstract class Login {
         }
         return false;
     }
-    
-	//https://www.baeldung.com/java-password-hashing
-	//https://www.mkyong.com/java/how-do-convert-byte-array-to-string-in-java/
+	
+	/**
+	 *
+	 * @param password
+	 * @param salt
+	 * @return
+	 * @throws Exception
+	 *
+	 * //https://www.baeldung.com/java-password-hashing
+	 * //https://www.mkyong.com/java/how-do-convert-byte-array-to-string-in-java/
+	 */
     private static byte[] saltPassword(String password, byte[] salt) throws Exception
     {
 	    KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 100, 16);
@@ -120,16 +155,24 @@ public abstract class Login {
 	    byte[] hash = factory.generateSecret(spec).getEncoded();
 	    return hash;
     }
-    
-    private static byte[] generateSalt()
+	
+	/**
+	 *
+	 * @return
+	 */
+	private static byte[] generateSalt()
     {
 	    SecureRandom secureRandom = new SecureRandom();
 	    byte[] salt = new byte[16];
 	    secureRandom.nextBytes(salt);
 	    return salt;
     }
-    
-    public static void main(String[] args){
+	
+	/**
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args){
         //try{Class.forName("com.mysql.cj.jdbc.Driver");}catch(Exception e){e.printStackTrace();}
         String username = "Tore";
         String password = "password";
