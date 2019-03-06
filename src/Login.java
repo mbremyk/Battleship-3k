@@ -1,3 +1,13 @@
+/**
+ * Login.java
+ *
+ * Handles registering of new users, login of existing users and salting and hashing passwords
+ *
+ * @Author Brevik Magnus
+ * @Author Bjerke homas
+ * @Author Gulaker Kristian
+ */
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
@@ -8,11 +18,12 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//Gjør klassen abstract
+/**
+ * 
+ */
 public abstract class Login {
 	
 	private static String databaseUrl = "jdbc:mysql://mysql.stud.idi.ntnu.no:3306/thombje?user=thombje&password=TFWUfjmb";
- 
 	
 	//Funksjoner er static
     public static boolean registerUser(String username, String password, String email) throws Exception{
