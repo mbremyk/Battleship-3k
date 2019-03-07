@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_13.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_13.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship 3k/BattleshipUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship 3k/JDBCExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship 3k/Login.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship 3k/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship 3k/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/JDBCExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/JDBCExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/BattleshipUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/BattleshipUser.java" afterDir="false" />
-    </list>
+    <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +66,8 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -108,8 +97,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/database/Login.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="133" column="43" lean-forward="true" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
+            <state relative-caret-position="398">
+              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -286,16 +275,18 @@
       <workItem from="1551707510073" duration="8864000" />
       <workItem from="1551863142573" duration="4192000" />
       <workItem from="1551870876223" duration="8453000" />
+      <workItem from="1551956846643" duration="89000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28119000" />
+    <option name="totallyTimeSpent" value="28208000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="919" y="0" width="1008" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2299578" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11886994" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -395,9 +386,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="1365" selection-start-line="1365" selection-end-line="1365" />
-          <folding>
-            <element signature="e#55829#55830#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -412,9 +400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="219" selection-start-line="219" selection-end-line="219" />
-          <folding>
-            <element signature="e#8112#8113#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -422,10 +407,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
           <caret line="331" column="30" selection-start-line="331" selection-start-column="30" selection-end-line="331" selection-end-column="30" />
-          <folding>
-            <element signature="e#24329#24330#0" expanded="true" />
-            <element signature="e#24394#24395#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -433,9 +414,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="333" selection-start-line="333" selection-end-line="333" />
-          <folding>
-            <element signature="e#11597#11598#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -443,9 +421,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="2034" selection-start-line="2034" selection-end-line="2034" />
-          <folding>
-            <element signature="e#83250#83251#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -460,10 +435,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="242" selection-start-line="242" selection-end-line="242" />
-          <folding>
-            <element signature="e#4546#4547#0" expanded="true" />
-            <element signature="e#4588#4589#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -490,8 +461,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/Login.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="133" column="43" lean-forward="true" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
+        <state relative-caret-position="398">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
