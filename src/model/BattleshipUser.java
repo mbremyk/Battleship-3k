@@ -49,6 +49,6 @@ public class BattleshipUser {
 	    	return 0;
 	    }
 	    
-	    return wonGames / (wonGames + lostGames);
+	    return (double)wonGames / (double)(wonGames + lostGames);
     }
 }
