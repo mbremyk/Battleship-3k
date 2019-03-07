@@ -1,3 +1,5 @@
+package database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -8,7 +10,7 @@ public class JDBCExample
 	{
 		System.out.println("Starter opp...");
 		
-		String url = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/magbre?user=magbre&password=cH96AClM";
+		String url = "jdbc:mysql://mysql.stud.idi.ntnu.no:3306/thombje?user=thombje&password=TFWUfjmb";
 		
 		try (Connection con = DriverManager.getConnection(url);)
 		{
