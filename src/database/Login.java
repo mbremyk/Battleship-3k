@@ -23,6 +23,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
+import com.mysql.jdbc.Driver;
 
 import static database.Constants.*;
 
@@ -31,7 +32,7 @@ import static database.Constants.*;
  */
 public abstract class Login {
 	
-	private static String databaseUrl = "jdbc:mysql://mysql.stud.idi.ntnu.no:3306/thombje?user=thombje&password=TFWUfjmb";
+	private static String databaseUrl = Constants.DB_URL;
 	
 	/**
 	 * Handles registering of a new user with the desired username, password, and email.
@@ -82,7 +83,7 @@ public abstract class Login {
                 byte[] passwordHash = res.getBytes("password");
                 byte[] salt = res.getBytes("salt");
                 if (Arrays.equals(saltPassword(password, salt), passwordHash)/*password.equals(res.getString("password")*/) {
-                    return new BattleshipUser(username, password, res.getString("email"), res.getInt("won_games"), res.getInt("lost_games"));
+                    return new BattleshipUser(username, password, res.getString(USERS_EMAIL), res.getInt("won_games"), res.getInt("lost_games"));
                 }
             }
         } catch (SQLException e) {
@@ -108,17 +109,17 @@ public abstract class Login {
 	        preparedStatement.setString(1, username);
 	        ResultSet res = preparedStatement.executeQuery();
             
-            while(res.next()){
-                if(username == res.getString("username")){
+            if(res.next()){
+                if(username == res.getString(USERS_USERNAME)){
                     return true;
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e);
+	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
         catch(Exception e)
         {
-        
+	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
@@ -131,17 +132,20 @@ public abstract class Login {
 	 */
 	public static boolean emailExists(String email) {
         try(Connection con = DriverManager.getConnection(databaseUrl)){
-	        String query = "SELECT email FROM BattleshipUser";
+	        String query = "SELECT email FROM BattleshipUser WHERE email = ?";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
+	        preparedStatement.setString(1, email);
 	        ResultSet res = preparedStatement.executeQuery();
             
-            while(res.next()){
-                if(email.equals(res.getString("email"))){
+            if(res.next()){
+                if(email.equals(res.getString(USERS_EMAIL))){
                     return true;
                 }
             }
         } catch (SQLException e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+        } catch (Exception e) {
+	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
@@ -154,7 +158,6 @@ public abstract class Login {
 	 * @return byte[] representing the hashed password
 	 *
 	 * //https://www.baeldung.com/java-password-hashing
-	 * //https://www.mkyong.com/java/how-do-convert-byte-array-to-string-in-java/
 	 */
     private static byte[] saltPassword(String password, byte[] salt) throws Exception
     {
@@ -167,7 +170,7 @@ public abstract class Login {
 	/**
 	 * Generates a secure random salt for hashing passwords
 	 *
-	 * @return
+	 * @return byte[] with secure random generated salt
 	 */
 	private static byte[] generateSalt()
     {

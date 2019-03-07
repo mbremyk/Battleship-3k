@@ -15,6 +15,7 @@ public class Constants {
     public static final String DB_USER = "thombje";
     public static final String DB_PASSWORD = "TFWUfjmb";
     public static final String DB_NAME = "thombje";
+	public static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password=" + DB_PASSWORD;
 
     //USERS Table Column Names
     public static final String USERS_TABLE = "BattleshipUser";
