@@ -48,7 +48,7 @@ public abstract class Login {
             try(Connection con = DriverManager.getConnection(databaseUrl)){
 	            byte[] salt = generateSalt();
 	            byte[] hashedPassword = saltPassword(password, salt);
-                String query = "INSERT INTO BattleshipUser(username,password,email,salt) VALUES(?,?,?,?)";
+                String query = "INSERT INTO " + USERS_TABLE + "(" + USERS_USERNAME + "," + USERS_PASSWORD + "," + USERS_EMAIL + "," + USERS_SALT + ") VALUES(?,?,?,?)";
                 PreparedStatement preparedStatement = con.prepareStatement(query);
                 preparedStatement.setString(1, username);
                 preparedStatement.setBytes(2, hashedPassword);
@@ -75,15 +75,15 @@ public abstract class Login {
 	 */
 	public static BattleshipUser login(String username, String password) {
         try(Connection con = DriverManager.getConnection(databaseUrl)){
-            String query = "SELECT * FROM BattleshipUser WHERE username = ?";
+            String query = "SELECT * FROM " + USERS_TABLE + " WHERE " + USERS_USERNAME + " = ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, username);
             ResultSet res = preparedStatement.executeQuery();
             if (res.next()) {
-                byte[] passwordHash = res.getBytes("password");
-                byte[] salt = res.getBytes("salt");
-                if (Arrays.equals(saltPassword(password, salt), passwordHash)/*password.equals(res.getString("password")*/) {
-                    return new BattleshipUser(username, password, res.getString(USERS_EMAIL), res.getInt("won_games"), res.getInt("lost_games"));
+                byte[] passwordHash = res.getBytes(USERS_PASSWORD);
+                byte[] salt = res.getBytes(USERS_SALT);
+                if (Arrays.equals(saltPassword(password, salt), passwordHash)) {    //password.equals(res.getString("password") for unhashed passwords
+                    return new BattleshipUser(username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
                 }
             }
         } catch (SQLException e) {
@@ -104,15 +104,13 @@ public abstract class Login {
 	 */
 	public static boolean usernameExists(String username) {
         try(Connection con = DriverManager.getConnection(databaseUrl)){
-	        String query = "SELECT username FROM BattleshipUser WHERE username = ?";
+	        String query = "SELECT " + USERS_USERNAME + " FROM " + USERS_TABLE + " WHERE " + USERS_USERNAME + " = ?";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
 	        preparedStatement.setString(1, username);
 	        ResultSet res = preparedStatement.executeQuery();
             
             if(res.next()){
-                if(username == res.getString(USERS_USERNAME)){
-                    return true;
-                }
+                return true;
             }
         } catch (SQLException e) {
 	        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
@@ -132,7 +130,7 @@ public abstract class Login {
 	 */
 	public static boolean emailExists(String email) {
         try(Connection con = DriverManager.getConnection(databaseUrl)){
-	        String query = "SELECT email FROM BattleshipUser WHERE email = ?";
+	        String query = "SELECT " + USERS_EMAIL + " FROM " + USERS_TABLE + " WHERE " + USERS_EMAIL + " = ?";
 	        PreparedStatement preparedStatement = con.prepareStatement(query);
 	        preparedStatement.setString(1, email);
 	        ResultSet res = preparedStatement.executeQuery();
