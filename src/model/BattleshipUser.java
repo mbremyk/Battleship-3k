@@ -1,3 +1,5 @@
+package model;
+
 public class BattleshipUser {
     private String username;
     private String password;
