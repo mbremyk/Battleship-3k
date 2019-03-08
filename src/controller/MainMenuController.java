@@ -2,7 +2,10 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,6 +16,9 @@ public class MainMenuController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private AnchorPane rootPane;
 
     @FXML
     private JFXButton MainMenuLoginButton;
@@ -46,7 +52,23 @@ public class MainMenuController {
         assert MainMenuOptionsButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
 
         MainMenuSignupButton.setOnAction(event -> {
-            System.out.println("Shreeeek");
+            try {
+                AnchorPane formPane = formPane = FXMLLoader.load(getClass().getResource("/view/SignupMenu.fxml"));
+                rootPane.getChildren().setAll(formPane);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        MainMenuLoginButton.setOnAction(event -> {
+            try {
+                AnchorPane formPane = formPane = FXMLLoader.load(getClass().getResource("/view/LoginMenu.fxml"));
+                rootPane.getChildren().setAll(formPane);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
+
+
 }

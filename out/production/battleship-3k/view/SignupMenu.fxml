@@ -39,16 +39,53 @@
             <Font name="PixelTorje" size="36.0" />
          </font>
       </JFXButton>
-      <TextField layoutX="290.0" layoutY="234.0" prefHeight="25.0" prefWidth="220.0" />
-      <JFXTextField layoutX="290.0" layoutY="275.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField layoutX="290.0" layoutY="234.0" prefHeight="25.0" prefWidth="220.0" promptText="shrek">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
       <AnchorPane layoutY="159.0" prefHeight="46.0" prefWidth="800.0" style="-fx-background-color: #1565c0;">
          <children>
-            <Text layoutX="361.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" textAlignment="CENTER" wrappingWidth="92.13671875">
+            <Text fill="WHITE" layoutX="341.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" textAlignment="CENTER" wrappingWidth="118.0">
                <font>
-                  <Font name="PixelTorje" size="30.0" />
+                  <Font name="PixelTorje" size="36.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
+      <Text layoutX="159.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" textAlignment="RIGHT" wrappingWidth="118.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="159.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" textAlignment="RIGHT" wrappingWidth="118.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Text>
+      <TextField layoutX="290.0" layoutY="281.0" prefHeight="25.0" prefWidth="220.0" promptText="shrek@hotmail.no">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <PasswordField layoutX="290.0" layoutY="330.0" prefHeight="30.0" prefWidth="220.0" promptText="1234">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+      <Text layoutX="159.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" textAlignment="RIGHT" wrappingWidth="118.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Text>
+      <PasswordField layoutX="290.0" layoutY="380.0" prefHeight="30.0" prefWidth="220.0" promptText="1234">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+      <Text layoutX="79.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm password" textAlignment="RIGHT" wrappingWidth="198.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
