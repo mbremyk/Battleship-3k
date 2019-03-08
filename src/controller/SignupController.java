@@ -1,8 +1,10 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -49,13 +51,17 @@ public class SignupController extends ViewComponent {
 
         SignupSignupButton.setOnAction(event -> {
             //TODO, this is where we add the new user to the database, if it is valid
-            System.out.println("TODO, see view/SignupController.java");
+            System.out.println("TODO, see view/SignupController.java, but:\n" +
+                    "Username = " + SignupUsernameField.getText() +
+                    "\nEmail = " + SignupEmailField.getText() +
+                    "\nPassword = " + SignupPasswordField.getText() +
+                    "\nConfirmed password = " + SignupConfirmPasswordField.getText());
         });
 
     }
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane)SignupCancelButton.getParent();
+        return (AnchorPane) SignupCancelButton.getParent();
     }
 }

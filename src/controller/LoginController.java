@@ -44,7 +44,9 @@ public class LoginController extends ViewComponent{
 
         LoginLoginButton.setOnAction(event -> {
             //TODO, this is where we check if the username and password are valid
-            System.out.println("TODO, see view/LoginController.java");
+            System.out.println("TODO, see view/LoginController.java, but:\n" +
+                    "Username = " +LoginUsernameField.getText()+
+                    "\nPassword = " +LoginPasswordField.getText());
         });
 
     }
