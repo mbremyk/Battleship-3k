@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuController {
+public class MainMenuController extends ViewComponent {
 
     @FXML
     private ResourceBundle resources;
@@ -45,7 +45,24 @@ public class MainMenuController {
         assert MainMenuFeedbackButton != null : "fx:id=\"MainMenuFeedbackButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuOptionsButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
 
+        MainMenuJoinButton.setOnAction(event -> {
+            System.out.println("Does nothing as of now");
+        });
+        MainMenuHostButton.setOnAction(event -> {
+            System.out.println("Does nothing as of now");
+        });
+        MainMenuOptionsButton.setOnAction(event -> {
+            System.out.println("Does nothing as of now");
+        });
+        MainMenuFeedbackButton.setOnAction(event -> {
+            System.out.println("Does nothing as of now");
+        });
+
     }
 
+    @Override
+    protected AnchorPane getParentAnchorPane() {
+        return (AnchorPane)MainMenuHostButton.getParent();
+    }
 
 }

@@ -1,11 +1,17 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
-public class LoginController {
+public class LoginController extends ViewComponent{
 
     @FXML
     private ResourceBundle resources;
@@ -14,15 +20,37 @@ public class LoginController {
     private URL location;
 
     @FXML
-    private JFXButton MainMenuJoinButton;
+    private PasswordField LoginPasswordField;
 
     @FXML
-    private JFXButton MainMenuFeedbackButton;
+    private JFXButton LoginCancelButton;
+
+    @FXML
+    private JFXButton LoginLoginButton;
+
+    @FXML
+    private TextField LoginUsernameField;
 
     @FXML
     void initialize() {
-        assert MainMenuJoinButton != null : "fx:id=\"MainMenuJoinButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert MainMenuFeedbackButton != null : "fx:id=\"MainMenuFeedbackButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert LoginPasswordField != null : "fx:id=\"LoginPasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert LoginCancelButton != null : "fx:id=\"LoginCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert LoginLoginButton != null : "fx:id=\"LoginLoginButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert LoginUsernameField != null : "fx:id=\"LoginUsernameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
 
+        LoginCancelButton.setOnAction(event -> {
+            switchView("MainMenu");
+        });
+
+        LoginLoginButton.setOnAction(event -> {
+            //TODO, this is where we check if the username and password are valid
+            System.out.println("TODO, see view/LoginController.java");
+        });
+
+    }
+
+    @Override
+    protected AnchorPane getParentAnchorPane() {
+        return (AnchorPane)LoginCancelButton.getParent();
     }
 }
