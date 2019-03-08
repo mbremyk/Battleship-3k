@@ -32,6 +32,10 @@ public class MainMenuController {
     @FXML
     private JFXButton MainMenuOptionsButton;
 
+    /**
+     * Standard JavaFX method
+     */
+
     @FXML
     void initialize() {
         assert MainMenuLoginButton != null : "fx:id=\"MainMenuLoginButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
@@ -41,5 +45,8 @@ public class MainMenuController {
         assert MainMenuFeedbackButton != null : "fx:id=\"MainMenuFeedbackButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuOptionsButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
 
+        MainMenuSignupButton.setOnAction(event -> {
+            System.out.println("Shreeeek");
+        });
     }
 }
