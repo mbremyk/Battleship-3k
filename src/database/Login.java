@@ -19,11 +19,9 @@ import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 import java.sql.*;
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.*;
-import com.mysql.jdbc.Driver;
 
 import static database.Constants.*;
 
@@ -156,6 +154,7 @@ public abstract class Login {
 	 * @return byte[] representing the hashed password
 	 *
 	 * //https://www.baeldung.com/java-password-hashing
+	 * //https://docs.oracle.com/javase/6/docs/api/java/security/SecureRandom.html#getInstance(java.lang.String)
 	 */
     private static byte[] saltPassword(String password, byte[] salt) throws Exception
     {
