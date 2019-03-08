@@ -10,7 +10,7 @@ public class Main extends Application {
 
 	/**
 	 * Overridden method from Application in JavaFX
-	 * Called in the JavaFX Main Thread when the application is ready to run
+	 * Called in the JavaFX Application Thread when the application is ready to run
 	 * @param primaryStage
 	 */
 	@Override
