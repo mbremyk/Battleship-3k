@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -29,6 +30,9 @@ public class LoginController extends ViewComponent{
     private JFXButton LoginLoginButton;
 
     @FXML
+    private Hyperlink LoginForgotPasswordLink;
+
+    @FXML
     private TextField LoginUsernameField;
 
     @FXML
@@ -36,7 +40,9 @@ public class LoginController extends ViewComponent{
         assert LoginPasswordField != null : "fx:id=\"LoginPasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert LoginCancelButton != null : "fx:id=\"LoginCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert LoginLoginButton != null : "fx:id=\"LoginLoginButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert LoginForgotPasswordLink != null : "fx:id=\"LoginForgotPasswordLink\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert LoginUsernameField != null : "fx:id=\"LoginUsernameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+
 
         LoginCancelButton.setOnAction(event -> {
             switchView("MainMenu");

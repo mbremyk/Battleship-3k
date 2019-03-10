@@ -34,6 +34,7 @@ public class MainMenuController extends ViewComponent {
 
     @FXML
     private JFXButton MainMenuOptionsButton;
+
     /**
      * Standard JavaFX method
      */
@@ -46,23 +47,23 @@ public class MainMenuController extends ViewComponent {
         assert MainMenuOptionsButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
 
         MainMenuJoinButton.setOnAction(event -> {
-            System.out.println("Does nothing as of now");
+            switchView("JoinGameMenu");
         });
         MainMenuHostButton.setOnAction(event -> {
-            System.out.println("Does nothing as of now");
+            switchView("HostGameMenu");
         });
         MainMenuOptionsButton.setOnAction(event -> {
-            System.out.println("Does nothing as of now");
+            switchView("OptionsMenu");
         });
         MainMenuFeedbackButton.setOnAction(event -> {
-            System.out.println("Does nothing as of now");
+            switchView("FeedbackMenu");
         });
 
     }
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane)MainMenuHostButton.getParent();
+        return (AnchorPane) MainMenuHostButton.getParent();
     }
 
 }
