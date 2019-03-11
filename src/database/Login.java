@@ -54,6 +54,16 @@ public abstract class Login
 	}
 	
 	/**
+	 * Overload of registerUser. Calls registerUser(String username, String password, String email)
+	 *
+	 * @param user BattleshipUser with information about the user
+	 * @return boolean representing whether the registering of a new user was successful or not. Returns true if user was registered, and false if a user with either the same email or the same password already exists
+	 */
+	public static boolean registerUser(BattleshipUser user){
+		return registerUser(user.getUsername(),user.getPassword(), user.getEmail());
+	}
+	
+	/**
 	 * Handles logging in with an existing user.
 	 *
 	 * @param username String containing the username of the user
