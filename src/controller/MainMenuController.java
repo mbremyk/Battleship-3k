@@ -1,24 +1,27 @@
+/**
+ * controller.LoginController.java
+ *
+ * @Author Thorkildsen Torje
+ */
+
 package controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuController {
+public class MainMenuController extends ViewComponent {
 
     @FXML
     private ResourceBundle resources;
 
     @FXML
     private URL location;
-
-    @FXML
-    private JFXButton MainMenuLoginButton;
-
-    @FXML
-    private JFXButton MainMenuSignupButton;
 
     @FXML
     private JFXButton MainMenuHostButton;
@@ -32,14 +35,35 @@ public class MainMenuController {
     @FXML
     private JFXButton MainMenuOptionsButton;
 
+    /**
+     * Standard JavaFX method
+     */
+
     @FXML
     void initialize() {
-        assert MainMenuLoginButton != null : "fx:id=\"MainMenuLoginButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert MainMenuSignupButton != null : "fx:id=\"MainMenuSignupButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuHostButton != null : "fx:id=\"MainMenuHostButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuJoinButton != null : "fx:id=\"MainMenuJoinButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuFeedbackButton != null : "fx:id=\"MainMenuFeedbackButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuOptionsButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
 
+        MainMenuJoinButton.setOnAction(event -> {
+            switchView("JoinGameMenu");
+        });
+        MainMenuHostButton.setOnAction(event -> {
+            switchView("HostGameMenu");
+        });
+        MainMenuOptionsButton.setOnAction(event -> {
+            switchView("OptionsMenu");
+        });
+        MainMenuFeedbackButton.setOnAction(event -> {
+            switchView("FeedbackMenu");
+        });
+
     }
+
+    @Override
+    protected AnchorPane getParentAnchorPane() {
+        return (AnchorPane) MainMenuHostButton.getParent();
+    }
+
 }
