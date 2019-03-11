@@ -1,3 +1,8 @@
+/**
+ *
+ *
+ * @Author Thorkildsen Torje
+ */
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -34,6 +39,10 @@ public class LoginController extends ViewComponent{
 
     @FXML
     private TextField LoginUsernameField;
+
+    /**
+     *
+     */
 
     @FXML
     void initialize() {

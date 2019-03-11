@@ -1,3 +1,8 @@
+/**
+ *
+ *
+ * @Author Thorkildsen Torje
+ */
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -17,6 +22,9 @@ public class OptionsController extends ViewComponent {
     @FXML
     private JFXButton OptionsCancelButton;
 
+    /**
+     *
+     */
     @FXML
     void initialize() {
         assert OptionsCancelButton != null : "fx:id=\"LoginCancelButton\" was not injected: check your FXML file 'OptionsMenu.fxml'.";

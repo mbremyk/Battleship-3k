@@ -5,7 +5,6 @@
  *
  * @Author Thorkildsen Torje
  */
-
 package controller;
 
 import javafx.fxml.FXMLLoader;

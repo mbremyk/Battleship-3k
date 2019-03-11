@@ -27,7 +27,7 @@
             <Font name="PixelTorje" size="36.0" />
          </font>
       </JFXButton>
-      <TableView layoutX="163.0" layoutY="84.0" prefHeight="200.0" prefWidth="474.0">
+      <TableView fx:id="JoinGameGamesTable" layoutX="163.0" layoutY="84.0" prefHeight="200.0" prefWidth="474.0">
         <columns>
           <TableColumn prefWidth="129.0" text="Game name" />
           <TableColumn prefWidth="127.0" text="Host user" />

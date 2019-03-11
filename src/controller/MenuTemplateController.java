@@ -1,3 +1,8 @@
+/**
+ *
+ *
+ * @Author Thorkildsen Torje
+ */
 package controller;
 
 import com.jfoenix.controls.JFXButton;
