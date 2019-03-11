@@ -1,3 +1,8 @@
+/**
+ * Models a the users we store information about in the database
+ *
+ * @Author Thorkildsen Torje
+ */
 package model;
 
 public class BattleshipUser {
@@ -7,8 +12,8 @@ public class BattleshipUser {
     private int wonGames;
     private int lostGames;
     private double ratio;
-    
-    public BattleshipUser(String username, String password, String email, int wonGames, int lostGames){
+
+    public BattleshipUser(String username, String password, String email, int wonGames, int lostGames) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -16,9 +21,12 @@ public class BattleshipUser {
         this.lostGames = lostGames;
         this.ratio = calculateRatio();
     }
-    
-    public String getUsername()
-    {
+
+    public BattleshipUser(String username, String password, String email) {
+        this(username, password, email, 0, 0);
+    }
+
+    public String getUsername() {
         return username;
     }
     
@@ -28,29 +36,24 @@ public class BattleshipUser {
     {
         return email;
     }
-    
-    public int getWonGames()
-    {
+
+    public int getWonGames() {
         return wonGames;
     }
-    
-    public int getLostGames()
-    {
+
+    public int getLostGames() {
         return lostGames;
     }
-    
-    public double getRatio()
-    {
+
+    public double getRatio() {
         return ratio;
     }
-    
-    private double calculateRatio()
-    {
-    	if(lostGames + wonGames == 0)
-	    {
-	    	return 0;
-	    }
-	    
-	    return (double)wonGames / (double)(wonGames + lostGames);
+
+    private double calculateRatio() {
+        if (lostGames + wonGames == 0) {
+            return 0;
+        }
+
+        return (double) wonGames / (double) (wonGames + lostGames);
     }
 }
