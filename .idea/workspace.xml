@@ -1,54 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/battleship-3k.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Battleship 3k/view/SignupMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/FeedbackController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/HostGameController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/JoinGameController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/LoginController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/MainMenuController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/MenuTemplateController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/OptionsController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/SignupController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/ViewComponent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/database/Constants.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/database/Login.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/model/BattleshipUser.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/FeedbackMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/HostGameMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/JoinGameMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/LoginMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/MainMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/MenuTemplate.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/OptionsMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/SignupMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/FeedbackController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/HostGameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/JoinGameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/MenuTemplateController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/OptionsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/SignupController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/ViewComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/FeedbackMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/HostGameMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/JoinGameMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/LoginMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/MenuTemplate.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/OptionsMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/SignupMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship 3k/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Battleship 3k/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship 3k/database/JDBCExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/database/JDBCExample.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship 3k/database/Login.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Battleship 3k/model/BattleshipUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainMenu.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +14,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
+            <state relative-caret-position="442">
               <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
               <folding>
                 <element signature="e#741#742#0" expanded="true" />
@@ -74,7 +27,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database/DatabaseConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1020">
+            <state>
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -111,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="68">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -123,7 +76,6 @@
             <state relative-caret-position="68">
               <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -176,7 +128,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -194,6 +145,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -258,12 +210,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30502000" />
+    <option name="totallyTimeSpent" value="30508000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15488432" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15681234" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -341,12 +294,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/JoinGameController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -404,8 +353,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="68">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
@@ -414,7 +363,6 @@
         <state relative-caret-position="68">
           <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -445,7 +393,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
+        <state relative-caret-position="442">
           <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
           <folding>
             <element signature="e#741#742#0" expanded="true" />
@@ -456,7 +404,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/DatabaseConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1020">
+        <state>
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
