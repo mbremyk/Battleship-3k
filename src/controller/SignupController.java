@@ -114,10 +114,10 @@ public class SignupController extends ViewComponent {
         } else if (SignupUsernameField.getText().equals("")) {
             SignupHelpText.setText("Username can't be empty");
             return false;
-        } else if (!Login.usernameExists(SignupUsernameField.getText())) {
+        } else if (Login.usernameExists(SignupUsernameField.getText())) {
             SignupHelpText.setText("That username is already in use");
             return false;
-        } else if (!Login.emailExists(SignupEmailField.getText())) {
+        } else if (Login.emailExists(SignupEmailField.getText())) {
             SignupHelpText.setText("That email is already in use");
             return false;
         } else if (SignupEmailField.getText().indexOf('@') <= 0 || SignupEmailField.getText().indexOf('.') <= 2) {

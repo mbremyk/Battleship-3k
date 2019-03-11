@@ -49,6 +49,7 @@ public abstract class Login
 			byte[] salt = generateSalt();
 			byte[] hashedPassword = saltPassword(password, salt);
 			databaseConnector.registerUser(username, hashedPassword, email, salt);
+			return true;
 		}
 		return false;
 	}
