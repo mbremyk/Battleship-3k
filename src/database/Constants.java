@@ -4,8 +4,10 @@ package database;
  * database.Login.java
  * <p>
  * Contains database constants such as table names and column names
+ * </p>
  *
  * @Author Thorkildsen Torje
+ * @Author Brevik Magnus
  */
 
 public class Constants {
