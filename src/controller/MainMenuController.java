@@ -32,7 +32,7 @@ public class MainMenuController extends ViewComponent {
     private JFXButton MainMenuFeedbackButton;
 
     @FXML
-    private JFXButton MainMenuOptionsButton;
+    private JFXButton MainMenuLeaderboardButton;
 
     /**
      * Standard JavaFX method
@@ -43,16 +43,16 @@ public class MainMenuController extends ViewComponent {
         assert MainMenuHostButton != null : "fx:id=\"MainMenuHostButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuJoinButton != null : "fx:id=\"MainMenuJoinButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuFeedbackButton != null : "fx:id=\"MainMenuFeedbackButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert MainMenuOptionsButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        
+        assert MainMenuLeaderboardButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
+
         MainMenuJoinButton.setOnAction(event -> {
             switchView("JoinGameMenu");
         });
         MainMenuHostButton.setOnAction(event -> {
             switchView("HostGameMenu");
         });
-        MainMenuOptionsButton.setOnAction(event -> {
-            switchView("OptionsMenu");
+        MainMenuLeaderboardButton.setOnAction(event -> {
+            switchView("LeaderboardMenu");
         });
         MainMenuFeedbackButton.setOnAction(event -> {
             switchView("FeedbackMenu");

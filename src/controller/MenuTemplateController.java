@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 
@@ -33,6 +34,10 @@ public class MenuTemplateController {
     @FXML
     private AnchorPane switchPane;
 
+    @FXML
+    private ImageView MainMenuOptionsImage;
+
+
     /**
      * Standard...
      */
@@ -41,7 +46,8 @@ public class MenuTemplateController {
         assert MainMenuLoginButton != null : "fx:id=\"MainMenuLoginButton\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
         assert MainMenuSignupButton != null : "fx:id=\"MainMenuSignupButton\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
         assert switchPane != null : "fx:id=\"switchPane\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
-        
+        assert MainMenuOptionsImage != null : "fx:id=\"MainMenuOptionsImage\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
+
         switchView("MainMenu");
 
 
