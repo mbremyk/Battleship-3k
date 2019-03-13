@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -25,6 +26,11 @@
                </font>
             </JFXButton>
             <Text layoutX="652.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as Guest19231" />
+            <ImageView fx:id="MainMenuOptionsImage" fitHeight="54.0" fitWidth="54.0" layoutX="8.0" layoutY="6.0">
+               <image>
+                  <Image url="@../../../../../../../Art/BattleShips/Options.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="switchPane" layoutY="160.0" prefHeight="436.0" prefWidth="800.0" />
