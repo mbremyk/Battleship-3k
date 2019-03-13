@@ -33,49 +33,49 @@ public class SignupController extends ViewComponent {
     private URL location;
 
     @FXML
-    private TextField SignupUsernameField;
+    private TextField signupUsernameField;
 
     @FXML
-    private TextField SignupEmailField;
+    private TextField signupEmailField;
 
     @FXML
-    private PasswordField SignupConfirmPasswordField;
+    private PasswordField signupConfirmPasswordField;
 
     @FXML
-    private JFXButton SignupSignupButton;
+    private JFXButton signupSignupButton;
 
     @FXML
-    private PasswordField SignupPasswordField;
+    private PasswordField signupPasswordField;
 
     @FXML
-    private JFXCheckBox SignupAgreeCheckbox;
+    private JFXCheckBox signupAgreeCheckbox;
 
     @FXML
-    private Text SignupHelpText;
+    private Text signupHelpText;
 
     @FXML
-    private JFXButton SignupCancelButton;
+    private JFXButton signupCancelButton;
 
     @FXML
-    private Hyperlink SignupTOSLink;
+    private Hyperlink signupTOSLink;
 
     @FXML
     void initialize() {
-        assert SignupUsernameField != null : "fx:id=\"SignupUsernameField\" was not injected: check your FXML file 'SignupMenu.fxml'.";
-        assert SignupEmailField != null : "fx:id=\"SignupEmailField\" was not injected: check your FXML file 'SignupMenu.fxml'.";
-        assert SignupConfirmPasswordField != null : "fx:id=\"SignupConfirmPasswordField\" was not injected: check your FXML file 'SignupMenu.fxml'.";
-        assert SignupSignupButton != null : "fx:id=\"SignupSignupButton\" was not injected: check your FXML file 'SignupMenu.fxml'.";
-        assert SignupPasswordField != null : "fx:id=\"SignupPasswordField\" was not injected: check your FXML file 'SignupMenu.fxml'.";
-        assert SignupAgreeCheckbox != null : "fx:id=\"SignupAgreeCheckbox\" was not injected: check your FXML file 'SignupMenu.fxml'.";
-        assert SignupHelpText != null : "fx:id=\"SignupHelpText\" was not injected: check your FXML file 'SignupMenu.fxml'.";
-        assert SignupCancelButton != null : "fx:id=\"SignupCancelButton\" was not injected: check your FXML file 'SignupMenu.fxml'.";
-        assert SignupTOSLink != null : "fx:id=\"SignupTOSLink\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupUsernameField != null : "fx:id=\"signupUsernameField\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupEmailField != null : "fx:id=\"signupEmailField\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupConfirmPasswordField != null : "fx:id=\"signupConfirmPasswordField\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupSignupButton != null : "fx:id=\"signupSignupButton\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupPasswordField != null : "fx:id=\"signupPasswordField\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupAgreeCheckbox != null : "fx:id=\"signupAgreeCheckbox\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupHelpText != null : "fx:id=\"signupHelpText\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupCancelButton != null : "fx:id=\"signupCancelButton\" was not injected: check your FXML file 'SignupMenu.fxml'.";
+        assert signupTOSLink != null : "fx:id=\"signupTOSLink\" was not injected: check your FXML file 'SignupMenu.fxml'.";
 
-        SignupCancelButton.setOnAction(event -> {
+        signupCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
 
-        SignupTOSLink.setOnAction(event -> {
+        signupTOSLink.setOnAction(event -> {
             try {
                 Desktop.getDesktop().browse(new URI("https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1Baax3OXZ--mQsO4eGXhF-Lex8sRqVlXF1Q1liVNr_ms%2Fedit%3F" +
                         "usp%3Dsharing%26fbclid%3DIwAR2_aZAr_IYbRYCLtvy7knyu7IDggeo0XhMhNldO1fdeemj0uoNvoxJW0l4&h=AT1PMrDvdy8uwx_tmNeYjqnlAT15EwTooRahaMTfUT36zgUGDDl3hbLDQ71MBiI_LzPa0Z" +
@@ -87,14 +87,14 @@ public class SignupController extends ViewComponent {
             }
         });
 
-        SignupSignupButton.setOnAction(event -> {
+        signupSignupButton.setOnAction(event -> {
             if (checkValidUser()) {
-                BattleshipUser user = new BattleshipUser(SignupUsernameField.getText(), SignupPasswordField.getText(), SignupEmailField.getText());
+                BattleshipUser user = new BattleshipUser(signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
                 boolean signupStatus = Login.registerUser(user);
                 if (signupStatus) {
-                    SignupHelpText.setText("New user was created");
+                    signupHelpText.setText("New user was created");
                 } else {
-                    SignupHelpText.setText("Something went wrong");
+                    signupHelpText.setText("Something went wrong");
                 }
             }
 
@@ -108,33 +108,33 @@ public class SignupController extends ViewComponent {
      * @return
      */
     private boolean checkValidUser() {
-        if (SignupUsernameField.getText().length() > USERNAME_MAX_LENGTH) {
-            SignupHelpText.setText("Username is too long, max is " + USERNAME_MAX_LENGTH + " characters");
+        if (signupUsernameField.getText().length() > USERNAME_MAX_LENGTH) {
+            signupHelpText.setText("Username is too long, max is " + USERNAME_MAX_LENGTH + " characters");
             return false;
-        } else if (SignupUsernameField.getText().equals("")) {
-            SignupHelpText.setText("Username can't be empty");
+        } else if (signupUsernameField.getText().equals("")) {
+            signupHelpText.setText("Username can't be empty");
             return false;
-        } else if (Login.usernameExists(SignupUsernameField.getText())) {
-            SignupHelpText.setText("That username is already in use");
+        } else if (Login.usernameExists(signupUsernameField.getText())) {
+            signupHelpText.setText("That username is already in use");
             return false;
-        } else if (Login.emailExists(SignupEmailField.getText())) {
-            SignupHelpText.setText("That email is already in use");
+        } else if (Login.emailExists(signupEmailField.getText())) {
+            signupHelpText.setText("That email is already in use");
             return false;
-        } else if (SignupEmailField.getText().indexOf('@') <= 0 || SignupEmailField.getText().indexOf('.') <= 2) {
+        } else if (signupEmailField.getText().indexOf('@') <= 0 || signupEmailField.getText().indexOf('.') <= 2) {
             //TODO improve this if-sentence
-            SignupHelpText.setText("Not a valid email address");
+            signupHelpText.setText("Not a valid email address");
             return false;
-        } else if (SignupPasswordField.getText().length() > PASSWORD_MAX_LENGTH) {
-            SignupHelpText.setText("Password is too long, max is " + PASSWORD_MAX_LENGTH + " characters");
+        } else if (signupPasswordField.getText().length() > PASSWORD_MAX_LENGTH) {
+            signupHelpText.setText("Password is too long, max is " + PASSWORD_MAX_LENGTH + " characters");
             return false;
-        } else if (SignupPasswordField.getText().equals("")) {
-            SignupHelpText.setText("Password can't be empty");
+        } else if (signupPasswordField.getText().equals("")) {
+            signupHelpText.setText("Password can't be empty");
             return false;
-        } else if (!SignupPasswordField.getText().equals(SignupConfirmPasswordField.getText())) {
-            SignupHelpText.setText("Passwords are not matching");
+        } else if (!signupPasswordField.getText().equals(signupConfirmPasswordField.getText())) {
+            signupHelpText.setText("Passwords are not matching");
             return false;
-        } else if (!SignupAgreeCheckbox.isSelected()) {
-            SignupHelpText.setText("You have to agree to our Terms of Service");
+        } else if (!signupAgreeCheckbox.isSelected()) {
+            signupHelpText.setText("You have to agree to our Terms of Service");
             return false;
         }
         return true;
@@ -142,6 +142,6 @@ public class SignupController extends ViewComponent {
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane) SignupCancelButton.getParent();
+        return (AnchorPane) signupCancelButton.getParent();
     }
 }

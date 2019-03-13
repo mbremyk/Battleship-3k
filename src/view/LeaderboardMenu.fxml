@@ -17,7 +17,7 @@
                </font>
             </Text>
          </children></AnchorPane>
-      <JFXButton fx:id="leaderboardCancelButton" focusTraversable="false" layoutX="31.0" layoutY="360.0" prefHeight="60.0" prefWidth="177.0" style="-fx-background-color: #1565c0;" text="Main menu" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton fx:id="leaderboardMainMenuButton" focusTraversable="false" layoutX="31.0" layoutY="360.0" prefHeight="60.0" prefWidth="177.0" style="-fx-background-color: #1565c0;" text="Main menu" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="PixelTorje" size="36.0" />
          </font>

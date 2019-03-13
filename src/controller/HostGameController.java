@@ -23,31 +23,31 @@ public class HostGameController extends ViewComponent{
     private URL location;
 
     @FXML
-    private JFXButton HostGameCreateGameButton;
+    private JFXButton hostGameCreateGameButton;
 
     @FXML
-    private TextField HostGameNameField;
+    private TextField hostGameNameField;
 
     @FXML
-    private PasswordField HostGamePasswordField;
+    private PasswordField hostGamePasswordField;
 
     @FXML
-    private JFXButton HostGameCancelButton;
+    private JFXButton hostGameCancelButton;
 
     @FXML
     void initialize() {
-        assert HostGameCreateGameButton != null : "fx:id=\"HostGameCreateGameButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert HostGameNameField != null : "fx:id=\"HostGameNameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert HostGamePasswordField != null : "fx:id=\"HostGamePasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert HostGameCancelButton != null : "fx:id=\"HostGameCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert hostGameCreateGameButton != null : "fx:id=\"hostGameCreateGameButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert hostGameNameField != null : "fx:id=\"hostGameNameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert hostGamePasswordField != null : "fx:id=\"hostGamePasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert hostGameCancelButton != null : "fx:id=\"hostGameCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
 
-        HostGameCancelButton.setOnAction(event -> {
+        hostGameCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
     }
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane) HostGameCancelButton.getParent();
+        return (AnchorPane) hostGameCancelButton.getParent();
     }
 }
