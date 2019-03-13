@@ -23,7 +23,6 @@ public class Main extends Application {
  			Parent root = FXMLLoader.load(getClass().getResource("view/MenuTemplate.fxml"));
 			
  			final Scene scene = new Scene(root);
- 			//scene.getStylesheets().add(getClass().getResource("custom-font-style.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
