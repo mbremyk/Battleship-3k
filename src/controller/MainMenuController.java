@@ -44,7 +44,12 @@ public class MainMenuController extends ViewComponent {
         assert MainMenuJoinButton != null : "fx:id=\"MainMenuJoinButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuFeedbackButton != null : "fx:id=\"MainMenuFeedbackButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
         assert MainMenuOptionsButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
-
+        
+        MainMenuJoinButton.getStyleClass().add("bigButton");
+        MainMenuFeedbackButton.getStyleClass().add("bigButton");
+        MainMenuHostButton.getStyleClass().add("bigButton");
+        MainMenuOptionsButton.getStyleClass().add("bigButton");
+        
         MainMenuJoinButton.setOnAction(event -> {
             switchView("JoinGameMenu");
         });
