@@ -3,7 +3,7 @@
  *
  * @Author Thorkildsen Torje
  */
-package controller;
+package main.java.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;

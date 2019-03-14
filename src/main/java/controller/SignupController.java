@@ -1,7 +1,7 @@
 /**
  * @Author Thorkildsen Torje
  */
-package controller;
+package main.java.controller;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -13,14 +13,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXCheckBox;
-import database.Login;
+import main.java.database.Login;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import model.BattleshipUser;
+import main.java.model.BattleshipUser;
 
 public class SignupController extends ViewComponent {
     private final static int USERNAME_MAX_LENGTH = 20;

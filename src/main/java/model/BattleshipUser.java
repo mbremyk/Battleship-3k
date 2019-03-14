@@ -3,7 +3,7 @@
  *
  * @Author Thorkildsen Torje
  */
-package model;
+package main.java.model;
 
 public class BattleshipUser {
     private String username;

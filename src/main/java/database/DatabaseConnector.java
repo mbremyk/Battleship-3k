@@ -4,12 +4,12 @@
  * Handles all connections with the database
  */
 
-package database;
+package main.java.database;
 
-import model.BattleshipUser;
+import main.java.model.BattleshipUser;
 
-import static database.Constants.*;
-import static database.Login.saltPassword;
+import static main.java.database.Constants.*;
+import static main.java.database.Login.saltPassword;
 
 import java.sql.*;
 import java.util.Arrays;

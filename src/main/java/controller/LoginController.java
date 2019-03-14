@@ -3,14 +3,14 @@
  *
  * @Author Thorkildsen Torje
  */
-package controller;
+package main.java.controller;
 
 import com.jfoenix.controls.JFXButton;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import database.Login;
+import main.java.database.Login;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-public class LoginController extends ViewComponent{
+public class LoginController extends ViewComponent {
 
     @FXML
     private ResourceBundle resources;

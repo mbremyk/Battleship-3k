@@ -6,7 +6,7 @@
  * @Author Thorkildsen Torje
  */
 
-package controller;
+package main.java.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;

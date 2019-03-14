@@ -1,4 +1,4 @@
-package database;
+package main.java.database;
 
 /**
  * database.Login.java

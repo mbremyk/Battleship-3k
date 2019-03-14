@@ -1,3 +1,5 @@
+package main.java;
+
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +22,7 @@ public class Main extends Application {
 			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 20);
 			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 36);
 			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 96);
- 			Parent root = FXMLLoader.load(getClass().getResource("view/MenuTemplate.fxml"));
+ 			Parent root = FXMLLoader.load(getClass().getResource("main/java/view/MenuTemplate.fxml"));
 			
  			final Scene scene = new Scene(root);
 			primaryStage.setScene(scene);

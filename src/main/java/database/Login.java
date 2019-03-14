@@ -11,7 +11,7 @@
  * TODO Use constants from Constants.java instead of the hardcoded strings
  */
 
-package database;
+package main.java.database;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -20,9 +20,9 @@ import java.security.spec.KeySpec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import model.*;
+import main.java.model.*;
 
-import static database.Constants.*;
+import static main.java.database.Constants.*;
 
 /**
  * Login class

@@ -1,10 +1,10 @@
-package controller;
+package main.java.controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import database.DatabaseConnector;
+import main.java.database.DatabaseConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,8 +12,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import model.BattleshipUser;
-import database.Constants;
+import main.java.model.BattleshipUser;
+import main.java.database.Constants;
 
 public class LeaderboardController extends ViewComponent {
 
