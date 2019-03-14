@@ -7,6 +7,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 
 public class MenuTemplateController {
 
@@ -51,7 +53,6 @@ public class MenuTemplateController {
         assert switchPane != null : "fx:id=\"switchPane\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
         assert mainMenuOptionsImage != null : "fx:id=\"mainMenuOptionsImage\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
         assert mainMenuLoggedInText != null : "fx:id=\"mainMenuLoggedInText\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
-
 
         switchView("MainMenu");
 

@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="72709a0a-140b-4002-94fd-96f55301accc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/battleship-3k.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/battleship-3k.iml" afterDir="false" />
+=======
+<<<<<<< HEAD
+    <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/MenuTemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MenuTemplateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/custom-font-style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fonts.mf" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/fonts.mf" afterDir="false" />
+    </list>
+=======
+<<<<<<< HEAD
+    <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/controller/LeaderboardController.java" afterDir="false" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/FeedbackController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/FeedbackController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/HostGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/HostGameController.class" afterDir="false" />
@@ -37,6 +54,15 @@
       <change beforePath="$PROJECT_DIR$/src/view/OptionsMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/OptionsMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/SignupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignupMenu.fxml" afterDir="false" />
     </list>
+<<<<<<< HEAD
+=======
+=======
+    <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,12 +96,62 @@
     </session>
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-667">
               <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="204">
+              <caret line="19" column="58" selection-start-line="19" selection-start-column="58" selection-end-line="19" selection-end-column="58" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="17">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+=======
+            <state relative-caret-position="442">
+              <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+              <folding>
+                <element signature="e#741#742#0" expanded="true" />
+                <element signature="e#760#761#0" expanded="true" />
+              </folding>
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="97">
+              <caret line="45" column="137" selection-start-line="45" selection-start-column="137" selection-end-line="45" selection-end-column="137" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="442">
+              <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+              <folding>
+                <element signature="e#741#742#0" expanded="true" />
+                <element signature="e#760#761#0" expanded="true" />
+=======
+            <state relative-caret-position="168">
+              <caret line="91" column="39" selection-start-line="91" selection-start-column="39" selection-end-line="91" selection-end-column="39" />
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+              <folding>
+                <element signature="imports" expanded="true" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+              </folding>
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
             </state>
           </provider>
         </entry>
@@ -98,10 +174,112 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/controller/SignupController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
               <caret line="75" column="11" lean-forward="true" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
+=======
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="42" column="119" selection-start-line="42" selection-start-column="119" selection-end-line="42" selection-end-column="119" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/database/Login.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="96" column="4" lean-forward="true" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/BattleshipUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#706#707#0" expanded="true" />
+                <element signature="e#759#760#0" expanded="true" />
+                <element signature="e#923#924#0" expanded="true" />
+                <element signature="e#951#952#0" expanded="true" />
+=======
+            <state relative-caret-position="255">
+              <caret line="51" column="24" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/database/DatabaseConnector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-62">
+              <caret line="28" column="67" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="323">
+              <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+=======
+            <state relative-caret-position="85">
+              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="568">
+              <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+=======
+            <state relative-caret-position="68">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/LeaderboardController.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="421">
+              <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
+=======
+            <state>
+              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
             </state>
           </provider>
         </entry>
@@ -115,12 +293,18 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>start</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/controller/LeaderboardController.java" />
         <option value="$PROJECT_DIR$/src/controller/SignupController.java" />
       </list>
@@ -134,7 +318,52 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+=======
+        <option value="$PROJECT_DIR$/src/view/MainMenu.fxml" />
+        <option value="$PROJECT_DIR$/src/controller/FeedbackController.java" />
+        <option value="$PROJECT_DIR$/src/controller/HostGameController.java" />
+        <option value="$PROJECT_DIR$/src/controller/JoinGameController.java" />
+        <option value="$PROJECT_DIR$/src/controller/LoginController.java" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/model/BattleshipUser.java" />
+=======
+        <option value="$PROJECT_DIR$/src/controller/MainMenuController.java" />
+        <option value="$PROJECT_DIR$/src/controller/MenuTemplateController.java" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+        <option value="$PROJECT_DIR$/src/Main.java" />
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+        <option value="$PROJECT_DIR$/src/controller/OptionsController.java" />
+        <option value="$PROJECT_DIR$/src/model/BattleshipUser.java" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/src/database/Login.java" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/controller/ViewComponent.java" />
+        <option value="$PROJECT_DIR$/src/controller/SignupController.java" />
+        <option value="$PROJECT_DIR$/src/controller/custom-font-styles.css" />
+        <option value="$PROJECT_DIR$/src/view/MenuTemplate.fxml" />
+        <option value="$PROJECT_DIR$/src/fonts.mf" />
+        <option value="$PROJECT_DIR$/src/custom-font-style.css" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/controller/MainMenuController.java" />
+        <option value="$PROJECT_DIR$/src/controller/MenuTemplateController.java" />
+=======
+        <option value="$PROJECT_DIR$/src/controller/MenuTemplateController.java" />
+        <option value="$PROJECT_DIR$/src/controller/MainMenuController.java" />
+        <option value="$PROJECT_DIR$/src/controller/LeaderboardController.java" />
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+      </list>
+    </option>
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="20" />
+    <option name="y" value="-12" />
+    <option name="width" value="974" />
+    <option name="height" value="920" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -169,7 +398,11 @@
               <item name="battleship-3k" type="b2602c69:ProjectViewProjectNode" />
               <item name="battleship-3k" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="view" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
             </path>
           </expand>
           <select />
@@ -178,6 +411,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552485511676" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -186,7 +420,35 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\torje\OneDrive\Dokumenter\2. Semester\Systemytvikling\Battleships\GIT\battleship-3k\src\controller" />
+=======
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< HEAD
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552484426672" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Public/Desktop/JavaFX Scene Builder 2.0.lnk" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552480058094" />
+    <property name="last_opened_file_path" value="C:/JavaLibraries/javafx-sdk-11.0.2/lib/javafx.web.jar!/" />
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <recent name="C:\Users\torje\OneDrive\Dokumenter\2. Semester\Systemytvikling\Battleships\GIT\battleship-3k\src\view" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\resources" />
+      <recent name="C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src" />
+      <recent name="C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\META-INF" />
+      <recent name="C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\resources\fonts" />
+      <recent name="C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\controller" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -275,19 +537,50 @@
       <workItem from="1551697210052" duration="1525000" />
       <workItem from="1552039530082" duration="16011000" />
       <workItem from="1552299128217" duration="10329000" />
+<<<<<<< HEAD
       <workItem from="1552483615552" duration="469000" />
       <workItem from="1552484116675" duration="1381000" />
+=======
+      <workItem from="1552310876822" duration="209000" />
+      <workItem from="1552311147624" duration="827000" />
+      <workItem from="1552468922240" duration="10557000" />
+      <workItem from="1552484489966" duration="234000" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="1284000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="45963000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="31008000" />
+=======
+    <option name="totallyTimeSpent" value="30899000" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15245202" />
+=======
+<<<<<<< HEAD
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25642672" />
+=======
+<<<<<<< HEAD
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14765458" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15681234" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -296,16 +589,43 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3253796" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+=======
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3243607" />
+=======
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3253796" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+=======
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3243607" />
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39838493" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+<<<<<<< HEAD
+      <window_info anchor="bottom" id="Version Control" order="10" />
+=======
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3286334" />
+=======
+<<<<<<< HEAD
+      <window_info active="true" anchor="bottom" id="Messages" order="11" visible="true" weight="0.3286334" />
+=======
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32839838" />
+      <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -353,38 +673,283 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+=======
+    <entry file="file://$PROJECT_DIR$/../../Backup/battleship-3k/src/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/view/SignupMenu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+        </state>
+      </provider>
+<<<<<<< HEAD
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/MenuTemplate.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
         </state>
       </provider>
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/LeaderboardMenu.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor" />
+<<<<<<< HEAD
+=======
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/controller/OptionsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
           <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/view/MainMenu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/LeaderboardController.java">
+    <entry file="file://$PROJECT_DIR$/src/controller/FeedbackController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="102">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/net/URL.java" />
+    <entry file="jar://C:/JavaLibraries/mysql-connector-java-8.0.13/mysql-connector-java-8.0.13.jar!/com/mysql/cj/jdbc/result/ResultSetImpl.class" />
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/OptionsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="306">
+          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="17">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+=======
+        <state relative-caret-position="204">
+          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/BattleshipUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/ViewComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+          <folding>
+            <element signature="e#741#742#0" expanded="true" />
+            <element signature="e#760#761#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/net/URL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="437" column="11" selection-start-line="437" selection-start-column="11" selection-end-line="437" selection-end-column="11" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/LeaderboardController.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="268">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+=======
+        <state relative-caret-position="323">
+          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-667">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/controller/JoinGameController.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/controller/OptionsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-192">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/HostGameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="205">
+          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+=======
+        <state>
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/SignupController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="101" column="13" selection-start-line="101" selection-start-column="13" selection-end-line="101" selection-end-column="13" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/FeedbackMenu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/javafx-src.zip!/com/sun/javafx/application/LauncherImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="159">
+          <caret line="862" selection-start-line="862" selection-end-line="862" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/fonts/PixelTorje.ttf" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/javafx-src.zip!/javafx/application/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="272" column="79" selection-start-line="272" selection-start-column="74" selection-end-line="272" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/MainMenu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/fonts/allmoneytome.txt" />
+    <entry file="file://$PROJECT_DIR$/Battleship 3k.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/JDBCExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/MenuTemplate.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="42" column="62" selection-start-line="42" selection-start-column="62" selection-end-line="42" selection-end-column="62" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="391">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#706#707#0" expanded="true" />
+            <element signature="e#759#760#0" expanded="true" />
+            <element signature="e#923#924#0" expanded="true" />
+            <element signature="e#951#952#0" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="185">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
         </state>
       </provider>
     </entry>
@@ -404,15 +969,102 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="221">
           <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+=======
+        <state relative-caret-position="568">
+          <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/controller/HostGameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/controller/SignupController.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="92" column="44" selection-start-line="92" selection-start-column="44" selection-end-line="92" selection-end-column="44" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/database/DatabaseConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="77" column="5" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/custom-font-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/fonts.mf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="204">
+          <caret line="19" column="58" selection-start-line="19" selection-start-column="58" selection-end-line="19" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="289">
           <caret line="75" column="11" lean-forward="true" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
+=======
+        <state relative-caret-position="97">
+          <caret line="45" column="137" selection-start-line="45" selection-start-column="137" selection-end-line="45" selection-end-column="137" />
+=======
+        <state relative-caret-position="168">
+          <caret line="91" column="39" selection-start-line="91" selection-start-column="39" selection-end-line="91" selection-end-column="39" />
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="136">
+          <caret line="42" column="119" selection-start-line="42" selection-start-column="119" selection-end-line="42" selection-end-column="119" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="289">
+          <caret line="96" column="4" lean-forward="true" selection-start-line="96" selection-start-column="4" selection-end-line="96" selection-end-column="4" />
+=======
+        <state relative-caret-position="255">
+          <caret line="51" column="24" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+>>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+>>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
         </state>
       </provider>
     </entry>
@@ -422,10 +1074,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>battleship-3k:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
