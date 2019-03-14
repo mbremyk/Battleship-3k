@@ -17,17 +17,14 @@
                </font>
             </Text>
          </children></AnchorPane>
-      <JFXButton fx:id="leaderboardCancelButton" focusTraversable="false" layoutX="31.0" layoutY="360.0" prefHeight="60.0" prefWidth="177.0" style="-fx-background-color: #1565c0;" text="Main menu" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton fx:id="leaderboardMainMenuButton" focusTraversable="false" layoutX="31.0" layoutY="360.0" prefHeight="60.0" prefWidth="177.0" style="-fx-background-color: #1565c0;" text="Main menu" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="PixelTorje" size="36.0" />
          </font>
       </JFXButton>
       <TableView fx:id="leaderboardTable" layoutX="111.0" layoutY="84.0" prefHeight="255.0" prefWidth="573.0">
         <columns>
-          <TableColumn prefWidth="209.0" text="Username" />
-          <TableColumn prefWidth="126.0" text="Wins" />
-            <TableColumn prefWidth="115.0" text="Losses" />
-            <TableColumn prefWidth="122.0" text="Ratio" />
+
         </columns>
       </TableView>
    </children>
