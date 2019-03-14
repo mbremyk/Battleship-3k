@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
 <<<<<<< HEAD
+    <list default="true" id="72709a0a-140b-4002-94fd-96f55301accc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/battleship-3k.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/battleship-3k.iml" afterDir="false" />
+=======
+<<<<<<< HEAD
     <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/Main.class" afterDir="false" />
@@ -15,93 +19,91 @@
 <<<<<<< HEAD
     <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/src/controller/LeaderboardController.java" afterDir="false" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/FeedbackController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/FeedbackController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/HostGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/HostGameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/JoinGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/JoinGameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/MainMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/MainMenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/MenuTemplateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/MenuTemplateController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/controller/SignupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/controller/SignupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/database/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/database/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/view/FeedbackMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/FeedbackMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/view/HostGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/HostGameMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/view/JoinGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/JoinGameMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/view/LoginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/LoginMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/view/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/view/MenuTemplate.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/MenuTemplate.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/view/OptionsMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/OptionsMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/battleship-3k/view/SignupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/battleship-3k/view/SignupMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/FeedbackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/FeedbackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HostGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HostGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/JoinGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/JoinGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/MenuTemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MenuTemplateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/FeedbackMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/FeedbackMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HostGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HostGameMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/JoinGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/JoinGameMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LeaderboardMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LeaderboardMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MenuTemplate.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuTemplate.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/OptionsMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/OptionsMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SignupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignupMenu.fxml" afterDir="false" />
     </list>
+<<<<<<< HEAD
+=======
 =======
     <list default="true" id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="" />
 >>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
 >>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-<<<<<<< HEAD
   <component name="FUSProjectUsageTrigger">
-    <session id="-788091742">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="java" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="JAVA" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="java" value="60" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JAVA" value="60" />
-        </counts>
-      </usages-collector>
-    </session>
     <session id="303472015">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="1" />
-          <entry key="fxml" value="6" />
-          <entry key="java" value="24" />
+          <entry key="fxml" value="3" />
+          <entry key="java" value="5" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="24" />
-          <entry key="XML" value="6" />
+          <entry key="JAVA" value="5" />
+          <entry key="XML" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="fxml" value="17" />
-          <entry key="java" value="4684" />
+          <entry key="java" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4684" />
-          <entry key="XML" value="17" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.10" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="JAVA" value="15" />
         </counts>
       </usages-collector>
     </session>
   </component>
-=======
->>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
   <component name="FileEditorManager">
+<<<<<<< HEAD
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-667">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+=======
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
@@ -149,38 +151,35 @@
                 <element signature="imports" expanded="true" />
 >>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
               </folding>
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/SignupController.java">
+        <entry file="file://$PROJECT_DIR$/src/view/MainMenu.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="282">
-              <caret line="92" column="44" selection-start-line="92" selection-start-column="44" selection-end-line="92" selection-end-column="44" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
+            <state relative-caret-position="-98" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/OptionsController.java">
+        <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/src/controller/SignupController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="75" column="11" lean-forward="true" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
+=======
 <<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -280,6 +279,7 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
             </state>
           </provider>
         </entry>
@@ -299,12 +299,26 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/controller/LeaderboardController.java" />
+        <option value="$PROJECT_DIR$/src/controller/SignupController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+=======
         <option value="$PROJECT_DIR$/src/view/MainMenu.fxml" />
         <option value="$PROJECT_DIR$/src/controller/FeedbackController.java" />
         <option value="$PROJECT_DIR$/src/controller/HostGameController.java" />
@@ -347,6 +361,7 @@
     <option name="y" value="-12" />
     <option name="width" value="974" />
     <option name="height" value="920" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -354,33 +369,58 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Battleship 3k" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Battleship 3k" type="462c0819:PsiDirectoryNode" />
+              <item name="battleship-3k" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleship-3k" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Battleship 3k" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Battleship 3k" type="462c0819:PsiDirectoryNode" />
+              <item name="battleship-3k" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleship-3k" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleship-3k" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleship-3k" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Battleship 3k" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Battleship 3k" type="462c0819:PsiDirectoryNode" />
+              <item name="battleship-3k" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleship-3k" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="battleship-3k" type="b2602c69:ProjectViewProjectNode" />
+              <item name="battleship-3k" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552485511676" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\torje\OneDrive\Dokumenter\2. Semester\Systemytvikling\Battleships\GIT\battleship-3k\src\controller" />
+=======
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
 <<<<<<< HEAD
@@ -400,6 +440,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <recent name="C:\Users\torje\OneDrive\Dokumenter\2. Semester\Systemytvikling\Battleships\GIT\battleship-3k\src\view" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -430,6 +471,53 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <module name="Battleship 3k" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <module name="Battleship 3k" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -441,7 +529,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="bdaa798c-fb37-4d13-839c-85704cd5af81" name="Default Changelist" comment="" />
+      <changelist id="da5884d8-d7b0-42f5-b263-4174e2ab0010" name="Default Changelist" comment="" />
       <created>1551697205395</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -449,14 +537,22 @@
       <workItem from="1551697210052" duration="1525000" />
       <workItem from="1552039530082" duration="16011000" />
       <workItem from="1552299128217" duration="10329000" />
+<<<<<<< HEAD
+      <workItem from="1552483615552" duration="469000" />
+      <workItem from="1552484116675" duration="1381000" />
+=======
       <workItem from="1552310876822" duration="209000" />
       <workItem from="1552311147624" duration="827000" />
       <workItem from="1552468922240" duration="10557000" />
       <workItem from="1552484489966" duration="234000" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="1284000" />
+=======
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="45963000" />
 =======
@@ -466,11 +562,15 @@
     <option name="totallyTimeSpent" value="30899000" />
 >>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
 >>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15245202" />
+=======
 <<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25642672" />
 =======
@@ -480,6 +580,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15681234" />
 >>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
 >>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -488,6 +589,10 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3253796" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+=======
 <<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3243607" />
 =======
@@ -499,6 +604,7 @@
 >>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39838493" />
 >>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -510,12 +616,16 @@
 =======
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
 <<<<<<< HEAD
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3286334" />
+=======
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Messages" order="11" visible="true" weight="0.3286334" />
 =======
 >>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32839838" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
 >>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -526,13 +636,46 @@
       <window_info anchor="right" id="PlantUML" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Maven Projects" order="9" />
-      <window_info anchor="right" id="Maven" order="10" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30306345" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Designer" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32858709" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3286334" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="PlantUML" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="9" />
+    </layout-to-restore>
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+=======
     <entry file="file://$PROJECT_DIR$/../../Backup/battleship-3k/src/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/view/SignupMenu.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -546,19 +689,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/MenuTemplate.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        <state relative-caret-position="255">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
         </state>
       </provider>
 >>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/OptionsMenu.fxml">
+    <entry file="file://$PROJECT_DIR$/src/view/LeaderboardMenu.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor" />
 <<<<<<< HEAD
 =======
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/controller/OptionsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+=======
     <entry file="file://$PROJECT_DIR$/src/view/MainMenu.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
@@ -658,28 +808,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
           <caret line="437" column="11" selection-start-line="437" selection-start-column="11" selection-end-line="437" selection-end-column="11" />
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/JavaLibraries/mysql-connector-java-8.0.13/mysql-connector-java-8.0.13.jar!/com/mysql/cj/jdbc/result/ResultSetImpl.class">
+    <entry file="file://$PROJECT_DIR$/src/controller/LeaderboardController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="1778" selection-start-line="1778" selection-end-line="1778" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
-      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="268">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+=======
         <state relative-caret-position="323">
           <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
 >>>>>>> 3412705c95e28019250a8fbbb928290d57ba73fb
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/controller/MenuTemplateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-667">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+=======
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/controller/JoinGameController.java">
 =======
@@ -795,41 +949,30 @@
         <state relative-caret-position="185">
           <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
 >>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/HostGameController.java">
+    <entry file="file://$PROJECT_DIR$/src/view/MenuTemplate.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="68">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-=======
-        <state relative-caret-position="442">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-          <folding>
-            <element signature="e#741#742#0" expanded="true" />
-            <element signature="e#760#761#0" expanded="true" />
->>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/src/controller/LeaderboardController.java">
+    <entry file="file://$PROJECT_DIR$/src/view/MainMenu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-98" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="221">
+          <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+=======
         <state relative-caret-position="568">
           <caret line="54" column="42" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
 =======
@@ -859,6 +1002,7 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
         </state>
       </provider>
     </entry>
@@ -886,6 +1030,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/MainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="289">
+          <caret line="75" column="11" lean-forward="true" selection-start-line="75" selection-start-column="11" selection-end-line="75" selection-end-column="11" />
+=======
         <state relative-caret-position="97">
           <caret line="45" column="137" selection-start-line="45" selection-start-column="137" selection-end-line="45" selection-end-column="137" />
 =======
@@ -916,6 +1064,7 @@
             <element signature="imports" expanded="true" />
           </folding>
 >>>>>>> 19dc7c38739927c5acc3ad5efa1106de33677475
+>>>>>>> d716cb9d1a5d265c6c86249e1327d137d6df199f
         </state>
       </provider>
     </entry>
@@ -950,7 +1099,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>mysql-connector-java-8.0.15</last-edited>
+          <last-edited>javafx11</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -962,7 +1111,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>11</last-edited>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -986,7 +1135,6 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>mysql-connector-java-8.0.15</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

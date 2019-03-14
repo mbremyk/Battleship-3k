@@ -7,11 +7,9 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,19 +24,19 @@ public class LoginController extends ViewComponent{
     private URL location;
 
     @FXML
-    private PasswordField LoginPasswordField;
+    private PasswordField loginPasswordField;
 
     @FXML
-    private JFXButton LoginCancelButton;
+    private JFXButton loginCancelButton;
 
     @FXML
-    private JFXButton LoginLoginButton;
+    private JFXButton loginLoginButton;
 
     @FXML
-    private Hyperlink LoginForgotPasswordLink;
+    private Hyperlink loginForgotPasswordLink;
 
     @FXML
-    private TextField LoginUsernameField;
+    private TextField loginUsernameField;
 
     /**
      *
@@ -46,28 +44,28 @@ public class LoginController extends ViewComponent{
 
     @FXML
     void initialize() {
-        assert LoginPasswordField != null : "fx:id=\"LoginPasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert LoginCancelButton != null : "fx:id=\"LoginCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert LoginLoginButton != null : "fx:id=\"LoginLoginButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert LoginForgotPasswordLink != null : "fx:id=\"LoginForgotPasswordLink\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert LoginUsernameField != null : "fx:id=\"LoginUsernameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert loginPasswordField != null : "fx:id=\"loginPasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert loginCancelButton != null : "fx:id=\"loginCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert loginLoginButton != null : "fx:id=\"loginLoginButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert loginForgotPasswordLink != null : "fx:id=\"loginForgotPasswordLink\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+        assert loginUsernameField != null : "fx:id=\"loginUsernameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
 
 
-        LoginCancelButton.setOnAction(event -> {
+        loginCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
 
-        LoginLoginButton.setOnAction(event -> {
+        loginLoginButton.setOnAction(event -> {
             //TODO, this is where we check if the username and password are valid
             System.out.println("TODO, see view/LoginController.java, but:\n" +
-                    "Username = " +LoginUsernameField.getText()+
-                    "\nPassword = " +LoginPasswordField.getText());
+                    "Username = " +loginUsernameField.getText()+
+                    "\nPassword = " +loginPasswordField.getText());
         });
 
     }
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane)LoginCancelButton.getParent();
+        return (AnchorPane)loginCancelButton.getParent();
     }
 }

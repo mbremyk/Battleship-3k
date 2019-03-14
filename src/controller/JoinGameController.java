@@ -22,28 +22,28 @@ public class JoinGameController extends ViewComponent{
     private URL location;
 
     @FXML
-    private JFXButton JoinGameJoinButton;
+    private JFXButton joinGameJoinButton;
 
     @FXML
-    private JFXButton JoinGameCancelButton;
+    private JFXButton joinGameCancelButton;
 
     @FXML
-    private TableView<?> JoinGameGamesTable;
+    private TableView<?> joinGameGamesTable;
 
     @FXML
     void initialize() {
-        assert JoinGameJoinButton != null : "fx:id=\"JoinGameJoinButton\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
-        assert JoinGameCancelButton != null : "fx:id=\"JoinGameCancelButton\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
-        assert JoinGameGamesTable != null : "fx:id=\"JoinGameGamesTable\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
+        assert joinGameJoinButton != null : "fx:id=\"joinGameJoinButton\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
+        assert joinGameCancelButton != null : "fx:id=\"joinGameCancelButton\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
+        assert joinGameGamesTable != null : "fx:id=\"joinGameGamesTable\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
 
 
-        JoinGameCancelButton.setOnAction(event -> {
+        joinGameCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
     }
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane) JoinGameCancelButton.getParent();
+        return (AnchorPane) joinGameCancelButton.getParent();
     }
 }

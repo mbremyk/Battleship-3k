@@ -1,5 +1,5 @@
 /**
- * controller.LoginController.java
+ * controller.MainMenuController.java
  *
  * @Author Thorkildsen Torje
  */
@@ -7,10 +7,8 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,16 +21,16 @@ public class MainMenuController extends ViewComponent {
     private URL location;
 
     @FXML
-    private JFXButton MainMenuHostButton;
+    private JFXButton mainMenuHostButton;
 
     @FXML
-    private JFXButton MainMenuJoinButton;
+    private JFXButton mainMenuJoinButton;
 
     @FXML
-    private JFXButton MainMenuFeedbackButton;
+    private JFXButton mainMenuFeedbackButton;
 
     @FXML
-    private JFXButton MainMenuLeaderboardButton;
+    private JFXButton mainMenuLeaderboardButton;
 
     /**
      * Standard JavaFX method
@@ -40,21 +38,22 @@ public class MainMenuController extends ViewComponent {
 
     @FXML
     void initialize() {
-        assert MainMenuHostButton != null : "fx:id=\"MainMenuHostButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert MainMenuJoinButton != null : "fx:id=\"MainMenuJoinButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert MainMenuFeedbackButton != null : "fx:id=\"MainMenuFeedbackButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
-        assert MainMenuLeaderboardButton != null : "fx:id=\"MainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
+        assert mainMenuHostButton != null : "fx:id=\"mainMenuHostButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
+        assert mainMenuJoinButton != null : "fx:id=\"mainMenuJoinButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
+        assert mainMenuFeedbackButton != null : "fx:id=\"mainMenuFeedbackButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
+        assert mainMenuLeaderboardButton != null : "fx:id=\"mainMenuOptionsButton\" was not injected: check your FXML file 'MainMenu.fxml'.";
 
-        MainMenuJoinButton.setOnAction(event -> {
+
+        mainMenuJoinButton.setOnAction(event -> {
             switchView("JoinGameMenu");
         });
-        MainMenuHostButton.setOnAction(event -> {
+        mainMenuHostButton.setOnAction(event -> {
             switchView("HostGameMenu");
         });
-        MainMenuLeaderboardButton.setOnAction(event -> {
+        mainMenuLeaderboardButton.setOnAction(event -> {
             switchView("LeaderboardMenu");
         });
-        MainMenuFeedbackButton.setOnAction(event -> {
+        mainMenuFeedbackButton.setOnAction(event -> {
             switchView("FeedbackMenu");
         });
 
@@ -62,7 +61,7 @@ public class MainMenuController extends ViewComponent {
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane) MainMenuHostButton.getParent();
+        return (AnchorPane) mainMenuHostButton.getParent();
     }
 
 }

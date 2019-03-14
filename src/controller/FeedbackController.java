@@ -17,23 +17,23 @@ public class FeedbackController extends ViewComponent{
     private URL location;
 
     @FXML
-    private JFXButton FeedbackSubmitButton;
+    private JFXButton feedbackSubmitButton;
 
     @FXML
-    private JFXButton FeedbackCancelButton;
+    private JFXButton feedbackCancelButton;
 
     @FXML
     void initialize() {
-        assert FeedbackSubmitButton != null : "fx:id=\"FeedbackSubmitButton\" was not injected: check your FXML file 'FeedbackMenu.fxml'.";
-        assert FeedbackCancelButton != null : "fx:id=\"FeedbackCancelButton\" was not injected: check your FXML file 'FeedbackMenu.fxml'.";
+        assert feedbackSubmitButton != null : "fx:id=\"feedbackSubmitButton\" was not injected: check your FXML file 'FeedbackMenu.fxml'.";
+        assert feedbackCancelButton != null : "fx:id=\"feedbackCancelButton\" was not injected: check your FXML file 'FeedbackMenu.fxml'.";
 
-        FeedbackCancelButton.setOnAction(event -> {
+        feedbackCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
     }
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane) FeedbackCancelButton.getParent();
+        return (AnchorPane) feedbackCancelButton.getParent();
     }
 }
