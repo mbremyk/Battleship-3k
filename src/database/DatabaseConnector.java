@@ -102,4 +102,26 @@ public class DatabaseConnector
 		}
 		return null;
 	}
+	public BattleshipUser[] getBattleshipUsers(){
+		try(Connection con = DriverManager.getConnection(databaseUrl)) {
+			BattleshipUser[] users = new BattleshipUser[0];
+			PreparedStatement setning = con.prepareStatement("SELECT * FROM "+USERS_TABLE+"");
+			ResultSet res = setning.executeQuery();
+
+			while (res.next()) {
+				BattleshipUser[] newUsers = new BattleshipUser[users.length + 1];
+				for (int i = 0; i < users.length; i++) {
+					newUsers[i] = users[i];
+				}
+				newUsers[newUsers.length - 1] = new BattleshipUser(res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
+						res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+				users = newUsers;
+			}
+			return users;
+		}
+		catch(SQLException e){
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null,e);
+		}
+		return null;
+    }
 }

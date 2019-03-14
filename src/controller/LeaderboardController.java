@@ -3,9 +3,17 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import database.DatabaseConnector;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import model.BattleshipUser;
+import database.Constants;
 
 public class LeaderboardController extends ViewComponent {
 
@@ -16,7 +24,7 @@ public class LeaderboardController extends ViewComponent {
     private URL location;
 
     @FXML
-    private TableView<?> leaderboardTable;
+    private TableView<BattleshipUser> leaderboardTable;
 
     @FXML
     private JFXButton leaderboardMainMenuButton;
@@ -29,8 +37,29 @@ public class LeaderboardController extends ViewComponent {
         leaderboardMainMenuButton.setOnAction(event -> {
             switchView("MainMenu");
         });
+        DatabaseConnector newConnector = new DatabaseConnector(Constants.DB_URL);
+        BattleshipUser[] users = newConnector.getBattleshipUsers();
+        ObservableList<BattleshipUser> userList = FXCollections.observableArrayList();
+
+        TableColumn<BattleshipUser,String> nameColumn = new TableColumn<>("Username");
+        nameColumn.setMinWidth(200);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+        TableColumn<BattleshipUser,Integer> winsColumn = new TableColumn<>("Wins");
+        winsColumn.setMinWidth(100);
+        winsColumn.setCellValueFactory(new PropertyValueFactory<>("wonGames"));
+
+        TableColumn<BattleshipUser,Integer> lossColumn = new TableColumn<>("Losses");
+        lossColumn.setMinWidth(100);
+        lossColumn.setCellValueFactory(new PropertyValueFactory<>("lostGames"));
 
 
+        for(int i=0; i<users.length; i++){
+            userList.add(users[i]);
+        }
+
+        leaderboardTable.setItems(userList);
+        leaderboardTable.getColumns().addAll(nameColumn,winsColumn,lossColumn);
     }
 
     @Override
