@@ -12,6 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 public abstract class ViewComponent {
 
@@ -23,7 +25,8 @@ public abstract class ViewComponent {
      */
     public boolean switchView(String view){
         try {
-            AnchorPane formPane = formPane = FXMLLoader.load(getClass().getResource("/view/"+view+".fxml"));
+            URL url = Paths.get("./src/main/java/view/" + view + ".fxml").toUri().toURL();
+            AnchorPane formPane = FXMLLoader.load(url);
             getParentAnchorPane().getChildren().setAll(formPane);
             return true;
         } catch (IOException e) {

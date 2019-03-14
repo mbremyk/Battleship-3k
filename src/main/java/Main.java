@@ -19,9 +19,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 20);
-			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 36);
-			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 96);
+			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 20);
+			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 36);
+			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 96);
 			URL url = Paths.get("./src/main/java/view/MenuTemplate.fxml").toUri().toURL();
  			Parent root = FXMLLoader.load(url);
 			
