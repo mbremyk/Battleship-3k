@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 public class Main extends Application {
 
@@ -20,7 +22,8 @@ public class Main extends Application {
 			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 20);
 			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 36);
 			Font.loadFont(getClass().getResourceAsStream("/PixelTorje.ttf"), 96);
- 			Parent root = FXMLLoader.load(getClass().getResource("view/MenuTemplate.fxml"));
+			URL url = Paths.get("./src/main/java/view/MenuTemplate.fxml").toUri().toURL();
+ 			Parent root = FXMLLoader.load(url);
 			
  			final Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
