@@ -2,6 +2,7 @@
  * DatabaseConnector.java
  * <p>
  * Handles all connections with the database
+ * </p>
  */
 
 package database;
@@ -19,11 +20,24 @@ public class DatabaseConnector
 {
 	private String databaseUrl;
 	
+	/**
+	 * Constructor for the DatabaseConnector class
+	 *
+	 * @param databaseUrl String containing the URL of the database, with username and password included
+	 */
 	public DatabaseConnector(String databaseUrl)
 	{
 		this.databaseUrl = databaseUrl;
 	}
 	
+	/**
+	 * Checks if string 'string' exists in 'column' in 'table'
+	 *
+	 * @param string String to search for
+	 * @param column String containing the column to search in
+	 * @param table String 
+	 * @return
+	 */
 	public boolean stringExistsInColumn(String string, String column, String table)
 	{
 		try (Connection con = DriverManager.getConnection(databaseUrl))
