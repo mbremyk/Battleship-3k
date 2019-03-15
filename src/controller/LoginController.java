@@ -9,11 +9,16 @@ import com.jfoenix.controls.JFXButton;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import database.Login;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 public class LoginController extends ViewComponent{
 
@@ -55,12 +60,16 @@ public class LoginController extends ViewComponent{
             switchView("MainMenu");
         });
 
+
         loginLoginButton.setOnAction(event -> {
-            //TODO, this is where we check if the username and password are valid
-            System.out.println("TODO, see view/LoginController.java, but:\n" +
-                    "Username = " +loginUsernameField.getText()+
-                    "\nPassword = " +loginPasswordField.getText());
+            if (Login.login(loginUsernameField.getText(), loginPasswordField.getText()) != null){
+                Scene scene = loginCancelButton.getScene();
+                Node node = scene.lookup("#mainMenuLoggedInText");
+                ((Text)node).setText("Logged in as "+ loginUsernameField.getText());
+                switchView("MainMenu");
+            }
         });
+
 
     }
 

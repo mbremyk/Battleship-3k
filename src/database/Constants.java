@@ -19,7 +19,7 @@ public class Constants {
     public static final String DB_NAME = "thombje";
 	public static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password=" + DB_PASSWORD;
 
-    //USERS Table Column Names
+    //Users table column names
     public static final String USERS_TABLE = "BattleshipUser";
     public static final String USERS_ID = "user_id";
     public static final String USERS_USERNAME = "username";
@@ -30,4 +30,10 @@ public class Constants {
     public static final String USERS_SALT = "salt";
     public static final String USERS_TOTAL_GAMES = "total_games";
     public static final String USERS_RATIO = "ratio";
+
+    //Board table column names
+    public static final String BOARDS_TABLE = "battleship_board";
+    public static final String BOARDS_GAME_ID = "game_id";
+    public static final String BOARDS_USER_ID = "user_id";
+    public static final String BOARDS_COORDINATES = "coordinates";
 }
