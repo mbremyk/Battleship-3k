@@ -1,3 +1,5 @@
 .idea/
 out/
 Battleship 3k.iml
+target/
+.gitignore
