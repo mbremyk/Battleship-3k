@@ -1,5 +1,8 @@
+game\Game.class
 controller\MainMenuController.class
+game\ShipCoordinates.class
 database\Login.class
+game\Board.class
 controller\JoinGameController.class
 database\JDBCExample.class
 database\Constants.class
