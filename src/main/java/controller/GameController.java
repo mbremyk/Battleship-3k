@@ -3,6 +3,8 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import game.Board;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -52,5 +54,12 @@ public class GameController {
         assert gameMainPane != null : "fx:id=\"gameMainPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameOptionsImage != null : "fx:id=\"gameOptionsImage\" was not injected: check your FXML file 'Game.fxml'.";
 
+        Board board1 = new Board();
+        board1.setTranslateX(250);
+        board1.setTranslateY(200);
+        Board board2 = new Board();
+        board2.setTranslateX(650);
+        board2.setTranslateY(200);
+        gameMainPane.getChildren().addAll(board1,board2);
     }
 }

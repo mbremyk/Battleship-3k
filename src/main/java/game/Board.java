@@ -3,8 +3,6 @@ package game;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.Arrays;
-
 /**
  * info on where objects are located on the board
  * attack logic
@@ -16,9 +14,12 @@ public class Board extends ImageView {
 
 
     public Board() {
-//        super(new Image("./grid10x10.png"));
+        super(new Image("./grid10x10.png"));
         board = new int[10][10];
+        this.setFitWidth(300);
+        this.setFitHeight(300);
     }
+
 
     public void saveShipPositions(int[][] pos) {
         for (int i = 0; i < pos.length; i++) {
