@@ -28,7 +28,7 @@
             <Text fx:id="mainMenuLoggedInText" layoutX="652.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as Guest19231" />
             <ImageView fx:id="mainMenuOptionsImage" fitHeight="54.0" fitWidth="54.0" layoutX="8.0" layoutY="6.0">
                <image>
-                  <Image url="@../../../../../../../Art/BattleShips/Options.png" />
+                  <Image url="/Options.png" />
                </image>
             </ImageView>
          </children>

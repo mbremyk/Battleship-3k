@@ -59,7 +59,7 @@ public class LoginController extends ViewComponent{
         loginCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
-    
+        
         loginLoginButton.setOnAction(event -> {
             if (Login.login(loginUsernameField.getText(), loginPasswordField.getText()) != null){
                 Scene scene = loginCancelButton.getScene();
