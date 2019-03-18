@@ -1,6 +1,8 @@
 package game;
 
+import database.DatabaseConnector;
 import javafx.scene.image.ImageView;
+import model.BattleshipUser;
 
 /**
  * info on where objects are located on the board
