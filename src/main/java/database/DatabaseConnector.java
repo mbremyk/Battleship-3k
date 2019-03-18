@@ -33,7 +33,6 @@ public class DatabaseConnector {
 			res = preparedStatement.executeQuery();
 			
 			if (res.next()) {
-				close(preparedStatement, res);
 				return true;
 			}
 		}
@@ -81,7 +80,6 @@ public class DatabaseConnector {
 				byte[] salt = res.getBytes(USERS_SALT);
 				if (Arrays.equals(saltPassword(password, salt), passwordHash))  //password.equals(res.getString("password") for unhashed passwords
 				{
-					close(preparedStatement, res);
 					return new BattleshipUser(username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
 				}
 			}
