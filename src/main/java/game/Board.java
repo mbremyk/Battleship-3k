@@ -21,7 +21,9 @@ public class Board extends ImageView {
 
     public boolean attack(int x, int y) {
         //checks if defenders board has a ship at given coordinates
-
+        if (this.hasShip(x, y)) {
+            return true;
+        }
         return false;
     }
 }
