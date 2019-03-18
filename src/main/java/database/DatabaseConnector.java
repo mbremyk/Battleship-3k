@@ -2,6 +2,7 @@
  * DatabaseConnector.java
  * <p>
  * Handles all connections with the database
+ * </p>
  */
 
 package database;
@@ -12,7 +13,6 @@ import model.BattleshipUser;
 import static database.Constants.*;
 import static database.Login.saltPassword;
 
-import java.io.Closeable;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.*;
@@ -33,7 +33,7 @@ public class DatabaseConnector {
 			res = preparedStatement.executeQuery();
 			
 			if (res.next()) {
-				close((Closeable) preparedStatement, (Closeable) res);
+				close(preparedStatement, res);
 				return true;
 			}
 		}
@@ -44,7 +44,7 @@ public class DatabaseConnector {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
 		finally {
-			close((Closeable) res);
+			close(res);
 		}
 		return false;
 	}
@@ -81,7 +81,7 @@ public class DatabaseConnector {
 				byte[] salt = res.getBytes(USERS_SALT);
 				if (Arrays.equals(saltPassword(password, salt), passwordHash))  //password.equals(res.getString("password") for unhashed passwords
 				{
-					close((Closeable) preparedStatement, (Closeable) res);
+					close(preparedStatement, res);
 					return new BattleshipUser(username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
 				}
 			}
@@ -93,7 +93,7 @@ public class DatabaseConnector {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
 		finally {
-			close((Closeable) res);
+			close(res);
 		}
 		return null;
 	}
@@ -121,7 +121,7 @@ public class DatabaseConnector {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
 		finally {
-			close((Closeable) res);
+			close(res);
 		}
 		return null;
 	}
@@ -164,13 +164,13 @@ public class DatabaseConnector {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
 		finally {
-			close((Closeable) res);
+			close(res);
 		}
 		
 		return coordinates;
 	}
 	
-	private void close(Closeable closeable) {
+	private void close(AutoCloseable closeable) {
 		try {
 			closeable.close();
 		}
@@ -179,7 +179,7 @@ public class DatabaseConnector {
 		}
 	}
 	
-	private void close(Closeable closeable1, Closeable closeable2) {
+	private void close(AutoCloseable closeable1, AutoCloseable closeable2) {
 		try {
 			closeable1.close();
 			closeable2.close();
