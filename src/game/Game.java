@@ -8,16 +8,26 @@ import model.BattleshipUser;
  * communication with controller(game looks), dbconstants, battleshipuser, dbc
  */
 public class Game {
-    private BattleshipUser player1;
-    private BattleshipUser player2;
-    private Board board1 = new Board(1);
-    private Board board2 = new Board(2);
+    private Player player1;
+    private Player player2;
 
-    Game(BattleshipUser player1, BattleshipUser player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+
+    Game(BattleshipUser user1, BattleshipUser user2) {
+        player1 = new Player(user1, 1);
+        player2 = new Player(user2, 2);
     }
 
+    public static void main(String[] args) {
+        while (true) {
+            if (getTurn == 1) {
+                player1.turn();
+            }
+            else if (getTurn ==2) {
+                player1.turn();
+            }
+        }
+
+    }
 
 
 

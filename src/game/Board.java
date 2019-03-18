@@ -13,7 +13,8 @@ public class Board {
         this.boardNumber = boardNumber;
     }
 
-    public boolean attack(BattleshipUser attacker, BattleshipUser defender, ) {
+    public boolean attack(BattleshipUser attacker, BattleshipUser defender, coordinates) {
+        //checks if defenders board has a ship at given coordinates
 
     }
 }
