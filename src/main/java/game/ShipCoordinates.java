@@ -1,14 +1,16 @@
 /**
  * Class that stores coordinates of a user's ships
+ * To get an object with information from the database, use the DatabaseConnector getCoordinates method
  *
  * @Author Thorkildsen Torje
+ *
+ * @see database.DatabaseConnector#getShipCoordinates(int, int)
  */
 
 package game;
 
 public class ShipCoordinates {
-    private final int[] coordinatesX;
-    private final int[] coordinatesY;
+    private final int[][] coordinates;
 
 
     public ShipCoordinates(int[] coordinatesX, int[] coordinatesY) {
@@ -16,28 +18,32 @@ public class ShipCoordinates {
         this.coordinatesY = coordinatesY;
     }
 
-    public int[] getCoordinatesX() {
-        return coordinatesX;
+    public ShipCoordinates(int[][] coordinates) {
+        this.coordinates = coordinates;
     }
 
-    public int[] getCoordinatesY() {
-        return coordinatesY;
+    public int[][] getCoordinates() {
+        return coordinates;
     }
 
+    @Override
+    public String toString() {
+        String ret = super.toString()+"\n";
+        for (int i = 0; i < coordinates.length; i++) {
+            ret += "{" + coordinates[i][0] + "," + coordinates[i][1] + "}";
+        }
+        return ret;
+    }
 
     /**
      * testklient
+     *
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         database.DatabaseConnector databaseConnector = new database.DatabaseConnector(database.Constants.DB_URL);
-        ShipCoordinates shipCoordinates = databaseConnector.getShipCoordinates(1,5);
+        ShipCoordinates shipCoordinates = databaseConnector.getShipCoordinates(1, 5);
 
-        int[] x = shipCoordinates.getCoordinatesX();
-        int[] y = shipCoordinates.getCoordinatesY();
-
-        for (int i = 0; i<x.length; i++){
-            System.out.println("{"+x[i]+","+y[i]+"}");
-        }
+        System.out.println(shipCoordinates.toString());
     }
 }

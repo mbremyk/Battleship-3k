@@ -126,13 +126,12 @@ public class DatabaseConnector {
                 String[] coordArray = coordString.split(",");
 
                 int length = coordArray.length / 2;
-                int[] coordX = new int[length];
-                int[] coordY = new int[length];
+                int[][] coords = new int[length][2];
                 for (int i = 0; i < length; i++) {
-                    coordX[i] = Integer.parseInt(coordArray[i * 2]);
-                    coordY[i] = Integer.parseInt(coordArray[i * 2 + 1]);
+                    coords[i][0] = Integer.parseInt(coordArray[i * 2]);
+                    coords[i][1] = Integer.parseInt(coordArray[i * 2 + 1]);
                 }
-                coordinates = new ShipCoordinates(coordX, coordY);
+                coordinates = new ShipCoordinates(coords);
             }
         } catch (SQLException e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
