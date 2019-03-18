@@ -5,7 +5,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import model.BattleshipUser;
 
-
 /**
  * info on where objects are located on the board
  * attack logic
