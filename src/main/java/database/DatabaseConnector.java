@@ -6,7 +6,6 @@
 
 package database;
 
-import game.ShipCoordinates;
 import model.BattleshipUser;
 
 import static database.Constants.*;
@@ -112,8 +111,8 @@ public class DatabaseConnector {
      * @param userid
      * @return ShipCoordinates object containing information about the spaces the ships occupy
      */
-    public ShipCoordinates getShipCoordinates(int gameid, int userid) {
-        ShipCoordinates coordinates = null;
+    public int[][] getShipCoordinates(int gameid, int userid) {
+        int[][] coordinates = null;
 
         try (Connection con = DriverManager.getConnection(databaseUrl)) {
             PreparedStatement preparedStatement = con.prepareStatement("SELECT " + BOARDS_COORDINATES + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + "=" + "? AND " + BOARDS_USER_ID + "=?");
@@ -126,18 +125,16 @@ public class DatabaseConnector {
                 String[] coordArray = coordString.split(",");
 
                 int length = coordArray.length / 2;
-                int[][] coords = new int[length][2];
+                coordinates = new int[length][2];
                 for (int i = 0; i < length; i++) {
-                    coords[i][0] = Integer.parseInt(coordArray[i * 2]);
-                    coords[i][1] = Integer.parseInt(coordArray[i * 2 + 1]);
+                    coordinates[i][0] = Integer.parseInt(coordArray[i * 2]);
+                    coordinates[i][1] = Integer.parseInt(coordArray[i * 2 + 1]);
                 }
-                coordinates = new ShipCoordinates(coords);
             }
         } catch (SQLException e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
-
-
+        
         return coordinates;
     }
 }

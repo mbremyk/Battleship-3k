@@ -1,11 +1,13 @@
 package game;
 
+import javafx.scene.image.ImageView;
+
 /**
  * info on where objects are located on the board
  * attack logic
  */
 
-public class Board extends Rectangle {
+public class Board extends ImageView {
     //private int boardNumber; //bord nr 1 eller 2 (korresponderer med spillernr
     int[][] board;
 
