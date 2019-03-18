@@ -13,6 +13,8 @@ public class BattleshipUser {
     private int lostGames;
     private double ratio;
 
+
+
     public BattleshipUser(String username, String password, String email, int wonGames, int lostGames) {
         this.username = username;
         this.password = password;

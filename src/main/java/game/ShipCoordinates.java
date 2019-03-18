@@ -13,6 +13,11 @@ public class ShipCoordinates {
     private final int[][] coordinates;
 
 
+    public ShipCoordinates(int[] coordinatesX, int[] coordinatesY) {
+        this.coordinatesX = coordinatesX;
+        this.coordinatesY = coordinatesY;
+    }
+
     public ShipCoordinates(int[][] coordinates) {
         this.coordinates = coordinates;
     }
