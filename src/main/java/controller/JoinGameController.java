@@ -8,10 +8,16 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class JoinGameController extends ViewComponent{
 
@@ -39,6 +45,10 @@ public class JoinGameController extends ViewComponent{
 
         joinGameCancelButton.setOnAction(event -> {
             switchView("MainMenu");
+        });
+
+        joinGameJoinButton.setOnAction(event -> {
+            startGame();
         });
     }
 
