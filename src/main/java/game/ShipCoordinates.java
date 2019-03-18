@@ -10,6 +10,7 @@ public class ShipCoordinates {
     private final int[] coordinatesX;
     private final int[] coordinatesY;
 
+
     public ShipCoordinates(int[] coordinatesX, int[] coordinatesY) {
         this.coordinatesX = coordinatesX;
         this.coordinatesY = coordinatesY;

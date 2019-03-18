@@ -12,16 +12,16 @@ public class GameLobby {
     private BattleshipUser user2;
     private String gameName;
     private BattleshipUser hostUser;
-    private boolean gameOpen = false; //
+    private boolean gameOpen = false;
 
     GameLobby(BattleshipUser user1, String gameName) {
         this.user1 = user1;
         this.gameName = gameName;
-        waitForPlayer();
+        waitForUser();
     }
 
     //whenever there is only one player (hosting game)
-    public BattleshipUser waitForPlayer() { //waits for user2 to join game lobby
+    public void waitForUser() { //waits for user2 to join game lobby
 
         //list game info in "join game window"
 
@@ -34,5 +34,4 @@ public class GameLobby {
         gameOpen = true;
         new Game(user1, user2);
     }
-
 }

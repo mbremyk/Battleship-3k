@@ -1,4 +1,6 @@
 package game;
+import database.Constants;
+import database.DatabaseConnector;
 import model.BattleshipUser;
 
 /**
@@ -8,28 +10,29 @@ import model.BattleshipUser;
  * communication with controller(game looks), dbconstants, battleshipuser, dbc
  */
 public class Game {
-    private Player player1;
-    private Player player2;
-
+    private BattleshipUser user1;
+    private BattleshipUser user2;
+    private Board board1;
+    private Board board2;
+    private DatabaseConnector databaseConnector;
 
     Game(BattleshipUser user1, BattleshipUser user2) {
-        player1 = new Player(user1, 1);
-        player2 = new Player(user2, 2);
+        this.user1 = user1;
+        this.user2 = user2;
+        board1 = new Board();
+        board2 = new Board();
+        databaseConnector = new DatabaseConnector(Constants.DB_URL);
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         while (true) {
-            if (getTurn == 1) {
+            if (DatabaseConnector.getTurn == 1) {
                 player1.turn();
             }
-            else if (getTurn ==2) {
+            else if (DatabaseConnector.getTurn == 2) {
                 player1.turn();
             }
         }
-
-    }
-
-
-
+    }*/
 
 }
