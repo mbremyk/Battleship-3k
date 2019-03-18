@@ -1,6 +1,7 @@
 package game;
 
 import database.DatabaseConnector;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import model.BattleshipUser;
 
@@ -10,7 +11,7 @@ import model.BattleshipUser;
  * attack logic
  */
 
-public class Board extends Rectangle {
+public class Board extends ImageView {
     //private int boardNumber; //bord nr 1 eller 2 (korresponderer med spillernr
     int[][] board;
 
