@@ -7,7 +7,7 @@ public class Player {
     private Board board;
 
     Player(BattleshipUser user, int boardNumber) {
-        board = new Board(boardNumber);
+        board = new Board();
     }
 
 }
