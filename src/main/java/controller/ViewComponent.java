@@ -9,7 +9,10 @@
 package controller;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +33,24 @@ public abstract class ViewComponent {
             getParentAnchorPane().getChildren().setAll(formPane);
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean startGame(){
+        try {
+            getParentAnchorPane().getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            URL url = Paths.get("./src/main/java/view/Game.fxml").toUri().toURL();
+            loader.setLocation(url);
+            loader.load();
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
