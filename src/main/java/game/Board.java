@@ -23,6 +23,6 @@ public class Board extends Rectangle {
     public boolean attack(int x, int y) {
         //checks if defenders board has a ship at given coordinates
 
-
+        return false;
     }
 }
