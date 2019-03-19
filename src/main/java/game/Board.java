@@ -9,15 +9,42 @@ import javafx.scene.image.ImageView;
  */
 
 public class Board extends ImageView {
+    public static final int SIZE = 300; //Width and height of image
+    public static final int TILES = 10; //Tiles in x and y direction
+    public static final double TILE_SIZE = SIZE / ((double) TILES); //Tiles in x and y direction
+
+    private final int boardNumber;
+    private int mousePosX = -1;
+    private int mousePosY = -1;
+
     //private int boardNumber; //bord nr 1 eller 2 (korresponderer med spillernr
     int[][] board;
 
 
-    public Board() {
+    public Board(int boardNumber) {
         super(new Image("./grid10x10.png"));
-        board = new int[10][10];
-        this.setFitWidth(300);
-        this.setFitHeight(300);
+        this.boardNumber = boardNumber;
+        board = new int[TILES][TILES];
+        this.setFitWidth(SIZE);
+        this.setFitHeight(SIZE);
+
+        setOnMouseMoved(event -> {
+            findMousePos(event.getX(), event.getY());
+        });
+        setOnMouseExited(event -> {
+            mousePosX = -1;
+            mousePosY = -1;
+        });
+        setOnMouseClicked(event -> {
+            //Attack with mousePosX and mousePosY
+            if (boardNumber == 1) System.out.println("Placing boat on " + mousePosX + "," + mousePosY);
+            if (boardNumber == 2) System.out.println("Attacking " + mousePosX + "," + mousePosY);
+        });
+    }
+
+    public void findMousePos(double x, double y) {
+        mousePosX = (int) (x / TILE_SIZE);
+        mousePosY = (int) (y / TILE_SIZE);
     }
 
 
@@ -31,6 +58,14 @@ public class Board extends ImageView {
         //checks if defenders board has a ship at given coordinates
 
         return false;
+    }
+
+    public int getMousePosX() {
+        return mousePosX;
+    }
+
+    public int getMousePosY() {
+        return mousePosY;
     }
 
     @Override
@@ -50,17 +85,19 @@ public class Board extends ImageView {
 
     /**
      * Test client
+     *
      * @param args
      */
 
-    public static void main(String[] args){
-        Board board = new Board();
+    public static void main(String[] args) {
+        //Disable/comment out super(new Image("./grid10x10.png")); in constructor to test
+        Board board = new Board(1);
         int[][] testPos = {
-                {0,4},
-                {1,4},
-                {2,4},
-                {6,6},
-                {6,7},
+                {0, 4},
+                {1, 4},
+                {2, 4},
+                {6, 6},
+                {6, 7},
         };
         board.saveShipPositions(testPos);
         System.out.println(board);
