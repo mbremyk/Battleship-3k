@@ -6,7 +6,9 @@
 
 package database;
 
+import game.Game;
 import game.ShipCoordinates;
+import game.Statics;
 import model.BattleshipUser;
 
 import static database.Constants.*;
@@ -71,7 +73,7 @@ public class DatabaseConnector {
                 byte[] salt = res.getBytes(USERS_SALT);
                 if (Arrays.equals(saltPassword(password, salt), passwordHash))  //password.equals(res.getString("password") for unhashed passwords
                 {
-                    return new BattleshipUser(username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+                    return new BattleshipUser(res.getInt(USERS_ID), username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
                 }
             }
         } catch (SQLException e) {
@@ -93,7 +95,7 @@ public class DatabaseConnector {
                 for (int i = 0; i < users.length; i++) {
                     newUsers[i] = users[i];
                 }
-                newUsers[newUsers.length - 1] = new BattleshipUser(res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
+                newUsers[newUsers.length - 1] = new BattleshipUser(res.getInt(USERS_ID), res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
                         res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
                 users = newUsers;
             }
@@ -117,8 +119,8 @@ public class DatabaseConnector {
 
         try (Connection con = DriverManager.getConnection(databaseUrl)) {
             PreparedStatement preparedStatement = con.prepareStatement("SELECT " + BOARDS_COORDINATES + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + "=" + "? AND " + BOARDS_USER_ID + "=?");
-            preparedStatement.setString(1, gameid+"");
-            preparedStatement.setString(2, userid+"");
+            preparedStatement.setString(1, gameid + "");
+            preparedStatement.setString(2, userid + "");
             ResultSet res = preparedStatement.executeQuery();
 
             if (res.next()) {
@@ -139,5 +141,29 @@ public class DatabaseConnector {
 
 
         return coordinates;
+    }
+
+    public boolean doAction(int gameId, int x, int y) {
+        //insert into actionstable (parameters)
+        return false;
+    }
+
+    public boolean createGame(Game newGame) {
+        try (Connection con = DriverManager.getConnection(databaseUrl)) {
+            String query = "INSERT INTO " + GAME_TABLE + "(" + GAME_ID + "," + HOST_ID + ") VALUES(?,?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, newGame.getGameId());
+            preparedStatement.setInt(2, newGame.getHostUser().getUserId());
+//            preparedStatement.setInt(3, newGame.getJoinUser().getUserId());
+            preparedStatement.execute();
+            Statics.setGame(newGame);
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
     }
 }

@@ -10,39 +10,46 @@ import model.BattleshipUser;
  * graphical logic
  */
 public class Game {
-	private BattleshipUser user1;
-	private BattleshipUser user2;
+	private BattleshipUser hostUser;
+	private BattleshipUser joinUser;
 	private Board board1;
 	private Board board2;
 	private DatabaseConnector databaseConnector;
 	private String gameName;
-	private BattleshipUser hostUser;
-	private boolean gameOpen = false;
+	private boolean gameOpen = true; //open to join
+	private int gameId;
 	
-	Game(BattleshipUser user1, BattleshipUser user2) {
-		this.user1 = user1;
-		this.user2 = user2;
-		board1 = new Board();
-		board2 = new Board();
+	public Game(BattleshipUser hostUser) {
 		databaseConnector = new DatabaseConnector(Constants.DB_URL);
+		this.hostUser = hostUser;
+		board1 = new Board(gameId);
+		board2 = new Board(gameId);
+	}
+
+	public int getGameId() {
+		return gameId;
+	}
+	public BattleshipUser getHostUser() {
+		return hostUser;
+	}
+	public BattleshipUser getJoinUser() {
+		return joinUser;
 	}
 
 	//whenever there is only one player (hosting game)
-	public void waitForUser() { //waits for user2 to join game lobby
+	public void waitForUser() { //waits for joinUser to join game
 
 		//list game info in "join game window"
-
-		//let user2 join lobby
+		//create thread
 		//Poll database for user join
-		//user2 = databaseGetUser();
-		//createGame(user1, user);
+		//joinUser = databaseGetUser();
+		gameOpen = false; //game full
 	}
 
 	//whenever two players are in the lobby
-	public void createGame() {
-		gameOpen = true;
-		databaseConnector.createGame(new Game(user1, user2));
-	}
+//	public void createGame() {
+//
+//	}
 
 	/*public static void main(String[] args) {
         while (true) {
