@@ -75,7 +75,8 @@ public class Board extends ImageView {
         for (Ship ship : ships) {
             saveShipPosition(ship);
         }
-        System.out.println("Registered ships:\n"+toString());
+        System.out.println("Registered ships:\n" + toString());
+        System.out.println("In database coordinates:\n"+getShipsForDatabase());
     }
 
     /**
@@ -90,12 +91,37 @@ public class Board extends ImageView {
         return true;
     }
 
+    /**
+     * @param visible, sets the visibility of the boat (might not be needed in future versions
+     * @// TODO: 19.03.2019  remove visible boolean if enemy boats aren't needed
+     */
+
     public void addDefaultShips(boolean visible) {
         addShip(new Ship(visible, 2, 5, 5, 1, this));
         addShip(new Ship(visible, 5, 1, 3, 2, this));
         addShip(new Ship(visible, 8, 8, 2, 1, this));
         addShip(new Ship(visible, 8, 3, 1, 3, this));
         addShip(new Ship(visible, 0, 7, 2, 2, this));
+    }
+
+    /**
+     * Gets the occupied tiles as a String written as xx,yy,xx,yy,xx,yy...
+     * Used in the battleship_board table in the database for storing ship coordinates
+     *
+     * @return String with coordinates written as xx,yy,xx,yy,xx,yy...
+     */
+    public String getShipsForDatabase() {
+        String ret = "";
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == 1) {
+                    ret += i < 10 ? "0" + i : i;
+                    ret += "," + (j < 10 ? "0" + j : j)+",";
+                }
+            }
+        }
+        ret = ret.substring(0,ret.length()-1);
+        return ret;
     }
 
     public boolean attack(int x, int y) {
@@ -136,7 +162,7 @@ public class Board extends ImageView {
     public static void main(String[] args) {
         //Disable/comment out super(new Image("./grid10x10.png")); in constructor to test
         Board board = new Board(1, null, 0, 0);
-        Ship ship = new Ship(false, 2, 5, 5, 2, new Board(10,new AnchorPane(),0,0));
+        Ship ship = new Ship(false, 2, 5, 5, 2, new Board(10, new AnchorPane(), 0, 0));
         board.saveShipPosition(ship);
         System.out.println(board);
     }
