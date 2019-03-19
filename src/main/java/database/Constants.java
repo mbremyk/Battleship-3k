@@ -8,6 +8,7 @@ package database;
  *
  * @Author Thorkildsen Torje
  * @Author Brevik Magnus
+ * @Author Hans Kristian Granli
  */
 
 public class Constants {
@@ -36,4 +37,10 @@ public class Constants {
     public static final String BOARDS_GAME_ID = "game_id";
     public static final String BOARDS_USER_ID = "user_id";
     public static final String BOARDS_COORDINATES = "coordinates";
+
+    //Action table column won_games
+    public static final String ACTION_TABLE = "Action";
+    public static final String ACTION_GAME_ID = "game_id";
+    public static final String ACTION_MOVE_ID = "move_id";
+    public static final String ACTION_COORDINATES = "coordinates";
 }
