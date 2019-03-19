@@ -127,11 +127,11 @@ public class DatabaseConnector {
 		return null;
 	}
 	public int lastAction(Game game){
+		int moveId = 0;
 		ResultSet res = null;
 		String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = " + game.getId() + " ORDER BY " + ACTION_MOVE_ID;
 		try(Connection con = DriverManager.getConnection(databaseUrl)){
 			PreparedStatement prepareStatement = con.prepareStatement(query){
-				int moveId = 0;
 				if(res.next()){
 					moveId = res.getInt(ACTION_MOVE_ID);
 				}
