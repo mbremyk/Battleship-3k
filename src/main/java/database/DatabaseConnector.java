@@ -104,7 +104,7 @@ public class DatabaseConnector {
 				byte[] salt = res.getBytes(USERS_SALT);
 				if (Arrays.equals(saltPassword(password, salt), passwordHash))  //password.equals(res.getString("password") for unhashed passwords
 				{
-					return new BattleshipUser(username, passwordHash, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+					return new BattleshipUser(username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
 				}
 			}
 		}
@@ -133,7 +133,7 @@ public class DatabaseConnector {
 				for (int i = 0; i < users.length; i++) {
 					newUsers[i] = users[i];
 				}
-				newUsers[newUsers.length - 1] = new BattleshipUser(res.getString(USERS_USERNAME), res.getBytes(USERS_PASSWORD),
+				newUsers[newUsers.length - 1] = new BattleshipUser(res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
 						res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
 				users = newUsers;
 			}
