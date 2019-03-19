@@ -44,6 +44,10 @@ public class HostGameController extends ViewComponent{
         hostGameCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
+
+        hostGameCreateGameButton.setOnAction(event -> {
+            startGame();
+        });
     }
 
     @Override

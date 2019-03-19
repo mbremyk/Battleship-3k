@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="gameMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #90caf9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+   <children>
+      <ImageView fitHeight="646.0" fitWidth="800.0" layoutX="200.0" layoutY="54.0" opacity="0.3" pickOnBounds="true">
+         <image>
+            <Image url="/Water.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff212127" height="646.0" layoutX="600.0" layoutY="54.0" stroke="TRANSPARENT" strokeType="INSIDE" width="404.0" />
+      <AnchorPane fx:id="gameToolsPane" layoutY="54.0" prefHeight="646.0" prefWidth="200.0" style="-fx-background-color: #90caf9;" />
+      <AnchorPane fx:id="gameAttacksPane" layoutX="1000.0" layoutY="54.0" prefHeight="646.0" prefWidth="200.0" style="-fx-background-color: #90caf9;" />
+      <AnchorPane prefHeight="40.0" prefWidth="1200.0" style="-fx-background-color: #1565c0;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="55.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="55.0" layoutX="1000.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
+            <ImageView fx:id="gameOptionsImage" fitHeight="54.0" fitWidth="54.0" layoutX="219.0" layoutY="1.0">
+               <image>
+                  <Image url="/Options.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="gameGameNameText" fill="WHITE" layoutX="339.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME" textAlignment="CENTER" wrappingWidth="523.0">
+               <font>
+                  <Font name="PixelTorje" size="36.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tools" textAlignment="CENTER" wrappingWidth="166.0">
+               <font>
+                  <Font name="PixelTorje" size="36.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="1020.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attacks" textAlignment="CENTER" wrappingWidth="166.0">
+               <font>
+                  <Font name="PixelTorje" size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="gameTurnButton" focusTraversable="false" layoutX="426.0" layoutY="615.0" prefHeight="60.0" prefWidth="349.0" style="-fx-background-color: #1565c0;" text="END TURN" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="PixelTorje" size="36.0" />
+         </font>
+      </JFXButton>
+      <Text fx:id="gameUserNameText" layoutX="275.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USER NAME" textAlignment="CENTER" wrappingWidth="253.0">
+         <font>
+            <Font name="PixelTorje" size="28.0" />
+         </font>
+      </Text>
+      <Text fx:id="gameOpponentNameText" layoutX="676.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OPPONENT NAME" textAlignment="CENTER" wrappingWidth="253.0">
+         <font>
+            <Font name="PixelTorje" size="28.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

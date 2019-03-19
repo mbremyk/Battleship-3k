@@ -7,13 +7,13 @@ package model;
 
 public class BattleshipUser {
     private String username;
-    private String password;
+    private byte[] password;
     private String email;
     private int wonGames;
     private int lostGames;
     private double ratio;
 
-    public BattleshipUser(String username, String password, String email, int wonGames, int lostGames) {
+    public BattleshipUser(String username, byte[] password, String email, int wonGames, int lostGames) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -22,7 +22,7 @@ public class BattleshipUser {
         this.ratio = calculateRatio();
     }
 
-    public BattleshipUser(String username, String password, String email) {
+    public BattleshipUser(String username, byte[] password, String email) {
         this(username, password, email, 0, 0);
     }
 
@@ -30,7 +30,7 @@ public class BattleshipUser {
         return username;
     }
     
-    public String getPassword() { return password; }
+    public byte[] getPassword() { return password; }
     
     public String getEmail()
     {
