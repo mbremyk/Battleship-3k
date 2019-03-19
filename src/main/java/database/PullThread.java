@@ -33,7 +33,7 @@ public class PullThread extends Thread{
     boolean gameOver = game.getGameState();
     int moveId = game.getMoveId();
     while(!gameOver){
-      int lastAction = db.lastAction();
+      int lastAction = db.lastAction(game);
         if(lastAction != moveId){
           game.move();
       }
