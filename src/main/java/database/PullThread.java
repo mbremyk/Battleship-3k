@@ -31,13 +31,13 @@ public class PullThread extends Thread{
   @Override
   public void run(){
     boolean gameOver = game.getGameState();
-    int gameId = game.getId();
     int moveId = game.getMoveId();
     while(!gameOver){
-      int[] lastAction = db.lastAction();
-        if(lastAction[0] != gameId){
-          game.move(lastAction[1]);
+      int lastAction = db.lastAction();
+        if(lastAction != moveId){
+          game.move();
       }
+      Thread.Sleep(500);
     }
   }
 }

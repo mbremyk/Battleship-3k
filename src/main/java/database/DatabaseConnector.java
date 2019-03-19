@@ -104,20 +104,20 @@ public class DatabaseConnector {
 		String query = "SELECT * FROM " + USERS_TABLE;
 		try (Connection con = DriverManager.getConnection(databaseUrl);
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
-			BattleshipUser[] users = new BattleshipUser[0];
-			res = preparedStatement.executeQuery();
+					 	BattleshipUser[] users = new BattleshipUser[0];
+						res = preparedStatement.executeQuery();
 
-			while (res.next()) {
-				BattleshipUser[] newUsers = new BattleshipUser[users.length + 1];
-				for (int i = 0; i < users.length; i++) {
-					newUsers[i] = users[i];
-				}
-				newUsers[newUsers.length - 1] = new BattleshipUser(res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
-						res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
-				users = newUsers;
-			}
-			return users;
-		}
+						while (res.next()) {
+							BattleshipUser[] newUsers = new BattleshipUser[users.length + 1];
+							for (int i = 0; i < users.length; i++) {
+								newUsers[i] = users[i];
+							}
+							newUsers[newUsers.length - 1] = new BattleshipUser(res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
+									res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+							users = newUsers;
+						}
+						return users;
+					}
 		catch (SQLException e) {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
@@ -126,17 +126,23 @@ public class DatabaseConnector {
 		}
 		return null;
 	}
-	public int[] lastAction(Game game){
+	public int lastAction(Game game){
 		ResultSet res = null;
 		String query = "SELECT * FROM " + ACTION + " WHERE " + ACTION_GAME_ID + " = " + game.getId() + " ORDER BY " + ACTION_MOVE_ID;
 		try(Connection con = DriverManager.getConnection(databaseUrl)){
-
+			PreparedStatement prepareStatement = con.prepareStatement(query){
+				int moveId = 0;
+				if(res.next()){
+					moveId = res.getInt(ACTION_MOVE_ID);
+				}
+			}
 		}catch (SQLException e) {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
 		finally{
 			close(res);
 		}
+		return moveId;
 	}
 
 
