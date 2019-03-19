@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import game.Board;
 import game.MouseFollower;
+import game.Ship;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
@@ -45,6 +46,9 @@ public class GameController {
     @FXML
     private ImageView gameOptionsImage;
 
+    private MouseFollower mouseFollower;
+    private static boolean shipsMovable = true;
+
 
     @FXML
     void initialize() {
@@ -57,23 +61,43 @@ public class GameController {
         assert gameMainPane != null : "fx:id=\"gameMainPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameOptionsImage != null : "fx:id=\"gameOptionsImage\" was not injected: check your FXML file 'Game.fxml'.";
 
-        Board board1 = new Board(1);
-        board1.setTranslateX(250);
-        board1.setTranslateY(200);
-        Board board2 = new Board(2);
-        board2.setTranslateX(650);
-        board2.setTranslateY(200);
-        MouseFollower mouseFollower = new MouseFollower();
-        gameMainPane.getChildren().addAll(board1, board2, mouseFollower);
+        shipsMovable = true;
+        addUIComponents();
+    }
+
+    /**
+     * Adds the Boards and the MouseFollower.
+     */
+    public void addUIComponents() {
+        mouseFollower = new MouseFollower();
+        mouseFollower.setVisible(false);
+        Board board1 = new Board(1, gameMainPane, 250, 200);
+        Board board2 = new Board(2, gameMainPane, 650, 200);
+
+        //THIS ORDER IS VERY IMPORTANT
+        gameMainPane.getChildren().addAll(board1, board2);
+        board1.addDefaultShips(true);
+        board2.addDefaultShips(false);
+        gameMainPane.getChildren().add(mouseFollower);
 
         gameMainPane.setOnMouseMoved(event -> {
             if (board1.getMousePosX() != -1 && board1.getMousePosY() != -1) {
-                mouseFollower.setTilePos(board1.getTranslateX(), board1.getTranslateY(),board1.getMousePosX(),board1.getMousePosY());
+                mouseFollower.setTilePos(board1.getTranslateX(), board1.getTranslateY(), board1.getMousePosX(), board1.getMousePosY());
             } else if (board2.getMousePosX() != -1 && board2.getMousePosY() != -1) {
-                mouseFollower.setTilePos(board2.getTranslateX() , board2.getTranslateY(),board2.getMousePosX(), board2.getMousePosY());
+                mouseFollower.setTilePos(board2.getTranslateX(), board2.getTranslateY(), board2.getMousePosX(), board2.getMousePosY());
             } else {
                 mouseFollower.setPos(event.getX(), event.getY());
             }
         });
+
+        gameTurnButton.setOnAction(event -> {
+            shipsMovable = false;
+            mouseFollower.setVisible(true);
+            board1.registerShipCoordinates();
+        });
+    }
+
+    public static boolean isShipsMovable() {
+        return shipsMovable;
     }
 }

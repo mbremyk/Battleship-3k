@@ -7,6 +7,7 @@
 
 package game;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class MouseFollower extends Rectangle {
@@ -19,6 +20,7 @@ public class MouseFollower extends Rectangle {
 
     public MouseFollower() {
         setMouseTransparent(true); //Not blocking MouseEvents
+        setFill(Color.RED);
         setWidth(size * widthBlocks);
         setHeight(size * heightBlocks);
     }

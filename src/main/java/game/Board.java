@@ -1,7 +1,11 @@
 package game;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+
+import java.util.ArrayList;
 
 /**
  * info on where objects are located on the board
@@ -16,14 +20,20 @@ public class Board extends ImageView {
     private final int boardNumber;
     private int mousePosX = -1;
     private int mousePosY = -1;
+    private final AnchorPane parent;
 
     //private int boardNumber; //bord nr 1 eller 2 (korresponderer med spillernr
-    int[][] board;
+    private int[][] board;
+    private ArrayList<Ship> ships = new ArrayList<Ship>();
 
 
-    public Board(int boardNumber) {
+    public Board(int boardNumber, AnchorPane parent, double x, double y) {
         super(new Image("./grid10x10.png"));
         this.boardNumber = boardNumber;
+        this.parent = parent;
+        setTranslateX(x);
+        setTranslateY(y);
+
         board = new int[TILES][TILES];
         this.setFitWidth(SIZE);
         this.setFitHeight(SIZE);
@@ -48,10 +58,44 @@ public class Board extends ImageView {
     }
 
 
-    public void saveShipPositions(int[][] pos) {
-        for (int i = 0; i < pos.length; i++) {
-            board[pos[i][0]][pos[i][1]] = 1;
+    public void saveShipPosition(Ship ship) {
+        int[] pos = ship.getBasePosition();
+        int[][] size = ship.getSize();
+        for (int i = 0; i < size.length; i++) {
+            for (int j = 0; j < size[0].length; j++) {
+                board[pos[0] + i][pos[1] + j] = 1;
+            }
         }
+    }
+
+    /**
+     * Confirms the placements of the ships by adding them to the board
+     */
+    public void registerShipCoordinates() {
+        for (Ship ship : ships) {
+            saveShipPosition(ship);
+        }
+        System.out.println("Registered ships:\n"+toString());
+    }
+
+    /**
+     * Adds a Ship object to the stage and registers it in the ships array
+     *
+     * @return boolean, true if ship could be added and false if there was a problem (for example spaces occupied)
+     */
+    public boolean addShip(Ship ship) {
+        if (this.parent == null) return false;
+        this.parent.getChildren().add(ship);
+        ships.add(ship);
+        return true;
+    }
+
+    public void addDefaultShips(boolean visible) {
+        addShip(new Ship(visible, 2, 5, 5, 1, this));
+        addShip(new Ship(visible, 5, 1, 3, 2, this));
+        addShip(new Ship(visible, 8, 8, 2, 1, this));
+        addShip(new Ship(visible, 8, 3, 1, 3, this));
+        addShip(new Ship(visible, 0, 7, 2, 2, this));
     }
 
     public boolean attack(int x, int y) {
@@ -91,15 +135,9 @@ public class Board extends ImageView {
 
     public static void main(String[] args) {
         //Disable/comment out super(new Image("./grid10x10.png")); in constructor to test
-        Board board = new Board(1);
-        int[][] testPos = {
-                {0, 4},
-                {1, 4},
-                {2, 4},
-                {6, 6},
-                {6, 7},
-        };
-        board.saveShipPositions(testPos);
+        Board board = new Board(1, null, 0, 0);
+        Ship ship = new Ship(false, 2, 5, 5, 2, new Board(10,new AnchorPane(),0,0));
+        board.saveShipPosition(ship);
         System.out.println(board);
     }
 }
