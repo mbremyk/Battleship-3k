@@ -17,6 +17,9 @@ import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.*;
 
+/**
+ * DatabaseConnector class
+ */
 public class DatabaseConnector {
 	private String databaseUrl;
 	
