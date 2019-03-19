@@ -1,14 +1,10 @@
 controller\MainMenuController.class
-controller\GameController.class
 controller\JoinGameController.class
 database\JDBCExample.class
 database\Constants.class
-Main.class
 database\DatabaseConnector.class
-controller\LoginController.class
 controller\LeaderboardController.class
 controller\HostGameController.class
-controller\FeedbackController.class
 database\Login.class
 controller\SignupController.class
 controller\OptionsController.class
