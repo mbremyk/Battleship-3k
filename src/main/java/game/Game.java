@@ -15,6 +15,9 @@ public class Game {
 	private Board board1;
 	private Board board2;
 	private DatabaseConnector databaseConnector;
+	private String gameName;
+	private BattleshipUser hostUser;
+	private boolean gameOpen = false;
 	
 	Game(BattleshipUser user1, BattleshipUser user2) {
 		this.user1 = user1;
@@ -22,6 +25,23 @@ public class Game {
 		board1 = new Board();
 		board2 = new Board();
 		databaseConnector = new DatabaseConnector(Constants.DB_URL);
+	}
+
+	//whenever there is only one player (hosting game)
+	public void waitForUser() { //waits for user2 to join game lobby
+
+		//list game info in "join game window"
+
+		//let user2 join lobby
+		//Poll database for user join
+		//user2 = databaseGetUser();
+		//createGame(user1, user);
+	}
+
+	//whenever two players are in the lobby
+	public void createGame() {
+		gameOpen = true;
+		databaseConnector.createGame(new Game(user1, user2));
 	}
 
 	/*public static void main(String[] args) {
