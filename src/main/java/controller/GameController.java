@@ -14,9 +14,11 @@ import game.MouseFollower;
 import game.Ship;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
@@ -122,10 +124,12 @@ public class GameController {
                 int attackResult = board2.attack(attackX, attackY);
                 if (attackResult == 1) {
 //                    System.out.println("HIT!");
-                    addTileColor(board2, attackX, attackY, Color.RED);
+//                    addTileColor(board2, attackX, attackY, Color.RED);
+                    addTileColor(board2, attackX, attackY, null, new Image("./ExplosionTile.png"));
                 } else if (attackResult == 0) {
 //                    System.out.println("MISS!");
-                    addTileColor(board2, attackX, attackY, Color.BLUE);
+//                    addTileColor(board2, attackX, attackY, Color.BLUE);
+                    addTileColor(board2, attackX, attackY, null, new Image("./WaterTile.png"));
                 }
             }
             moveMouseFollower(event.getX(), event.getY());
@@ -174,9 +178,10 @@ public class GameController {
      * @param x
      * @param y
      */
-    private void addTileColor(Board board, int x, int y, Color color) {
+    private void addTileColor(Board board, int x, int y, Color color, Image image) {
         Rectangle square = new Rectangle(Board.TILE_SIZE, Board.TILE_SIZE);
-        square.setFill(color);
+        if(color != null) square.setFill(color);
+        if(image != null) square.setFill(new ImagePattern(image));
         square.setTranslateX(board.getTranslateX() + x * Board.TILE_SIZE);
         square.setTranslateY(board.getTranslateY() + y * Board.TILE_SIZE);
         gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower) - 1, square);
