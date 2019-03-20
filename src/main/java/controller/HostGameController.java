@@ -1,6 +1,5 @@
 /**
- *
- *
+ * HostGameController.java
  * @Author Thorkildsen Torje
  * @Author Grande Trym
  */

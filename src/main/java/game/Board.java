@@ -1,3 +1,8 @@
+/**
+ * Board.java
+ * @author
+ */
+
 package game;
 
 import database.DatabaseConnector;

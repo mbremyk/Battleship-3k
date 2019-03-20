@@ -1,3 +1,8 @@
+/**
+ * Game.java
+ * @author Grande Trym
+ */
+
 package game;
 
 import database.Constants;
@@ -46,21 +51,4 @@ public class Game {
 		//joinUser = databaseGetUser();
 		gameOpen = false; //game full
 	}
-
-	//whenever two players are in the lobby
-//	public void createGame() {
-//
-//	}
-
-	/*public static void main(String[] args) {
-        while (true) {
-            if (DatabaseConnector.getTurn == 1) {
-                player1.turn();
-            }
-            else if (DatabaseConnector.getTurn == 2) {
-                player1.turn();
-            }
-        }
-    }*/
-
 }

@@ -1,3 +1,10 @@
+/**
+ * Statics.java
+ * @author Grande Trym
+ * @author Thorkildsen Torje
+ * @author Brevik Magnus
+ */
+
 package game;
 
 import model.BattleshipUser;

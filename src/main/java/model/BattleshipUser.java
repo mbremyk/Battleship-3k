@@ -1,7 +1,7 @@
 /**
+ * BattleShipUser.java
  * Models a the users we store information about in the database
  * #TODO remove password
- *
  * @Author Thorkildsen Torje
  * @Author Brevik Magnus
  */

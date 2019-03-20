@@ -1,6 +1,5 @@
 /**
- *
- *
+ * * LoginController.java
  * @Author Thorkildsen Torje
  */
 package controller;
