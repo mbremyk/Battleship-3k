@@ -67,9 +67,9 @@ public class MouseFollower extends Rectangle {
      */
     public void pressed(boolean pressed){
         if(pressed){
-            setFill(Color.DARKRED);
+            setFill(Color.GRAY);
         }else{
-            setFill(Color.RED);
+            setFill(Color.WHITE);
         }
     }
 

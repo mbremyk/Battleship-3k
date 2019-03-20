@@ -14,6 +14,7 @@ import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class GameController {
@@ -78,8 +79,8 @@ public class GameController {
     public void addUIComponents() {
         mouseFollower = new MouseFollower();
         mouseFollower.setVisible(false);
-        board1 = new Board(1, gameMainPane, 250, 200);
-        board2 = new Board(2, gameMainPane, 650, 200);
+        board1 = new Board( gameMainPane, 250, 200);
+        board2 = new Board(gameMainPane, 650, 200);
 
         //THIS ORDER IS VERY IMPORTANT---------------------
         gameMainPane.getChildren().addAll(board1, board2);
@@ -115,11 +116,13 @@ public class GameController {
             } else if (boardNumber == 2) {
                 int attackX = board2.getMousePosX();
                 int attackY = board2.getMousePosY();
-                int attackResult = board2.attack(attackX,attackY);
+                int attackResult = board2.attack(attackX, attackY);
                 if (attackResult == 1) {
-                    System.out.println("HIT!");
+//                    System.out.println("HIT!");
+                    addTileColor(board2, attackX, attackY, Color.RED);
                 } else if (attackResult == 0) {
-                    System.out.println("MISS!");
+//                    System.out.println("MISS!");
+                    addTileColor(board2, attackX, attackY, Color.BLUE);
                 }
             }
             moveMouseFollower(event.getX(), event.getY());
@@ -146,6 +149,21 @@ public class GameController {
             return 2;
         }
         return -1;
+    }
+
+    /**
+     * Adds a square to a board that indicates if an attack has missed or hit
+     *
+     * @param board
+     * @param x
+     * @param y
+     */
+    private void addTileColor(Board board, int x, int y, Color color) {
+        Rectangle square = new Rectangle(Board.TILE_SIZE,Board.TILE_SIZE);
+        square.setFill(color);
+        square.setTranslateX(board.getTranslateX()+x*Board.TILE_SIZE);
+        square.setTranslateY(board.getTranslateY()+y*Board.TILE_SIZE);
+        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower)-1,square);
     }
 
     //returns board number if cursor is on same tiles as when pressed

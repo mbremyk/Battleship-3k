@@ -18,7 +18,6 @@ public class Board extends ImageView {
     public static final int TILES = 10; //Tiles in x and y direction
     public static final double TILE_SIZE = SIZE / ((double) TILES); //Tiles in x and y direction
 
-    private final int boardNumber;
     private int mousePosX = -1;
     private int mousePosY = -1;
     private final AnchorPane parent;
@@ -34,9 +33,8 @@ public class Board extends ImageView {
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
 
-    public Board(int boardNumber, AnchorPane parent, double x, double y) {
+    public Board(AnchorPane parent, double x, double y) {
         super(new Image("./grid10x10.png"));
-        this.boardNumber = boardNumber;
         this.parent = parent;
         setTranslateX(x);
         setTranslateY(y);
@@ -205,8 +203,8 @@ public class Board extends ImageView {
 
     public static void main(String[] args) {
         //Disable/comment out super(new Image("./grid10x10.png")); in constructor to test
-        Board board = new Board(1, null, 0, 0);
-        Ship ship = new Ship(false, 2, 5, 5, 2, new Board(10, new AnchorPane(), 0, 0));
+        Board board = new Board(null, 0, 0);
+        Ship ship = new Ship(false, 2, 5, 5, 2, new Board(new AnchorPane(), 0, 0));
         board.saveShipPosition(ship);
         System.out.println(board);
     }
