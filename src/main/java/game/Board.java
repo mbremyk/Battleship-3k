@@ -1,3 +1,9 @@
+/**
+ * Board.java
+ * info on where objects are located on the board
+ * attack logic
+ * @Author Grande Trym
+ */
 package game;
 import database.DatabaseConnector;
 import javafx.scene.image.ImageView;

@@ -150,10 +150,13 @@ public class DatabaseConnector {
 
     public boolean createGame(Game newGame) {
         try (Connection con = DriverManager.getConnection(databaseUrl)) {
-            String query = "INSERT INTO " + GAME_TABLE + "(" + GAME_ID + "," + HOST_ID + ") VALUES(?,?)";
+            String query = "INSERT INTO " + GAME_TABLE + "(" + HOST_ID + ") VALUES(?)";
             PreparedStatement preparedStatement = con.prepareStatement(query);
-            preparedStatement.setInt(1, newGame.getGameId());
-            preparedStatement.setInt(2, newGame.getHostUser().getUserId());
+//            preparedStatement.setInt(1, newGame.getGameId());
+//            System.out.println(newGame);
+//            System.out.println(newGame.getHostUser());
+//            System.out.println(newGame.getHostUser().getUserId());
+            preparedStatement.setInt(1, newGame.getHostUser().getUserId());
 //            preparedStatement.setInt(3, newGame.getJoinUser().getUserId());
             preparedStatement.execute();
             Statics.setGame(newGame);

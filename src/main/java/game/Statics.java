@@ -14,6 +14,10 @@ public class Statics {
         return localUser;
     }
 
+    public static void setLocalUser(BattleshipUser localUser) {
+        Statics.localUser = localUser;
+    }
+
     public static void setGame(Game _game){
         game = _game;
     }
