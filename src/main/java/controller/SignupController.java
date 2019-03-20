@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXCheckBox;
 import database.Login;
+import game.Statics;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
@@ -89,7 +90,7 @@ public class SignupController extends ViewComponent {
 
         signupSignupButton.setOnAction(event -> {
             if (checkValidUser()) {
-                BattleshipUser user = new BattleshipUser(signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
+                BattleshipUser user = new BattleshipUser(Statics.getGame().getGameId(), signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
                 boolean signupStatus = Login.registerUser(user);
                 if (signupStatus) {
                     signupHelpText.setText("New user was created");
