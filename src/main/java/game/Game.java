@@ -35,6 +35,9 @@ public class Game {
 	public BattleshipUser getJoinUser() {
 		return joinUser;
 	}
+	public void setJoinUser(BattleshipUser newUser){
+		this.joinUser = newUser;
+	}
 
 	//whenever there is only one player (hosting game)
 	public void waitForUser() { //waits for joinUser to join game
