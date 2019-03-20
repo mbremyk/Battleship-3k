@@ -63,11 +63,10 @@ public class Board extends ImageView {
     }
 
 
-    public void saveShipPosition(Ship ship) {
+    public void registerShip(Ship ship) {
         int[] pos = ship.getBasePosition();
-        int[][] size = ship.getSize();
-        for (int i = 0; i < size.length; i++) {
-            for (int j = 0; j < size[0].length; j++) {
+        for (int i = 0; i < ship.getWidthTiles(); i++) {
+            for (int j = 0; j < ship.getHeightTiles(); j++) {
                 board[pos[0] + i][pos[1] + j] = 1;
             }
         }
@@ -76,12 +75,65 @@ public class Board extends ImageView {
     /**
      * Confirms the placements of the ships by adding them to the board
      */
-    public void registerShipCoordinates() {
+    public boolean registerShipCoordinates() {
+        if (!checkNoShipsOverlap()) return false;
         for (Ship ship : ships) {
-            saveShipPosition(ship);
+            registerShip(ship);
         }
         System.out.println("Registered ships:\n" + toString());
         System.out.println("In database coordinates:\n" + getShipsForDatabase());
+        return true;
+    }
+
+    /**
+     * Checks if any ships are overlapping
+     *
+     * @return boolean, true if no ships are overlapping and false otherwise
+     */
+    private boolean checkNoShipsOverlap() {
+        for (int i = 0; i < ships.size()-1; i++) {
+            Ship ship1 = ships.get(i);
+            for (int j = i+1; j < ships.size(); j++) {
+                Ship ship2 = ships.get(j);
+                if(shipsOverlap(ship1,ship2)) return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if two ships are overlapping on the board
+     * @param ship1
+     * @param ship2
+     * @return boolean, true if the ships overlap and false if not
+     */
+    private boolean shipsOverlap(Ship ship1, Ship ship2){
+        int[] pos1 = ship1.getBasePosition();
+        int width1 = ship1.getWidthTiles();
+        int height1 = ship1.getHeightTiles();
+        int[] pos2 = ship2.getBasePosition();
+        int width2 = ship2.getWidthTiles();
+        int height2 = ship2.getHeightTiles();
+
+        if(pos1[0]+width1-1<pos2[0]
+                || pos2[0]+width2-1<pos1[0]
+                || pos1[1]+height1-1<pos2[1]
+                || pos2[1]+height2-1<pos1[1]){
+            return false;
+        }
+
+//        for(int i = 0; i<width1;i++){
+//            for(int j = 0; j<height1; j++){
+//                for(int k = 0; k<width2;k++){
+//                    for(int l = 0; l<height2;l++){
+//
+//                    }
+//                }
+//            }
+//        }
+
+        return true;
     }
 
     /**
@@ -152,12 +204,13 @@ public class Board extends ImageView {
 
     /**
      * Attacks a spot on the board
+     *
      * @param x
      * @param y
      * @return int -1 if tile already attacked, 0 if no boats, and 1 if boat
      */
     public int attack(int x, int y) {
-        switch (board[x][y]){
+        switch (board[x][y]) {
             case -1:
                 return -1;
             case 0:
@@ -205,7 +258,7 @@ public class Board extends ImageView {
         //Disable/comment out super(new Image("./grid10x10.png")); in constructor to test
         Board board = new Board(null, 0, 0);
         Ship ship = new Ship(false, 2, 5, 5, 2, new Board(new AnchorPane(), 0, 0));
-        board.saveShipPosition(ship);
+        board.registerShip(ship);
         System.out.println(board);
     }
 }

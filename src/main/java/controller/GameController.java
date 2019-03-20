@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import database.DatabaseConnector;
+import effects.Shaker;
 import game.Board;
 import game.MouseFollower;
 import game.Ship;
@@ -130,15 +131,19 @@ public class GameController {
         });
 
         gameReadyButton.setOnAction(event -> {
-            gameReadyButton.setText("Waiting for opponent");
-            gameReadyButton.setVisible(false);
-            shipsMovable = false;
-            mouseFollower.setVisible(true);
-            board1.registerShipCoordinates();
-            DatabaseConnector databaseConnector = new DatabaseConnector();
-            databaseConnector.uploadShipCoordinates(board1);
-            board2.loadShipsFromDatabase(3, 6);
-            System.out.println(board2);
+            if(board1.registerShipCoordinates()) {
+                gameReadyButton.setText("Waiting for opponent");
+                gameReadyButton.setVisible(false);
+                shipsMovable = false;
+                mouseFollower.setVisible(true);
+                DatabaseConnector databaseConnector = new DatabaseConnector();
+                databaseConnector.uploadShipCoordinates(board1);
+                board2.loadShipsFromDatabase(3, 6);
+                System.out.println(board2);
+            }else{
+                Shaker shaker = new Shaker(gameMainPane);
+                shaker.shake();
+            }
         });
     }
 
