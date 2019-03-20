@@ -10,7 +10,6 @@ import model.BattleshipUser;
  * graphical logic
  */
 public class Game {
-<<<<<<< HEAD
 	private BattleshipUser hostUser;
 	private BattleshipUser joinUser;
 	private Board board1;
@@ -23,8 +22,6 @@ public class Game {
 	public Game(BattleshipUser hostUser) {
 		databaseConnector = new DatabaseConnector(Constants.DB_URL);
 		this.hostUser = hostUser;
-		board1 = new Board(gameId);
-		board2 = new Board(gameId);
 	}
 
 	public int getGameId() {
@@ -65,8 +62,5 @@ public class Game {
             }
         }
     }*/
-=======
 
-
->>>>>>> origin
 }
