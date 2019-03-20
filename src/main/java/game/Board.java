@@ -75,14 +75,15 @@ public class Board extends ImageView {
     /**
      * Confirms the placements of the ships by adding them to the board
      */
-    public boolean registerShipCoordinates() {
-        if (!checkNoShipsOverlap()) return false;
+    public ArrayList<Ship> registerShipCoordinates() {
+        ArrayList<Ship> overlappingShips = checkNoShipsOverlap();
+        if (overlappingShips != null) return overlappingShips;
         for (Ship ship : ships) {
             registerShip(ship);
         }
         System.out.println("Registered ships:\n" + toString());
         System.out.println("In database coordinates:\n" + getShipsForDatabase());
-        return true;
+        return null;
     }
 
     /**
@@ -90,16 +91,31 @@ public class Board extends ImageView {
      *
      * @return boolean, true if no ships are overlapping and false otherwise
      */
-    private boolean checkNoShipsOverlap() {
+    private ArrayList<Ship> checkNoShipsOverlap() {
+        ArrayList<Ship> overlappingShips = null;
         for (int i = 0; i < ships.size()-1; i++) {
             Ship ship1 = ships.get(i);
             for (int j = i+1; j < ships.size(); j++) {
                 Ship ship2 = ships.get(j);
-                if(shipsOverlap(ship1,ship2)) return false;
+                Ship[] extraOverlappingShips = shipsOverlap(ship1,ship2);
+                if(extraOverlappingShips != null) {
+                    if(overlappingShips == null) {
+                        overlappingShips = new ArrayList<>();
+                    }
+                    addToShipArray(overlappingShips,extraOverlappingShips);
+                }
             }
         }
 
-        return true;
+        return overlappingShips;
+    }
+
+    private void addToShipArray(ArrayList original,Ship[] extra){
+        for(Ship ship:extra) {
+            if (original.indexOf(ship) == -1){
+                original.add(ship);
+            }
+        }
     }
 
     /**
@@ -108,7 +124,7 @@ public class Board extends ImageView {
      * @param ship2
      * @return boolean, true if the ships overlap and false if not
      */
-    private boolean shipsOverlap(Ship ship1, Ship ship2){
+    private Ship[] shipsOverlap(Ship ship1, Ship ship2){
         int[] pos1 = ship1.getBasePosition();
         int width1 = ship1.getWidthTiles();
         int height1 = ship1.getHeightTiles();
@@ -120,20 +136,9 @@ public class Board extends ImageView {
                 || pos2[0]+width2-1<pos1[0]
                 || pos1[1]+height1-1<pos2[1]
                 || pos2[1]+height2-1<pos1[1]){
-            return false;
+            return null;
         }
-
-//        for(int i = 0; i<width1;i++){
-//            for(int j = 0; j<height1; j++){
-//                for(int k = 0; k<width2;k++){
-//                    for(int l = 0; l<height2;l++){
-//
-//                    }
-//                }
-//            }
-//        }
-
-        return true;
+        return new Ship[]{ship1,ship2};
     }
 
     /**
