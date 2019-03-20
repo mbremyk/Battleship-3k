@@ -3,9 +3,12 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import database.DatabaseConnector;
+import effects.Scaler;
+import effects.Shaker;
 import game.Board;
 import game.MouseFollower;
 import game.Ship;
@@ -79,7 +82,7 @@ public class GameController {
     public void addUIComponents() {
         mouseFollower = new MouseFollower();
         mouseFollower.setVisible(false);
-        board1 = new Board( gameMainPane, 250, 200);
+        board1 = new Board(gameMainPane, 250, 200);
         board2 = new Board(gameMainPane, 650, 200);
 
         //THIS ORDER IS VERY IMPORTANT---------------------
@@ -130,15 +133,28 @@ public class GameController {
         });
 
         gameReadyButton.setOnAction(event -> {
-            gameReadyButton.setText("Waiting for opponent");
-            gameReadyButton.setVisible(false);
-            shipsMovable = false;
-            mouseFollower.setVisible(true);
-            board1.registerShipCoordinates();
-            DatabaseConnector databaseConnector = new DatabaseConnector();
-            databaseConnector.uploadShipCoordinates(board1);
-            board2.loadShipsFromDatabase(3, 6);
-            System.out.println(board2);
+            ArrayList<Ship> overlappingShips = board1.registerShipCoordinates();
+            if (overlappingShips == null) {
+                gameReadyButton.setText("Waiting for opponent");
+                gameReadyButton.setVisible(false);
+                shipsMovable = false;
+                mouseFollower.setVisible(true);
+                DatabaseConnector databaseConnector = new DatabaseConnector();
+                databaseConnector.uploadShipCoordinates(board1);
+                board2.loadShipsFromDatabase(3, 6);
+                System.out.println(board2);
+            } else {
+                //FOR SHAKING THE WHOLE SCENE
+//                Shaker shaker = new Shaker(gameMainPane);
+//                shaker.shake();
+
+                for (Ship ship : overlappingShips){
+//                    Shaker shaker = new Shaker(ship);
+//                    shaker.shake();
+                   Scaler scaler = new Scaler(ship);
+                    scaler.play();
+                }
+            }
         });
     }
 
@@ -159,11 +175,11 @@ public class GameController {
      * @param y
      */
     private void addTileColor(Board board, int x, int y, Color color) {
-        Rectangle square = new Rectangle(Board.TILE_SIZE,Board.TILE_SIZE);
+        Rectangle square = new Rectangle(Board.TILE_SIZE, Board.TILE_SIZE);
         square.setFill(color);
-        square.setTranslateX(board.getTranslateX()+x*Board.TILE_SIZE);
-        square.setTranslateY(board.getTranslateY()+y*Board.TILE_SIZE);
-        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower)-1,square);
+        square.setTranslateX(board.getTranslateX() + x * Board.TILE_SIZE);
+        square.setTranslateY(board.getTranslateY() + y * Board.TILE_SIZE);
+        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower) - 1, square);
     }
 
     //returns board number if cursor is on same tiles as when pressed
