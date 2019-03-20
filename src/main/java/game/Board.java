@@ -1,18 +1,6 @@
-/**
- * Board.java
- * info on where objects are located on the board
- * attack logic
- * @Author Grande Trym
- */
 package game;
+
 import database.DatabaseConnector;
-import javafx.scene.image.ImageView;
-import model.BattleshipUser;
-
-import javax.xml.crypto.Data;
-
-import static database.Constants.*;
-
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,19 +18,23 @@ public class Board extends ImageView {
     public static final int TILES = 10; //Tiles in x and y direction
     public static final double TILE_SIZE = SIZE / ((double) TILES); //Tiles in x and y direction
 
-    private final int boardNumber;
     private int mousePosX = -1;
     private int mousePosY = -1;
     private final AnchorPane parent;
 
-    //private int boardNumber; //bord nr 1 eller 2 (korresponderer med spillernr
     private int[][] board;
+    /*
+    -1 = no ship but tile attacked
+    0 = no ship, not attacked
+    1 = ship, not attacked
+    2 = ship, attacked and destroyed
+     */
+
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
 
-    public Board(int boardNumber, AnchorPane parent, double x, double y) {
+    public Board(AnchorPane parent, double x, double y) {
         super(new Image("./grid10x10.png"));
-        this.boardNumber = boardNumber;
         this.parent = parent;
         setTranslateX(x);
         setTranslateY(y);
@@ -60,7 +52,6 @@ public class Board extends ImageView {
             }
         });
         setOnMouseExited(event -> {
-            System.out.println(123);
             mousePosX = -1;
             mousePosY = -1;
         });
@@ -91,6 +82,17 @@ public class Board extends ImageView {
         }
         System.out.println("Registered ships:\n" + toString());
         System.out.println("In database coordinates:\n" + getShipsForDatabase());
+    }
+
+    /**
+     * Registers ship coordinates from an int[][], like the coordinates DatabaseConnector.java gives you
+     *
+     * @param coords
+     */
+    public void registerShipCoordinates(int[][] coords) {
+        for (int i = 0; i < coords.length; i++) {
+            board[coords[i][0]][coords[i][1]] = 1;
+        }
     }
 
     /**
@@ -138,15 +140,36 @@ public class Board extends ImageView {
         return ret;
     }
 
+    /**
+     * @param gameid
+     * @param userid
+     */
+    public void loadShipsFromDatabase(int gameid, int userid) {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        int[][] coords = databaseConnector.getShipCoordinates(gameid, userid);
+        registerShipCoordinates(coords);
+    }
 
-
-    public boolean attack(int x, int y) {
-        //checks if defenders board has a ship at given coordinates
-        DatabaseConnector databaseConnector2 = new DatabaseConnector(DB_URL);
-        if (databaseConnector2.doAction(Statics.getGame().getGameId(), x, y)) {
-            return true;
+    /**
+     * Attacks a spot on the board
+     * @param x
+     * @param y
+     * @return int -1 if tile already attacked, 0 if no boats, and 1 if boat
+     */
+    public int attack(int x, int y) {
+        switch (board[x][y]){
+            case -1:
+                return -1;
+            case 0:
+                board[x][y] = -1;
+                return 0;
+            case 1:
+                board[x][y] = 2;
+                return 1;
+            case 2:
+                return -1;
         }
-        return false;
+        return -1;
     }
 
     public int getMousePosX() {
@@ -180,8 +203,8 @@ public class Board extends ImageView {
 
     public static void main(String[] args) {
         //Disable/comment out super(new Image("./grid10x10.png")); in constructor to test
-        Board board = new Board(1, null, 0, 0);
-        Ship ship = new Ship(false, 2, 5, 5, 2, new Board(10, new AnchorPane(), 0, 0));
+        Board board = new Board(null, 0, 0);
+        Ship ship = new Ship(false, 2, 5, 5, 2, new Board(new AnchorPane(), 0, 0));
         board.saveShipPosition(ship);
         System.out.println(board);
     }

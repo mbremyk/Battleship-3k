@@ -40,6 +40,7 @@ public class HostGameController extends ViewComponent{
     @FXML
     private JFXButton hostGameCancelButton;
 
+
     @FXML
     void initialize() {
         assert hostGameCreateGameButton != null : "fx:id=\"hostGameCreateGameButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
