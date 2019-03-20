@@ -30,6 +30,7 @@ public class Ship extends Rectangle {
         setTranslateY(parentBoard.getTranslateY() + tileY * Board.TILE_SIZE);
 
 
+        //These make the Ship remember "real" position while being snapped to other tiles
         setOnMousePressed(event -> {
             startDragX = event.getX();
             startDragY = event.getY();
@@ -42,21 +43,30 @@ public class Ship extends Rectangle {
                 if (isInsideBoard()) {
                     this.setTranslateX(parentBoard.getTranslateX() + getTileX() * Board.TILE_SIZE);
                     this.setTranslateY(parentBoard.getTranslateY() + getTileY() * Board.TILE_SIZE);
+                } else {
+                    int newTileX = getTileX();
+                    int newTileY = getTileY();
+                    if (getTileX() < 0) newTileX = 0;
+                    if (getTileX() > Board.TILES - width) newTileX = Board.TILES - width;
+                    if (getTileY() < 0) newTileY = 0;
+                    if (getTileY() > Board.TILES - height) newTileY = Board.TILES - height;
+                    setTilePos(newTileX, newTileY);
                 }
             }
         });
-
-        setOnMouseReleased(event -> {
-            if (!isInsideBoard()) {
-                int newTileX = getTileX();
-                int newTileY = getTileY();
-                if (getTileX() < 0) newTileX = 0;
-                if (getTileX() > Board.TILES - width) newTileX = Board.TILES - width;
-                if (getTileY() < 0) newTileY = 0;
-                if (getTileY() > Board.TILES - height) newTileY = Board.TILES - height;
-                setTilePos(newTileX, newTileY);
-            }
-        });
+        //Not needed, this is if you want dragging Ships outside of board possible
+        //If wanted, comment out the first else-block above this
+//        setOnMouseReleased(event -> {
+//            if (!isInsideBoard()) {
+//                int newTileX = getTileX();
+//                int newTileY = getTileY();
+//                if (getTileX() < 0) newTileX = 0;
+//                if (getTileX() > Board.TILES - width) newTileX = Board.TILES - width;
+//                if (getTileY() < 0) newTileY = 0;
+//                if (getTileY() > Board.TILES - height) newTileY = Board.TILES - height;
+//                setTilePos(newTileX, newTileY);
+//            }
+//        });
     }
 
     /**

@@ -41,14 +41,15 @@ public class Board extends ImageView {
         setOnMouseMoved(event -> {
             findMousePos(event.getX(), event.getY());
         });
+        setOnMouseDragged(event -> {
+            if (event.getX() > 0 && event.getY() > 0) {
+                findMousePos(event.getX(), event.getY());
+            }
+        });
         setOnMouseExited(event -> {
+            System.out.println(123);
             mousePosX = -1;
             mousePosY = -1;
-        });
-        setOnMouseClicked(event -> {
-            //Attack with mousePosX and mousePosY
-            if (boardNumber == 1) System.out.println("Placing boat on " + mousePosX + "," + mousePosY);
-            if (boardNumber == 2) System.out.println("Attacking " + mousePosX + "," + mousePosY);
         });
     }
 
@@ -76,7 +77,7 @@ public class Board extends ImageView {
             saveShipPosition(ship);
         }
         System.out.println("Registered ships:\n" + toString());
-        System.out.println("In database coordinates:\n"+getShipsForDatabase());
+        System.out.println("In database coordinates:\n" + getShipsForDatabase());
     }
 
     /**
@@ -116,11 +117,11 @@ public class Board extends ImageView {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] == 1) {
                     ret += i < 10 ? "0" + i : i;
-                    ret += "," + (j < 10 ? "0" + j : j)+",";
+                    ret += "," + (j < 10 ? "0" + j : j) + ",";
                 }
             }
         }
-        ret = ret.substring(0,ret.length()-1);
+        ret = ret.substring(0, ret.length() - 1);
         return ret;
     }
 
