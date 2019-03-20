@@ -1,5 +1,6 @@
 package game;
 
+import database.DatabaseConnector;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,8 +23,14 @@ public class Board extends ImageView {
     private int mousePosY = -1;
     private final AnchorPane parent;
 
-    //private int boardNumber; //bord nr 1 eller 2 (korresponderer med spillernr
     private int[][] board;
+    /*
+    -1 = no ship but tile attacked
+    0 = no ship, not attacked
+    1 = ship, not attacked
+    2 = ship, attacked and destroyed
+     */
+
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
 
@@ -47,7 +54,6 @@ public class Board extends ImageView {
             }
         });
         setOnMouseExited(event -> {
-            System.out.println(123);
             mousePosX = -1;
             mousePosY = -1;
         });
@@ -78,6 +84,17 @@ public class Board extends ImageView {
         }
         System.out.println("Registered ships:\n" + toString());
         System.out.println("In database coordinates:\n" + getShipsForDatabase());
+    }
+
+    /**
+     * Registers ship coordinates from an int[][], like the coordinates DatabaseConnector.java gives you
+     *
+     * @param coords
+     */
+    public void registerShipCoordinates(int[][] coords) {
+        for (int i = 0; i < coords.length; i++) {
+            board[coords[i][0]][coords[i][1]] = 1;
+        }
     }
 
     /**
@@ -125,10 +142,36 @@ public class Board extends ImageView {
         return ret;
     }
 
-    public boolean attack(int x, int y) {
-        //checks if defenders board has a ship at given coordinates
+    /**
+     * @param gameid
+     * @param userid
+     */
+    public void loadShipsFromDatabase(int gameid, int userid) {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        int[][] coords = databaseConnector.getShipCoordinates(gameid, userid);
+        registerShipCoordinates(coords);
+    }
 
-        return false;
+    /**
+     * Attacks a spot on the board
+     * @param x
+     * @param y
+     * @return int -1 if tile already attacked, 0 if no boats, and 1 if boat
+     */
+    public int attack(int x, int y) {
+        switch (board[x][y]){
+            case -1:
+                return -1;
+            case 0:
+                board[x][y] = -1;
+                return 0;
+            case 1:
+                board[x][y] = 2;
+                return 1;
+            case 2:
+                return -1;
+        }
+        return -1;
     }
 
     public int getMousePosX() {

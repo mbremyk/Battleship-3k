@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import database.DatabaseConnector;
 import game.Board;
 import game.MouseFollower;
 import game.Ship;
@@ -36,7 +37,7 @@ public class GameController {
     private Text gameGameNameText;
 
     @FXML
-    private JFXButton gameTurnButton;
+    private JFXButton gameReadyButton;
 
     @FXML
     private Text gameUserNameText;
@@ -62,7 +63,7 @@ public class GameController {
         assert gameOpponentNameText != null : "fx:id=\"gameOpponentNameText\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameAttacksPane != null : "fx:id=\"gameAttacksPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameGameNameText != null : "fx:id=\"gameGameNameText\" was not injected: check your FXML file 'Game.fxml'.";
-        assert gameTurnButton != null : "fx:id=\"gameTurnButton\" was not injected: check your FXML file 'Game.fxml'.";
+        assert gameReadyButton != null : "fx:id=\"gameReadyButton\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameUserNameText != null : "fx:id=\"gameUserNameText\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameMainPane != null : "fx:id=\"gameMainPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameOptionsImage != null : "fx:id=\"gameOptionsImage\" was not injected: check your FXML file 'Game.fxml'.";
@@ -112,16 +113,29 @@ public class GameController {
             if (boardNumber == 1) {
                 System.out.println("Placing boat on " + board1.getMousePosX() + "," + board1.getMousePosY());
             } else if (boardNumber == 2) {
-                System.out.println("Attacking " + board2.getMousePosX() + "," + board2.getMousePosY());
+                int attackX = board2.getMousePosX();
+                int attackY = board2.getMousePosY();
+                int attackResult = board2.attack(attackX,attackY);
+                if (attackResult == 1) {
+                    System.out.println("HIT!");
+                } else if (attackResult == 0) {
+                    System.out.println("MISS!");
+                }
             }
             moveMouseFollower(event.getX(), event.getY());
             colorMouseFollower(true);
         });
 
-        gameTurnButton.setOnAction(event -> {
+        gameReadyButton.setOnAction(event -> {
+            gameReadyButton.setText("Waiting for opponent");
+            gameReadyButton.setVisible(false);
             shipsMovable = false;
             mouseFollower.setVisible(true);
             board1.registerShipCoordinates();
+            DatabaseConnector databaseConnector = new DatabaseConnector();
+            databaseConnector.uploadShipCoordinates(board1);
+            board2.loadShipsFromDatabase(3, 6);
+            System.out.println(board2);
         });
     }
 
