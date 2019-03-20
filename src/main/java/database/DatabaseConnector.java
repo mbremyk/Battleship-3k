@@ -254,7 +254,6 @@ public class DatabaseConnector {
         }
         return false;
     }
-}
 
     public boolean doAction(int gameId, int x, int y) {
         //insert into actionstable (parameters)
