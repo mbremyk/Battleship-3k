@@ -7,10 +7,12 @@ import java.util.ResourceBundle;
 
 import game.Board;
 import game.MouseFollower;
+import game.Ship;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class GameController {
@@ -45,6 +47,14 @@ public class GameController {
     @FXML
     private ImageView gameOptionsImage;
 
+    private MouseFollower mouseFollower;
+    Board board1;
+    Board board2;
+    int pressedBoard = -1;
+    int pressedTileX = -1;
+    int pressedTileY = -1;
+    private static boolean shipsMovable = true;
+
 
     @FXML
     void initialize() {
@@ -57,23 +67,109 @@ public class GameController {
         assert gameMainPane != null : "fx:id=\"gameMainPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameOptionsImage != null : "fx:id=\"gameOptionsImage\" was not injected: check your FXML file 'Game.fxml'.";
 
-        Board board1 = new Board(1);
-        board1.setTranslateX(250);
-        board1.setTranslateY(200);
-        Board board2 = new Board(2);
-        board2.setTranslateX(650);
-        board2.setTranslateY(200);
-        MouseFollower mouseFollower = new MouseFollower();
-        gameMainPane.getChildren().addAll(board1, board2, mouseFollower);
+        shipsMovable = true;
+        addUIComponents();
+    }
+
+    /**
+     * Adds the Boards and the MouseFollower.
+     */
+    public void addUIComponents() {
+        mouseFollower = new MouseFollower();
+        mouseFollower.setVisible(false);
+        board1 = new Board(1, gameMainPane, 250, 200);
+        board2 = new Board(2, gameMainPane, 650, 200);
+
+        //THIS ORDER IS VERY IMPORTANT---------------------
+        gameMainPane.getChildren().addAll(board1, board2);
+        board1.addDefaultShips(true);
+//        board2.addDefaultShips(false); //NOT NEEDED, LOADED FROM DATABASE AND ARE INVISIBLE ANYWAY
+        gameMainPane.getChildren().add(mouseFollower);
+        //-------------------------------------------------
 
         gameMainPane.setOnMouseMoved(event -> {
-            if (board1.getMousePosX() != -1 && board1.getMousePosY() != -1) {
-                mouseFollower.setTilePos(board1.getTranslateX(), board1.getTranslateY(),board1.getMousePosX(),board1.getMousePosY());
-            } else if (board2.getMousePosX() != -1 && board2.getMousePosY() != -1) {
-                mouseFollower.setTilePos(board2.getTranslateX() , board2.getTranslateY(),board2.getMousePosX(), board2.getMousePosY());
-            } else {
-                mouseFollower.setPos(event.getX(), event.getY());
-            }
+            moveMouseFollower(event.getX(), event.getY());
         });
+        gameMainPane.setOnMouseDragged(event -> {
+            colorMouseFollower();
+        });
+
+        gameMainPane.setOnMousePressed(event -> {
+            //Attack with mousePosX and mousePosY
+            pressedBoard = getMouseBoardNumber();
+            if (pressedBoard == 1) {
+                pressedTileX = board1.getMousePosX();
+                pressedTileY = board1.getMousePosY();
+            } else if (pressedBoard == 2) {
+                pressedTileX = board2.getMousePosX();
+                pressedTileY = board2.getMousePosY();
+            }
+            colorMouseFollower();
+        });
+        gameMainPane.setOnMouseReleased(event -> {
+            //Attack with mousePosX and mousePosY
+            int boardNumber = onSameTiles();
+            if (boardNumber == 1) {
+                System.out.println("Placing boat on " + board1.getMousePosX() + "," + board1.getMousePosY());
+            } else if (boardNumber == 2) {
+                System.out.println("Attacking " + board2.getMousePosX() + "," + board2.getMousePosY());
+            }
+            moveMouseFollower(event.getX(), event.getY());
+            colorMouseFollower(true);
+        });
+
+        gameTurnButton.setOnAction(event -> {
+            shipsMovable = false;
+            mouseFollower.setVisible(true);
+            board1.registerShipCoordinates();
+        });
+    }
+
+    private int getMouseBoardNumber() {
+        if (board1.getMousePosX() != -1 && board1.getMousePosY() != -1) {
+            return 1;
+        } else if (board2.getMousePosX() != -1 && board2.getMousePosY() != -1) {
+            return 2;
+        }
+        return -1;
+    }
+
+    //returns board number if cursor is on same tiles as when pressed
+    private int onSameTiles() {
+        if (pressedBoard == getMouseBoardNumber() && !shipsMovable && pressedBoard != -1 && pressedTileX != -1 && pressedTileY != -1) {
+            if (board1.getMousePosX() == pressedTileX && board1.getMousePosY() == pressedTileY) {
+                return 1;
+            } else if (board2.getMousePosX() == pressedTileX && board2.getMousePosY() == pressedTileY) {
+                return 2;
+            }
+        }
+        return -1;
+    }
+
+    private void moveMouseFollower(double eventX, double eventY) {
+        int boardNumber = getMouseBoardNumber();
+        if (boardNumber == 1) {
+            mouseFollower.setTilePos(board1.getTranslateX(), board1.getTranslateY(), board1.getMousePosX(), board1.getMousePosY());
+        } else if (boardNumber == 2) {
+            mouseFollower.setTilePos(board2.getTranslateX(), board2.getTranslateY(), board2.getMousePosX(), board2.getMousePosY());
+        } else {
+            mouseFollower.setPos(eventX, eventY);
+        }
+    }
+
+    private void colorMouseFollower() {
+        colorMouseFollower(false);
+    }
+
+    private void colorMouseFollower(boolean removeColor) {
+        if (onSameTiles() == -1 || removeColor) {
+            mouseFollower.pressed(false);
+        } else {
+            mouseFollower.pressed(true);
+        }
+    }
+
+    public static boolean isShipsMovable() {
+        return shipsMovable;
     }
 }

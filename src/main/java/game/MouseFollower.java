@@ -7,6 +7,7 @@
 
 package game;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class MouseFollower extends Rectangle {
@@ -19,6 +20,7 @@ public class MouseFollower extends Rectangle {
 
     public MouseFollower() {
         setMouseTransparent(true); //Not blocking MouseEvents
+        pressed(false);
         setWidth(size * widthBlocks);
         setHeight(size * heightBlocks);
     }
@@ -57,6 +59,18 @@ public class MouseFollower extends Rectangle {
         this.currentBoardNumber = boardNumber;
         this.tileX = x;
         this.tileY = y;
+    }
+
+    /**
+     * Changes color if the object is pressed
+     * @param pressed
+     */
+    public void pressed(boolean pressed){
+        if(pressed){
+            setFill(Color.DARKRED);
+        }else{
+            setFill(Color.RED);
+        }
     }
 
 }
