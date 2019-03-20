@@ -10,6 +10,7 @@ import model.BattleshipUser;
  * graphical logic
  */
 public class Game {
+<<<<<<< HEAD
 	private BattleshipUser hostUser;
 	private BattleshipUser joinUser;
 	private Board board1;
@@ -64,4 +65,8 @@ public class Game {
             }
         }
     }*/
+=======
+
+
+>>>>>>> origin
 }

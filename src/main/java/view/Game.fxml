@@ -17,10 +17,10 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff212127" height="646.0" layoutX="600.0" layoutY="54.0" stroke="TRANSPARENT" strokeType="INSIDE" width="404.0" />
       <AnchorPane fx:id="gameToolsPane" layoutY="54.0" prefHeight="646.0" prefWidth="200.0" style="-fx-background-color: #90caf9;" />
       <AnchorPane fx:id="gameAttacksPane" layoutX="1000.0" layoutY="54.0" prefHeight="646.0" prefWidth="200.0" style="-fx-background-color: #90caf9;" />
-      <AnchorPane prefHeight="40.0" prefWidth="1200.0" style="-fx-background-color: #1565c0;">
+      <AnchorPane prefHeight="40.0" prefWidth="1200.0" style="-fx-background-color: #5d99c6;">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="55.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="55.0" layoutX="1000.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1565c0" height="55.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1565c0" height="55.0" layoutX="1000.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
             <ImageView fx:id="gameOptionsImage" fitHeight="54.0" fitWidth="54.0" layoutX="219.0" layoutY="1.0">
                <image>
                   <Image url="/Options.png" />

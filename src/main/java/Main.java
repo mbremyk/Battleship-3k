@@ -1,3 +1,14 @@
+/**
+ * Main.java
+ *
+ * @Author Brevik Magnus
+ * @Author Bjerke Thomas
+ * @Author Gulaker Kristian
+ * @Author Thorkildsen Torje
+ * @Author Granli Hans Kristian Olsen
+ * @Author Grande Trym
+ */
+
 import game.Game;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -5,8 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 
