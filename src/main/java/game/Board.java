@@ -1,4 +1,17 @@
+/**
+ * Board.java
+ * info on where objects are located on the board
+ * attack logic
+ * @Author Grande Trym
+ */
 package game;
+import database.DatabaseConnector;
+import javafx.scene.image.ImageView;
+import model.BattleshipUser;
+
+import javax.xml.crypto.Data;
+
+import static database.Constants.*;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -125,9 +138,14 @@ public class Board extends ImageView {
         return ret;
     }
 
+
+
     public boolean attack(int x, int y) {
         //checks if defenders board has a ship at given coordinates
-
+        DatabaseConnector databaseConnector2 = new DatabaseConnector(DB_URL);
+        if (databaseConnector2.doAction(Statics.getGame().getGameId(), x, y)) {
+            return true;
+        }
         return false;
     }
 
