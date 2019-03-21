@@ -85,9 +85,6 @@
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-io:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-utils:3.0.24" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-interactivity-api:1.0-alpha-6" level="project" />
-    <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:8.0.8" level="project" />
-    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.15" level="project" />
-    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.plugins:maven-javadoc-plugin:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-core:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-settings-builder:3.0" level="project" />
@@ -162,5 +159,8 @@
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-io:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-utils:3.0.24" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-interactivity-api:1.0-alpha-6" level="project" />
+    <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:8.0.8" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.15" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
   </component>
 </module>
