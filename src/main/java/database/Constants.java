@@ -8,6 +8,7 @@ package database;
  *
  * @Author Thorkildsen Torje
  * @Author Brevik Magnus
+ * @Author Hans Kristian Granli
  */
 
 public class Constants {
