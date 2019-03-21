@@ -36,4 +36,17 @@ public class Constants {
     public static final String BOARDS_GAME_ID = "game_id";
     public static final String BOARDS_USER_ID = "user_id";
     public static final String BOARDS_COORDINATES = "coordinates";
+
+    //Game table column names
+    public static final String GAME_TABLE = "battleship_game";
+    public static final String GAME_ID = "game_id";
+    public static final String HOST_ID = "host_id";
+    public static final String JOIN_ID = "join_id";
+
+    //Action table columns names
+
+    public static final String ACTION_TABLE = "Action";
+    public static final String ACTION_GAME_ID = "game_id";
+    public static final String ACTION_MOVE_ID = "move_id";
+    public static final String ACTION_COORDINATES = "coordinates";
 }

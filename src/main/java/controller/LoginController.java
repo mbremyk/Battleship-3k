@@ -1,6 +1,5 @@
 /**
- *
- *
+ * LoginController.java
  * @Author Thorkildsen Torje
  */
 package controller;
@@ -13,6 +12,7 @@ import java.util.ResourceBundle;
 import database.Login;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import game.Statics;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,6 +21,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import model.BattleshipUser;
 
 public class LoginController extends ViewComponent{
 
@@ -74,7 +75,9 @@ public class LoginController extends ViewComponent{
         });
         
         loginLoginButton.setOnAction(event -> {
-            if (Login.login(loginUsernameField.getText(), loginPasswordField.getText()) != null){
+            BattleshipUser user = Login.login(loginUsernameField.getText(), loginPasswordField.getText());
+            if (user != null){
+                Statics.setLocalUser(user);
                 Scene scene = loginCancelButton.getScene();
                 Node node = scene.lookup("#mainMenuLoggedInText");
                 ((Text)node).setText("Logged in as " + loginUsernameField.getText());

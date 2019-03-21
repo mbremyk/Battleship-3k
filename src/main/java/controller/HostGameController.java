@@ -1,7 +1,7 @@
 /**
- *
- *
+ * HostGameController.java
  * @Author Thorkildsen Torje
+ * @Author Grande Trym
  */
 
 package controller;
@@ -9,6 +9,11 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import database.Constants;
+import database.DatabaseConnector;
+import game.Game;
+import game.Statics;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -34,6 +39,7 @@ public class HostGameController extends ViewComponent{
     @FXML
     private JFXButton hostGameCancelButton;
 
+
     @FXML
     void initialize() {
         assert hostGameCreateGameButton != null : "fx:id=\"hostGameCreateGameButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
@@ -46,6 +52,8 @@ public class HostGameController extends ViewComponent{
         });
 
         hostGameCreateGameButton.setOnAction(event -> {
+            DatabaseConnector databaseConnector4 = new DatabaseConnector(Constants.DB_URL);
+            databaseConnector4.createGame(new Game(Statics.getLocalUser()));
             startGame();
         });
     }

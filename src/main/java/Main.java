@@ -1,3 +1,15 @@
+/**
+ * Main.java
+ *
+ * @Author Brevik Magnus
+ * @Author Bjerke Thomas
+ * @Author Gulaker Kristian
+ * @Author Thorkildsen Torje
+ * @Author Granli Hans Kristian Olsen
+ * @Author Grande Trym
+ */
+
+import game.Game;
 import database.ConnectionPool;
 import database.DatabaseConnector;
 import javafx.application.Application;
@@ -6,8 +18,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.sql.DriverManager;
@@ -16,14 +26,13 @@ import java.sql.SQLException;
 import static database.Constants.DB_URL;
 
 public class Main extends Application {
-
+	private static Game game;
+	public static ConnectionPool connectionPool = null;
 	/**
 	 * Overridden method from Application in JavaFX
 	 * Called in the JavaFX Application Thread when the application is ready to run
 	 * @param primaryStage
 	 */
-
-	public static ConnectionPool connectionPool = null;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -40,7 +49,6 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -57,5 +65,9 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 		launch(args);
+	}
+
+	public static Game getGame() {
+		return game;
 	}
 }
