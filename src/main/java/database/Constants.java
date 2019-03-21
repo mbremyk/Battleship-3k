@@ -8,7 +8,6 @@ package database;
  *
  * @Author Thorkildsen Torje
  * @Author Brevik Magnus
- * @Author Hans Kristian Granli
  */
 
 public class Constants {
@@ -43,4 +42,10 @@ public class Constants {
     public static final String ACTION_GAME_ID = "game_id";
     public static final String ACTION_MOVE_ID = "move_id";
     public static final String ACTION_COORDINATES = "coordinates";
+
+    //Game table column names
+    public static final String GAME_TABLE = "battleship_game";
+    public static final String GAME_ID = "game_id";
+    public static final String HOST_ID = "host_id";
+    public static final String JOIN_ID = "join_id";
 }

@@ -1,0 +1,12 @@
+controller\MainMenuController.class
+controller\JoinGameController.class
+database\JDBCExample.class
+database\Constants.class
+database\DatabaseConnector.class
+controller\LeaderboardController.class
+controller\HostGameController.class
+database\Login.class
+controller\SignupController.class
+controller\OptionsController.class
+controller\ViewComponent.class
+controller\MenuTemplateController.class
