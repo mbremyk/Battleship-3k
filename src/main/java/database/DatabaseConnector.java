@@ -7,7 +7,9 @@
 
 package database;
 
+import game.Board;
 import game.Game;
+import game.Statics;
 import model.BattleshipUser;
 
 import static database.Constants.*;
@@ -18,9 +20,8 @@ import java.util.Arrays;
 import java.util.logging.*;
 
 public class DatabaseConnector {
-
-	private String databaseUrl;
-	
+    private String databaseUrl;
+    private static ConnectionPool connectionPool;
 	/**
 	 * Constructor for the DatabaseConnector class
 	 *
@@ -34,6 +35,11 @@ public class DatabaseConnector {
         this.databaseUrl = Constants.DB_URL;
     }
 
+	public ConnectionPool setConnectionPool(ConnectionPool _connectionPool) {
+		connectionPool = _connectionPool;
+		return connectionPool;
+	}
+
 	/**
 	 * Checks if string 'string' exists in 'column' in 'table'
 	 *
@@ -45,7 +51,7 @@ public class DatabaseConnector {
 	public boolean stringExistsInColumn(String string, String column, String table) {
 		String query = "SELECT " + column + " FROM " + table + " WHERE " + column + " = ?";
 		ResultSet res = null;
-		try (Connection con = DriverManager.getConnection(databaseUrl);
+		try (Connection con = connectionPool.getConnection();
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			preparedStatement.setString(1, string);
 			res = preparedStatement.executeQuery();
@@ -76,7 +82,7 @@ public class DatabaseConnector {
 	 */
 	public boolean registerUser(String username, byte[] hashedPassword, String email, byte[] salt) {
 		String query = "INSERT INTO " + USERS_TABLE + "(" + USERS_USERNAME + "," + USERS_PASSWORD + "," + USERS_EMAIL + "," + USERS_SALT + ") VALUES(?,?,?,?)";
-		try (Connection con = DriverManager.getConnection(databaseUrl);
+		try (Connection con = connectionPool.getConnection();
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			preparedStatement.setString(1, username);
 			preparedStatement.setBytes(2, hashedPassword);
@@ -104,7 +110,7 @@ public class DatabaseConnector {
 	public BattleshipUser getBattleshipUser(String username, String password) {
 		ResultSet res = null;
 		String query = "SELECT * FROM " + USERS_TABLE + " WHERE " + USERS_USERNAME + " = ?";
-		try (Connection con = DriverManager.getConnection(databaseUrl);
+		try (Connection con = connectionPool.getConnection();
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			preparedStatement.setString(1, username);
 			res = preparedStatement.executeQuery();
@@ -137,7 +143,7 @@ public class DatabaseConnector {
 	public BattleshipUser[] getBattleshipUsers() {
 		ResultSet res = null;
 		String query = "SELECT * FROM " + USERS_TABLE;
-		try (Connection con = DriverManager.getConnection(databaseUrl);
+		try (Connection con = connectionPool.getConnection();
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			BattleshipUser[] users = new BattleshipUser[0];
 			res = preparedStatement.executeQuery();
@@ -181,6 +187,52 @@ public class DatabaseConnector {
 		return moveId;
 	}
 	
+	/** Method for retrieving all current games from database
+	 *
+	 * @return table of Game objects created from database
+	 */
+	public Game[] getGames(){
+		Game[] games;
+		String query = "SELECT " + USERS_TABLE + "." + USERS_USERNAME + "," + USERS_TABLE + "." + USERS_WINS + "," + GAME_TABLE + "." + HOST_ID + "," +
+				"" + GAME_TABLE + "." + JOIN_ID + "" +
+				" FROM " + USERS_TABLE + "" +
+				" INNER JOIN " + GAME_TABLE + " ON " + GAME_TABLE + "." + HOST_ID + " = " + USERS_TABLE + "." + USERS_ID + "";
+
+		try(Connection con = DriverManager.getConnection(databaseUrl)){
+			PreparedStatement statement = con.prepareStatement(query);
+			ResultSet resultSet = statement.executeQuery();
+
+			games = new Game[0];
+
+			while(resultSet.next()){
+				int hostId = resultSet.getInt(HOST_ID);
+				String username = resultSet.getString(USERS_USERNAME);
+				int hostWins = resultSet.getInt(USERS_WINS);
+				BattleshipUser newHost = new BattleshipUser(hostId,username,"","",hostWins,0);
+				BattleshipUser newJoin;
+				if(resultSet.getString(JOIN_ID) == null){
+					newJoin = null;
+				}
+				else{
+					newJoin = new BattleshipUser(resultSet.getInt(JOIN_ID),"","","");
+				}
+				Game newGame = new Game(newHost);
+				newGame.setJoinUser(newJoin);
+				Game[] newGames = new Game[games.length + 1];
+				for(int i=0; i<games.length; i++){
+					newGames[i] = games[i];
+				}
+				newGames[newGames.length - 1] = newGame;
+				games = newGames;
+			}
+			return games;
+		}
+		catch (SQLException e) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return null;
+	}
+
 	/**
 	 * Method to get the ship's coordinates from the database
 	 *
@@ -191,9 +243,9 @@ public class DatabaseConnector {
 	public String getShipCoordinatesString(int gameid, int userid) {
 		ResultSet res = null;
 		String query = "SELECT " + BOARDS_COORDINATES + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + "=" + "? AND " + BOARDS_USER_ID + "= ?";
-		String coordString = null;
+        String coordString = null;
 
-		try (Connection con = DriverManager.getConnection(databaseUrl);
+		try (Connection con =connectionPool.getConnection();
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			
 			preparedStatement.setString(1, gameid + "");
@@ -247,4 +299,55 @@ public class DatabaseConnector {
 		}
 		return coordinates;
 	}
+
+	public boolean uploadShipCoordinates(Board board) {
+//        uploadShipCoordinates(Statics);
+		return false;
+	}
+
+	public boolean uploadShipCoordinates(int gameid, int userid, int[][] coordinates) {
+		try (Connection con = DriverManager.getConnection(databaseUrl)) {
+			String query = "INSERT INTO " + BOARDS_TABLE + "(" + BOARDS_GAME_ID + "," + BOARDS_USER_ID + "," + BOARDS_COORDINATES + ")VALUES(?,?,?,?)";
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+//            preparedStatement.setInt(1, username);
+//            preparedStatement.setInt(2, hashedPassword);
+//            preparedStatement.setString(3, email);
+//            preparedStatement.execute();
+			return true;
+		} catch (SQLException e) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+			return false;
+		} catch (Exception e) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
+	public boolean doAction(int x, int y) {
+		int gameId = Statics.getGame().getGameId();
+		//insert into actionstable (parameters)
+		return false;
+	}
+
+	public boolean createGame(Game newGame) {
+		try (Connection con = DriverManager.getConnection(databaseUrl)) {
+			String query = "INSERT INTO " + GAME_TABLE + "(" + HOST_ID + ") VALUES(?)";
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+//            preparedStatement.setInt(1, newGame.getGameId());
+//            System.out.println(newGame);
+//            System.out.println(newGame.getHostUser());
+//            System.out.println(newGame.getHostUser().getUserId());
+			preparedStatement.setInt(1, newGame.getHostUser().getUserId());
+//            preparedStatement.setInt(3, newGame.getJoinUser().getUserId());
+			preparedStatement.execute();
+			Statics.setGame(newGame);
+			return true;
+		} catch (SQLException e) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+			return false;
+		} catch (Exception e) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return false;
+	}
+
 }
