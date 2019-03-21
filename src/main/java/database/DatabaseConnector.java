@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.logging.*;
 
 public class DatabaseConnector {
+
 	private String databaseUrl;
 	
 	/**
@@ -28,7 +29,11 @@ public class DatabaseConnector {
 	public DatabaseConnector(String databaseUrl) {
 		this.databaseUrl = databaseUrl;
 	}
-	
+
+    public DatabaseConnector() {
+        this.databaseUrl = Constants.DB_URL;
+    }
+
 	/**
 	 * Checks if string 'string' exists in 'column' in 'table'
 	 *
@@ -234,5 +239,20 @@ public class DatabaseConnector {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String getLastCoordinates(int moveId, int gameId){
+		String coordinates = "";
+    	ResultSet res = null;
+		String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = " + gameId + " AND " + ACTION_MOVE_ID + " = " + moveId;
+		try(Connection con = DriverManager.getConnection(databaseUrl)){
+			PreparedStatement prepareStatement = con.prepareStatement(query);
+			if(res.next()){
+				coordinates = res.getString(ACTION_COORDINATES);
+			}
+		}catch (SQLException e) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return coordinates;
 	}
 }
