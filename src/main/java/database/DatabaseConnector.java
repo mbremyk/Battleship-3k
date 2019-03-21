@@ -8,6 +8,7 @@
 package database;
 
 import game.Game;
+import game.Statics;
 import model.BattleshipUser;
 
 import static database.Constants.*;
@@ -254,5 +255,15 @@ public class DatabaseConnector {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return coordinates;
+	}
+	
+	public void createGame (Game game)
+	{
+		Statics.setGame(game);
+	}
+	
+	public boolean doAction(int gameId, int x, int y) {
+		//insert into actionstable (parameters)
+		return false;
 	}
 }
