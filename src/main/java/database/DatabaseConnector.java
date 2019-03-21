@@ -281,4 +281,32 @@ public class DatabaseConnector {
         }
         return false;
     }
+	public int lastAction(Game game){
+		int moveId = 0;
+		ResultSet res = null;
+		String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = " + game.getGameId() + " ORDER BY " + ACTION_MOVE_ID;
+		try(Connection con = DriverManager.getConnection(databaseUrl)){
+			PreparedStatement prepareStatement = con.prepareStatement(query);
+				if(res.next()){
+					moveId = res.getInt(ACTION_MOVE_ID);
+				}
+		}catch (SQLException e) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return moveId;
+	}
+	public String getLastCoordinates(int moveId, int gameId){
+		String coordinates = "";
+    	ResultSet res = null;
+		String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = " + gameId + " AND " + ACTION_MOVE_ID + " = " + moveId;
+		try(Connection con = DriverManager.getConnection(databaseUrl)){
+			PreparedStatement prepareStatement = con.prepareStatement(query);
+			if(res.next()){
+				coordinates = res.getString(ACTION_COORDINATES);
+			}
+		}catch (SQLException e) {
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return coordinates;
+	}
 }

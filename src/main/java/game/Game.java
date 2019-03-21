@@ -51,4 +51,9 @@ public class Game {
 		//joinUser = databaseGetUser();
 		gameOpen = false; //game full
 	}
+	public void move(String coordinates){}
+	public boolean getGameState(){return false;}
+	public int getMoveId(){return 0;}
+
+	// mOtherfuckers be making method for gameover and last move id, and incomming move
 }
