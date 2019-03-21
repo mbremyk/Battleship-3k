@@ -75,7 +75,7 @@ public class MenuTemplateController {
      */
     public boolean switchView(String view){
         try {
-            URL url = Paths.get("./src/main/java/view/" + view + ".fxml").toUri().toURL();
+            URL url = Paths.get("src/main/java/view/" + view + ".fxml").toUri().toURL();
             AnchorPane formPane = FXMLLoader.load(url);
             switchPane.getChildren().setAll(formPane);
             return true;

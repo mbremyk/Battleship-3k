@@ -40,7 +40,7 @@ public class Main extends Application {
 			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 28);
 			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 36);
 			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 96);
-			URL url = Paths.get("./src/main/java/view/MenuTemplate.fxml").toUri().toURL();
+			URL url = Paths.get("src/main/java/view/MenuTemplate.fxml").toUri().toURL();
  			Parent root = FXMLLoader.load(url);
 			
  			final Scene scene = new Scene(root);
