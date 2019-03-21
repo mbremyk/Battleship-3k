@@ -2,6 +2,7 @@
  * DatabaseConnector.java
  * <p>
  * Handles all connections with the database
+ * </p>
  */
 
 package database;
@@ -34,13 +35,13 @@ public class DatabaseConnector {
 	 * @param string String to search for
 	 * @param column String containing the column to search in
 	 * @param table  String
-	 * @return
+	 * @return true if string exists, false if not
 	 */
 	public boolean stringExistsInColumn(String string, String column, String table) {
 		String query = "SELECT " + column + " FROM " + table + " WHERE " + column + " = ?";
 		ResultSet res = null;
 		try (Connection con = DriverManager.getConnection(databaseUrl);
-		     PreparedStatement preparedStatement = con.prepareStatement(query);) {
+		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			preparedStatement.setString(1, string);
 			res = preparedStatement.executeQuery();
 			if (res.next()) {
@@ -62,10 +63,10 @@ public class DatabaseConnector {
 	/**
 	 * Method for registering users in the database
 	 *
-	 * @param username username to register. This will be checked for other occurrences in the database
+	 * @param username       username to register. This will be checked for other occurrences in the database
 	 * @param hashedPassword the hashed password of the user
-	 * @param email the user's email address
-	 * @param salt the secure randomly generated salt that was used to hash the password
+	 * @param email          the user's email address
+	 * @param salt           the secure randomly generated salt that was used to hash the password
 	 * @return true if registration was successful, false if not
 	 */
 	public boolean registerUser(String username, byte[] hashedPassword, String email, byte[] salt) {
@@ -107,7 +108,7 @@ public class DatabaseConnector {
 				byte[] salt = res.getBytes(USERS_SALT);
 				if (Arrays.equals(saltPassword(password, salt), passwordHash))  //password.equals(res.getString("password") for unhashed passwords
 				{
-					return new BattleshipUser(username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+					return new BattleshipUser(res.getInt(USERS_ID), username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
 				}
 			}
 		}
@@ -116,7 +117,8 @@ public class DatabaseConnector {
 		}
 		catch (Exception e) {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-		} finally {
+		}
+		finally {
 			close(res);
 		}
 		return null;
@@ -132,20 +134,20 @@ public class DatabaseConnector {
 		String query = "SELECT * FROM " + USERS_TABLE;
 		try (Connection con = DriverManager.getConnection(databaseUrl);
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
-					 	BattleshipUser[] users = new BattleshipUser[0];
-						res = preparedStatement.executeQuery();
-
-						while (res.next()) {
-							BattleshipUser[] newUsers = new BattleshipUser[users.length + 1];
-							for (int i = 0; i < users.length; i++) {
-								newUsers[i] = users[i];
-							}
-							newUsers[newUsers.length - 1] = new BattleshipUser(res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
-									res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
-							users = newUsers;
-						}
-						return users;
-					}
+			BattleshipUser[] users = new BattleshipUser[0];
+			res = preparedStatement.executeQuery();
+			
+			while (res.next()) {
+				BattleshipUser[] newUsers = new BattleshipUser[users.length + 1];
+				for (int i = 0; i < users.length; i++) {
+					newUsers[i] = users[i];
+				}
+				newUsers[newUsers.length - 1] = new BattleshipUser(res.getInt(USERS_ID), res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
+						res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+				users = newUsers;
+			}
+			return users;
+		}
 		catch (SQLException e) {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
@@ -154,26 +156,26 @@ public class DatabaseConnector {
 		}
 		return null;
 	}
-
-	public int lastAction(Game game){
+	
+	public int lastAction(Game game) {
 		int moveId = 0;
 		ResultSet res = null;
-		String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = " + game.getId() + " ORDER BY " + ACTION_MOVE_ID;
-		try(Connection con = DriverManager.getConnection(databaseUrl)){
-			PreparedStatement prepareStatement = con.prepareStatement(query){
-				if(res.next()){
-					moveId = res.getInt(ACTION_MOVE_ID);
-				}
+		String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = " + game.getGameId() + " ORDER BY " + ACTION_MOVE_ID;
+		try (Connection con = DriverManager.getConnection(databaseUrl);
+		     PreparedStatement prepareStatement = con.prepareStatement(query)) {
+			if (res.next()) {
+				moveId = res.getInt(ACTION_MOVE_ID);
 			}
-		}catch (SQLException e) {
+		}
+		catch (Exception e) {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
-		finally{
+		finally {
 			close(res);
 		}
 		return moveId;
 	}
-
+	
 	/**
 	 * Method to get the ship's coordinates from the database
 	 *
@@ -185,7 +187,7 @@ public class DatabaseConnector {
 		int[][] coordinates = null;
 		ResultSet res = null;
 		String query = "SELECT " + BOARDS_COORDINATES + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + "=" + "? AND " + BOARDS_USER_ID + "= ?";
-
+		
 		try (Connection con = DriverManager.getConnection(databaseUrl);
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			
@@ -211,10 +213,10 @@ public class DatabaseConnector {
 		finally {
 			close(res);
 		}
-
+		
 		return coordinates;
 	}
-
+	
 	private void close(AutoCloseable closeable) {
 		try {
 			closeable.close();
@@ -223,7 +225,7 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 	}
-
+	
 	private void close(AutoCloseable closeable1, AutoCloseable closeable2) {
 		try {
 			closeable1.close();
