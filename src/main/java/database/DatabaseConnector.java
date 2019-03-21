@@ -2,7 +2,6 @@
  * DatabaseConnector.java
  * <p>
  * Handles all connections with the database
- * </p>
  */
 
 package database;
@@ -17,9 +16,6 @@ import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.*;
 
-/**
- * DatabaseConnector class
- */
 public class DatabaseConnector {
 	private String databaseUrl;
 	
@@ -158,7 +154,7 @@ public class DatabaseConnector {
 		}
 		return null;
 	}
-	
+
 	public int lastAction(Game game){
 		int moveId = 0;
 		ResultSet res = null;
@@ -177,8 +173,7 @@ public class DatabaseConnector {
 		}
 		return moveId;
 	}
-	
-	
+
 	/**
 	 * Method to get the ship's coordinates from the database
 	 *

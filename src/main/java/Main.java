@@ -9,17 +9,18 @@
  * @Author Grande Trym
  */
 
+import game.Game;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-
 import java.net.URL;
 import java.nio.file.Paths;
 
 public class Main extends Application {
+	private static Game game;
 
 	/**
 	 * Overridden method from Application in JavaFX
@@ -50,5 +51,9 @@ public class Main extends Application {
 	 */
 	public static void main(String[] args){
 		launch(args);
+	}
+
+	public static Game getGame() {
+		return game;
 	}
 }
