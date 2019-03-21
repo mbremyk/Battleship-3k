@@ -20,6 +20,7 @@ public class MouseFollower extends Rectangle {
 
     public MouseFollower() {
         setMouseTransparent(true); //Not blocking MouseEvents
+        setOpacity(0.6);
         pressed(false);
         setWidth(size * widthBlocks);
         setHeight(size * heightBlocks);

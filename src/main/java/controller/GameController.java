@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import database.DatabaseConnector;
+import effects.DownScaler;
 import effects.Scaler;
 import effects.Shaker;
 import game.Board;
@@ -180,11 +181,14 @@ public class GameController {
      */
     private void addTileColor(Board board, int x, int y, Color color, Image image) {
         Rectangle square = new Rectangle(Board.TILE_SIZE, Board.TILE_SIZE);
+        square.setMouseTransparent(true);
         if(color != null) square.setFill(color);
         if(image != null) square.setFill(new ImagePattern(image));
         square.setTranslateX(board.getTranslateX() + x * Board.TILE_SIZE);
         square.setTranslateY(board.getTranslateY() + y * Board.TILE_SIZE);
         gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower) - 1, square);
+        DownScaler downScaler = new DownScaler(square);
+        downScaler.play();
     }
 
     //returns board number if cursor is on same tiles as when pressed
