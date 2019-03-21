@@ -1,3 +1,5 @@
+import database.ConnectionPool;
+import database.DatabaseConnector;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,6 +10,10 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import static database.Constants.DB_URL;
 
 public class Main extends Application {
 
@@ -16,6 +22,8 @@ public class Main extends Application {
 	 * Called in the JavaFX Application Thread when the application is ready to run
 	 * @param primaryStage
 	 */
+
+	public static ConnectionPool connectionPool = null;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -32,6 +40,7 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	/**
@@ -39,6 +48,14 @@ public class Main extends Application {
 	 * @param args
 	 */
 	public static void main(String[] args){
+		try {
+			connectionPool = ConnectionPool.create(DB_URL);
+			DatabaseConnector databaseConnector = new DatabaseConnector(DB_URL);
+			databaseConnector.setConnectionPool(connectionPool);
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		launch(args);
 	}
 }

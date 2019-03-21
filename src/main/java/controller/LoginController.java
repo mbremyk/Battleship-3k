@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import database.Login;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -55,6 +57,17 @@ public class LoginController extends ViewComponent{
         assert loginForgotPasswordLink != null : "fx:id=\"loginForgotPasswordLink\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert loginUsernameField != null : "fx:id=\"loginUsernameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
 
+        loginPasswordField.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (Login.login(loginUsernameField.getText(), loginPasswordField.getText()) != null){
+                    Scene scene = loginCancelButton.getScene();
+                    Node node = scene.lookup("#mainMenuLoggedInText");
+                    ((Text)node).setText("Logged in as " + loginUsernameField.getText());
+                    switchView("MainMenu");
+                }
+            }
+        });
 
         loginCancelButton.setOnAction(event -> {
             switchView("MainMenu");

@@ -17,13 +17,19 @@ import java.util.logging.*;
 
 public class DatabaseConnector {
     private String databaseUrl;
+    private static ConnectionPool connectionPool;
 
     public DatabaseConnector(String databaseUrl) {
         this.databaseUrl = databaseUrl;
     }
 
+    public ConnectionPool setConnectionPool(ConnectionPool _connectionPool) {
+        connectionPool = _connectionPool;
+        return connectionPool;
+    }
+
     public boolean stringExistsInColumn(String string, String column, String table) {
-        try (Connection con = DriverManager.getConnection(databaseUrl)) {
+        try (Connection con = connectionPool.getConnection()) {
             String query = "SELECT " + column + " FROM " + table + " WHERE " + column + " = ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, string);
@@ -41,7 +47,7 @@ public class DatabaseConnector {
     }
 
     public boolean registerUser(String username, byte[] hashedPassword, String email, byte[] salt) {
-        try (Connection con = DriverManager.getConnection(databaseUrl)) {
+        try (Connection con = connectionPool.getConnection()) {
             String query = "INSERT INTO " + USERS_TABLE + "(" + USERS_USERNAME + "," + USERS_PASSWORD + "," + USERS_EMAIL + "," + USERS_SALT + ") VALUES(?,?,?,?)";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, username);
@@ -60,7 +66,7 @@ public class DatabaseConnector {
     }
 
     public BattleshipUser getBattleshipUser(String username, String password) {
-        try (Connection con = DriverManager.getConnection(databaseUrl)) {
+        try (Connection con = connectionPool.getConnection()) {
             String query = "SELECT * FROM " + USERS_TABLE + " WHERE " + USERS_USERNAME + " = ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, username);
@@ -82,7 +88,7 @@ public class DatabaseConnector {
     }
 
     public BattleshipUser[] getBattleshipUsers() {
-        try (Connection con = DriverManager.getConnection(databaseUrl)) {
+        try (Connection con = connectionPool.getConnection()) {
             BattleshipUser[] users = new BattleshipUser[0];
             PreparedStatement setning = con.prepareStatement("SELECT * FROM " + USERS_TABLE + "");
             ResultSet res = setning.executeQuery();
@@ -114,10 +120,10 @@ public class DatabaseConnector {
     public int[][] getShipCoordinates(int gameid, int userid) {
         int[][] coordinates = null;
 
-        try (Connection con = DriverManager.getConnection(databaseUrl)) {
+        try (Connection con =connectionPool.getConnection()) {
             PreparedStatement preparedStatement = con.prepareStatement("SELECT " + BOARDS_COORDINATES + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + "=" + "? AND " + BOARDS_USER_ID + "=?");
-            preparedStatement.setString(1, gameid+"");
-            preparedStatement.setString(2, userid+"");
+            preparedStatement.setString(1, gameid + "");
+            preparedStatement.setString(2, userid + "");
             ResultSet res = preparedStatement.executeQuery();
 
             if (res.next()) {
@@ -134,7 +140,7 @@ public class DatabaseConnector {
         } catch (SQLException e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return coordinates;
     }
 }

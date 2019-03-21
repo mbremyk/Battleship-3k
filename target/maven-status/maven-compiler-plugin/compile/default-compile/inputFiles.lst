@@ -1,19 +1,19 @@
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\LoginController.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\database\Login.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\ViewComponent.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\model\BattleshipUser.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\Main.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\MainMenuController.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\game\Board.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\game\Game.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\database\JDBCExample.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\OptionsController.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\FeedbackController.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\SignupController.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\MenuTemplateController.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\LeaderboardController.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\game\ShipCoordinates.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\database\DatabaseConnector.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\database\Constants.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\HostGameController.java
-C:\Users\Windows User\Desktop\javaprogrammer\Battleship 3k\src\main\java\controller\JoinGameController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\Main.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\database\JDBCExample.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\database\Login.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\ViewComponent.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\HostGameController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\JoinGameController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\database\Constants.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\model\BattleshipUser.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\MainMenuController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\database\DatabaseConnector.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\MenuTemplateController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\game\Game.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\FeedbackController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\OptionsController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\game\Board.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\LeaderboardController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\GameController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\SignupController.java
+C:\Users\thoma\Documents\Java\prosjekt\battleship-3k\src\main\java\controller\LoginController.java
