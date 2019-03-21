@@ -8,7 +8,7 @@ public class DownScaler {
     private ScaleTransition scaleTransition;
 
     public DownScaler(Node node) {
-        scaleTransition = new ScaleTransition(Duration.millis(50),node);
+        scaleTransition = new ScaleTransition(Duration.millis(100),node);
         scaleTransition.setFromX(4);
         scaleTransition.setFromY(4);
         scaleTransition.setByX(-3);
