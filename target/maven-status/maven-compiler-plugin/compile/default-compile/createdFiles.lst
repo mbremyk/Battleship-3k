@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 controller\MainMenuController.class
 controller\JoinGameController.class
 database\JDBCExample.class
@@ -10,3 +12,4 @@ controller\SignupController.class
 controller\OptionsController.class
 controller\ViewComponent.class
 controller\MenuTemplateController.class
+>>>>>>> aa517e5ae65d0dfb4b11722e86339877984b1f1f
