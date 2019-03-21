@@ -19,15 +19,20 @@ public class Ship extends Rectangle {
     private double startDragX;
     private double startDragY;
 
+    private int health;
+    private boolean alive = true;
 
-    public Ship(boolean visible, int tileX, int tileY, int width, int height, Board parentBoard) {
+
+    public Ship(boolean visible, int tileX, int tileY, int width, int height, int rotation, Board parentBoard) {
         this.parentBoard = parentBoard;
         this.basePosition = new int[]{tileX, tileY};
         widthTiles = width;
         heightTiles = height;
+        this.rotation = rotation;
         setVisible(visible);
         setFill(Color.color(Math.random(), Math.random(), Math.random()));
         updateSize();
+        health = width * height;
         setTranslateX(parentBoard.getTranslateX() + tileX * Board.TILE_SIZE);
         setTranslateY(parentBoard.getTranslateY() + tileY * Board.TILE_SIZE);
 
@@ -119,6 +124,29 @@ public class Ship extends Rectangle {
         int tileY = (int) ((getTranslateY() - parentBoard.getTranslateY() + Board.TILE_SIZE / 2) / Board.TILE_SIZE);
         basePosition[1] = tileY;
         return tileY;
+    }
+
+    public int getRotation() {
+        return rotation;
+    }
+
+    /**
+     * Reduces the health of the ship by 1
+     *
+     * @return the remaining health
+     */
+    public int reduceHealth() {
+        health--;
+        if (health <= 0) {
+            setVisible(true);
+            setOpacity(0.6);
+            alive = false;
+        }
+        return health;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 
     private void rotateRight() {
