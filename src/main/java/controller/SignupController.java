@@ -102,7 +102,6 @@ public class SignupController extends ViewComponent {
 
         });
 
-
     }
 
 
