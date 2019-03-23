@@ -56,4 +56,19 @@ public class Game {
 	public int getMoveId(){return 0;}
 
 	// mOtherfuckers be making method for gameover and last move id, and incomming move
+
+
+	@Override
+	public String toString() {
+		return "Game{" +
+				"gameId=" + gameId +
+				", hostUser=" + hostUser +
+				", joinUser=" + joinUser +
+				", board1=" + board1 +
+				", board2=" + board2 +
+				", databaseConnector=" + databaseConnector +
+				", gameName='" + gameName + '\'' +
+				", gameOpen=" + gameOpen +
+				'}';
+	}
 }
