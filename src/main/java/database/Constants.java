@@ -45,7 +45,7 @@ public class Constants {
     public static final String JOIN_ID = "join_id";
 
     //Action table columns names
-    public static final String ACTION_TABLE = "Action";
+    public static final String ACTION_TABLE = "battleship_action";
     public static final String ACTION_GAME_ID = "game_id";
     public static final String ACTION_MOVE_ID = "move_id";
     public static final String ACTION_COORDINATES = "coordinates";

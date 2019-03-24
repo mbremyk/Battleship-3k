@@ -163,18 +163,24 @@ public class DatabaseConnector {
     }
 
     public int lastAction(Game game) {
-        int moveId = 0;
+        int moveId = -1;
         ResultSet res = null;
+        PreparedStatement preparedStatement = null;
         String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = " + game.getGameId() + " ORDER BY " + ACTION_MOVE_ID;
-        try (Connection con = connectionPool.getConnection();
-             PreparedStatement prepareStatement = con.prepareStatement(query)) {
+        try {
+            Connection con = connectionPool.getConnection();
+            if (con == null) return -1;
+            preparedStatement = con.prepareStatement(query);
+            res = preparedStatement.executeQuery();
+            connectionPool.releaseConnection(con);
             if (res.next()) {
                 moveId = res.getInt(ACTION_MOVE_ID);
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         } finally {
-            close(res);
+            if (res != null) close(res);
+            if (preparedStatement != null) close(res);
         }
         return moveId;
     }
@@ -248,13 +254,18 @@ public class DatabaseConnector {
         ResultSet res = null;
         String query = "SELECT " + BOARDS_COORDINATES + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + "=" + "? AND " + BOARDS_USER_ID + "= ?";
         String coordString = null;
-
-        try (Connection con = connectionPool.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement(query)) {
-
-            preparedStatement.setString(1, gameid + "");
-            preparedStatement.setString(2, userid + "");
+        PreparedStatement preparedStatement = null;
+        try {
+            Connection con = connectionPool.getConnection();
+            if (con == null) {
+                System.out.println("OUT OF CONNECTIONS");
+                return null;
+            }
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, gameid);
+            preparedStatement.setInt(2, userid);
             res = preparedStatement.executeQuery();
+            connectionPool.releaseConnection(con);
 
             if (res.next()) {
                 coordString = res.getString(BOARDS_COORDINATES);
@@ -262,7 +273,8 @@ public class DatabaseConnector {
         } catch (SQLException e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         } finally {
-            close(res);
+            if (res != null) close(res);
+            if (preparedStatement != null) close(preparedStatement);
         }
 
         return coordString;
@@ -288,39 +300,62 @@ public class DatabaseConnector {
     public String getLastCoordinates(int moveId, int gameId) {
         String coordinates = "";
         ResultSet res = null;
-        String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = " + gameId + " AND " + ACTION_MOVE_ID + " = " + moveId;
-        try (Connection con = connectionPool.getConnection()) {
-            PreparedStatement prepareStatement = con.prepareStatement(query);
+        PreparedStatement preparedStatement = null;
+        String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ?" + " AND " + ACTION_MOVE_ID + " = ?";
+        try {
+            Connection con = connectionPool.getConnection();
+            if (con == null) return null;
+            res = preparedStatement.executeQuery();
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, gameId);
+            preparedStatement.setInt(2, moveId);
+            res = preparedStatement.executeQuery();
+            connectionPool.releaseConnection(con);
             if (res.next()) {
                 coordinates = res.getString(ACTION_COORDINATES);
             }
         } catch (SQLException e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (res != null) close(res);
+            if (preparedStatement != null) close(preparedStatement);
         }
         return coordinates;
     }
 
     public boolean userJoined(Game game) {
+        //TODO clean up this code
         int gameId = game.getGameId();
         ResultSet res = null;
         PreparedStatement preparedStatement = null;
         String query = "SELECT " + BOARDS_USER_ID + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + " = " + gameId;
-        try (Connection con = connectionPool.getConnection()) {
-            if(con == null) return false;
+        try {
+            Connection con = connectionPool.getConnection();
+            if (con == null) return false;
             preparedStatement = con.prepareStatement(query);
             res = preparedStatement.executeQuery();
-            if (res.next() && res.next()) {
-//                int users = res.getInt(BOARDS_USER_ID);
-                System.out.println("READY");
+            connectionPool.releaseConnection(con);
+            if (res.next()) {
+                if (res.getInt(BOARDS_USER_ID) == Statics.getLocalUser().getUserId()) {
+                    BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID));
+                    if (game.getJoinUser() == null) game.setJoinUser(opponent);
+                    System.out.println("READY");
+                } else {
+                    if (res.next()) {
+                        BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID));
+                        if (game.getJoinUser() == null) game.setJoinUser(opponent);
+                        System.out.println("READY");
+                    }
+                }
                 return true;
             } else {
                 System.out.println("NOT READY");
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-        }finally {
-                 if(res != null) close(res);
-                 if(preparedStatement != null) close(preparedStatement);
+        } finally {
+            if (res != null) close(res);
+            if (preparedStatement != null) close(preparedStatement);
         }
         return false;
     }
@@ -383,10 +418,14 @@ public class DatabaseConnector {
         BattleshipUser user = Statics.getLocalUser();
         if (user == null) return false;
         String query = "UPDATE " + GAME_TABLE + " SET " + JOIN_ID + " = ? WHERE " + GAME_ID + " = " + game.getGameId() + " AND " + JOIN_ID + " IS NULL";
-        try (Connection con = connectionPool.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement(query)) {
+        PreparedStatement preparedStatement = null;
+        try {
+            Connection con = connectionPool.getConnection();
+            if (con == null) return false;
+            preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, user.getUserId());
             preparedStatement.execute();
+            connectionPool.releaseConnection(con);
             game.setJoinUser(user);
             Statics.setGame(game);
             return true;
@@ -395,6 +434,9 @@ public class DatabaseConnector {
             return false;
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (preparedStatement != null) close(preparedStatement);
+
         }
         return false;
     }

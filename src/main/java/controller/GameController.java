@@ -65,6 +65,8 @@ public class GameController {
     private int pressedTileY = -1;
     private static boolean shipsMovable = true;
 
+    private int boardsReady = 0; //1 if ready, 2 if update fixed
+
 
     @FXML
     void initialize() {
@@ -89,7 +91,7 @@ public class GameController {
         mouseFollower.setVisible(false);
         board1 = new Board(gameMainPane, 250, 200);
         board2 = new Board(gameMainPane, 650, 200);
-        Statics.getGame().setBoards(board1,board2);
+        Statics.getGame().setBoards(board1, board2);
 
         //THIS ORDER IS VERY IMPORTANT---------------------
         gameMainPane.getChildren().addAll(board1, board2);
@@ -103,6 +105,9 @@ public class GameController {
 
         gameMainPane.setOnMouseMoved(event -> {
             moveMouseFollower(event.getX(), event.getY());
+            if (boardsReady == 1) {
+                updateBoards();
+            }
         });
         gameMainPane.setOnMouseDragged(event -> {
             colorMouseFollower();
@@ -157,10 +162,10 @@ public class GameController {
 //                Shaker shaker = new Shaker(gameMainPane);
 //                shaker.shake();
 
-                for (Ship ship : overlappingShips){
+                for (Ship ship : overlappingShips) {
 //                    Shaker shaker = new Shaker(ship);
 //                    shaker.shake();
-                   Scaler scaler = new Scaler(ship);
+                    Scaler scaler = new Scaler(ship);
                     scaler.play();
                 }
             }
@@ -186,8 +191,8 @@ public class GameController {
     private void addTileColor(Board board, int x, int y, Color color, Image image) {
         Rectangle square = new Rectangle(Board.TILE_SIZE, Board.TILE_SIZE);
         square.setMouseTransparent(true);
-        if(color != null) square.setFill(color);
-        if(image != null) square.setFill(new ImagePattern(image));
+        if (color != null) square.setFill(color);
+        if (image != null) square.setFill(new ImagePattern(image));
         square.setTranslateX(board.getTranslateX() + x * Board.TILE_SIZE);
         square.setTranslateY(board.getTranslateY() + y * Board.TILE_SIZE);
 //        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower), square);
@@ -222,15 +227,20 @@ public class GameController {
     /**
      * Called by thread to signal that both boards are uploaded
      */
-    public void boardsReady(){
+    public void boardsReady() {
+        boardsReady = 1;
+    }
+
+    private void updateBoards() {
         System.out.println("boardsReady called");
-        if(Statics.getGame().getJoinUser() != null && Statics.getGame().getHostUser() != null) {
+        if (Statics.getGame().getJoinUser() != null && Statics.getGame().getHostUser() != null) {
             int opponentid;
             if (Statics.getLocalUser().equals(Statics.getGame().getHostUser()))
                 opponentid = Statics.getGame().getJoinUser().getUserId();
             else opponentid = Statics.getGame().getHostUser().getUserId();
             board2.loadShipsFromDatabase(Statics.getGame().getGameId(), opponentid);
-//        System.out.println("Opponent board:\n"+board2);
+            boardsReady = 2;
+            System.out.println("Opponent board:\n" + board2);
         }
     }
 
