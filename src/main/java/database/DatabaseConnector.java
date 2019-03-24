@@ -255,4 +255,7 @@ public class DatabaseConnector {
 		}
 		return coordinates;
 	}
+	public boolean gameStarted(Game game){
+
+	}
 }

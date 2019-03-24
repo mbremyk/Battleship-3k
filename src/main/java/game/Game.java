@@ -54,6 +54,7 @@ public class Game {
 	public void move(String coordinates){}
 	public boolean getGameState(){return false;}
 	public int getMoveId(){return 0;}
+	public void userJoined(){}
 
 	// mOtherfuckers be making method for gameover and last move id, and incomming move
 }

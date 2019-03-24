@@ -22,6 +22,13 @@ public class PullThread extends Thread{
 
     @Override
     public void run(){
+        boolean gameStart = false;
+        while(!gameStart){
+            gameStart = db.gameStarted(game);
+            if(gameStart){
+                game.userJoined();
+            }
+        }
         boolean gameOver = game.getGameState();
         int moveId = game.getMoveId();
         while(!gameOver){
@@ -38,5 +45,6 @@ public class PullThread extends Thread{
             }
 
         }
+        stop();
     }
 }
