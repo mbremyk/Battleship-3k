@@ -35,9 +35,12 @@ public class ConnectionPool{
     // standard constructors
 
     public Connection getConnection() {
-        Connection connection = connectionPool
-                .remove(connectionPool.size() - 1);
-        usedConnections.add(connection);
+        Connection connection = null;
+        if(connectionPool.size()>0) {
+            connection = connectionPool
+                    .remove(connectionPool.size() - 1);
+            usedConnections.add(connection);
+        }
         return connection;
     }
 
@@ -56,4 +59,5 @@ public class ConnectionPool{
     }
 
     // standard getters
+
 }

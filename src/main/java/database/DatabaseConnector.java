@@ -303,11 +303,14 @@ public class DatabaseConnector {
     public boolean userJoined(Game game) {
         int gameId = game.getGameId();
         ResultSet res = null;
+        PreparedStatement preparedStatement = null;
         String query = "SELECT " + BOARDS_USER_ID + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + " = " + gameId;
         try (Connection con = connectionPool.getConnection()) {
-            PreparedStatement preparedStatement = con.prepareStatement(query);
-            int users = res.getInt(BOARDS_USER_ID);
+            if(con == null) return false;
+            preparedStatement = con.prepareStatement(query);
+            res = preparedStatement.executeQuery();
             if (res.next() && res.next()) {
+//                int users = res.getInt(BOARDS_USER_ID);
                 System.out.println("READY");
                 return true;
             } else {
@@ -315,6 +318,9 @@ public class DatabaseConnector {
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+        }finally {
+                 if(res != null) close(res);
+                 if(preparedStatement != null) close(preparedStatement);
         }
         return false;
     }

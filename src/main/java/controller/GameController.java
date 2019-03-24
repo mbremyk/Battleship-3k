@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import database.DatabaseConnector;
+import database.PullThread;
 import effects.DownScaler;
 import effects.Scaler;
 import effects.Shaker;
@@ -93,16 +94,10 @@ public class GameController {
         //THIS ORDER IS VERY IMPORTANT---------------------
         gameMainPane.getChildren().addAll(board1, board2);
         board1.addDefaultShips(true);
-        System.out.println(Statics.getGame().getJoinUser()+","+Statics.getGame().getHostUser());
-        if(Statics.getGame().getJoinUser() != null && Statics.getGame().getHostUser() != null) {
-            int opponentid;
-            if (Statics.getLocalUser().equals(Statics.getGame().getHostUser()))
-                opponentid = Statics.getGame().getJoinUser().getUserId();
-            else opponentid = Statics.getGame().getHostUser().getUserId();
-            board2.loadShipsFromDatabase(Statics.getGame().getGameId(), opponentid); //TODO Make wait method
-            board2.setShipsMouseTransparent(true);
-//        System.out.println("Opponent board:\n"+board2);
-        }
+        //Wait thread
+        PullThread pullThread = new PullThread(this);
+        pullThread.start();
+        board2.setShipsMouseTransparent(true);
         gameMainPane.getChildren().add(mouseFollower);
         //-------------------------------------------------
 
@@ -221,6 +216,21 @@ public class GameController {
             mouseFollower.setTilePos(board2.getTranslateX(), board2.getTranslateY(), board2.getMousePosX(), board2.getMousePosY());
         } else {
             mouseFollower.setPos(eventX, eventY);
+        }
+    }
+
+    /**
+     * Called by thread to signal that both boards are uploaded
+     */
+    public void boardsReady(){
+        System.out.println("boardsReady called");
+        if(Statics.getGame().getJoinUser() != null && Statics.getGame().getHostUser() != null) {
+            int opponentid;
+            if (Statics.getLocalUser().equals(Statics.getGame().getHostUser()))
+                opponentid = Statics.getGame().getJoinUser().getUserId();
+            else opponentid = Statics.getGame().getHostUser().getUserId();
+            board2.loadShipsFromDatabase(Statics.getGame().getGameId(), opponentid);
+//        System.out.println("Opponent board:\n"+board2);
         }
     }
 
