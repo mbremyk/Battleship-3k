@@ -23,6 +23,7 @@ public class Game {
 	private String gameName;
 	private boolean gameOpen = true; //open to join
 	private int gameId;
+	private boolean gameOver = false;
 	
 	public Game(int gameid, BattleshipUser hostUser) {
 //		databaseConnector = new DatabaseConnector(Constants.DB_URL);
@@ -54,7 +55,13 @@ public class Game {
 	}
 	public void move(String coordinates){}
 	public boolean getGameState(){return false;}
+
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
 	public int getMoveId(){return 0;}
+	public void userJoined(){}
 
 	// mOtherfuckers be making method for gameover and last move id, and incomming move
 

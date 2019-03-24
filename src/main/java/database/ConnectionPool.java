@@ -11,7 +11,7 @@ public class ConnectionPool{
     private String url;
     private List<Connection> connectionPool;
     private List<Connection> usedConnections = new ArrayList<>();
-    private static int INITIAL_POOL_SIZE = 10;
+    private static int INITIAL_POOL_SIZE = 15;
 
     public ConnectionPool(String url, List<Connection> connectionPool){
         this.url = url;
@@ -35,9 +35,12 @@ public class ConnectionPool{
     // standard constructors
 
     public Connection getConnection() {
-        Connection connection = connectionPool
-                .remove(connectionPool.size() - 1);
-        usedConnections.add(connection);
+        Connection connection = null;
+        if(connectionPool.size()>0) {
+            connection = connectionPool
+                    .remove(connectionPool.size() - 1);
+            usedConnections.add(connection);
+        }
         return connection;
     }
 
@@ -56,4 +59,5 @@ public class ConnectionPool{
     }
 
     // standard getters
+
 }

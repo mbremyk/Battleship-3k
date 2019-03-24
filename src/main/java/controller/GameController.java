@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import database.DatabaseConnector;
+import database.PullThread;
 import effects.DownScaler;
 import effects.Scaler;
 import effects.Shaker;
@@ -64,6 +65,8 @@ public class GameController {
     private int pressedTileY = -1;
     private static boolean shipsMovable = true;
 
+    private int boardsReady = 0; //1 if ready, 2 if update fixed
+
 
     @FXML
     void initialize() {
@@ -88,26 +91,23 @@ public class GameController {
         mouseFollower.setVisible(false);
         board1 = new Board(gameMainPane, 250, 200);
         board2 = new Board(gameMainPane, 650, 200);
-        Statics.getGame().setBoards(board1,board2);
+        Statics.getGame().setBoards(board1, board2);
 
         //THIS ORDER IS VERY IMPORTANT---------------------
         gameMainPane.getChildren().addAll(board1, board2);
         board1.addDefaultShips(true);
-        System.out.println(Statics.getGame().getJoinUser()+","+Statics.getGame().getHostUser());
-        if(Statics.getGame().getJoinUser() != null && Statics.getGame().getHostUser() != null) {
-            int opponentid;
-            if (Statics.getLocalUser().equals(Statics.getGame().getHostUser()))
-                opponentid = Statics.getGame().getJoinUser().getUserId();
-            else opponentid = Statics.getGame().getHostUser().getUserId();
-            board2.loadShipsFromDatabase(Statics.getGame().getGameId(), opponentid); //TODO Make wait method
-            board2.setShipsMouseTransparent(true);
-//        System.out.println("Opponent board:\n"+board2);
-        }
+        //Wait thread
+        PullThread pullThread = new PullThread(this);
+        pullThread.start();
+        board2.setShipsMouseTransparent(true);
         gameMainPane.getChildren().add(mouseFollower);
         //-------------------------------------------------
 
         gameMainPane.setOnMouseMoved(event -> {
             moveMouseFollower(event.getX(), event.getY());
+            if (boardsReady == 1) {
+                updateBoards();
+            }
         });
         gameMainPane.setOnMouseDragged(event -> {
             colorMouseFollower();
@@ -162,10 +162,10 @@ public class GameController {
 //                Shaker shaker = new Shaker(gameMainPane);
 //                shaker.shake();
 
-                for (Ship ship : overlappingShips){
+                for (Ship ship : overlappingShips) {
 //                    Shaker shaker = new Shaker(ship);
 //                    shaker.shake();
-                   Scaler scaler = new Scaler(ship);
+                    Scaler scaler = new Scaler(ship);
                     scaler.play();
                 }
             }
@@ -191,8 +191,8 @@ public class GameController {
     private void addTileColor(Board board, int x, int y, Color color, Image image) {
         Rectangle square = new Rectangle(Board.TILE_SIZE, Board.TILE_SIZE);
         square.setMouseTransparent(true);
-        if(color != null) square.setFill(color);
-        if(image != null) square.setFill(new ImagePattern(image));
+        if (color != null) square.setFill(color);
+        if (image != null) square.setFill(new ImagePattern(image));
         square.setTranslateX(board.getTranslateX() + x * Board.TILE_SIZE);
         square.setTranslateY(board.getTranslateY() + y * Board.TILE_SIZE);
 //        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower), square);
@@ -221,6 +221,28 @@ public class GameController {
             mouseFollower.setTilePos(board2.getTranslateX(), board2.getTranslateY(), board2.getMousePosX(), board2.getMousePosY());
         } else {
             mouseFollower.setPos(eventX, eventY);
+        }
+    }
+
+    /**
+     * Called by thread to signal that both boards are uploaded
+     */
+    public void boardsReady() {
+        boardsReady = 1;
+    }
+
+    private void updateBoards() {
+        System.out.println("boardsReady called");
+        if (Statics.getGame().getJoinUser() != null && Statics.getGame().getHostUser() != null) {
+            int opponentid;
+            if (Statics.getLocalUser().equals(Statics.getGame().getHostUser()))
+                opponentid = Statics.getGame().getJoinUser().getUserId();
+            else opponentid = Statics.getGame().getHostUser().getUserId();
+            System.out.println(Statics.getGame().getJoinUser().getUserId());
+            System.out.println(Statics.getGame().getHostUser().getUserId());
+            board2.loadShipsFromDatabase(Statics.getGame().getGameId(), opponentid);
+            boardsReady = 2;
+//            System.out.println("Opponent board:\n" + board2);
         }
     }
 
