@@ -370,5 +370,30 @@ public class DatabaseConnector {
         }
         return false;
     }
+    public boolean uploadFeedback(String title, String message){
+        if(title == "" || message == "" || title == null || message == null){
+            return false;
+        }
+        else{
+            try (Connection con = connectionPool.getConnection()) {
+                String update =  "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, '" + title + "', '" + message + "')";
+                PreparedStatement preparedStatement = con.prepareStatement(update);
+                preparedStatement.execute();
+                return true;
+            } catch (SQLException e) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+                return false;
+            } catch (Exception e) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+                return false;
+            }
+        }
+    }
+
+
+
+
+
+
 
 }
