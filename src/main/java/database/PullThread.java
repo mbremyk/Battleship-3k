@@ -24,7 +24,7 @@ public class PullThread extends Thread{
     public void run(){
         boolean gameStart = false;
         while(!gameStart){
-            gameStart = db.gameStarted(game);
+            gameStart = db.userJoined(game);
             if(gameStart){
                 game.userJoined();
             }

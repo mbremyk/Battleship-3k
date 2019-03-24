@@ -255,7 +255,17 @@ public class DatabaseConnector {
 		}
 		return coordinates;
 	}
-	public boolean gameStarted(Game game){
-
+	public boolean userJoined(Game game){
+		int gameId = game.getGameId();
+		ResultSet res = null;
+		String query = "SELECT " + BOARDS_USER_ID + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + " = " + gameId;
+		try(Connection con = DriverManager.getConnection(databaseUrl)){
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			 int users = res.getInt(BOARDS_USER_ID);
+			if(res.next()) return true;
+		}catch (Exception e){
+			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+		}
+	return false;
 	}
 }
