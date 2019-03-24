@@ -20,6 +20,7 @@ import java.security.spec.KeySpec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import game.Statics;
 import model.*;
 
 import static database.Constants.*;
@@ -73,7 +74,9 @@ public abstract class Login
 	 */
 	public static BattleshipUser login(String username, String password)
 	{
-		return databaseConnector.getBattleshipUser(username, password);
+		BattleshipUser user = databaseConnector.getBattleshipUser(username, password);
+		if(user != null) Statics.setLocalUser(user);
+		return user;
 	}
 	
 	/**

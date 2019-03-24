@@ -19,13 +19,14 @@ public class Game {
 	private BattleshipUser joinUser;
 	private Board board1;
 	private Board board2;
-	private DatabaseConnector databaseConnector;
+//	private DatabaseConnector databaseConnector;
 	private String gameName;
 	private boolean gameOpen = true; //open to join
 	private int gameId;
 	
-	public Game(BattleshipUser hostUser) {
-		databaseConnector = new DatabaseConnector(Constants.DB_URL);
+	public Game(int gameid, BattleshipUser hostUser) {
+//		databaseConnector = new DatabaseConnector(Constants.DB_URL);
+		this.gameId = gameid;
 		this.hostUser = hostUser;
 	}
 
@@ -57,6 +58,18 @@ public class Game {
 
 	// mOtherfuckers be making method for gameover and last move id, and incomming move
 
+	public void setBoards(Board board1, Board board2){
+		this.board1 = board1;
+		this.board2 = board2;
+	}
+
+	public boolean isGameOpen() {
+		return gameOpen;
+	}
+
+	public void setGameOpen(boolean gameOpen) {
+		this.gameOpen = gameOpen;
+	}
 
 	@Override
 	public String toString() {
@@ -66,7 +79,7 @@ public class Game {
 				", joinUser=" + joinUser +
 				", board1=" + board1 +
 				", board2=" + board2 +
-				", databaseConnector=" + databaseConnector +
+//				", databaseConnector=" + databaseConnector +
 				", gameName='" + gameName + '\'' +
 				", gameOpen=" + gameOpen +
 				'}';

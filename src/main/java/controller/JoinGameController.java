@@ -1,12 +1,11 @@
 /**
- *
- *
  * @Author Thorkildsen Torje
  */
 
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
@@ -15,6 +14,7 @@ import com.mysql.cj.result.Row;
 import database.Constants;
 import database.DatabaseConnector;
 import game.Game;
+import game.Statics;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.BattleshipUser;
 
-public class JoinGameController extends ViewComponent{
+public class JoinGameController extends ViewComponent {
 
     @FXML
     private ResourceBundle resources;
@@ -52,9 +52,9 @@ public class JoinGameController extends ViewComponent{
     Game[] games;
     ObservableList<RowData> gameList = FXCollections.observableArrayList();
 
-    TableColumn<RowData,String> hostColumn;
-    TableColumn<RowData,Integer> winsColumn;
-    TableColumn<RowData,Boolean> openColumn;
+    TableColumn<RowData, String> hostColumn;
+    TableColumn<RowData, Integer> winsColumn;
+    TableColumn<RowData, Boolean> openColumn;
 
     @FXML
     void initialize() {
@@ -76,38 +76,58 @@ public class JoinGameController extends ViewComponent{
         openColumn.setCellValueFactory(new PropertyValueFactory<>("open"));
 
         refreshList();
-        joinGameGamesTable.getColumns().addAll(hostColumn,winsColumn,openColumn);
+        joinGameGamesTable.getColumns().addAll(hostColumn, winsColumn, openColumn);
 
         joinGameCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
 
         joinGameJoinButton.setOnAction(event -> {
-            startGame();
+            RowData rowData = joinGameGamesTable.getSelectionModel().getSelectedItem();
+            if (Statics.getLocalUser() == null) {
+                System.out.println("You are not logged in");
+            } else if (rowData == null) {
+                System.out.println("No game has been selected");
+            } else {
+                Game game = getGame(rowData.getUsername());
+                DatabaseConnector databaseConnector = new DatabaseConnector();
+                if(game.isGameOpen() && databaseConnector.joinGame(game)){
+                    startGame();
+                }else{
+                    System.out.println("Could not join game");
+                }
+            }
         });
 
         joinGameReflexButton.setOnAction(event -> {
             refreshList();
         });
     }
-    public void refreshList(){
+
+    public Game getGame(String hostUsername) {
+        for (Game game : games) {
+            if (hostUsername.equals(game.getHostUser().getUsername())) return game;
+        }
+        return null;
+    }
+
+    public void refreshList() {
         DatabaseConnector newConnector = new DatabaseConnector(Constants.DB_URL);
         games = newConnector.getGames();
         gameList.clear();
         joinGameGamesTable.getItems().clear();
 
 
-        for(int i=0; i<games.length; i++){
+        for (int i = 0; i < games.length; i++) {
             boolean open = true;
-            if(games[i].getJoinUser() != null) {
+            if (games[i].getJoinUser() != null) {
                 open = false;
             }
-            RowData newRow = new RowData(games[i].getHostUser().getUsername(),games[i].getHostUser().getWonGames(),open);
+            RowData newRow = new RowData(games[i].getHostUser().getUsername(), games[i].getHostUser().getWonGames(), open);
             gameList.add(newRow);
         }
         joinGameGamesTable.setItems(gameList);
     }
-
 
 
     @Override
@@ -115,23 +135,26 @@ public class JoinGameController extends ViewComponent{
         return (AnchorPane) joinGameCancelButton.getParent();
     }
 
-    public class RowData{
+    public class RowData {
         private String username;
         private int wins;
         private boolean open;
 
-        public RowData(String username, int wins, boolean open){
+        public RowData(String username, int wins, boolean open) {
             this.username = username;
             this.wins = wins;
             this.open = open;
         }
-        public String getUsername(){
+
+        public String getUsername() {
             return username;
         }
-        public int getWins(){
+
+        public int getWins() {
             return wins;
         }
-        public boolean getOpen(){
+
+        public boolean getOpen() {
             return open;
         }
     }

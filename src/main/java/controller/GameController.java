@@ -13,6 +13,7 @@ import effects.Shaker;
 import game.Board;
 import game.MouseFollower;
 import game.Ship;
+import game.Statics;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
@@ -87,13 +88,21 @@ public class GameController {
         mouseFollower.setVisible(false);
         board1 = new Board(gameMainPane, 250, 200);
         board2 = new Board(gameMainPane, 650, 200);
+        Statics.getGame().setBoards(board1,board2);
 
         //THIS ORDER IS VERY IMPORTANT---------------------
         gameMainPane.getChildren().addAll(board1, board2);
         board1.addDefaultShips(true);
-        board2.loadShipsFromDatabase(3, 6); //TODO Make wait method
-        board2.setShipsMouseTransparent(true);
+        System.out.println(Statics.getGame().getJoinUser()+","+Statics.getGame().getHostUser());
+        if(Statics.getGame().getJoinUser() != null && Statics.getGame().getHostUser() != null) {
+            int opponentid;
+            if (Statics.getLocalUser().equals(Statics.getGame().getHostUser()))
+                opponentid = Statics.getGame().getJoinUser().getUserId();
+            else opponentid = Statics.getGame().getHostUser().getUserId();
+            board2.loadShipsFromDatabase(Statics.getGame().getGameId(), opponentid); //TODO Make wait method
+            board2.setShipsMouseTransparent(true);
 //        System.out.println("Opponent board:\n"+board2);
+        }
         gameMainPane.getChildren().add(mouseFollower);
         //-------------------------------------------------
 
@@ -142,8 +151,7 @@ public class GameController {
         gameReadyButton.setOnAction(event -> {
             ArrayList<Ship> overlappingShips = board1.uploadShipCoordinates();
             if (overlappingShips == null) {
-                DatabaseConnector databaseConnector = new DatabaseConnector();
-//              databaseConnector.uploadShipCoordinates(board1); //TODO Create this method in DatabaseConnector.java
+                //If no ships are overlapping (the ships have been uploaded)
                 board1.setShipsMouseTransparent(true);
                 gameReadyButton.setText("Waiting for opponent");
                 gameReadyButton.setVisible(false);
