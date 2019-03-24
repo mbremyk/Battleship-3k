@@ -53,7 +53,7 @@ public class HostGameController extends ViewComponent{
 		
 		hostGameCreateGameButton.setOnAction(event -> {
 			DatabaseConnector databaseConnector4 = new DatabaseConnector(Constants.DB_URL);
-			databaseConnector4.createGame(new Game(Statics.getLocalUser()));
+			databaseConnector4.createGame();
 			startGame();
 		});
 	}

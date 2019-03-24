@@ -115,4 +115,18 @@ public class BattleshipUser {
 
         return (double) wonGames / (double) (wonGames + lostGames);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(obj == this) return true;
+
+        if(!(obj instanceof BattleshipUser)){
+            return false;
+        }
+
+        BattleshipUser user = (BattleshipUser) obj;
+
+        return user.getUsername().equals(this.username);
+    }
 }

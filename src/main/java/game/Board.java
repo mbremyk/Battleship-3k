@@ -85,7 +85,7 @@ public class Board extends ImageView {
         ret += "," + (width < 10 ? "0" + width : width);
         ret += "," + (height < 10 ? "0" + height : height);
         ret += "," + (rotation < 10 ? "00" + rotation : (rotation < 100 ? "0" + rotation : rotation));
-        registerShipCoordinates(x, y, width, height,ships.indexOf(ship));
+        registerShipCoordinates(x, y, width, height, ships.indexOf(ship));
         return ret;
     }
 
@@ -102,8 +102,11 @@ public class Board extends ImageView {
         }
         shipCoordinates = shipCoordinates.substring(0, shipCoordinates.length() - 1);
 
+        DatabaseConnector databaseConnector = new DatabaseConnector();
         System.out.println("Registered ships:\n" + toString());
-        System.out.println("In database coordinates:\n" + shipCoordinates); //TODO Upload these
+        System.out.println("In database coordinates:\n" + shipCoordinates);
+        boolean uploadStatus = databaseConnector.uploadShipCoordinates(shipCoordinates);
+        System.out.println("Board uploaded: " + uploadStatus);
         return null;
     }
 
@@ -172,16 +175,16 @@ public class Board extends ImageView {
      * @param height
      * @param shipIndex
      */
-    public void registerShipCoordinates(int x, int y, int width, int height,int shipIndex) {
+    public void registerShipCoordinates(int x, int y, int width, int height, int shipIndex) {
         for (int w = 0; w < width; w++) {
             for (int h = 0; h < height; h++) {
-                board[x + w][y + h] = shipIndex+1;
+                board[x + w][y + h] = shipIndex + 1;
             }
         }
     }
 
     public void registerShipCoordinates(Ship ship) {
-        registerShipCoordinates(ship.getTileX(), ship.getTileY(), ship.getWidthTiles(), ship.getHeightTiles(),ships.indexOf(ship));
+        registerShipCoordinates(ship.getTileX(), ship.getTileY(), ship.getWidthTiles(), ship.getHeightTiles(), ships.indexOf(ship));
     }
 
     /**
@@ -232,6 +235,7 @@ public class Board extends ImageView {
             addShip(loadedShip);
             registerShipCoordinates(loadedShip);
         }
+        System.out.println("Opponent board:\n"+this);
     }
 
     /**
@@ -251,7 +255,7 @@ public class Board extends ImageView {
                 board[x][y] = -1;
                 return 0;
             default:
-                ships.get(board[x][y]-1).reduceHealth();
+                ships.get(board[x][y] - 1).reduceHealth();
                 board[x][y] = -2;
                 return 1; //HIT
         }
@@ -269,6 +273,10 @@ public class Board extends ImageView {
 
     public int getMousePosY() {
         return mousePosY;
+    }
+
+    public int[][] getBoard() {
+        return board;
     }
 
     @Override
