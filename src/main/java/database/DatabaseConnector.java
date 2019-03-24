@@ -262,7 +262,7 @@ public class DatabaseConnector {
 		try(Connection con = DriverManager.getConnection(databaseUrl)){
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			 int users = res.getInt(BOARDS_USER_ID);
-			if(res.next()) {
+			if(res.next() && res.next()) {
 				System.out.println("READY");
 				return true;
 			}else{
