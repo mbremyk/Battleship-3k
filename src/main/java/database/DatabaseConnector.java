@@ -336,18 +336,19 @@ public class DatabaseConnector {
             res = preparedStatement.executeQuery();
             connectionPool.releaseConnection(con);
             if (res.next()) {
-                if (res.getInt(BOARDS_USER_ID) == Statics.getLocalUser().getUserId()) {
+                if (res.getInt(BOARDS_USER_ID) != Statics.getLocalUser().getUserId()) {
                     BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID));
                     if (game.getJoinUser() == null) game.setJoinUser(opponent);
                     System.out.println("READY");
-                } else {
-                    if (res.next()) {
+                }
+                if (res.next()) {
+                    if (res.getInt(BOARDS_USER_ID) != Statics.getLocalUser().getUserId()) {
                         BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID));
                         if (game.getJoinUser() == null) game.setJoinUser(opponent);
                         System.out.println("READY");
                     }
+                    return true;
                 }
-                return true;
             } else {
                 System.out.println("NOT READY");
             }

@@ -238,9 +238,11 @@ public class GameController {
             if (Statics.getLocalUser().equals(Statics.getGame().getHostUser()))
                 opponentid = Statics.getGame().getJoinUser().getUserId();
             else opponentid = Statics.getGame().getHostUser().getUserId();
+            System.out.println(Statics.getGame().getJoinUser().getUserId());
+            System.out.println(Statics.getGame().getHostUser().getUserId());
             board2.loadShipsFromDatabase(Statics.getGame().getGameId(), opponentid);
             boardsReady = 2;
-            System.out.println("Opponent board:\n" + board2);
+//            System.out.println("Opponent board:\n" + board2);
         }
     }
 
