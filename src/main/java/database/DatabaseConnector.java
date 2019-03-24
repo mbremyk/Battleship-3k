@@ -20,7 +20,7 @@ import java.util.logging.*;
 public class DatabaseConnector {
 
 	private String databaseUrl;
-	
+
 	/**
 	 * Constructor for the DatabaseConnector class
 	 *
@@ -64,7 +64,7 @@ public class DatabaseConnector {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Method for registering users in the database
 	 *
@@ -93,7 +93,7 @@ public class DatabaseConnector {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Method for fetching information about a specific user, given username and password
 	 *
@@ -128,7 +128,7 @@ public class DatabaseConnector {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Method for fetching all users from the database
 	 *
@@ -141,7 +141,7 @@ public class DatabaseConnector {
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			BattleshipUser[] users = new BattleshipUser[0];
 			res = preparedStatement.executeQuery();
-			
+
 			while (res.next()) {
 				BattleshipUser[] newUsers = new BattleshipUser[users.length + 1];
 				for (int i = 0; i < users.length; i++) {
@@ -161,7 +161,7 @@ public class DatabaseConnector {
 		}
 		return null;
 	}
-	
+
 	public int lastAction(Game game) {
 		int moveId = 0;
 		ResultSet res = null;
@@ -180,7 +180,7 @@ public class DatabaseConnector {
 		}
 		return moveId;
 	}
-	
+
 	/**
 	 * Method to get the ship's coordinates from the database
 	 *
@@ -192,18 +192,18 @@ public class DatabaseConnector {
 		int[][] coordinates = null;
 		ResultSet res = null;
 		String query = "SELECT " + BOARDS_COORDINATES + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + "=" + "? AND " + BOARDS_USER_ID + "= ?";
-		
+
 		try (Connection con = DriverManager.getConnection(databaseUrl);
 		     PreparedStatement preparedStatement = con.prepareStatement(query)) {
-			
+
 			preparedStatement.setString(1, gameid + "");
 			preparedStatement.setString(2, userid + "");
 			res = preparedStatement.executeQuery();
-			
+
 			if (res.next()) {
 				String coordString = res.getString(BOARDS_COORDINATES);
 				String[] coordArray = coordString.split(",");
-				
+
 				int length = coordArray.length / 2;
 				coordinates = new int[length][2];
 				for (int i = 0; i < length; i++) {
@@ -218,10 +218,10 @@ public class DatabaseConnector {
 		finally {
 			close(res);
 		}
-		
+
 		return coordinates;
 	}
-	
+
 	private void close(AutoCloseable closeable) {
 		try {
 			closeable.close();
@@ -230,7 +230,7 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void close(AutoCloseable closeable1, AutoCloseable closeable2) {
 		try {
 			closeable1.close();
@@ -240,7 +240,7 @@ public class DatabaseConnector {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getLastCoordinates(int moveId, int gameId){
 		String coordinates = "";
     	ResultSet res = null;
@@ -262,7 +262,12 @@ public class DatabaseConnector {
 		try(Connection con = DriverManager.getConnection(databaseUrl)){
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			 int users = res.getInt(BOARDS_USER_ID);
-			if(res.next()) return true;
+			if(res.next()) {
+				System.out.println("READY");
+				return true;
+			}else{
+                System.out.println("NOT READY");
+			}
 		}catch (Exception e){
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
 		}
