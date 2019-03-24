@@ -2,6 +2,7 @@ effects\Scaler.class
 game\MouseFollower.class
 game\Game.class
 controller\MainMenuController.class
+database\PullThread.class
 game\Board.class
 controller\GameController.class
 controller\JoinGameController.class

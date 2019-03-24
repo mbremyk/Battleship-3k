@@ -90,7 +90,8 @@ public class SignupController extends ViewComponent {
 
         signupSignupButton.setOnAction(event -> {
             if (checkValidUser()) {
-                BattleshipUser user = new BattleshipUser(Statics.getGame().getGameId(), signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
+                //Sets userid to -1 because the user hasn't been created yet so no userid exists in the database
+                BattleshipUser user = new BattleshipUser(-1, signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
                 boolean signupStatus = Login.registerUser(user);
                 if (signupStatus) {
                     signupHelpText.setText("New user was created");
@@ -100,7 +101,6 @@ public class SignupController extends ViewComponent {
             }
 
         });
-
 
     }
 

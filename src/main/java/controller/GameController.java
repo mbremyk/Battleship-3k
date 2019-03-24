@@ -13,6 +13,7 @@ import effects.Shaker;
 import game.Board;
 import game.MouseFollower;
 import game.Ship;
+import game.Statics;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
@@ -56,11 +57,11 @@ public class GameController {
     private ImageView gameOptionsImage;
 
     private MouseFollower mouseFollower;
-    Board board1;
-    Board board2;
-    int pressedBoard = -1;
-    int pressedTileX = -1;
-    int pressedTileY = -1;
+    private Board board1;
+    private Board board2;
+    private int pressedBoard = -1;
+    private int pressedTileX = -1;
+    private int pressedTileY = -1;
     private static boolean shipsMovable = true;
 
 
@@ -87,11 +88,21 @@ public class GameController {
         mouseFollower.setVisible(false);
         board1 = new Board(gameMainPane, 250, 200);
         board2 = new Board(gameMainPane, 650, 200);
+        Statics.getGame().setBoards(board1,board2);
 
         //THIS ORDER IS VERY IMPORTANT---------------------
         gameMainPane.getChildren().addAll(board1, board2);
         board1.addDefaultShips(true);
-//        board2.addDefaultShips(false); //NOT NEEDED, LOADED FROM DATABASE AND ARE INVISIBLE ANYWAY
+        System.out.println(Statics.getGame().getJoinUser()+","+Statics.getGame().getHostUser());
+        if(Statics.getGame().getJoinUser() != null && Statics.getGame().getHostUser() != null) {
+            int opponentid;
+            if (Statics.getLocalUser().equals(Statics.getGame().getHostUser()))
+                opponentid = Statics.getGame().getJoinUser().getUserId();
+            else opponentid = Statics.getGame().getHostUser().getUserId();
+            board2.loadShipsFromDatabase(Statics.getGame().getGameId(), opponentid); //TODO Make wait method
+            board2.setShipsMouseTransparent(true);
+//        System.out.println("Opponent board:\n"+board2);
+        }
         gameMainPane.getChildren().add(mouseFollower);
         //-------------------------------------------------
 
@@ -138,16 +149,14 @@ public class GameController {
         });
 
         gameReadyButton.setOnAction(event -> {
-            ArrayList<Ship> overlappingShips = board1.registerShipCoordinates();
+            ArrayList<Ship> overlappingShips = board1.uploadShipCoordinates();
             if (overlappingShips == null) {
+                //If no ships are overlapping (the ships have been uploaded)
+                board1.setShipsMouseTransparent(true);
                 gameReadyButton.setText("Waiting for opponent");
                 gameReadyButton.setVisible(false);
                 shipsMovable = false;
                 mouseFollower.setVisible(true);
-                DatabaseConnector databaseConnector = new DatabaseConnector();
-                databaseConnector.uploadShipCoordinates(board1);
-                board2.loadShipsFromDatabase(3, 6);
-                System.out.println(board2);
             } else {
                 //FOR SHAKING THE WHOLE SCENE
 //                Shaker shaker = new Shaker(gameMainPane);
@@ -186,7 +195,8 @@ public class GameController {
         if(image != null) square.setFill(new ImagePattern(image));
         square.setTranslateX(board.getTranslateX() + x * Board.TILE_SIZE);
         square.setTranslateY(board.getTranslateY() + y * Board.TILE_SIZE);
-        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower) - 1, square);
+//        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower), square);
+        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(board2), square);
         DownScaler downScaler = new DownScaler(square);
         downScaler.play();
     }

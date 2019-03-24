@@ -20,46 +20,46 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class HostGameController extends ViewComponent{
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private JFXButton hostGameCreateGameButton;
-
-    @FXML
-    private TextField hostGameNameField;
-
-    @FXML
-    private PasswordField hostGamePasswordField;
-
-    @FXML
-    private JFXButton hostGameCancelButton;
-
-
-    @FXML
-    void initialize() {
-        assert hostGameCreateGameButton != null : "fx:id=\"hostGameCreateGameButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert hostGameNameField != null : "fx:id=\"hostGameNameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert hostGamePasswordField != null : "fx:id=\"hostGamePasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert hostGameCancelButton != null : "fx:id=\"hostGameCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-
-        hostGameCancelButton.setOnAction(event -> {
-            switchView("MainMenu");
-        });
-
-        hostGameCreateGameButton.setOnAction(event -> {
-            DatabaseConnector databaseConnector4 = new DatabaseConnector(Constants.DB_URL);
-            databaseConnector4.createGame(new Game(Statics.getLocalUser()));
-            startGame();
-        });
-    }
-
-    @Override
-    protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane) hostGameCancelButton.getParent();
-    }
+	
+	@FXML
+	private ResourceBundle resources;
+	
+	@FXML
+	private URL location;
+	
+	@FXML
+	private JFXButton hostGameCreateGameButton;
+	
+	@FXML
+	private TextField hostGameNameField;
+	
+	@FXML
+	private PasswordField hostGamePasswordField;
+	
+	@FXML
+	private JFXButton hostGameCancelButton;
+	
+	
+	@FXML
+	void initialize() {
+		assert hostGameCreateGameButton != null : "fx:id=\"hostGameCreateGameButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+		assert hostGameNameField != null : "fx:id=\"hostGameNameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+		assert hostGamePasswordField != null : "fx:id=\"hostGamePasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+		assert hostGameCancelButton != null : "fx:id=\"hostGameCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
+		
+		hostGameCancelButton.setOnAction(event -> {
+			switchView("MainMenu");
+		});
+		
+		hostGameCreateGameButton.setOnAction(event -> {
+			DatabaseConnector databaseConnector4 = new DatabaseConnector(Constants.DB_URL);
+			databaseConnector4.createGame();
+			startGame();
+		});
+	}
+	
+	@Override
+	protected AnchorPane getParentAnchorPane() {
+		return (AnchorPane) hostGameCancelButton.getParent();
+	}
 }

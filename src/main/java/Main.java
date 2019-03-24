@@ -10,6 +10,8 @@
  */
 
 import game.Game;
+import database.ConnectionPool;
+import database.DatabaseConnector;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,10 +20,14 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import static database.Constants.DB_URL;
 
 public class Main extends Application {
 	private static Game game;
-
+	public static ConnectionPool connectionPool = null;
 	/**
 	 * Overridden method from Application in JavaFX
 	 * Called in the JavaFX Application Thread when the application is ready to run
@@ -50,6 +56,14 @@ public class Main extends Application {
 	 * @param args
 	 */
 	public static void main(String[] args){
+		try {
+			connectionPool = ConnectionPool.create(DB_URL);
+			DatabaseConnector databaseConnector = new DatabaseConnector(DB_URL);
+			databaseConnector.setConnectionPool(connectionPool);
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 		launch(args);
 	}
 
