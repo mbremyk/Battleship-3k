@@ -233,6 +233,7 @@ public class DatabaseConnector {
         PreparedStatement preparedStatement = null;
         ResultSet res = null;
         try {
+            con = connectionPool.getConnection();
             preparedStatement = con.prepareStatement(query);
             res = preparedStatement.executeQuery();
 
