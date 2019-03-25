@@ -233,6 +233,7 @@ public class DatabaseConnector {
         PreparedStatement preparedStatement = null;
         ResultSet res = null;
         try {
+            con = connectionPool.getConnection();
             preparedStatement = con.prepareStatement(query);
             res = preparedStatement.executeQuery();
 
@@ -492,7 +493,9 @@ public class DatabaseConnector {
             return false;
         }
         else{
-            try (Connection con = connectionPool.getConnection()) {
+            Connection con = null;
+            try {
+                con = connectionPool.getConnection()
                 String update =  "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, '" + title + "', '" + message + "')";
                 PreparedStatement preparedStatement = con.prepareStatement(update);
                 preparedStatement.execute();
