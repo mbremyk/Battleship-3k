@@ -19,11 +19,13 @@ public class Game {
 	private BattleshipUser joinUser;
 	private Board board1;
 	private Board board2;
+	private boolean boardsReady = false;
 //	private DatabaseConnector databaseConnector;
 	private String gameName;
 	private boolean gameOpen = true; //open to join
 	private int gameId;
 	private boolean gameOver = false;
+	private boolean shipsMovable = true;
 	
 	public Game(int gameid, BattleshipUser hostUser) {
 //		databaseConnector = new DatabaseConnector(Constants.DB_URL);
@@ -76,6 +78,22 @@ public class Game {
 
 	public void setGameOpen(boolean gameOpen) {
 		this.gameOpen = gameOpen;
+	}
+
+	public void setBoardsReady(boolean boardsReady) {
+		this.boardsReady = boardsReady;
+	}
+
+	public boolean isBoardsReady() {
+		return boardsReady;
+	}
+
+	public boolean isShipsMovable() {
+		return shipsMovable;
+	}
+
+	public void setShipsMovable(boolean shipsMovable) {
+		this.shipsMovable = shipsMovable;
 	}
 
 	@Override

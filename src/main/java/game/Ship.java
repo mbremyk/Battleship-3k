@@ -51,7 +51,7 @@ public class Ship extends Rectangle {
         });
 
         setOnMouseDragged(event -> {
-            if (GameController.isShipsMovable() && event.getButton() == MouseButton.PRIMARY) {
+            if (Statics.getGame().isShipsMovable() && event.getButton() == MouseButton.PRIMARY) {
                 this.setTranslateX(event.getSceneX() - startDragX);
                 this.setTranslateY(event.getSceneY() - startDragY);
                 updatePosition();
