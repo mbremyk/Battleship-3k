@@ -97,9 +97,7 @@ public class SignupController extends ViewComponent {
                 boolean signupStatus = Login.registerUser(user);
                 if (signupStatus) {
                     signupHelpText.setText("New user was created");
-                    //switch scene
                     switchView("Login");
-                    //login
                     Statics.setLocalUser(user);
                     Scene scene = signupCancelButton.getScene();
                     Node node = scene.lookup("#mainMenuLoggedInText");
@@ -110,7 +108,6 @@ public class SignupController extends ViewComponent {
                     signupHelpText.setText("Something went wrong");
                 }
             }
-
         });
     }
 
