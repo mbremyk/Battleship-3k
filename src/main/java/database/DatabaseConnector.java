@@ -495,7 +495,7 @@ public class DatabaseConnector {
         else{
             Connection con = null;
             try {
-                con = connectionPool.getConnection()
+                con = connectionPool.getConnection();
                 String update =  "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, '" + title + "', '" + message + "')";
                 PreparedStatement preparedStatement = con.prepareStatement(update);
                 preparedStatement.execute();
