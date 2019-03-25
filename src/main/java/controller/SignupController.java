@@ -97,7 +97,7 @@ public class SignupController extends ViewComponent {
                 boolean signupStatus = Login.registerUser(user);
                 if (signupStatus) {
                     signupHelpText.setText("New user was created");
-                    switchView("Login");
+//                    switchView("LoginMenu");
                     Statics.setLocalUser(user);
                     Scene scene = signupCancelButton.getScene();
                     Node node = scene.lookup("#mainMenuLoggedInText");
