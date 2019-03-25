@@ -262,7 +262,7 @@ public class DatabaseConnector {
 
             }
             return games;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             if (res != null) close(res);
