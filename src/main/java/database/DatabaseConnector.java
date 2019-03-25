@@ -506,6 +506,8 @@ public class DatabaseConnector {
             } catch (Exception e) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
                 return false;
+            } finally {
+                if (con  != null) connectionPool.releaseConnection(con);
             }
         }
     }
