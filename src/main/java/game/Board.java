@@ -246,6 +246,7 @@ public class Board extends ImageView {
      * @return int -1 if tile already attacked, 0 if no boats, and 1 if boat
      */
     public int attack(int x, int y) {
+        if(!Statics.getGame().isBoardsReady()) return -1;
         switch (board[x][y]) {
             case -2:
                 return -1;
