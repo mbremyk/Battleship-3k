@@ -54,9 +54,17 @@ public class PullThread extends Thread {
         gameController.boardsReady();
 
         boolean gameOver = game.isGameOver();
-        while (!gameOver) {
+        int timer = 0;
+        while (!gameOver || !game.allActionsUploaded()) {
             if (!game.isMyTurn()) {
                 db.lastAction(game);
+            }
+
+            //To make it upload every second instead of 0.5 seconds
+            timer++;
+            timer %=2;
+            if(timer == 0){
+                game.uploadCachedActions();
             }
             gameOver = game.isGameOver();
             try {

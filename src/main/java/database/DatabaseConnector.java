@@ -454,25 +454,22 @@ public class DatabaseConnector {
         return false;
     }
 
-    public boolean doAction(int x, int y) {
+    public boolean doAction(String coordString) {
         Game game = Statics.getGame();
         int gameId = game.getGameId();
         int moveId = game.getMoveId();
         Connection con = null;
         PreparedStatement insertPreparedStatement = null;
         try {
-            String coordString = "";
-            coordString+=(x < 10)?"0"+x:x;
-            coordString+=","+((y < 10)?"0"+y:y);
-
             con = connectionPool.getConnection();
             String insertQuery = "INSERT INTO " + ACTION_TABLE + "(" + ACTION_GAME_ID + "," + ACTION_MOVE_ID + ","+ ACTION_USER_ID + "," + ACTION_COORDINATES + ")VALUES(?,?,?,?)";
             insertPreparedStatement = con.prepareStatement(insertQuery);
             insertPreparedStatement.setInt(1, gameId);
-            insertPreparedStatement.setInt(2, moveId);
+            insertPreparedStatement.setInt(2, moveId+1);
             insertPreparedStatement.setInt(3, Statics.getLocalUser().getUserId());
             insertPreparedStatement.setString(4, coordString);
             insertPreparedStatement.execute();
+            game.incMoveID();
             return true;
         } catch (SQLException e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);

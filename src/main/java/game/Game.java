@@ -11,6 +11,8 @@ import database.DatabaseConnector;
 import model.BattleshipUser;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -33,10 +35,10 @@ public class Game {
     private boolean shipsMovable = true;
 
     private boolean myTurn = false;
-    private int moveId = 0;
+    private int moveId = -1;
 
     private ArrayList<String> actionCache = new ArrayList<>();
-//    private ArrayList<String> uploadActionCache = new ArrayList<>();
+    private ArrayList<String> uploadActionCache = new ArrayList<>();
 
     public Game(int gameid, BattleshipUser hostUser) {
         this(gameid, hostUser, false);
@@ -94,25 +96,69 @@ public class Game {
     }
 
     public void addCachedAction(String coords) {
-        for (String s : actionCache) {
-            if (s.equals(coords)) return;
+        try {
+            for (Iterator<String> it = actionCache.iterator(); it.hasNext(); ) {
+                String s = it.next();
+                if (s.equals(coords)) return;
+            }
+            actionCache.add(coords);
+        } catch (ConcurrentModificationException e) {
+            addCachedAction(coords);
         }
-        actionCache.add(coords);
     }
 
     public void doCachedActions() {
-        for (String coords : actionCache) {
-            if (coords != null) doAction(coords);
+        try {
+            for (Iterator<String> it = actionCache.iterator(); it.hasNext(); ) {
+                String coords = it.next();
+                if (coords != null) doAction(coords);
+                it.remove();
+            }
+        } catch (ConcurrentModificationException e) {
+            doCachedActions();
         }
-        actionCache.clear();
     }
 
-//    public void addUploadAction(String coords){
-//        for (String s : uploadActionCache) {
-//            if (s.equals(coords)) return;
-//        }
-//        uploadActionCache.add(coords);
-//    }
+    public void addUploadAction(String coords) {
+        try {
+            for (Iterator<String> it = uploadActionCache.iterator(); it.hasNext(); ) {
+                String s = it.next();
+                if (s.equals(coords)) return;
+            }
+            uploadActionCache.add(coords);
+        } catch (ConcurrentModificationException e) {
+            addUploadAction(coords);
+        }
+    }
+
+    public void uploadCachedActions(String remove, int status) {
+//        System.out.println("REUP: "+moveId);
+        try {
+            if (status == 2) {
+                uploadActionCache.remove(remove);
+            }
+            uploadCachedActions();
+        } catch (ConcurrentModificationException e) {
+            uploadCachedActions(remove, status);
+        }
+    }
+
+    public void uploadCachedActions() {
+        DatabaseConnector db = new DatabaseConnector();
+        int status = 0;
+        String coords = null;
+        try {
+            for (int i = 0; i < uploadActionCache.size(); i++) {
+                coords = uploadActionCache.get(i);
+                status = 1;
+                db.doAction(coords);
+                status = 2;
+                uploadActionCache.remove(coords);
+            }
+        } catch (ConcurrentModificationException e) {
+            uploadCachedActions(coords, status);
+        }
+    }
 
     public void incMoveID() {
         moveId++;
@@ -126,10 +172,18 @@ public class Game {
         this.myTurn = myTurn;
     }
 
+    public boolean allActionsUploaded(){
+        for(String s: uploadActionCache){
+            if(s!=null) return false;
+        }
+        return true;
+    }
+
     public boolean isGameOver() {
         boolean status = false;
         if (board1.shipsRemaining() == 0 || board2.shipsRemaining() == 0) {
             status = true;
+            setMyTurn(false);
         }
         return status;
     }

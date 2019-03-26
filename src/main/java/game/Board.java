@@ -198,7 +198,7 @@ public class Board extends ImageView {
      */
     public boolean addShip(Ship ship) {
         if (this.parent == null) return false;
-        this.parent.getChildren().add(parent.getChildren().indexOf(this)+1, ship);
+        this.parent.getChildren().add(parent.getChildren().indexOf(this) + 1, ship);
         ships.add(ship);
         return true;
     }
@@ -255,26 +255,30 @@ public class Board extends ImageView {
 
     public int attack(int x, int y, boolean upload) {
         Game game = Statics.getGame();
-        if (!game.isBoardsReady() || game.isGameOver()) return -1;
+        if (!game.isBoardsReady() || game.isGameOver() && !upload) return -1;
         switch (board[x][y]) {
             case -2:
                 return -1;
             case -1:
                 return -1;
             case 0:
-                game.incMoveID();
                 board[x][y] = -1;
                 if (upload) {
                     game.setMyTurn(false);
-                    if (upload) uploadAttack(x, y);
+                    uploadAttack(x, y);
+                } else {
+                    game.incMoveID();
                 }
                 addTileColor(x, y, null, new Image("./WaterTile.png"));
                 return 0;
             default:
-                game.incMoveID();
                 ships.get(board[x][y] - 1).reduceHealth();
                 board[x][y] = -2;
-                if (upload) uploadAttack(x, y);
+                if (upload) {
+                    uploadAttack(x, y);
+                } else {
+                    game.incMoveID();
+                }
                 addTileColor(x, y, null, new Image("./ExplosionTile.png"));
                 return 1; //HIT
         }
@@ -301,8 +305,13 @@ public class Board extends ImageView {
     }
 
     private void uploadAttack(int x, int y) {
+        String coordString = "";
+        coordString += (x < 10) ? "0" + x : x;
+        coordString += "," + ((y < 10) ? "0" + y : y);
+
 //        DatabaseConnector db = new DatabaseConnector();
-//        db.doAction(x, y);
+//        db.doAction(coordString);
+        Statics.getGame().addUploadAction(coordString);
     }
 
     public void setShipsMouseTransparent(boolean transparent) {
