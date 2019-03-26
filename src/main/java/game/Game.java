@@ -10,6 +10,7 @@ import database.Constants;
 import database.DatabaseConnector;
 import model.BattleshipUser;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -34,6 +35,9 @@ public class Game {
     private boolean myTurn = false;
     private int moveId = 0;
 
+    private ArrayList<String> actionCache = new ArrayList<>();
+//    private ArrayList<String> uploadActionCache = new ArrayList<>();
+
     public Game(int gameid, BattleshipUser hostUser) {
         this(gameid, hostUser, false);
     }
@@ -49,9 +53,6 @@ public class Game {
         if (hosting && result == 0 || !hosting && result == 1) {
             myTurn = true;
         }
-
-        System.out.println("myTurn: " + myTurn);
-        System.out.println("Hosting: " + hosting);
     }
 
     public int getGameId() {
@@ -80,11 +81,41 @@ public class Game {
         gameOpen = false; //game full
     }
 
-    public void move(String coordinates) {
+    public void doAction(String coordinates) {
+        String[] coords = coordinates.split(",");
+        int x = Integer.parseInt(coords[0]);
+        int y = Integer.parseInt(coords[1]);
+
+        int attack = board1.attack(x, y, false);
+
+        if (attack == 0) {
+            myTurn = true;
+        }
     }
 
-    public boolean getGameState() {
-        return false;
+    public void addCachedAction(String coords) {
+        for (String s : actionCache) {
+            if (s.equals(coords)) return;
+        }
+        actionCache.add(coords);
+    }
+
+    public void doCachedActions() {
+        for (String coords : actionCache) {
+            if (coords != null) doAction(coords);
+        }
+        actionCache.clear();
+    }
+
+//    public void addUploadAction(String coords){
+//        for (String s : uploadActionCache) {
+//            if (s.equals(coords)) return;
+//        }
+//        uploadActionCache.add(coords);
+//    }
+
+    public void incMoveID() {
+        moveId++;
     }
 
     public boolean isMyTurn() {
@@ -96,7 +127,11 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return gameOver;
+        boolean status = false;
+        if (board1.shipsRemaining() == 0 || board2.shipsRemaining() == 0) {
+            status = true;
+        }
+        return status;
     }
 
     public int getMoveId() {

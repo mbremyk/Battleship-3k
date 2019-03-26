@@ -1,7 +1,7 @@
 /**
  * DatabaseConnector.java
  * <p>
- *Pulling from the sql database to check if the oponent has made any new moves
+ * Pulling from the sql database to check if the oponent has made any new moves
  * </p>
  */
 
@@ -13,58 +13,55 @@ import controller.GameController;
 import game.Game;
 import game.Statics;
 
-public class PullThread extends Thread{
+public class PullThread extends Thread {
     private final DatabaseConnector db;
     private final Game game;
     private final GameController gameController;
 
-    public PullThread(DatabaseConnector db, Game game){
+    public PullThread(DatabaseConnector db, Game game) {
         this.db = db;
         this.game = game;
-        this.gameController=null;
+        this.gameController = null;
     }
-    public PullThread(Game game){
+
+    public PullThread(Game game) {
         this.db = new DatabaseConnector();
         this.game = game;
-        this.gameController=null;
+        this.gameController = null;
     }
 
     //I think we only need this one now
-    public PullThread(GameController gameController){
+    public PullThread(GameController gameController) {
         this.db = new DatabaseConnector();
         this.game = Statics.getGame();
         this.gameController = gameController;
     }
 
     @Override
-    public void run(){
+    public void run() {
         boolean gameStart = false;
-        while(!gameStart){
+        while (!gameStart) {
             gameStart = db.userJoined(game);
-            if(gameStart){
+            if (gameStart) {
                 game.userJoined();
             }
-            try{
+            try {
                 Thread.sleep(500);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         gameController.boardsReady();
-        boolean gameOver = game.getGameState();
-        int moveId = game.getMoveId();
-        while(!gameOver){
-            int lastAction = db.lastAction(game);
-            System.out.println(lastAction);
-            if(lastAction != moveId && lastAction != -1){
-                System.out.println("MOVED");
-                moveId ++;
-                game.move(db.getLastCoordinates(moveId, game.getGameId()));//TODO fix this
+
+        boolean gameOver = game.isGameOver();
+        while (!gameOver) {
+            if (!game.isMyTurn()) {
+                db.lastAction(game);
             }
             gameOver = game.isGameOver();
-            try{
+            try {
                 Thread.sleep(500);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
