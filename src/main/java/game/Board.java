@@ -7,10 +7,14 @@
 package game;
 
 import database.DatabaseConnector;
+import effects.DownScaler;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -194,14 +198,13 @@ public class Board extends ImageView {
      */
     public boolean addShip(Ship ship) {
         if (this.parent == null) return false;
-        this.parent.getChildren().add(ship);
+        this.parent.getChildren().add(parent.getChildren().indexOf(this) + 1, ship);
         ships.add(ship);
         return true;
     }
 
     /**
      * @param visible, sets the visibility of the boat (might not be needed in future versions
-     * @// TODO: 19.03.2019  remove visible boolean if enemy boats aren't needed
      */
 
     public void addDefaultShips(boolean visible) {
@@ -234,8 +237,9 @@ public class Board extends ImageView {
 
             addShip(loadedShip);
             registerShipCoordinates(loadedShip);
+            setShipsMouseTransparent(true);
         }
-        System.out.println("Opponent board:\n"+this);
+        System.out.println("Opponent board:\n" + this);
     }
 
     /**
@@ -246,7 +250,12 @@ public class Board extends ImageView {
      * @return int -1 if tile already attacked, 0 if no boats, and 1 if boat
      */
     public int attack(int x, int y) {
-        if(!Statics.getGame().isBoardsReady()) return -1;
+        return attack(x, y, true);
+    }
+
+    public int attack(int x, int y, boolean upload) {
+        Game game = Statics.getGame();
+        if (!game.isBoardsReady() || game.isGameOver() && !upload) return -1;
         switch (board[x][y]) {
             case -2:
                 return -1;
@@ -254,18 +263,70 @@ public class Board extends ImageView {
                 return -1;
             case 0:
                 board[x][y] = -1;
+                if (upload) {
+                    game.setMyTurn(false);
+                    uploadAttack(x, y);
+                } else {
+                    game.incMoveID();
+                }
+                addTileColor(x, y, null, new Image("./WaterTile.png"));
                 return 0;
             default:
                 ships.get(board[x][y] - 1).reduceHealth();
                 board[x][y] = -2;
+                if (upload) {
+                    uploadAttack(x, y);
+                } else {
+                    game.incMoveID();
+                }
+                addTileColor(x, y, null, new Image("./ExplosionTile.png"));
                 return 1; //HIT
         }
+    }
+
+    /**
+     * Adds a square to a board that indicates if an attack has missed or hit
+     *
+     * @param x
+     * @param y
+     * @param color
+     * @param image
+     */
+    private void addTileColor(int x, int y, Color color, Image image) {
+        Rectangle square = new Rectangle(Board.TILE_SIZE, Board.TILE_SIZE);
+        square.setMouseTransparent(true);
+        if (color != null) square.setFill(color);
+        if (image != null) square.setFill(new ImagePattern(image));
+        square.setTranslateX(this.getTranslateX() + x * Board.TILE_SIZE);
+        square.setTranslateY(this.getTranslateY() + y * Board.TILE_SIZE);
+        parent.getChildren().add(parent.getChildren().indexOf(this), square);
+        DownScaler downScaler = new DownScaler(square);
+        downScaler.play();
+    }
+
+    private void uploadAttack(int x, int y) {
+        String coordString = "";
+        coordString += (x < 10) ? "0" + x : x;
+        coordString += "," + ((y < 10) ? "0" + y : y);
+
+//        DatabaseConnector db = new DatabaseConnector();
+//        db.doAction(coordString);
+        Statics.getGame().addUploadAction(coordString);
     }
 
     public void setShipsMouseTransparent(boolean transparent) {
         for (Ship ship : ships) {
             ship.setMouseTransparent(transparent);
         }
+    }
+
+    public int shipsRemaining() {
+        if (ships.size() == 0) return -1; //If boards are not ready
+        int count = 0;
+        for (Ship ship : ships) {
+            if (ship.isAlive()) count++;
+        }
+        return count;
     }
 
     public int getMousePosX() {

@@ -36,6 +36,7 @@ public class Ship extends Rectangle {
         setTranslateX(parentBoard.getTranslateX() + tileX * Board.TILE_SIZE);
         setTranslateY(parentBoard.getTranslateY() + tileY * Board.TILE_SIZE);
 
+        setOpacity(0.6); //TODO Remove/discuss this
 
         //These make the Ship remember "real" position while being snapped to other tiles
         setOnMousePressed(event -> {

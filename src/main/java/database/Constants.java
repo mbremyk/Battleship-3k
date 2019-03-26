@@ -48,6 +48,7 @@ public class Constants {
     public static final String ACTION_TABLE = "battleship_action";
     public static final String ACTION_GAME_ID = "game_id";
     public static final String ACTION_MOVE_ID = "move_id";
+    public static final String ACTION_USER_ID = "user_id";
     public static final String ACTION_COORDINATES = "coordinates";
 
     //Feedback table column names

@@ -26,7 +26,6 @@ import java.sql.SQLException;
 import static database.Constants.DB_URL;
 
 public class Main extends Application {
-	private static Game game;
 	public static ConnectionPool connectionPool = null;
 	/**
 	 * Overridden method from Application in JavaFX
@@ -67,7 +66,4 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	public static Game getGame() {
-		return game;
-	}
 }

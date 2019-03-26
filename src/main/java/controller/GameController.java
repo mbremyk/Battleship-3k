@@ -100,9 +100,12 @@ public class GameController {
 
         gameMainPane.setOnMouseMoved(event -> {
             moveMouseFollower(event.getX(), event.getY());
+
+            //TODO find a better place to update these
             if (boardsReady == 1) {
                 updateBoards();
             }
+            Statics.getGame().doCachedActions();
         });
         gameMainPane.setOnMouseDragged(event -> {
             colorMouseFollower();
@@ -125,19 +128,10 @@ public class GameController {
             int boardNumber = onSameTiles();
             if (boardNumber == 1) {
                 System.out.println("Placing boat on " + board1.getMousePosX() + "," + board1.getMousePosY());
-            } else if (boardNumber == 2) {
+            } else if (boardNumber == 2 && Statics.getGame().isMyTurn()) {
                 int attackX = board2.getMousePosX();
                 int attackY = board2.getMousePosY();
-                int attackResult = board2.attack(attackX, attackY);
-                if (attackResult == 1) {
-//                    System.out.println("HIT!");
-//                    addTileColor(board2, attackX, attackY, Color.RED);
-                    addTileColor(board2, attackX, attackY, null, new Image("./ExplosionTile.png"));
-                } else if (attackResult == 0) {
-//                    System.out.println("MISS!");
-//                    addTileColor(board2, attackX, attackY, Color.BLUE);
-                    addTileColor(board2, attackX, attackY, null, new Image("./WaterTile.png"));
-                }
+                board2.attack(attackX, attackY);
             }
             moveMouseFollower(event.getX(), event.getY());
             colorMouseFollower(true);
@@ -178,26 +172,6 @@ public class GameController {
             return 2;
         }
         return -1;
-    }
-
-    /**
-     * Adds a square to a board that indicates if an attack has missed or hit
-     *
-     * @param board
-     * @param x
-     * @param y
-     */
-    private void addTileColor(Board board, int x, int y, Color color, Image image) {
-        Rectangle square = new Rectangle(Board.TILE_SIZE, Board.TILE_SIZE);
-        square.setMouseTransparent(true);
-        if (color != null) square.setFill(color);
-        if (image != null) square.setFill(new ImagePattern(image));
-        square.setTranslateX(board.getTranslateX() + x * Board.TILE_SIZE);
-        square.setTranslateY(board.getTranslateY() + y * Board.TILE_SIZE);
-//        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(mouseFollower), square);
-        gameMainPane.getChildren().add(gameMainPane.getChildren().indexOf(board2), square);
-        DownScaler downScaler = new DownScaler(square);
-        downScaler.play();
     }
 
     //returns board number if cursor is on same tiles as when pressed
