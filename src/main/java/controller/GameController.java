@@ -139,10 +139,10 @@ public class GameController {
 
         gameReadyButton.setOnAction(event -> {
             if(!gameReadyButtonPressed) {
-                gameReadyButtonPressed = true;
                 ArrayList<Ship> overlappingShips = board1.uploadShipCoordinates();
                 if (overlappingShips == null) {
                     //If no ships are overlapping (the ships have been uploaded)
+                    gameReadyButtonPressed = true;
                     board1.setShipsMouseTransparent(true);
                     gameReadyButton.setText("Waiting for opponent");
                     gameReadyButton.setDisableVisualFocus(true);
