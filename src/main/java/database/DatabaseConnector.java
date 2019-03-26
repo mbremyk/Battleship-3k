@@ -539,8 +539,9 @@ public class DatabaseConnector {
         return false;
     }
 
-    public boolean uploadFeedback(String title, String message) {
-        if (title == "" || message == "" || title == null || message == null) {
+
+    public boolean uploadFeedback(String title, String message){
+        if(title == "" || message == "" || title == null || message == null){
             return false;
         } else {
             Connection con = null;
