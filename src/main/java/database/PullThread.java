@@ -55,9 +55,11 @@ public class PullThread extends Thread{
         int moveId = game.getMoveId();
         while(!gameOver){
             int lastAction = db.lastAction(game);
-            if(lastAction != moveId && lastAction != 0){
+            System.out.println(lastAction);
+            if(lastAction != moveId && lastAction != -1){
+                System.out.println("MOVED");
                 moveId ++;
-//                game.move(db.getLastCoordinates(moveId, game.getGameId()));//TODO fix this
+                game.move(db.getLastCoordinates(moveId, game.getGameId()));//TODO fix this
             }
             gameOver = game.isGameOver();
             try{

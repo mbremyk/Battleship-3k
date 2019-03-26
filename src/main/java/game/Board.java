@@ -246,7 +246,8 @@ public class Board extends ImageView {
      * @return int -1 if tile already attacked, 0 if no boats, and 1 if boat
      */
     public int attack(int x, int y) {
-        if(!Statics.getGame().isBoardsReady()) return -1;
+        Game game = Statics.getGame();
+        if(!game.isBoardsReady() || !game.isMyTurn()) return -1;
         switch (board[x][y]) {
             case -2:
                 return -1;
@@ -254,12 +255,20 @@ public class Board extends ImageView {
                 return -1;
             case 0:
                 board[x][y] = -1;
+                game.setMyTurn(false);
+                uploadAttack(x,y);
                 return 0;
             default:
                 ships.get(board[x][y] - 1).reduceHealth();
                 board[x][y] = -2;
+                uploadAttack(x,y);
                 return 1; //HIT
         }
+    }
+
+    private void uploadAttack(int x, int y){
+        DatabaseConnector db = new DatabaseConnector();
+        db.doAction(x,y);
     }
 
     public void setShipsMouseTransparent(boolean transparent) {
