@@ -16,6 +16,8 @@ import com.jfoenix.controls.JFXCheckBox;
 import database.Login;
 import game.Statics;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -95,13 +97,18 @@ public class SignupController extends ViewComponent {
                 boolean signupStatus = Login.registerUser(user);
                 if (signupStatus) {
                     signupHelpText.setText("New user was created");
+//                    switchView("LoginMenu");
+                    Statics.setLocalUser(user);
+                    Scene scene = signupCancelButton.getScene();
+                    Node node = scene.lookup("#mainMenuLoggedInText");
+                    ((Text)node).setText("Logged in as " + signupUsernameField.getText());
+                    switchView("MainMenu");
+
                 } else {
                     signupHelpText.setText("Something went wrong");
                 }
             }
-
         });
-
     }
 
 
