@@ -137,6 +137,6 @@ public class BattleshipUser {
 
         BattleshipUser user = (BattleshipUser) obj;
 
-        return user.getUsername().equals(this.username);
+        return user.getUserId() == this.userId;
     }
 }

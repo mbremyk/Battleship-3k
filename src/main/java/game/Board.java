@@ -239,7 +239,7 @@ public class Board extends ImageView {
             registerShipCoordinates(loadedShip);
             setShipsMouseTransparent(true);
         }
-//        System.out.println("Opponent board:\n" + this);
+        System.out.println("Opponent board:\n" + this);
     }
 
     /**
