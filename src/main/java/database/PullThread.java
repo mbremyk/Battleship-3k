@@ -42,9 +42,9 @@ public class PullThread extends Thread {
         boolean gameStart = false;
         while (!gameStart) {
             gameStart = db.userJoined(game);
-            if (gameStart) {
-                game.userJoined();
-            }
+//            if (gameStart) {
+//                game.userJoined();
+//            }
             try {
                 Thread.sleep(500);
             } catch (Exception e) {

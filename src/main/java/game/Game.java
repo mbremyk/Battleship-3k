@@ -36,6 +36,8 @@ public class Game {
 
     private boolean myTurn = false;
     private int moveId = -1;
+    private int largestMoveIdDone = -1;
+    private boolean opponentMissed = false;
 
     private ArrayList<String> actionCache = new ArrayList<>();
     private ArrayList<String> uploadActionCache = new ArrayList<>();
@@ -87,11 +89,21 @@ public class Game {
         String[] coords = coordinates.split(",");
         int x = Integer.parseInt(coords[0]);
         int y = Integer.parseInt(coords[1]);
-
+        int mid = Integer.parseInt(coords[2]);
+        System.out.println(mid);
         int attack = board1.attack(x, y, false);
 
         if (attack == 0) {
+            opponentMissed = true;
+        }
+
+        if(mid > largestMoveIdDone){
+            largestMoveIdDone = mid;
+        }
+
+        if(opponentMissed && moveId==largestMoveIdDone){
             myTurn = true;
+            opponentMissed = false;
         }
     }
 
@@ -154,6 +166,7 @@ public class Game {
                 db.doAction(coords);
                 status = 2;
                 uploadActionCache.remove(coords);
+                i--;
             }
         } catch (ConcurrentModificationException e) {
             uploadCachedActions(coords, status);
@@ -192,8 +205,8 @@ public class Game {
         return moveId;
     }
 
-    public void userJoined() {
-    }
+//    public void userJoined() {
+//    }
 
     // mOtherfuckers be making method for gameover and last move id, and incomming move
 
