@@ -12,6 +12,7 @@ import effects.DownScaler;
 import effects.Scaler;
 import effects.Shaker;
 import game.*;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
@@ -100,12 +101,6 @@ public class GameController {
 
         gameMainPane.setOnMouseMoved(event -> {
             moveMouseFollower(event.getX(), event.getY());
-
-            //TODO find a better place to update these
-            if (boardsReady == 1) {
-                updateBoards();
-            }
-            Statics.getGame().doCachedActions();
         });
         gameMainPane.setOnMouseDragged(event -> {
             colorMouseFollower();
@@ -127,7 +122,7 @@ public class GameController {
             //Attack with mousePosX and mousePosY
             int boardNumber = onSameTiles();
             if (boardNumber == 1) {
-                System.out.println("Placing boat on " + board1.getMousePosX() + "," + board1.getMousePosY());
+//                System.out.println("Placing boat on " + board1.getMousePosX() + "," + board1.getMousePosY());
             } else if (boardNumber == 2 && Statics.getGame().isMyTurn()) {
                 int attackX = board2.getMousePosX();
                 int attackY = board2.getMousePosY();
@@ -139,16 +134,27 @@ public class GameController {
 
         gameReadyButton.setOnAction(event -> {
             if(!gameReadyButtonPressed) {
-                gameReadyButtonPressed = true;
                 ArrayList<Ship> overlappingShips = board1.uploadShipCoordinates();
                 if (overlappingShips == null) {
                     //If no ships are overlapping (the ships have been uploaded)
+                    gameReadyButtonPressed = true;
                     board1.setShipsMouseTransparent(true);
                     gameReadyButton.setText("Waiting for opponent");
                     gameReadyButton.setDisableVisualFocus(true);
 //                gameReadyButton.setVisible(false);
                     Statics.getGame().setShipsMovable(false);
                     mouseFollower.setVisible(true);
+                    AnimationTimer animationTimer = new AnimationTimer() {
+                        @Override
+                        public void handle(long now) {
+                            if (boardsReady == 1) {
+                                updateBoards();
+                            }
+                            Statics.getGame().doCachedActions();
+                            if(Statics.getGame().isGameOver()) this.stop();
+                        }
+                    };
+                    animationTimer.start();
                 } else {
                     //FOR SHAKING THE WHOLE SCENE
 //                Shaker shaker = new Shaker(gameMainPane);
@@ -205,7 +211,6 @@ public class GameController {
     }
 
     private void updateBoards() {
-        System.out.println("boardsReady called");
         Game game = Statics.getGame();
         if (game.getJoinUser() != null && game.getHostUser() != null) {
             game.setBoardsReady(true);
@@ -213,8 +218,8 @@ public class GameController {
             if (Statics.getLocalUser().equals(game.getHostUser()))
                 opponentid = game.getJoinUser().getUserId();
             else opponentid = game.getHostUser().getUserId();
-            System.out.println(game.getJoinUser().getUserId());
-            System.out.println(game.getHostUser().getUserId());
+//            System.out.println(game.getJoinUser().getUserId());
+//            System.out.println(game.getHostUser().getUserId());
             board2.loadShipsFromDatabase(game.getGameId(), opponentid);
             gameReadyButton.setVisible(false);
             boardsReady = 2;

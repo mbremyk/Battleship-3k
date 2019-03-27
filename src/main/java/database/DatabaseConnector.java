@@ -204,7 +204,7 @@ public class DatabaseConnector {
             preparedStatement.setInt(3,moveId);
             res = preparedStatement.executeQuery();
             while (res.next()) {
-                game.addCachedAction(res.getString(ACTION_COORDINATES));
+                game.addCachedAction(res.getString(ACTION_COORDINATES)+","+res.getString(ACTION_MOVE_ID));
             }
             String deleteQuery = "DELETE FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ? "+" AND "+ACTION_MOVE_ID +" < ?";
             deletePreparedStatement = con.prepareStatement(deleteQuery);

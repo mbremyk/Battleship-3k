@@ -107,10 +107,10 @@ public class Board extends ImageView {
         shipCoordinates = shipCoordinates.substring(0, shipCoordinates.length() - 1);
 
         DatabaseConnector databaseConnector = new DatabaseConnector();
-        System.out.println("Registered ships:\n" + toString());
-        System.out.println("In database coordinates:\n" + shipCoordinates);
+//        System.out.println("Registered ships:\n" + toString());
+//        System.out.println("In database coordinates:\n" + shipCoordinates);
         boolean uploadStatus = databaseConnector.uploadShipCoordinates(shipCoordinates);
-        System.out.println("Board uploaded: " + uploadStatus);
+//        System.out.println("Board uploaded: " + uploadStatus);
         return null;
     }
 
@@ -239,7 +239,7 @@ public class Board extends ImageView {
             registerShipCoordinates(loadedShip);
             setShipsMouseTransparent(true);
         }
-        System.out.println("Opponent board:\n" + this);
+//        System.out.println("Opponent board:\n" + this);
     }
 
     /**
@@ -354,19 +354,5 @@ public class Board extends ImageView {
         }
 
         return ret;
-    }
-
-    /**
-     * Test client
-     *
-     * @param args
-     */
-
-    public static void main(String[] args) {
-        //Disable/comment out super(new Image("./grid10x10.png")); in constructor to test
-        Board board = new Board(null, 0, 0);
-        Ship ship = new Ship(false, 2, 5, 5, 2, 0, new Board(new AnchorPane(), 0, 0));
-        board.registerShip(ship);
-        System.out.println(board);
     }
 }
