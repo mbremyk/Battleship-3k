@@ -90,7 +90,6 @@ public class Game {
         int x = Integer.parseInt(coords[0]);
         int y = Integer.parseInt(coords[1]);
         int mid = Integer.parseInt(coords[2]);
-        System.out.println(mid);
         int attack = board1.attack(x, y, false);
 
         if (attack == 0) {

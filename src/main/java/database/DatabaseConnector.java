@@ -255,7 +255,7 @@ public class DatabaseConnector {
                 " FROM " + USERS_TABLE + "" +
                 " INNER JOIN " + GAME_TABLE + " ON " + GAME_TABLE + "." + HOST_ID + " = " + USERS_TABLE + "." + USERS_ID;
 
-        if (hostid != -1) query += " WHERE " + HOST_ID + " = " + hostid;
+        if (hostid != -1) query += " WHERE " + HOST_ID + " = ?";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -263,6 +263,7 @@ public class DatabaseConnector {
         try {
             con = connectionPool.getConnection();
             preparedStatement = con.prepareStatement(query);
+            if (hostid != -1) preparedStatement.setInt(1,hostid);
             res = preparedStatement.executeQuery();
 
             games = new Game[0];

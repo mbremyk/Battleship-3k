@@ -133,7 +133,7 @@ public class GameController {
         });
 
         gameReadyButton.setOnAction(event -> {
-            if(!gameReadyButtonPressed) {
+            if (!gameReadyButtonPressed) {
                 ArrayList<Ship> overlappingShips = board1.uploadShipCoordinates();
                 if (overlappingShips == null) {
                     //If no ships are overlapping (the ships have been uploaded)
@@ -151,7 +151,7 @@ public class GameController {
                                 updateBoards();
                             }
                             Statics.getGame().doCachedActions();
-                            if(Statics.getGame().isGameOver()) this.stop();
+                            if (Statics.getGame().isGameOver()) this.stop();
                         }
                     };
                     animationTimer.start();
@@ -218,8 +218,8 @@ public class GameController {
             if (Statics.getLocalUser().equals(game.getHostUser()))
                 opponentid = game.getJoinUser().getUserId();
             else opponentid = game.getHostUser().getUserId();
-//            System.out.println(game.getJoinUser().getUserId());
-//            System.out.println(game.getHostUser().getUserId());
+            System.out.println("JOIN: " + game.getJoinUser().getUserId());
+            System.out.println("HOST: " + game.getHostUser().getUserId());
             board2.loadShipsFromDatabase(game.getGameId(), opponentid);
             gameReadyButton.setVisible(false);
             boardsReady = 2;
