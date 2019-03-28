@@ -548,8 +548,10 @@ public class DatabaseConnector {
             Connection con = null;
             try {
                 con = connectionPool.getConnection();
-                String update = "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, '" + title + "', '" + message + "')";
+                String update = "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, ?, ?)";
                 PreparedStatement preparedStatement = con.prepareStatement(update);
+                preparedStatement.setString(1,title);
+                preparedStatement.setString(2,message);
                 preparedStatement.execute();
                 return true;
             } catch (SQLException e) {

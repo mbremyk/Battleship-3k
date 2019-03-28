@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 
-public class MenuTemplateController {
+public class MenuTemplateController extends ViewComponent {
 
     @FXML
     private ResourceBundle resources;
@@ -67,22 +67,29 @@ public class MenuTemplateController {
         });
     }
 
-    /**
-     * Handles...
-     *
-     * @param view
-     * @return boolean representing whether the view-switch was successful or not
-     */
-    public boolean switchView(String view){
-        try {
-            URL url = Paths.get("src/main/java/view/" + view + ".fxml").toUri().toURL();
-            AnchorPane formPane = FXMLLoader.load(url);
-            switchPane.getChildren().setAll(formPane);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+
+//TODO REMOVE THIS?
+//    /**
+//     * Handles...
+//     *
+//     * @param view
+//     * @return boolean representing whether the view-switch was successful or not
+//     */
+//    public boolean switchView(String view){
+//        try {
+//            URL url = Paths.get("src/main/java/view/" + view + ".fxml").toUri().toURL();
+//            AnchorPane formPane = FXMLLoader.load(url);
+//            switchPane.getChildren().setAll(formPane);
+//            return true;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
+
+    @Override
+    protected AnchorPane getParentAnchorPane() {
+        return switchPane;
     }
 
 }
