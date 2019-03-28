@@ -67,12 +67,14 @@ public class MenuTemplateController extends ViewComponent {
         });
     }
 
-    /**
-     * Handles...
-     *
-     * @param view
-     * @return boolean representing whether the view-switch was successful or not
-     */
+
+//TODO REMOVE THIS?
+//    /**
+//     * Handles...
+//     *
+//     * @param view
+//     * @return boolean representing whether the view-switch was successful or not
+//     */
 //    public boolean switchView(String view){
 //        try {
 //            URL url = Paths.get("src/main/java/view/" + view + ".fxml").toUri().toURL();
