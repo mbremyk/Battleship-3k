@@ -23,7 +23,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class GameController {
+public class GameController extends ViewComponent{
 
     @FXML
     private ResourceBundle resources;
@@ -151,7 +151,10 @@ public class GameController {
                                 updateBoards();
                             }
                             Statics.getGame().doCachedActions();
-                            if (Statics.getGame().isGameOver()) this.stop();
+                            if (Statics.getGame().isGameOver()){
+                                endGame();
+                                this.stop();
+                            }
                         }
                     };
                     animationTimer.start();
@@ -212,7 +215,7 @@ public class GameController {
 
     private void updateBoards() {
         Game game = Statics.getGame();
-        if (game.getJoinUser() != null && game.getHostUser() != null) {
+        if (game.getJoinUser() != null && game.getHostUser() != null){
             game.setBoardsReady(true);
             int opponentid;
             if (Statics.getLocalUser().equals(game.getHostUser()))
@@ -236,5 +239,21 @@ public class GameController {
         } else {
             mouseFollower.pressed(true);
         }
+    }
+    private void endGame(){
+        if(Statics.getGame().getGameResult() == 1){
+            DatabaseConnector connector = new DatabaseConnector();
+            connector.updateUserScore(Statics.getLocalUser().getUsername(),1);
+            switchView("GameResultMenu");
+        }
+        else if(Statics.getGame().getGameResult() == 0){
+            DatabaseConnector connector = new DatabaseConnector();
+            connector.updateUserScore(Statics.getLocalUser().getUsername(),0);
+            switchView("GameResultMenu");
+        }
+    }
+    @Override
+    protected AnchorPane getParentAnchorPane() {
+        return (AnchorPane) gameToolsPane.getParent();
     }
 }

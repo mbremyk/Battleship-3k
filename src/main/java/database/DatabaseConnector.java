@@ -565,6 +565,41 @@ public class DatabaseConnector {
             }
         }
     }
-
-
+    public boolean updateUserScore(String username,int gameResult){
+        Connection con = null;
+        PreparedStatement statement = null;
+        String query;
+        ResultSet res;
+        int currentValue = 0;
+        String column;
+        try {
+            con = connectionPool.getConnection();
+            if(gameResult == 1) {
+                query = "SELECT " + USERS_WINS + " FROM " + USERS_TABLE + "";
+                column = USERS_WINS;
+            }
+            else{
+                query = "SELECT " + USERS_LOSSES + " FROM " + USERS_TABLE + "";
+                column = USERS_LOSSES;
+            }
+            statement = con.prepareStatement(query);
+            res = statement.executeQuery();
+            if(res.next()){
+                currentValue = res.getInt(column);
+            }
+            query = "UPDATE " + USERS_TABLE + " SET " + column + " = " + currentValue++ + " WHERE " + USERS_USERNAME + " = '" + username + "'";
+            statement = con.prepareStatement(query);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        } finally {
+            if (con != null) connectionPool.releaseConnection(con);
+            if(statement != null) close(statement);
+        }
+    }
 }

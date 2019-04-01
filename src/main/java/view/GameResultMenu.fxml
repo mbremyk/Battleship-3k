@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="800.0" style="-fx-background-color: #90caf9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameResultMenuController">
+    <children>
+        <ImageView fx:id="gameResultMenuImage" fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="200.0">
+            <image>
+                <Image url="/trophy.png"/>
+            </image>
+        </ImageView>
+        <Text fx:id="gameResultMenuText" layoutX="200" layoutY="150" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU WON!" font="PixelTorje" ></Text>
+        <JFXButton fx:id="returnButton" focusTraversable="false" layoutX="575.0" layoutY="353.0" prefHeight="60.0" prefWidth="180.0" style="-fx-background-color: #1565c0;" text="Return to main menu" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="PixelTorje" size="36.0" />
+            </font>
+        </JFXButton>
+        <JFXButton fx:id="rematchButton" focusTraversable="false" layoutX="356.0" layoutY="353.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #1565c0;" text="Refresh list" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="PixelTorje" size="36.0" />
+            </font>
+        </JFXButton>
+    </children>
+</AnchorPane>

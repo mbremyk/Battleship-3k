@@ -208,6 +208,26 @@ public class Game {
 //    }
 
     // mOtherfuckers be making method for gameover and last move id, and incomming move
+    //returns 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
+    public int getGameResult(){
+        if(isGameOver()){
+            if(hosting){
+                if(board1.shipsRemaining() == 0){
+                    return 0;
+                }
+                else{
+                    return 1;
+                }
+            }
+            if(board2.shipsRemaining() == 0){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+        return -1;
+    }
 
     public void setBoards(Board board1, Board board2) {
         this.board1 = board1;
