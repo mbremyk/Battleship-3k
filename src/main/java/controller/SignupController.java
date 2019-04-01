@@ -79,36 +79,44 @@ public class SignupController extends ViewComponent {
         });
 
         signupTOSLink.setOnAction(event -> {
-            try {
-                Desktop.getDesktop().browse(new URI("https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1Baax3OXZ--mQsO4eGXhF-Lex8sRqVlXF1Q1liVNr_ms%2Fedit%3F" +
-                        "usp%3Dsharing%26fbclid%3DIwAR2_aZAr_IYbRYCLtvy7knyu7IDggeo0XhMhNldO1fdeemj0uoNvoxJW0l4&h=AT1PMrDvdy8uwx_tmNeYjqnlAT15EwTooRahaMTfUT36zgUGDDl3hbLDQ71MBiI_LzPa0Z" +
-                        "IEtu8VolT3PmJFhPiuGd6UnRUIZibBYYxzsMBpfSSbcZcFK_BTyz63oTst7Fj3JkAtKAwiN_E8-eIarg"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+            termsOfServiceClicked();
         });
 
         signupSignupButton.setOnAction(event -> {
-            if (checkValidUser()) {
-                //Sets userid to -1 because the user hasn't been created yet so no userid exists in the database
-                BattleshipUser user = new BattleshipUser(-1, signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
-                boolean signupStatus = Login.registerUser(user);
-                if (signupStatus) {
-                    signupHelpText.setText("New user was created");
-//                    switchView("LoginMenu");
-                    Statics.setLocalUser(user);
-                    Scene scene = signupCancelButton.getScene();
-                    Node node = scene.lookup("#mainMenuLoggedInText");
-                    ((Text)node).setText("Logged in as " + signupUsernameField.getText());
-                    switchView("MainMenu");
-
-                } else {
-                    signupHelpText.setText("Something went wrong");
-                }
-            }
+            signupButtonClicked();
         });
+    }
+
+    public void termsOfServiceClicked(){
+        try {
+            Desktop.getDesktop().browse(new URI("https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1Baax3OXZ--mQsO4eGXhF-Lex8sRqVlXF1Q1liVNr_ms%2Fedit%3F" +
+                    "usp%3Dsharing%26fbclid%3DIwAR2_aZAr_IYbRYCLtvy7knyu7IDggeo0XhMhNldO1fdeemj0uoNvoxJW0l4&h=AT1PMrDvdy8uwx_tmNeYjqnlAT15EwTooRahaMTfUT36zgUGDDl3hbLDQ71MBiI_LzPa0Z" +
+                    "IEtu8VolT3PmJFhPiuGd6UnRUIZibBYYxzsMBpfSSbcZcFK_BTyz63oTst7Fj3JkAtKAwiN_E8-eIarg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void signupButtonClicked() {
+        if (checkValidUser()) {
+            //Sets userid to -1 because the user hasn't been created yet so no userid exists in the database
+            BattleshipUser user = new BattleshipUser(-1, signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
+            boolean signupStatus = Login.registerUser(user);
+            if (signupStatus) {
+                signupHelpText.setText("New user was created");
+//                    switchView("LoginMenu");
+                Statics.setLocalUser(user);
+                Scene scene = signupCancelButton.getScene();
+                Node node = scene.lookup("#mainMenuLoggedInText");
+                ((Text) node).setText("Logged in as " + signupUsernameField.getText());
+                switchView("MainMenu");
+
+            } else {
+                signupHelpText.setText("Something went wrong");
+            }
+        }
     }
 
 
