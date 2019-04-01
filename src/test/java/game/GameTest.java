@@ -8,21 +8,27 @@
 //import static org.junit.jupiter.api.Assertions.*;
 //
 //class GameTest {
+//    BattleshipUser hostUser;
+//    BattleshipUser joinUser;
+//    Game testGame;
 //
 //    @BeforeEach
 //    void setUp() {
-//        BattleshipUser hostUser = new BattleshipUser(1, "dolan", "1234", "dolanmail@gmail.com", 1, 1);
-//        BattleshipUser joinUser = new BattleshipUser(2, "dolan2", "1234", "dolanmail@gmail.com", 1, 1);
-//        Game testGame = new Game(1, hostUser);
+//        hostUser = new BattleshipUser(1, "dolan", "1234", "dolanmail@gmail.com", 1, 1);
+//        joinUser = new BattleshipUser(2, "dolan2", "1234", "dolanmail@gmail.com", 1, 1);
+//        testGame = new Game(1, hostUser);
 //    }
 //
 //    @AfterEach
 //    void tearDown() {
+//    hostUser = null;
+//    joinUser = null;
+//    testGame = null;
 //    }
 //
 //    @Test
 //    void getGameId() {
-////        assertEquals();
+//        assertEquals(1, testGame.getGameId());
 //    }
 //
 //    @Test
@@ -36,6 +42,18 @@
 //    @Test
 //    void setJoinUser() {
 //    }
+//
+//    @Test
+//    void doAction() {
+//
+//    }
+//
+//    @Test
+//    void incMoveID() {
+//        int moveId = testGame.getMoveId();
+//        assertEquals(moveId+1, testGame.getMoveId());
+//    }
+//
 //
 //    @Test
 //    void move() {
