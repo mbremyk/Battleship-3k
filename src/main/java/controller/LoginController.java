@@ -1,5 +1,6 @@
 /**
  * LoginController.java
+ *
  * @Author Thorkildsen Torje
  */
 package controller;
@@ -23,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.BattleshipUser;
 
-public class LoginController extends ViewComponent{
+public class LoginController extends ViewComponent {
 
     @FXML
     private ResourceBundle resources;
@@ -61,10 +62,10 @@ public class LoginController extends ViewComponent{
         loginPasswordField.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (Login.login(loginUsernameField.getText(), loginPasswordField.getText()) != null){
+                if (Login.login(loginUsernameField.getText(), loginPasswordField.getText()) != null) {
                     Scene scene = loginCancelButton.getScene();
                     Node node = scene.lookup("#mainMenuLoggedInText");
-                    ((Text)node).setText("Logged in as " + loginUsernameField.getText());
+                    ((Text) node).setText("Logged in as " + loginUsernameField.getText());
                     switchView("MainMenu");
                 }
             }
@@ -73,21 +74,25 @@ public class LoginController extends ViewComponent{
         loginCancelButton.setOnAction(event -> {
             switchView("MainMenu");
         });
-        
+
         loginLoginButton.setOnAction(event -> {
-            BattleshipUser user = Login.login(loginUsernameField.getText(), loginPasswordField.getText());
-            if (user != null){
-                Statics.setLocalUser(user);
-                Scene scene = loginCancelButton.getScene();
-                Node node = scene.lookup("#mainMenuLoggedInText");
-                ((Text)node).setText("Logged in as " + loginUsernameField.getText());
-                switchView("MainMenu");
-            }
+            loginButtonPressed();
         });
+    }
+
+    public void loginButtonPressed() {
+        BattleshipUser user = Login.login(loginUsernameField.getText(), loginPasswordField.getText());
+        if (user != null) {
+            Statics.setLocalUser(user);
+            Scene scene = loginCancelButton.getScene();
+            Node node = scene.lookup("#mainMenuLoggedInText");
+            ((Text) node).setText("Logged in as " + loginUsernameField.getText());
+            switchView("MainMenu");
+        }
     }
 
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane)loginCancelButton.getParent();
+        return (AnchorPane) loginCancelButton.getParent();
     }
 }

@@ -118,6 +118,7 @@ public class GameController {
             }
             colorMouseFollower();
         });
+
         gameMainPane.setOnMouseReleased(event -> {
             //Attack with mousePosX and mousePosY
             int boardNumber = onSameTiles();
@@ -141,7 +142,6 @@ public class GameController {
                     board1.setShipsMouseTransparent(true);
                     gameReadyButton.setText("Waiting for opponent");
                     gameReadyButton.setDisableVisualFocus(true);
-//                gameReadyButton.setVisible(false);
                     Statics.getGame().setShipsMovable(false);
                     mouseFollower.setVisible(true);
                     AnimationTimer animationTimer = new AnimationTimer() {
@@ -161,8 +161,6 @@ public class GameController {
 //                shaker.shake();
 
                     for (Ship ship : overlappingShips) {
-//                    Shaker shaker = new Shaker(ship);
-//                    shaker.shake();
                         Scaler scaler = new Scaler(ship);
                         scaler.play();
                     }
