@@ -257,16 +257,13 @@ public class GameController extends ViewComponent{
         }
     }
     private void endGame(){
+        DatabaseConnector connector = new DatabaseConnector();
         if(Statics.getGame().getGameResult() == 1){
-            DatabaseConnector connector = new DatabaseConnector();
             connector.updateUserScore(Statics.getLocalUser().getUsername(),1);
-            switchView("GameResultMenu");
-        }
-        else if(Statics.getGame().getGameResult() == 0){
-            DatabaseConnector connector = new DatabaseConnector();
+        } else if(Statics.getGame().getGameResult() == 0){
             connector.updateUserScore(Statics.getLocalUser().getUsername(),0);
-            switchView("GameResultMenu");
         }
+        switchView("GameResultMenu",true);
     }
     @Override
     protected AnchorPane getParentAnchorPane() {

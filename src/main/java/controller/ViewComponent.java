@@ -1,6 +1,6 @@
 /**
  * controller.ViewComponent.java
- *
+ * <p>
  * Abstract class inherited by view-components that want to be able to switch the parent AnchorPane's view
  *
  * @Author Thorkildsen Torje
@@ -27,19 +27,29 @@ public abstract class ViewComponent {
      * @param view the name of the fxml file you want to switch to, without path or ".fxml"
      * @return boolean, true if the view switch went well and false if not
      */
-    public boolean switchView(String view){
+    public boolean switchView(String view, boolean updateSize) {
+        AnchorPane formPane = getFormPane(view);
+        if (formPane == null) return false;
+        if (updateSize) updateSize(formPane);
+        getParentAnchorPane().getChildren().setAll(formPane);
+        return true;
+    }
+
+    public boolean switchView(String view) {
+        return switchView(view, false);
+    }
+
+    private AnchorPane getFormPane(String view) {
         try {
             URL url = Paths.get("./src/main/java/view/" + view + ".fxml").toUri().toURL();
-            AnchorPane formPane = FXMLLoader.load(url);
-            getParentAnchorPane().getChildren().setAll(formPane);
-            return true;
+            return (AnchorPane) FXMLLoader.load(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
-    public boolean startGame(){
+    public boolean startGame() {
         //THIS IS FOR A NEW WINDOW
 //        try {
 //            getParentAnchorPane().getScene().getWindow().hide();
@@ -57,25 +67,26 @@ public abstract class ViewComponent {
 //        }
 //        return false;
 
-        try {
-            URL url = Paths.get("./src/main/java/view/Game.fxml").toUri().toURL();
-            AnchorPane formPane = FXMLLoader.load(url);
-            AnchorPane parent = (AnchorPane) getParentAnchorPane().getScene().getRoot();
-            parent.getChildren().setAll(formPane);
-            Window window = parent.getScene().getWindow();
-            window.setWidth(formPane.getPrefWidth());
-            double heightDiff = window.getHeight() - parent.getScene().getHeight();
-            window.setHeight(formPane.getPrefHeight()+heightDiff);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+        AnchorPane formPane = getFormPane("Game");
+        if (formPane == null) return false;
+        updateSize(formPane);
+        AnchorPane parent = (AnchorPane) getParentAnchorPane().getScene().getRoot();
+        parent.getChildren().setAll(formPane);
+        return true;
     }
 
+    private void updateSize(AnchorPane formPane) {
+        AnchorPane parent = (AnchorPane) getParentAnchorPane().getScene().getRoot();
+        Window window = parent.getScene().getWindow();
+        double heightDiff = window.getHeight() - parent.getScene().getHeight();
+        System.out.println(heightDiff);
+        window.setWidth(formPane.getPrefWidth()+13);
+        window.setHeight(formPane.getPrefHeight() + heightDiff);
+    }
 
     /**
      * Gets the AnchorPane we need to switch between views in the SwitchView method
+     *
      * @return the parent AnchorPane the components (TextFields, Buttons etc) are part of
      */
     protected abstract AnchorPane getParentAnchorPane();
