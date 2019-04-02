@@ -64,14 +64,16 @@ public class FeedbackController extends ViewComponent{
         feedbackTextArea.setWrapText(true);
 
         feedbackSubmitButton.setOnAction(event -> {
-            DatabaseConnector connector = new DatabaseConnector();
-            if(connector.uploadFeedback(titleTextArea.getText(),feedbackTextArea.getText())){
-                charText.setText("Thank you for your feedback!");
-            }
+            submitButtonPressed();
         });
 
+    }
 
-
+    public void submitButtonPressed(){
+        DatabaseConnector connector = new DatabaseConnector();
+        if(connector.uploadFeedback(titleTextArea.getText(),feedbackTextArea.getText())){
+            charText.setText("Thank you for your feedback!");
+        }
     }
 
     @Override

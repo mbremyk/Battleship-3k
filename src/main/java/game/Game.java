@@ -84,16 +84,6 @@ public class Game {
         this.joinUser = newUser;
     }
 
-    //whenever there is only one player (hosting game)
-    public void waitForUser() { //waits for joinUser to join game
-
-        //list game info in "join game window"
-        //create thread
-        //Poll database for user join
-        //joinUser = databaseGetUser();
-        gameOpen = false; //game full
-    }
-
     public void doAction(String coordinates) {
         String[] coords = coordinates.split(",");
         int x = Integer.parseInt(coords[0]);

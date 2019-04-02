@@ -83,25 +83,29 @@ public class JoinGameController extends ViewComponent {
         });
 
         joinGameJoinButton.setOnAction(event -> {
-            RowData rowData = joinGameGamesTable.getSelectionModel().getSelectedItem();
-            if (Statics.getLocalUser() == null) {
-                System.out.println("You are not logged in");
-            } else if (rowData == null) {
-                System.out.println("No game has been selected");
-            } else {
-                Game game = getGame(rowData.getUsername());
-                DatabaseConnector databaseConnector = new DatabaseConnector();
-                if(game.isGameOpen() && databaseConnector.joinGame(game)){
-                    startGame();
-                }else{
-                    System.out.println("Could not join game");
-                }
-            }
+            joinButtonPressed();
         });
 
         joinGameReflexButton.setOnAction(event -> {
             refreshList();
         });
+    }
+
+    public void joinButtonPressed() {
+        RowData rowData = joinGameGamesTable.getSelectionModel().getSelectedItem();
+        if (Statics.getLocalUser() == null) {
+            System.out.println("You are not logged in");
+        } else if (rowData == null) {
+            System.out.println("No game has been selected");
+        } else {
+            Game game = getGame(rowData.getUsername());
+            DatabaseConnector databaseConnector = new DatabaseConnector();
+            if (game.isGameOpen() && databaseConnector.joinGame(game)) {
+                startGame();
+            } else {
+                System.out.println("Could not join game");
+            }
+        }
     }
 
     public Game getGame(String hostUsername) {
