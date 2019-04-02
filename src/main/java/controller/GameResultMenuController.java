@@ -61,19 +61,27 @@ public class GameResultMenuController extends ViewComponent {
         assert gameResultMenuText != null : "fx:id=\"gameResultMenuText\" was not injected: check your FXML file 'GameResultMenu.fxml'.";
         assert gameResultMenuImage != null : "fx:id=\"gameResultMenuImage\" was not injected: check your FXML file 'GameResultMenu.fxml'.";
 
-        if(Statics.getGame().getGameResult() == 0){
-            Image image = new Image("/skull.png");
-            gameResultMenuImage.setImage(image);
-            gameResultMenuImage.setFitHeight(200);
-            gameResultMenuImage.setFitWidth(200);
-            gameResultMenuImage.setX(300);
-            gameResultMenuImage.setY(200);
-            gameResultMenuText.setText("YOU LOST!");
-            gameResultMenuText.setX(200);
-            gameResultMenuText.setY(150);
+        Image image;
+        String endText;
+        if (Statics.getGame().getGameResult() == 0) {
+            endText = "YOU LOST!";
+            image = new Image("/skull.png");
+//            gameResultMenuImage.setFitHeight(200);
+//            gameResultMenuImage.setFitWidth(200);
+//            gameResultMenuImage.setX(300);
+//            gameResultMenuImage.setY(200);
+//            gameResultMenuText.setX(200);
+//            gameResultMenuText.setY(150);
+        } else {
+            endText = "YOU WON!";
+            image = new Image("/trophy.png");
         }
-        returnButton.setOnAction(e -> switchView("MenuTemplate"));
+        gameResultMenuText.setText(endText);
+        gameResultMenuImage.setImage(image);
+
+        returnButton.setOnAction(e -> switchView("MenuTemplate", true));
     }
+
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) rematchButton.getParent();

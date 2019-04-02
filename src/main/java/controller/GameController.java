@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import model.BattleshipUser;
 
 public class GameController extends ViewComponent{
 
@@ -77,6 +78,7 @@ public class GameController extends ViewComponent{
         assert gameMainPane != null : "fx:id=\"gameMainPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameOptionsImage != null : "fx:id=\"gameOptionsImage\" was not injected: check your FXML file 'Game.fxml'.";
         addUIComponents();
+        updateText();
     }
 
     /**
@@ -149,6 +151,7 @@ public class GameController extends ViewComponent{
                         public void handle(long now) {
                             if (boardsReady == 1) {
                                 updateBoards();
+                                updateText();
                             }
                             Statics.getGame().doCachedActions();
                             if (Statics.getGame().isGameOver()){
@@ -227,6 +230,21 @@ public class GameController extends ViewComponent{
         }
     }
 
+    private void updateText(){
+        Game game = Statics.getGame();
+        BattleshipUser host = game.getHostUser();
+        BattleshipUser join = game.getJoinUser();
+        gameGameNameText.setText(game.getGameName());
+        if(game.isHosting()) {
+            if(host != null)gameUserNameText.setText(host.getUsername());
+            if(join != null)gameOpponentNameText.setText(join.getUsername());
+        }else{
+            if(join != null)gameUserNameText.setText(join.getUsername());
+            if(host != null)gameOpponentNameText.setText(host.getUsername());
+
+        }
+    }
+
     private void colorMouseFollower() {
         colorMouseFollower(false);
     }
@@ -239,16 +257,13 @@ public class GameController extends ViewComponent{
         }
     }
     private void endGame(){
+        DatabaseConnector connector = new DatabaseConnector();
         if(Statics.getGame().getGameResult() == 1){
-            DatabaseConnector connector = new DatabaseConnector();
             connector.updateUserScore(Statics.getLocalUser().getUsername(),1);
-            switchView("GameResultMenu");
-        }
-        else if(Statics.getGame().getGameResult() == 0){
-            DatabaseConnector connector = new DatabaseConnector();
+        } else if(Statics.getGame().getGameResult() == 0){
             connector.updateUserScore(Statics.getLocalUser().getUsername(),0);
-            switchView("GameResultMenu");
         }
+        switchView("GameResultMenu",true);
     }
     @Override
     protected AnchorPane getParentAnchorPane() {

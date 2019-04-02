@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.BattleshipUser;
 
 public class HostGameController extends ViewComponent {
 
@@ -54,14 +55,21 @@ public class HostGameController extends ViewComponent {
         });
 
         hostGameCreateGameButton.setOnAction(event -> {
-            createGameButtonPressed();
+           createGameButtonPressed();
         });
     }
 
-    public void createGameButtonPressed() {
-        DatabaseConnector databaseConnector = new DatabaseConnector(Constants.DB_URL);
-        databaseConnector.createGame();
-        startGame();
+    public boolean createGameButtonPressed(){
+        BattleshipUser user = Statics.getLocalUser();
+        if (user != null) {
+            DatabaseConnector databaseConnector4 = new DatabaseConnector(Constants.DB_URL);
+            String gameName = hostGameNameField.getText();
+            if (gameName.equals("")) gameName = user.getUsername() + "'s game";
+            databaseConnector4.createGame(gameName);
+            startGame();
+            return true;
+        }
+        return false;
     }
 
     @Override

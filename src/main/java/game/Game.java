@@ -42,13 +42,14 @@ public class Game {
     private ArrayList<String> actionCache = new ArrayList<>();
     private ArrayList<String> uploadActionCache = new ArrayList<>();
 
-    public Game(int gameid, BattleshipUser hostUser) {
-        this(gameid, hostUser, false);
+    public Game(int gameid,String gameName, BattleshipUser hostUser) {
+        this(gameid,gameName, hostUser, false);
     }
 
-    public Game(int gameid, BattleshipUser hostUser, boolean hosting) {
+    public Game(int gameid,String gameName, BattleshipUser hostUser, boolean hosting) {
 //		databaseConnector = new DatabaseConnector(Constants.DB_URL);
         this.gameId = gameid;
+        this.gameName = gameName;
         this.hostUser = hostUser;
         this.hosting = hosting;
 
@@ -61,6 +62,14 @@ public class Game {
 
     public int getGameId() {
         return gameId;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public boolean isHosting() {
+        return hosting;
     }
 
     public BattleshipUser getHostUser() {

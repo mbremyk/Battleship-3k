@@ -36,15 +36,10 @@ public class BattleshipUser {
         this.ratio = calculateRatio();
     }
     //FOR OPPONENT
-    public BattleshipUser(int userId){//, String username) {
-        this.userId = userId;
-        this.username = "";//username;
-        this.password = "";
-        this.email = "";
-        this.wonGames = 0;
-        this.lostGames = 0;
-        this.ratio = calculateRatio();
+    public BattleshipUser(int userId,String username){
+        this(userId,username,"","",0,0);
     }
+
     /**
      * Constructor without won or lost games
      *
