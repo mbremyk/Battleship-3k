@@ -13,8 +13,8 @@ public class Shaker {
         translateTransition = new TranslateTransition(Duration.millis(100),node);
         translateTransition.setFromX(startX);
         translateTransition.setFromY(startY);
-        translateTransition.setByX((1-Math.round(Math.random())*2)*(10f+Math.random()*30));
-        translateTransition.setByY((1-Math.round(Math.random())*2)*(10f+Math.random()*30));
+        translateTransition.setByX(30);//(1-Math.round(Math.random())*2)*(10f+Math.random()*30));
+        translateTransition.setByY(0);//(1-Math.round(Math.random())*2)*(10f+Math.random()*30));
         translateTransition.setCycleCount(4);
         translateTransition.setAutoReverse(true);
     }

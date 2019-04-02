@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import database.Login;
+import effects.Shaker;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import game.Statics;
@@ -59,16 +60,12 @@ public class LoginController extends ViewComponent {
         assert loginForgotPasswordLink != null : "fx:id=\"loginForgotPasswordLink\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert loginUsernameField != null : "fx:id=\"loginUsernameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
 
-        loginPasswordField.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (Login.login(loginUsernameField.getText(), loginPasswordField.getText()) != null) {
-                    Scene scene = loginCancelButton.getScene();
-                    Node node = scene.lookup("#mainMenuLoggedInText");
-                    ((Text) node).setText("Logged in as " + loginUsernameField.getText());
-                    switchView("MainMenu");
-                }
-            }
+        loginUsernameField.setOnAction(event -> {
+            loginButtonPressed();
+        });
+
+        loginPasswordField.setOnAction(event -> {
+            loginButtonPressed();
         });
 
         loginCancelButton.setOnAction(event -> {
@@ -88,6 +85,21 @@ public class LoginController extends ViewComponent {
             Node node = scene.lookup("#mainMenuLoggedInText");
             ((Text) node).setText("Logged in as " + loginUsernameField.getText());
             switchView("MainMenu");
+        } else {
+            for (Node node : getParentAnchorPane().getChildren()) {
+                if (node != loginUsernameField && node != loginPasswordField) {
+                    if(node instanceof Text){
+                        String text = ((Text) node).getText();
+                        if(!text.equals("Username")&&!text.equals("Password")){
+                            continue;
+                        }
+                    }else {
+                        continue;
+                    }
+                }
+                Shaker shaker = new Shaker(node);
+                shaker.shake();
+            }
         }
     }
 
