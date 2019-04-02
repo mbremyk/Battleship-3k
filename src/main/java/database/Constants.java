@@ -41,8 +41,9 @@ public class Constants {
     //Game table column names
     public static final String GAME_TABLE = "battleship_game";
     public static final String GAME_ID = "game_id";
-    public static final String HOST_ID = "host_id";
-    public static final String JOIN_ID = "join_id";
+    public static final String GAME_NAME = "name";
+    public static final String GAME_HOST_ID = "host_id";
+    public static final String GAME_JOIN_ID = "join_id";
 
     //Action table columns names
     public static final String ACTION_TABLE = "battleship_action";

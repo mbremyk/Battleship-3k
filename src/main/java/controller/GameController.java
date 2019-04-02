@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import model.BattleshipUser;
 
 public class GameController {
 
@@ -77,6 +78,7 @@ public class GameController {
         assert gameMainPane != null : "fx:id=\"gameMainPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameOptionsImage != null : "fx:id=\"gameOptionsImage\" was not injected: check your FXML file 'Game.fxml'.";
         addUIComponents();
+        updateText();
     }
 
     /**
@@ -149,6 +151,7 @@ public class GameController {
                         public void handle(long now) {
                             if (boardsReady == 1) {
                                 updateBoards();
+                                updateText();
                             }
                             Statics.getGame().doCachedActions();
                             if (Statics.getGame().isGameOver()) this.stop();
@@ -223,6 +226,21 @@ public class GameController {
             board2.loadShipsFromDatabase(game.getGameId(), opponentid);
             gameReadyButton.setVisible(false);
             boardsReady = 2;
+        }
+    }
+
+    private void updateText(){
+        Game game = Statics.getGame();
+        BattleshipUser host = game.getHostUser();
+        BattleshipUser join = game.getJoinUser();
+        gameGameNameText.setText(game.getGameName());
+        if(game.isHosting()) {
+            if(host != null)gameUserNameText.setText(host.getUsername());
+            if(join != null)gameOpponentNameText.setText(join.getUsername());
+        }else{
+            if(join != null)gameUserNameText.setText(join.getUsername());
+            if(host != null)gameOpponentNameText.setText(host.getUsername());
+
         }
     }
 
