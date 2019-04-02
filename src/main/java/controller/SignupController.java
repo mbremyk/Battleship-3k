@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXCheckBox;
 import database.Login;
+import effects.Shaker;
 import game.Statics;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -85,9 +86,22 @@ public class SignupController extends ViewComponent {
         signupSignupButton.setOnAction(event -> {
             signupButtonClicked();
         });
+
+        signupUsernameField.setOnAction(event -> {
+            signupButtonClicked();
+        });
+        signupEmailField.setOnAction(event -> {
+            signupButtonClicked();
+        });
+        signupPasswordField.setOnAction(event -> {
+            signupButtonClicked();
+        });
+        signupConfirmPasswordField.setOnAction(event -> {
+            signupButtonClicked();
+        });
     }
 
-    public void termsOfServiceClicked(){
+    public void termsOfServiceClicked() {
         try {
             Desktop.getDesktop().browse(new URI("https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1Baax3OXZ--mQsO4eGXhF-Lex8sRqVlXF1Q1liVNr_ms%2Fedit%3F" +
                     "usp%3Dsharing%26fbclid%3DIwAR2_aZAr_IYbRYCLtvy7knyu7IDggeo0XhMhNldO1fdeemj0uoNvoxJW0l4&h=AT1PMrDvdy8uwx_tmNeYjqnlAT15EwTooRahaMTfUT36zgUGDDl3hbLDQ71MBiI_LzPa0Z" +
@@ -115,6 +129,21 @@ public class SignupController extends ViewComponent {
 
             } else {
                 signupHelpText.setText("Something went wrong");
+            }
+        } else {
+            for (Node node : getParentAnchorPane().getChildren()) {
+                if (node != signupUsernameField && node != signupEmailField&& node != signupPasswordField&& node != signupConfirmPasswordField && node != signupAgreeCheckbox && node != signupTOSLink) {
+                    if (node instanceof Text) {
+                        String text = ((Text) node).getText();
+                        if (!text.equals("Username") && !text.equals("Email") && !text.equals("Password") && !text.equals("Confirm password")) {
+                            continue;
+                        }
+                    } else {
+                        continue;
+                    }
+                }
+                Shaker shaker = new Shaker(node);
+                shaker.shake();
             }
         }
     }

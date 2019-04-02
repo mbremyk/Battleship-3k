@@ -67,12 +67,12 @@
             <Font name="PixelTorje" size="36.0" />
          </font>
       </JFXButton>
-      <Hyperlink fx:id="signupTOSLink" layoutX="474.0" layoutY="264.0" prefHeight="29.0" prefWidth="118.0" text="Terms of Service" underline="true">
+      <Hyperlink fx:id="signupTOSLink" focusTraversable="false" layoutX="474.0" layoutY="264.0" prefHeight="29.0" prefWidth="118.0" text="Terms of Service" underline="true">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Hyperlink>
-      <JFXCheckBox fx:id="signupAgreeCheckbox" checkedColor="#1565c0" layoutX="364.0" layoutY="269.0" text="I agree to the">
+      <JFXCheckBox fx:id="signupAgreeCheckbox" checkedColor="#1565c0" focusTraversable="false" layoutX="364.0" layoutY="269.0" text="I agree to the">
          <font>
             <Font size="14.0" />
          </font>
