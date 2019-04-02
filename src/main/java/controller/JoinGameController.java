@@ -52,9 +52,9 @@ public class JoinGameController extends ViewComponent {
     Game[] games;
     ObservableList<RowData> gameList = FXCollections.observableArrayList();
 
+    TableColumn<RowData, String> nameColumn;
     TableColumn<RowData, String> hostColumn;
     TableColumn<RowData, Integer> winsColumn;
-    TableColumn<RowData, Boolean> openColumn;
 
     @FXML
     void initialize() {
@@ -62,6 +62,10 @@ public class JoinGameController extends ViewComponent {
         assert joinGameCancelButton != null : "fx:id=\"joinGameCancelButton\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
         assert joinGameGamesTable != null : "fx:id=\"joinGameGamesTable\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
         assert joinGameReflexButton != null : "fx:id=\"joinGameReflexButton\" was not injected: check your FXML file 'JoinGameMenu.fxml'.";
+
+        nameColumn = new TableColumn<>("Name");
+        nameColumn.setMinWidth(200);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("gameName"));
 
         hostColumn = new TableColumn<>("Host");
         hostColumn.setMinWidth(200);
@@ -71,12 +75,8 @@ public class JoinGameController extends ViewComponent {
         winsColumn.setMinWidth(100);
         winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
 
-        openColumn = new TableColumn<>("Open");
-        openColumn.setMinWidth(150);
-        openColumn.setCellValueFactory(new PropertyValueFactory<>("open"));
-
         refreshList();
-        joinGameGamesTable.getColumns().addAll(hostColumn, winsColumn, openColumn);
+        joinGameGamesTable.getColumns().addAll(nameColumn,hostColumn, winsColumn);
 
         joinGameCancelButton.setOnAction(event -> {
             switchView("MainMenu");
@@ -127,8 +127,10 @@ public class JoinGameController extends ViewComponent {
             if (games[i].getJoinUser() != null) {
                 open = false;
             }
-            RowData newRow = new RowData(games[i].getHostUser().getUsername(), games[i].getHostUser().getWonGames(), open);
-            gameList.add(newRow);
+            if(open) {
+                RowData newRow = new RowData(games[i].getGameName(), games[i].getHostUser().getUsername(), games[i].getHostUser().getWonGames());
+                gameList.add(newRow);
+            }
         }
         joinGameGamesTable.setItems(gameList);
     }
@@ -140,15 +142,16 @@ public class JoinGameController extends ViewComponent {
     }
 
     public class RowData {
+        private String gameName;
         private String username;
         private int wins;
-        private boolean open;
 
-        public RowData(String username, int wins, boolean open) {
+        public RowData(String gameName,String username, int wins){
+            this.gameName = gameName;
             this.username = username;
             this.wins = wins;
-            this.open = open;
         }
+        public String getGameName(){ return gameName; }
 
         public String getUsername() {
             return username;
@@ -156,10 +159,6 @@ public class JoinGameController extends ViewComponent {
 
         public int getWins() {
             return wins;
-        }
-
-        public boolean getOpen() {
-            return open;
         }
     }
 }
