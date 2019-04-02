@@ -42,13 +42,14 @@ public class Game {
     private ArrayList<String> actionCache = new ArrayList<>();
     private ArrayList<String> uploadActionCache = new ArrayList<>();
 
-    public Game(int gameid, BattleshipUser hostUser) {
-        this(gameid, hostUser, false);
+    public Game(int gameid,String gameName, BattleshipUser hostUser) {
+        this(gameid,gameName, hostUser, false);
     }
 
-    public Game(int gameid, BattleshipUser hostUser, boolean hosting) {
+    public Game(int gameid,String gameName, BattleshipUser hostUser, boolean hosting) {
 //		databaseConnector = new DatabaseConnector(Constants.DB_URL);
         this.gameId = gameid;
+        this.gameName = gameName;
         this.hostUser = hostUser;
         this.hosting = hosting;
 
@@ -61,6 +62,14 @@ public class Game {
 
     public int getGameId() {
         return gameId;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public boolean isHosting() {
+        return hosting;
     }
 
     public BattleshipUser getHostUser() {
@@ -198,6 +207,26 @@ public class Game {
 //    }
 
     // mOtherfuckers be making method for gameover and last move id, and incomming move
+    //returns 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
+    public int getGameResult(){
+        if(isGameOver()){
+            if(hosting){
+                if(board1.shipsRemaining() == 0){
+                    return 0;
+                }
+                else{
+                    return 1;
+                }
+            }
+            if(board2.shipsRemaining() == 0){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+        return -1;
+    }
 
     public void setBoards(Board board1, Board board2) {
         this.board1 = board1;

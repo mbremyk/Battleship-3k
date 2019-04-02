@@ -53,7 +53,7 @@
             <Font name="PixelTorje" size="28.0" />
          </font>
       </Text>
-      <Text fx:id="gameOpponentNameText" layoutX="676.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OPPONENT NAME" textAlignment="CENTER" wrappingWidth="253.0">
+      <Text fx:id="gameOpponentNameText" layoutX="676.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="CENTER" wrappingWidth="253.0">
          <font>
             <Font name="PixelTorje" size="28.0" />
          </font>

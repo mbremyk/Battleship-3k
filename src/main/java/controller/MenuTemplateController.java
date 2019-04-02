@@ -12,12 +12,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+
+import game.Statics;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
+import model.BattleshipUser;
 
 public class MenuTemplateController extends ViewComponent {
 
@@ -57,6 +60,8 @@ public class MenuTemplateController extends ViewComponent {
 
         switchView("MainMenu");
 
+        BattleshipUser user = Statics.getLocalUser();
+        if(user != null) mainMenuLoggedInText.setText("Logged in as "+user.getUsername());
 
         mainMenuSignupButton.setOnAction(event -> {
             switchView("SignupMenu");

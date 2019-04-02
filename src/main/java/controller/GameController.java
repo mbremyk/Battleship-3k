@@ -22,8 +22,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import model.BattleshipUser;
 
-public class GameController {
+public class GameController extends ViewComponent{
 
     @FXML
     private ResourceBundle resources;
@@ -77,6 +78,7 @@ public class GameController {
         assert gameMainPane != null : "fx:id=\"gameMainPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameOptionsImage != null : "fx:id=\"gameOptionsImage\" was not injected: check your FXML file 'Game.fxml'.";
         addUIComponents();
+        updateText();
     }
 
     /**
@@ -149,9 +151,13 @@ public class GameController {
                         public void handle(long now) {
                             if (boardsReady == 1) {
                                 updateBoards();
+                                updateText();
                             }
                             Statics.getGame().doCachedActions();
-                            if (Statics.getGame().isGameOver()) this.stop();
+                            if (Statics.getGame().isGameOver()){
+                                endGame();
+                                this.stop();
+                            }
                         }
                     };
                     animationTimer.start();
@@ -210,7 +216,7 @@ public class GameController {
 
     private void updateBoards() {
         Game game = Statics.getGame();
-        if (game.getJoinUser() != null && game.getHostUser() != null) {
+        if (game.getJoinUser() != null && game.getHostUser() != null){
             game.setBoardsReady(true);
             int opponentid;
             if (Statics.getLocalUser().equals(game.getHostUser()))
@@ -224,6 +230,21 @@ public class GameController {
         }
     }
 
+    private void updateText(){
+        Game game = Statics.getGame();
+        BattleshipUser host = game.getHostUser();
+        BattleshipUser join = game.getJoinUser();
+        gameGameNameText.setText(game.getGameName());
+        if(game.isHosting()) {
+            if(host != null)gameUserNameText.setText(host.getUsername());
+            if(join != null)gameOpponentNameText.setText(join.getUsername());
+        }else{
+            if(join != null)gameUserNameText.setText(join.getUsername());
+            if(host != null)gameOpponentNameText.setText(host.getUsername());
+
+        }
+    }
+
     private void colorMouseFollower() {
         colorMouseFollower(false);
     }
@@ -234,5 +255,18 @@ public class GameController {
         } else {
             mouseFollower.pressed(true);
         }
+    }
+    private void endGame(){
+        DatabaseConnector connector = new DatabaseConnector();
+        if(Statics.getGame().getGameResult() == 1){
+            connector.updateUserScore(Statics.getLocalUser().getUsername(),1);
+        } else if(Statics.getGame().getGameResult() == 0){
+            connector.updateUserScore(Statics.getLocalUser().getUsername(),0);
+        }
+        switchView("GameResultMenu",true);
+    }
+    @Override
+    protected AnchorPane getParentAnchorPane() {
+        return (AnchorPane) gameToolsPane.getParent();
     }
 }

@@ -7,7 +7,6 @@
 
 package database;
 
-import game.Board;
 import game.Game;
 import game.Statics;
 import model.BattleshipUser;
@@ -185,6 +184,7 @@ public class DatabaseConnector {
 
     /**
      * Loads the latest attacks from the opponent into a cache
+     *
      * @param game
      * @return latest move_id
      */
@@ -197,19 +197,19 @@ public class DatabaseConnector {
         try {
             con = connectionPool.getConnection();
             con.setAutoCommit(false);
-            String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ? " +" AND "+ACTION_USER_ID +" != ?"+" AND "+ACTION_MOVE_ID +" > ?"+ " ORDER BY " + ACTION_MOVE_ID;
+            String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ? " + " AND " + ACTION_USER_ID + " != ?" + " AND " + ACTION_MOVE_ID + " > ?" + " ORDER BY " + ACTION_MOVE_ID;
             preparedStatement = con.prepareStatement(query);
-            preparedStatement.setInt(1,game.getGameId());
-            preparedStatement.setInt(2,Statics.getLocalUser().getUserId());
-            preparedStatement.setInt(3,moveId);
+            preparedStatement.setInt(1, game.getGameId());
+            preparedStatement.setInt(2, Statics.getLocalUser().getUserId());
+            preparedStatement.setInt(3, moveId);
             res = preparedStatement.executeQuery();
             while (res.next()) {
-                game.addCachedAction(res.getString(ACTION_COORDINATES)+","+res.getString(ACTION_MOVE_ID));
+                game.addCachedAction(res.getString(ACTION_COORDINATES) + "," + res.getString(ACTION_MOVE_ID));
             }
-            String deleteQuery = "DELETE FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ? "+" AND "+ACTION_MOVE_ID +" < ?";
+            String deleteQuery = "DELETE FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ? " + " AND " + ACTION_MOVE_ID + " < ?";
             deletePreparedStatement = con.prepareStatement(deleteQuery);
-            deletePreparedStatement.setInt(1,game.getGameId());
-            deletePreparedStatement.setInt(2,moveId);
+            deletePreparedStatement.setInt(1, game.getGameId());
+            deletePreparedStatement.setInt(2, moveId);
             deletePreparedStatement.execute();
 
             con.commit();
@@ -250,12 +250,12 @@ public class DatabaseConnector {
      */
     public Game[] getGames(int hostid) {
         Game[] games;
-        String query = "SELECT " + USERS_TABLE + "." + USERS_USERNAME + "," + USERS_TABLE + "." + USERS_WINS + "," + GAME_TABLE + "." + GAME_ID + "," + GAME_TABLE + "." + HOST_ID + "," +
-                "" + GAME_TABLE + "." + JOIN_ID + "" +
+        String query = "SELECT " + USERS_TABLE + "." + USERS_USERNAME + "," + USERS_TABLE + "." + USERS_WINS + "," + GAME_TABLE + "." + GAME_ID + "," + GAME_TABLE + "." + GAME_HOST_ID + "," +
+                "" + GAME_TABLE + "." + GAME_JOIN_ID + "," + GAME_TABLE + "." + GAME_NAME +
                 " FROM " + USERS_TABLE + "" +
-                " INNER JOIN " + GAME_TABLE + " ON " + GAME_TABLE + "." + HOST_ID + " = " + USERS_TABLE + "." + USERS_ID;
+                " INNER JOIN " + GAME_TABLE + " ON " + GAME_TABLE + "." + GAME_HOST_ID + " = " + USERS_TABLE + "." + USERS_ID;
 
-        if (hostid != -1) query += " WHERE " + HOST_ID + " = ?";
+        if (hostid != -1) query += " WHERE " + GAME_HOST_ID + " = ?";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -263,23 +263,23 @@ public class DatabaseConnector {
         try {
             con = connectionPool.getConnection();
             preparedStatement = con.prepareStatement(query);
-            if (hostid != -1) preparedStatement.setInt(1,hostid);
+            if (hostid != -1) preparedStatement.setInt(1, hostid);
             res = preparedStatement.executeQuery();
 
             games = new Game[0];
 
             while (res.next()) {
-                int hostId = res.getInt(HOST_ID);
+                int hostId = res.getInt(GAME_HOST_ID);
                 String username = res.getString(USERS_USERNAME);
                 int hostWins = res.getInt(USERS_WINS);
                 BattleshipUser newHost = new BattleshipUser(hostId, username, "", "", hostWins, 0);
                 BattleshipUser newJoin;
-                Game newGame = new Game(res.getInt(GAME_ID), newHost, hostid != -1);
-                if (res.getString(JOIN_ID) == null) {
+                Game newGame = new Game(res.getInt(GAME_ID),res.getString(GAME_NAME), newHost, hostid != -1);
+                if (res.getString(GAME_JOIN_ID) == null) {
                     newJoin = null;
                     newGame.setGameOpen(true);
                 } else {
-                    newJoin = new BattleshipUser(res.getInt(JOIN_ID), "", "", "");
+                    newJoin = new BattleshipUser(res.getInt(GAME_JOIN_ID), "", "", "");
                     newGame.setGameOpen(false);
                 }
                 newGame.setJoinUser(newJoin);
@@ -391,7 +391,7 @@ public class DatabaseConnector {
         int gameId = game.getGameId();
         ResultSet res = null;
         PreparedStatement preparedStatement = null;
-        String query = "SELECT " + BOARDS_USER_ID + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + " = " + gameId;
+        String query = "SELECT bb." + BOARDS_USER_ID + "," + USERS_USERNAME + " FROM " + BOARDS_TABLE + " bb JOIN " + USERS_TABLE + " bu ON bb." + BOARDS_USER_ID + "=bu." + USERS_ID + " WHERE " + BOARDS_GAME_ID + " = " + gameId;
         Connection con = null;
         try {
             con = connectionPool.getConnection();
@@ -399,17 +399,9 @@ public class DatabaseConnector {
             preparedStatement = con.prepareStatement(query);
             res = preparedStatement.executeQuery();
             if (res.next()) {
-                if (res.getInt(BOARDS_USER_ID) != Statics.getLocalUser().getUserId()) {
-                    BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID));
-                    if (game.getJoinUser() == null) game.setJoinUser(opponent);
-                    System.out.println("READY");
-                }
+                checkJoin(game, res);
                 if (res.next()) {
-                    if (res.getInt(BOARDS_USER_ID) != Statics.getLocalUser().getUserId()) {
-                        BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID));
-                        if (game.getJoinUser() == null) game.setJoinUser(opponent);
-                        System.out.println("READY");
-                    }
+                    checkJoin(game, res);
                     return true;
                 }
             } else {
@@ -423,6 +415,14 @@ public class DatabaseConnector {
             if (preparedStatement != null) close(preparedStatement);
         }
         return false;
+    }
+
+    private void checkJoin(Game game, ResultSet res) throws SQLException {
+        if (res.getInt(BOARDS_USER_ID) != Statics.getLocalUser().getUserId()) {
+            BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID), res.getString(USERS_USERNAME));
+            if (game.getJoinUser() == null) game.setJoinUser(opponent);
+            System.out.println("READY");
+        }
     }
 
     public boolean uploadShipCoordinates(String coordString) {
@@ -463,10 +463,10 @@ public class DatabaseConnector {
         PreparedStatement insertPreparedStatement = null;
         try {
             con = connectionPool.getConnection();
-            String insertQuery = "INSERT INTO " + ACTION_TABLE + "(" + ACTION_GAME_ID + "," + ACTION_MOVE_ID + ","+ ACTION_USER_ID + "," + ACTION_COORDINATES + ")VALUES(?,?,?,?)";
+            String insertQuery = "INSERT INTO " + ACTION_TABLE + "(" + ACTION_GAME_ID + "," + ACTION_MOVE_ID + "," + ACTION_USER_ID + "," + ACTION_COORDINATES + ")VALUES(?,?,?,?)";
             insertPreparedStatement = con.prepareStatement(insertQuery);
             insertPreparedStatement.setInt(1, gameId);
-            insertPreparedStatement.setInt(2, moveId+1);
+            insertPreparedStatement.setInt(2, moveId + 1);
             insertPreparedStatement.setInt(3, Statics.getLocalUser().getUserId());
             insertPreparedStatement.setString(4, coordString);
             insertPreparedStatement.execute();
@@ -483,11 +483,11 @@ public class DatabaseConnector {
         return false;
     }
 
-    public boolean createGame() {
+    public boolean createGame(String gameName) {
         BattleshipUser user = Statics.getLocalUser();
         if (user == null) return false;
-        String deleteQuery = "DELETE FROM " + GAME_TABLE + " WHERE " + HOST_ID + " = ? ";
-        String insertQuery = "INSERT INTO " + GAME_TABLE + "(" + HOST_ID + ") VALUES(?)";
+        String deleteQuery = "DELETE FROM " + GAME_TABLE + " WHERE " + GAME_HOST_ID + " = ? ";
+        String insertQuery = "INSERT INTO " + GAME_TABLE + "(" + GAME_HOST_ID +","+GAME_NAME + ") VALUES(?,?)";
         Connection con = null;
         PreparedStatement deletePreparedStatement = null;
         PreparedStatement insertPreparedStatement = null;
@@ -498,6 +498,7 @@ public class DatabaseConnector {
             deletePreparedStatement.setInt(1, user.getUserId());
             deletePreparedStatement.execute();
             insertPreparedStatement.setInt(1, user.getUserId());
+            insertPreparedStatement.setString(2, gameName);
             insertPreparedStatement.execute();
             Statics.setGame(getGame(user.getUserId()));
             return true;
@@ -516,7 +517,7 @@ public class DatabaseConnector {
     public boolean joinGame(Game game) {
         BattleshipUser user = Statics.getLocalUser();
         if (user == null) return false;
-        String query = "UPDATE " + GAME_TABLE + " SET " + JOIN_ID + " = ? WHERE " + GAME_ID + " = " + game.getGameId() + " AND " + JOIN_ID + " IS NULL";
+        String query = "UPDATE " + GAME_TABLE + " SET " + GAME_JOIN_ID + " = ? WHERE " + GAME_ID + " = " + game.getGameId() + " AND " + GAME_JOIN_ID + " IS NULL";
         PreparedStatement preparedStatement = null;
         Connection con = null;
         try {
@@ -541,8 +542,8 @@ public class DatabaseConnector {
     }
 
 
-    public boolean uploadFeedback(String title, String message){
-        if(title == "" || message == "" || title == null || message == null){
+    public boolean uploadFeedback(String title, String message) {
+        if (title == "" || message == "" || title == null || message == null) {
             return false;
         } else {
             Connection con = null;
@@ -550,8 +551,8 @@ public class DatabaseConnector {
                 con = connectionPool.getConnection();
                 String update = "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, ?, ?)";
                 PreparedStatement preparedStatement = con.prepareStatement(update);
-                preparedStatement.setString(1,title);
-                preparedStatement.setString(2,message);
+                preparedStatement.setString(1, title);
+                preparedStatement.setString(2, message);
                 preparedStatement.execute();
                 return true;
             } catch (SQLException e) {
@@ -565,6 +566,41 @@ public class DatabaseConnector {
             }
         }
     }
-
-
+    public boolean updateUserScore(String username,int gameResult){
+        Connection con = null;
+        PreparedStatement statement = null;
+        String query;
+        ResultSet res;
+        int currentValue = 0;
+        String column;
+        try {
+            con = connectionPool.getConnection();
+            if(gameResult == 1) {
+                query = "SELECT " + USERS_WINS + " FROM " + USERS_TABLE + "";
+                column = USERS_WINS;
+            }
+            else{
+                query = "SELECT " + USERS_LOSSES + " FROM " + USERS_TABLE + "";
+                column = USERS_LOSSES;
+            }
+            statement = con.prepareStatement(query);
+            res = statement.executeQuery();
+            if(res.next()){
+                currentValue = res.getInt(column);
+            }
+            query = "UPDATE " + USERS_TABLE + " SET " + column + " = " + currentValue++ + " WHERE " + USERS_USERNAME + " = '" + username + "'";
+            statement = con.prepareStatement(query);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        } catch (Exception e) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        } finally {
+            if (con != null) connectionPool.releaseConnection(con);
+            if(statement != null) close(statement);
+        }
+    }
 }
