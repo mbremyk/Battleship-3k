@@ -57,6 +57,14 @@ public class HostGameController extends ViewComponent {
         hostGameCreateGameButton.setOnAction(event -> {
            createGameButtonPressed();
         });
+
+        hostGameNameField.setOnAction(event -> {
+            createGameButtonPressed();
+        });
+
+        hostGamePasswordField.setOnAction(event -> {
+            createGameButtonPressed();
+        });
     }
 
     public boolean createGameButtonPressed(){

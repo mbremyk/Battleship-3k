@@ -24,7 +24,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import model.BattleshipUser;
 
-public class GameController extends ViewComponent{
+public class GameController extends ViewComponent {
 
     @FXML
     private ResourceBundle resources;
@@ -59,6 +59,8 @@ public class GameController extends ViewComponent{
     private MouseFollower mouseFollower;
     private Board board1;
     private Board board2;
+    private Rectangle board1Shadow;
+    private Rectangle board2Shadow;
     private int pressedBoard = -1;
     private int pressedTileX = -1;
     private int pressedTileY = -1;
@@ -89,10 +91,18 @@ public class GameController extends ViewComponent{
         mouseFollower.setVisible(false);
         board1 = new Board(gameMainPane, 250, 200);
         board2 = new Board(gameMainPane, 650, 200);
+        board1Shadow = new Rectangle(board1.getTranslateX(), board1.getTranslateY(), board1.getFitWidth(), board1.getFitHeight());
+        board2Shadow = new Rectangle(board2.getTranslateX(), board2.getTranslateY(), board2.getFitWidth(), board2.getFitHeight());
+        board1Shadow.setOpacity(0.5);
+        board2Shadow.setOpacity(0.5);
+        board1Shadow.setVisible(false);
+        board2Shadow.setVisible(false);
+        board1Shadow.setMouseTransparent(true);
+        board2Shadow.setMouseTransparent(true);
         Statics.getGame().setBoards(board1, board2);
 
         //THIS ORDER IS VERY IMPORTANT---------------------
-        gameMainPane.getChildren().addAll(board1, board2);
+        gameMainPane.getChildren().addAll(board1, board2, board1Shadow, board2Shadow);
         board1.addDefaultShips(true);
         //Wait thread
         PullThread pullThread = new PullThread(this);
@@ -154,7 +164,8 @@ public class GameController extends ViewComponent{
                                 updateText();
                             }
                             Statics.getGame().doCachedActions();
-                            if (Statics.getGame().isGameOver()){
+                            updateBoardShadows();
+                            if (Statics.getGame().isGameOver()) {
                                 endGame();
                                 this.stop();
                             }
@@ -216,7 +227,7 @@ public class GameController extends ViewComponent{
 
     private void updateBoards() {
         Game game = Statics.getGame();
-        if (game.getJoinUser() != null && game.getHostUser() != null){
+        if (game.getJoinUser() != null && game.getHostUser() != null) {
             game.setBoardsReady(true);
             int opponentid;
             if (Statics.getLocalUser().equals(game.getHostUser()))
@@ -230,17 +241,27 @@ public class GameController extends ViewComponent{
         }
     }
 
-    private void updateText(){
+    private void updateBoardShadows() {
+        if (Statics.getGame().isMyTurn()) {
+            board1Shadow.setVisible(true);
+            board2Shadow.setVisible(false);
+        } else {
+            board1Shadow.setVisible(false);
+            board2Shadow.setVisible(true);
+        }
+    }
+
+    private void updateText() {
         Game game = Statics.getGame();
         BattleshipUser host = game.getHostUser();
         BattleshipUser join = game.getJoinUser();
         gameGameNameText.setText(game.getGameName());
-        if(game.isHosting()) {
-            if(host != null)gameUserNameText.setText(host.getUsername());
-            if(join != null)gameOpponentNameText.setText(join.getUsername());
-        }else{
-            if(join != null)gameUserNameText.setText(join.getUsername());
-            if(host != null)gameOpponentNameText.setText(host.getUsername());
+        if (game.isHosting()) {
+            if (host != null) gameUserNameText.setText(host.getUsername());
+            if (join != null) gameOpponentNameText.setText(join.getUsername());
+        } else {
+            if (join != null) gameUserNameText.setText(join.getUsername());
+            if (host != null) gameOpponentNameText.setText(host.getUsername());
 
         }
     }
@@ -256,15 +277,17 @@ public class GameController extends ViewComponent{
             mouseFollower.pressed(true);
         }
     }
-    private void endGame(){
+
+    private void endGame() {
         DatabaseConnector connector = new DatabaseConnector();
-        if(Statics.getGame().getGameResult() == 1){
-            connector.updateUserScore(Statics.getLocalUser().getUsername(),1);
-        } else if(Statics.getGame().getGameResult() == 0){
-            connector.updateUserScore(Statics.getLocalUser().getUsername(),0);
+        if (Statics.getGame().getGameResult() == 1) {
+            connector.updateUserScore(Statics.getLocalUser().getUsername(), 1);
+        } else if (Statics.getGame().getGameResult() == 0) {
+            connector.updateUserScore(Statics.getLocalUser().getUsername(), 0);
         }
-        switchView("GameResultMenu",true);
+        switchView("GameResultMenu", true);
     }
+
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) gameToolsPane.getParent();
