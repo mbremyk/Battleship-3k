@@ -603,4 +603,30 @@ public class DatabaseConnector {
             if(statement != null) close(statement);
         }
     }
+
+    public boolean removeGameFromDatabase(Game game){
+        Connection con = null;
+        PreparedStatement statement = null;
+        String query;
+        ResultSet res;
+        try{
+            con = connectionPool.getConnection();
+            query = "DELETE FROM " + GAME_TABLE + " WHERE " + GAME_ID + " = '" + game.getGameId() + "'";
+            statement = con.prepareStatement(query);
+            statement.executeUpdate();
+            return true;
+        }
+        catch (SQLException e){
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        }
+        catch (Exception e){
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        }
+        finally {
+            if (con != null) connectionPool.releaseConnection(con);
+            if (statement != null) close(statement);
+        }
+    }
 }
