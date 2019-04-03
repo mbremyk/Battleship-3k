@@ -274,7 +274,7 @@ public class DatabaseConnector {
                 int hostWins = res.getInt(USERS_WINS);
                 BattleshipUser newHost = new BattleshipUser(hostId, username, "", "", hostWins, 0);
                 BattleshipUser newJoin;
-                Game newGame = new Game(res.getInt(GAME_ID),res.getString(GAME_NAME), newHost, hostid != -1);
+                Game newGame = new Game(res.getInt(GAME_ID), res.getString(GAME_NAME), newHost, hostid != -1);
                 if (res.getString(GAME_JOIN_ID) == null) {
                     newJoin = null;
                     newGame.setGameOpen(true);
@@ -487,7 +487,7 @@ public class DatabaseConnector {
         BattleshipUser user = Statics.getLocalUser();
         if (user == null) return false;
         String deleteQuery = "DELETE FROM " + GAME_TABLE + " WHERE " + GAME_HOST_ID + " = ? ";
-        String insertQuery = "INSERT INTO " + GAME_TABLE + "(" + GAME_HOST_ID +","+GAME_NAME + ") VALUES(?,?)";
+        String insertQuery = "INSERT INTO " + GAME_TABLE + "(" + GAME_HOST_ID + "," + GAME_NAME + ") VALUES(?,?)";
         Connection con = null;
         PreparedStatement deletePreparedStatement = null;
         PreparedStatement insertPreparedStatement = null;
@@ -566,30 +566,31 @@ public class DatabaseConnector {
             }
         }
     }
-    public boolean updateUserScore(String username,int gameResult){
+
+    public boolean updateUserScore(int userId, int gameResult) {
         Connection con = null;
         PreparedStatement statement = null;
         String query;
-        ResultSet res;
-        int currentValue = 0;
+//        ResultSet res;
+//        int currentValue = 0;
         String column;
         try {
             con = connectionPool.getConnection();
-            if(gameResult == 1) {
-                query = "SELECT " + USERS_WINS + " FROM " + USERS_TABLE + "";
+            if (gameResult == 1) {
+//                query = "SELECT " + USERS_WINS + " FROM " + USERS_TABLE + "";
                 column = USERS_WINS;
-            }
-            else{
-                query = "SELECT " + USERS_LOSSES + " FROM " + USERS_TABLE + "";
+            } else {
+//                query = "SELECT " + USERS_LOSSES + " FROM " + USERS_TABLE + "";
                 column = USERS_LOSSES;
+//            }
+//            statement = con.prepareStatement(query);
+//            res = statement.executeQuery();
+//            if(res.next()){
+//                currentValue = res.getInt(column);
             }
+            query = "UPDATE " + USERS_TABLE + " SET " + column + " = " + column + "+1" + " WHERE " + USERS_ID + " = ?";
             statement = con.prepareStatement(query);
-            res = statement.executeQuery();
-            if(res.next()){
-                currentValue = res.getInt(column);
-            }
-            query = "UPDATE " + USERS_TABLE + " SET " + column + " = " + currentValue++ + " WHERE " + USERS_USERNAME + " = '" + username + "'";
-            statement = con.prepareStatement(query);
+            statement.setInt(1, userId);
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -600,31 +601,28 @@ public class DatabaseConnector {
             return false;
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
-            if(statement != null) close(statement);
+            if (statement != null) close(statement);
         }
     }
 
-    public boolean removeGameFromDatabase(Game game){
+    public boolean removeGameFromDatabase(Game game) {
         Connection con = null;
         PreparedStatement statement = null;
         String query;
         ResultSet res;
-        try{
+        try {
             con = connectionPool.getConnection();
             query = "DELETE FROM " + GAME_TABLE + " WHERE " + GAME_ID + " = '" + game.getGameId() + "'";
             statement = con.prepareStatement(query);
             statement.executeUpdate();
             return true;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             return false;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             return false;
-        }
-        finally {
+        } finally {
             if (con != null) connectionPool.releaseConnection(con);
             if (statement != null) close(statement);
         }
