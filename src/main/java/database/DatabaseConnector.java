@@ -405,7 +405,7 @@ public class DatabaseConnector {
                     return true;
                 }
             } else {
-                System.out.println("NOT READY");
+//                System.out.println("NOT READY");
             }
         } catch (Exception e) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);

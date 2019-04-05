@@ -155,11 +155,11 @@ public class Board extends ImageView {
      */
     private Ship[] shipsOverlap(Ship ship1, Ship ship2) {
         int[] pos1 = ship1.getBasePosition();
-        int width1 = ship1.getWidthTiles();
-        int height1 = ship1.getHeightTiles();
+        int width1 = ship1.getTilesX();
+        int height1 = ship1.getTilesY();
         int[] pos2 = ship2.getBasePosition();
-        int width2 = ship2.getWidthTiles();
-        int height2 = ship2.getHeightTiles();
+        int width2 = ship2.getTilesX();
+        int height2 = ship2.getTilesY();
 
         if (pos1[0] + width1 - 1 < pos2[0]
                 || pos2[0] + width2 - 1 < pos1[0]
@@ -211,7 +211,7 @@ public class Board extends ImageView {
         addShip(new Ship(visible, 2, 5, 5, 1, 0, this));
         addShip(new Ship(visible, 5, 1, 3, 2, 0, this));
         addShip(new Ship(visible, 8, 8, 2, 1, 0, this));
-        addShip(new Ship(visible, 8, 3, 1, 3, 90, this));
+        addShip(new Ship(visible, 8, 3, 3, 1, 90, this));
         addShip(new Ship(visible, 0, 7, 2, 2, 0, this));
     }
 
