@@ -80,7 +80,7 @@ public abstract class ViewComponent {
         Window window = parent.getScene().getWindow();
         double heightDiff = window.getHeight() - parent.getScene().getHeight();
         System.out.println(heightDiff);
-        window.setWidth(formPane.getPrefWidth()+13);
+        window.setWidth(formPane.getPrefWidth());//+13);
         window.setHeight(formPane.getPrefHeight() + heightDiff);
     }
 

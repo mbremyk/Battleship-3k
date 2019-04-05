@@ -79,7 +79,10 @@ public class GameResultMenuController extends ViewComponent {
         gameResultMenuText.setText(endText);
         gameResultMenuImage.setImage(image);
 
-        returnButton.setOnAction(e -> switchView("MenuTemplate", true));
+        returnButton.setOnAction(e -> {
+            DatabaseConnector connector = new DatabaseConnector();
+            connector.removeGameFromDatabase(Statics.getGame());
+            switchView("MenuTemplate", true);});
     }
 
     @Override
