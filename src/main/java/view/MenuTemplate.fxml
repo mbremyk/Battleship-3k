@@ -25,12 +25,7 @@
                   <Font name="PixelTorje" size="20.0" />
                </font>
             </JFXButton>
-            <Text fx:id="mainMenuLoggedInText" layoutX="652.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as Guest19231" textAlignment="RIGHT" />
-            <ImageView fx:id="mainMenuOptionsImage" fitHeight="54.0" fitWidth="54.0" layoutX="8.0" layoutY="6.0">
-               <image>
-                  <Image url="/Options.png" />
-               </image>
-            </ImageView>
+            <Text fx:id="mainMenuLoggedInText" layoutX="587.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not logged in" textAlignment="RIGHT" wrappingWidth="198.7109375" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="switchPane" layoutY="160.0" prefHeight="436.0" prefWidth="800.0" />

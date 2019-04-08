@@ -35,6 +35,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 18);
 			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 20);
 			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 28);
 			Font.loadFont(getClass().getResourceAsStream("PixelTorje.ttf"), 36);
@@ -45,6 +46,7 @@ public class Main extends Application {
  			final Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			primaryStage.setResizable(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
