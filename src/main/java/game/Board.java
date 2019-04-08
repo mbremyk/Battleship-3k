@@ -78,9 +78,9 @@ public class Board extends ImageView {
      */
     public String registerShip(Ship ship) {
         String ret = "";
-        int[] pos = ship.getBasePosition();
-        int x = pos[0];
-        int y = pos[1];
+//        int[] pos = ship.getBasePosition();
+        int x = ship.getRotationCenterX();
+        int y = ship.getRotationCenterY();
         int width = ship.getWidthTiles();
         int height = ship.getHeightTiles();
         int rotation = ship.getRotation();
@@ -89,7 +89,7 @@ public class Board extends ImageView {
         ret += "," + (width < 10 ? "0" + width : width);
         ret += "," + (height < 10 ? "0" + height : height);
         ret += "," + (rotation < 10 ? "00" + rotation : (rotation < 100 ? "0" + rotation : rotation));
-        registerShipCoordinates(x, y, width, height, ships.indexOf(ship));
+        registerShipCoordinates(ship.getTileX(), ship.getTileY(), ship.getTilesX(), ship.getTilesY(), ships.indexOf(ship));
         return ret;
     }
 
@@ -188,7 +188,7 @@ public class Board extends ImageView {
     }
 
     public void registerShipCoordinates(Ship ship) {
-        registerShipCoordinates(ship.getTileX(), ship.getTileY(), ship.getWidthTiles(), ship.getHeightTiles(), ships.indexOf(ship));
+        registerShipCoordinates(ship.getTileX(), ship.getTileY(), ship.getTilesX(), ship.getTilesY(), ships.indexOf(ship));
     }
 
     /**

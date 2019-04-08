@@ -39,21 +39,24 @@ public class Ship extends Rectangle {
         this.basePosition = new int[]{tileX, tileY};
         widthTiles = width;
         heightTiles = height;
-        this.rotation = rotation;
+        tilesX = width;
+        tilesY = height;
+        rotateRight(rotation / 90);
+        setTilePos(tileX,tileY);
         setVisible(visible);
-        //setFill(Color.color(Math.random(), Math.random(), Math.random()));
         loadImage(); //Must happen before updateSize()
         updateSize();
         health = width * height;
         setTranslateX(parentBoard.getTranslateX() + tileX * Board.TILE_SIZE);
         setTranslateY(parentBoard.getTranslateY() + tileY * Board.TILE_SIZE);
 
-        setOpacity(0.6); //TODO Remove/discuss this
+        setOpacity(0.6);
 
         //These make the Ship remember "real" position while being snapped to other tiles
         setOnMousePressed(event -> {
-            startDragX = event.getX();
-            startDragY = event.getY();
+            startDragX = event.getSceneX()-(parentBoard.getTranslateX()+(getTileX())*Board.TILE_SIZE);
+            startDragY = event.getSceneY()-(parentBoard.getTranslateY()+(getTileY())*Board.TILE_SIZE);
+            System.out.println(startDragX+","+startDragY);
         });
 
         setOnMouseClicked(event -> {
@@ -65,8 +68,8 @@ public class Ship extends Rectangle {
 
         setOnMouseDragged(event -> {
             if (Statics.getGame().isShipsMovable() && event.getButton() == MouseButton.PRIMARY) {
-                this.setTranslateX(event.getSceneX() - startDragX);
-                this.setTranslateY(event.getSceneY() - startDragY);
+                this.setTranslateX(event.getSceneX() - startDragX+totalPositionOffsetX*Board.TILE_SIZE);
+                this.setTranslateY(event.getSceneY() - startDragY+totalPositionOffsetY*Board.TILE_SIZE);
                 updatePosition();
             }
         });
@@ -74,18 +77,13 @@ public class Ship extends Rectangle {
 
     private void updatePosition() {
         addOffset();
-        if (isInsideBoard()) {
-//            this.setTranslateX(parentBoard.getTranslateX() + getTileX() * Board.TILE_SIZE);
-//            this.setTranslateY(parentBoard.getTranslateY() + getTileY() * Board.TILE_SIZE);
-        } else {
-            int newTileX = getTileX();
-            int newTileY = getTileY();
-//            if (getTileX() < 0) newTileX = 0;
-//            if (getTileX() > Board.TILES - tilesX) newTileX = Board.TILES - tilesX;
-//            if (getTileY() < 0) newTileY = 0;
-//            if (getTileY() > Board.TILES - tilesY) newTileY = Board.TILES - tilesY;
-            setTilePos(newTileX, newTileY);
-        }
+        int newTileX = getTileX();
+        int newTileY = getTileY();
+        if (getTileX() < 0) newTileX = 0;
+        if (getTileX() > Board.TILES - tilesX) newTileX = Board.TILES - tilesX;
+        if (getTileY() < 0) newTileY = 0;
+        if (getTileY() > Board.TILES - tilesY) newTileY = Board.TILES - tilesY;
+        setTilePos(newTileX, newTileY);
     }
 
     private void addOffset() {
@@ -125,19 +123,27 @@ public class Ship extends Rectangle {
      * @param y Tile number y from left to right, 0 to (max number of tiles - 1 - height in tiles)
      */
     public void setTilePos(int x, int y) {
-        setTranslateX(parentBoard.getTranslateX() + (x) * Board.TILE_SIZE);
-        setTranslateY(parentBoard.getTranslateY() + (y) * Board.TILE_SIZE);
+        setTranslateX(parentBoard.getTranslateX() + (x + totalPositionOffsetX) * Board.TILE_SIZE);
+        setTranslateY(parentBoard.getTranslateY() + (y + totalPositionOffsetY) * Board.TILE_SIZE);
         updateBasePosition();
     }
 
+    public int getRotationCenterX(){
+        return (int) ((getTranslateX() - parentBoard.getTranslateX() + Board.TILE_SIZE / 2) / Board.TILE_SIZE);
+    }
+
+    public int getRotationCenterY(){
+        return (int) ((getTranslateY() - parentBoard.getTranslateY() + Board.TILE_SIZE / 2) / Board.TILE_SIZE);
+    }
+
     public int getTileX() {
-        int tileX = (int) ((getTranslateX() - parentBoard.getTranslateX() + Board.TILE_SIZE / 2) / Board.TILE_SIZE)-totalPositionOffsetX;
+        int tileX = getRotationCenterX() - totalPositionOffsetX;
         basePosition[0] = tileX;
         return tileX;
     }
 
     public int getTileY() {
-        int tileY = (int) ((getTranslateY() - parentBoard.getTranslateY() + Board.TILE_SIZE / 2) / Board.TILE_SIZE)-totalPositionOffsetY;
+        int tileY = getRotationCenterY() - totalPositionOffsetY;
         basePosition[1] = tileY;
         return tileY;
     }
@@ -173,6 +179,12 @@ public class Ship extends Rectangle {
 
     public boolean isAlive() {
         return alive;
+    }
+
+    private void rotateRight(int times) {
+        for (int i = 0; i < times; i++) {
+            rotateRight();
+        }
     }
 
     private void rotateRight() {
@@ -215,7 +227,8 @@ public class Ship extends Rectangle {
         updateBasePosition();
         updatePosition();
 
-        System.out.println(getTileX() + "," + getTileY() + "," + positionOffsetX + "," + positionOffsetY);
+//        System.out.println(getTileX() + "," + getTileY() + "," + positionOffsetX + "," + positionOffsetY);
+        System.out.println(getTileX() + "," + getTileY() + "," + totalPositionOffsetX + "," + totalPositionOffsetY);
 
 //        updateSize();
 //        setRotationAxis(new Point3D(getTranslateX(),getTranslateY(),0));
@@ -230,8 +243,6 @@ public class Ship extends Rectangle {
     private void updateSize() {
         setWidth(widthTiles * Board.TILE_SIZE);
         setHeight(heightTiles * Board.TILE_SIZE);
-//        setRotate(rotation);
-        getTransforms().add(new Rotate(rotation, Board.TILE_SIZE / 2, Board.TILE_SIZE / 2, 0, Rotate.Z_AXIS));
     }
 
     private void updateBasePosition() {
@@ -241,6 +252,7 @@ public class Ship extends Rectangle {
 
 
     public int[] getBasePosition() {
+        updateBasePosition();
         return basePosition;
     }
 
