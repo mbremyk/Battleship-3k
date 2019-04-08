@@ -139,6 +139,10 @@ public abstract class Login
 		secureRandom.nextBytes(salt);
 		return salt;
 	}
+
+    public static boolean logout() {
+        return databaseConnector.logout();
+    }
 	
 	public static void main(String[] args)
 	{

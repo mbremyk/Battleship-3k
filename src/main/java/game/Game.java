@@ -22,6 +22,8 @@ public class Game {
     private boolean hosting; //If the local player is hosting
     private BattleshipUser hostUser;
     private BattleshipUser joinUser;
+    private BattleshipUser winner;
+    private BattleshipUser loser;
     private Board board1;
     private Board board2;
     private boolean boardsReady = false;
@@ -246,6 +248,15 @@ public class Game {
 
     public void setShipsMovable(boolean shipsMovable) {
         this.shipsMovable = shipsMovable;
+    }
+
+    public void setLoser(BattleshipUser loser) {
+        this.loser = loser;
+        this.winner = Statics.getGame().getHostUser().getUserId() == loser.getUserId() ? Statics.getGame().getJoinUser() : Statics.getGame().getHostUser();
+    }
+
+    public BattleshipUser getWinner() {
+        return this.winner;
     }
 
     @Override
