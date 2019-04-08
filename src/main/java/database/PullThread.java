@@ -17,6 +17,7 @@ public class PullThread extends Thread {
     private final DatabaseConnector db;
     private final Game game;
     private final GameController gameController;
+    private boolean running = false;
 
     public PullThread(DatabaseConnector db, Game game) {
         this.db = db;
@@ -39,8 +40,9 @@ public class PullThread extends Thread {
 
     @Override
     public void run() {
+        running = true;
         boolean gameStart = false;
-        while (!gameStart) {
+        while (!gameStart && running) {
             gameStart = db.userJoined(game);
 //            if (gameStart) {
 //                game.userJoined();
@@ -55,15 +57,15 @@ public class PullThread extends Thread {
 
         boolean gameOver = game.isGameOver();
         int timer = 0;
-        while (!gameOver || !game.allActionsUploaded()) {
+        while ((!gameOver || !game.allActionsUploaded()) && running) {
             if (!game.isMyTurn()) {
                 db.lastAction(game);
             }
 
             //To make it upload every second instead of 0.5 seconds
             timer++;
-            timer %=2;
-            if(timer == 0){
+            timer %= 2;
+            if (timer == 0) {
                 game.uploadCachedActions();
             }
             gameOver = game.isGameOver();
@@ -76,4 +78,10 @@ public class PullThread extends Thread {
         }
         stop();//TODO remove this because it's depricated
     }
+
+    public void terminate() {
+        running = false;
+        this.interrupt();
+    }
+
 }

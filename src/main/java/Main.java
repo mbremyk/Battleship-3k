@@ -12,18 +12,21 @@
 import game.Game;
 import database.ConnectionPool;
 import database.DatabaseConnector;
+import game.Statics;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+
 import java.net.URL;
 import java.nio.file.Paths;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import static database.Constants.DB_URL;
+import static database.Login.logout;
 
 public class Main extends Application {
 	public static ConnectionPool connectionPool = null;
@@ -45,6 +48,22 @@ public class Main extends Application {
  			final Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+
+            primaryStage.setOnCloseRequest(e -> {
+                Game game = Statics.getGame();
+                if (game != null && !game.isGameOver()) {
+                    game.setMyTurn(false);
+                    game.setLoser(Statics.getLocalUser());
+                    DatabaseConnector db = new DatabaseConnector();
+                    db.uploadResults();
+                }
+                Statics.setGame(game);
+                logout();
+                if (Statics.getPullThread() != null && Statics.getPullThread().isAlive()) {
+                    Statics.getPullThread().terminate();
+                }
+            });
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

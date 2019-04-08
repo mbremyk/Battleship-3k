@@ -63,9 +63,9 @@ public class DatabaseConnector {
                 return true;
             }
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (res != null) close(res);
             if (preparedStatement != null) close(preparedStatement);
@@ -98,9 +98,9 @@ public class DatabaseConnector {
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (preparedStatement != null) close(preparedStatement);
             if (con != null) connectionPool.releaseConnection(con);
@@ -118,26 +118,43 @@ public class DatabaseConnector {
     public BattleshipUser getBattleshipUser(String username, String password) {
         ResultSet res = null;
         String query = "SELECT * FROM " + USERS_TABLE + " WHERE " + USERS_USERNAME + " = ?";
+        String loginQuery = "UPDATE " + USERS_TABLE + " SET " + USERS_LOGGED_IN + " = 1 WHERE " + USERS_ID + " = ?";
         Connection con = null;
         PreparedStatement preparedStatement = null;
+        PreparedStatement loginPreparedStatement = null;
         try {
             con = connectionPool.getConnection();
+            con.setAutoCommit(false);
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, username);
             res = preparedStatement.executeQuery();
+            BattleshipUser out = null;
             if (res.next()) {
                 byte[] passwordHash = res.getBytes(USERS_PASSWORD);
                 byte[] salt = res.getBytes(USERS_SALT);
                 if (Arrays.equals(saltPassword(password, salt), passwordHash))  //password.equals(res.getString("password") for unhashed passwords
                 {
-                    return new BattleshipUser(res.getInt(USERS_ID), username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+                    out = new BattleshipUser(res.getInt(USERS_ID), username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+                    loginPreparedStatement = con.prepareStatement(loginQuery);
+                    loginPreparedStatement.setInt(1, out.getUserId());
+                    loginPreparedStatement.execute();
                 }
             }
-        } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-        } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            con.commit();
+            return out;
+        } catch (Exception e1) {
+            try {
+                con.rollback();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+            e1.printStackTrace();
         } finally {
+            try {
+                con.setAutoCommit(true);
+            } catch (Exception e3) {
+                e3.printStackTrace();
+            }
             if (res != null) close(res);
             if (preparedStatement != null) close(preparedStatement);
             if (con != null) connectionPool.releaseConnection(con);
@@ -173,7 +190,7 @@ public class DatabaseConnector {
             }
             return users;
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (res != null) close(res);
             if (preparedStatement != null) close(preparedStatement);
@@ -219,7 +236,7 @@ public class DatabaseConnector {
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
             return -1;
         } finally {
             try {
@@ -293,7 +310,7 @@ public class DatabaseConnector {
             }
             return games;
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (res != null) close(res);
             if (preparedStatement != null) close(preparedStatement);
@@ -330,7 +347,7 @@ public class DatabaseConnector {
                 coordString = res.getString(BOARDS_COORDINATES);
             }
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
             return null;
         } finally {
             if (res != null) close(res);
@@ -376,7 +393,7 @@ public class DatabaseConnector {
 //                coordinates = res.getString(ACTION_COORDINATES);
 //            }
 //        } catch (SQLException e) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+//            e.printStackTrace();
 //            return null;
 //        } finally {
 //            if (con != null) connectionPool.releaseConnection(con);
@@ -408,7 +425,7 @@ public class DatabaseConnector {
                 System.out.println("NOT READY");
             }
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
             if (res != null) close(res);
@@ -445,9 +462,9 @@ public class DatabaseConnector {
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
             if (preparedStatement != null) close(preparedStatement);
@@ -473,9 +490,9 @@ public class DatabaseConnector {
             game.incMoveID();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
             if (insertPreparedStatement != null) close(insertPreparedStatement);
@@ -503,9 +520,9 @@ public class DatabaseConnector {
             Statics.setGame(getGame(user.getUserId()));
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
             if (deletePreparedStatement != null) close(deletePreparedStatement);
@@ -530,10 +547,10 @@ public class DatabaseConnector {
             Statics.setGame(game);
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
             return false;
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
             if (preparedStatement != null) close(preparedStatement);
@@ -556,10 +573,10 @@ public class DatabaseConnector {
                 preparedStatement.execute();
                 return true;
             } catch (SQLException e) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+                e.printStackTrace();
                 return false;
             } catch (Exception e) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+                e.printStackTrace();
                 return false;
             } finally {
                 if (con != null) connectionPool.releaseConnection(con);
@@ -594,10 +611,10 @@ public class DatabaseConnector {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
             return false;
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
             return false;
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
@@ -617,14 +634,65 @@ public class DatabaseConnector {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
             return false;
         } catch (Exception e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
             return false;
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
             if (statement != null) close(statement);
         }
+    }
+
+    public boolean logout() {
+        if (Statics.getLocalUser() != null) {
+            Connection con = null;
+            PreparedStatement preparedStatement = null;
+            String query = "UPDATE " + USERS_TABLE + " SET " + USERS_LOGGED_IN + " = ? WHERE " + USERS_ID + " = ?";
+            try {
+                con = connectionPool.getConnection();
+                preparedStatement = con.prepareStatement(query);
+                preparedStatement.setBoolean(1, false);
+                preparedStatement.setInt(2, Statics.getLocalUser().getUserId());
+                preparedStatement.execute();
+                Statics.setLocalUser(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            } finally {
+                if (con != null)
+                    connectionPool.releaseConnection(con);
+                if (preparedStatement != null)
+                    close(preparedStatement);
+            }
+        }
+        return true;
+    }
+
+    public boolean uploadResults() {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        String query = "UPDATE " + GAME_TABLE + " SET " + GAME_WINNER_ID + " = ? WHERE " + GAME_ID + " = ?";
+        try {
+            con = connectionPool.getConnection();
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, Statics.getGame().getGameId());
+            if (Statics.getGame().getWinner() != null) {
+                preparedStatement.setInt(2, Statics.getGame().getWinner().getUserId());
+            } else {
+                return false;
+            }
+            preparedStatement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (con != null)
+                connectionPool.releaseConnection(con);
+            if (preparedStatement != null)
+                close(preparedStatement);
+        }
+        return true;
     }
 }
