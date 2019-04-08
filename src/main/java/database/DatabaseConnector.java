@@ -267,9 +267,9 @@ public class DatabaseConnector {
      */
     public Game[] getGames(int hostid) {
         Game[] games;
-        String query = "SELECT " + USERS_TABLE + "." + USERS_USERNAME + "," + USERS_TABLE + "." + USERS_WINS + "," + GAME_TABLE + "." + GAME_ID + "," + GAME_TABLE + "." + GAME_HOST_ID + "," +
-                "" + GAME_TABLE + "." + GAME_JOIN_ID + "," + GAME_TABLE + "." + GAME_NAME +
-                " FROM " + USERS_TABLE + "" +
+        String query = "SELECT " + USERS_TABLE + "." + USERS_USERNAME + "," + USERS_TABLE + "." + USERS_WINS + "," + GAME_TABLE + "." + GAME_ID + ","
+                + GAME_TABLE + "." + GAME_HOST_ID + "," + "" + GAME_TABLE + "." + GAME_JOIN_ID + ","
+                + GAME_TABLE + "." + GAME_NAME + " FROM " + USERS_TABLE + "" +
                 " INNER JOIN " + GAME_TABLE + " ON " + GAME_TABLE + "." + GAME_HOST_ID + " = " + USERS_TABLE + "." + USERS_ID;
 
         if (hostid != -1) query += " WHERE " + GAME_HOST_ID + " = ?";

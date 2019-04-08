@@ -40,9 +40,6 @@ public class MenuTemplateController extends ViewComponent {
     private AnchorPane switchPane;
 
     @FXML
-    private ImageView mainMenuOptionsImage;
-
-    @FXML
     private Text mainMenuLoggedInText;
 
 
@@ -55,7 +52,6 @@ public class MenuTemplateController extends ViewComponent {
         assert mainMenuLoginButton != null : "fx:id=\"mainMenuLoginButton\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
         assert mainMenuSignupButton != null : "fx:id=\"mainMenuSignupButton\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
         assert switchPane != null : "fx:id=\"switchPane\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
-        assert mainMenuOptionsImage != null : "fx:id=\"mainMenuOptionsImage\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
         assert mainMenuLoggedInText != null : "fx:id=\"mainMenuLoggedInText\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
 
         switchView("MainMenu");
