@@ -41,7 +41,7 @@ public class Game {
 
     private ArrayList<String> actionCache = new ArrayList<>();
     private ArrayList<String> uploadActionCache = new ArrayList<>();
-
+    //depricated constructor
     public Game(int gameid,String gameName, BattleshipUser hostUser) {
         this(gameid,gameName, hostUser, false);
     }

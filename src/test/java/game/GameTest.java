@@ -10,44 +10,51 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
     BattleshipUser hostUser;
     BattleshipUser joinUser;
-    Game testGame;
+    Game testHostGame;
+    Game testJoinGame;
 
     @BeforeEach
     void setUp() {
         hostUser = new BattleshipUser(1, "dolan", "1234", "dolanmail@gmail.com", 1, 1);
         joinUser = new BattleshipUser(2, "dolan2", "1234", "dolanmail@gmail.com", 1, 1);
-        testGame = new Game(1, hostUser);
+        testHostGame = new Game(1, "Dolan's game", hostUser, true);
+        testJoinGame = new Game(1, "Dolan's game", hostUser, false);
+
     }
 
     @AfterEach
     void tearDown() {
     hostUser = null;
     joinUser = null;
-    testGame = null;
+    testHostGame = null;
     }
 
     @Test
     void getGameId() {
-        assertEquals(1, testGame.getGameId());
+        assertEquals(1, testHostGame.getGameId());
     }
 
     @Test
-    void getGameName() {
-
+    void getGameName() { 
+        assertEquals("Dolan's game", testHostGame.getGameName());
+        assertEquals("Dolan's game", testJoinGame.getGameName());
     }
 
     @Test
     void isHosting() {
-
+        assertTrue(testHostGame.isHosting());
+        assertTrue(testHostGame.isHosting());
     }
 
     @Test
     void getHostUser() {
-
+        assertEquals(hostUser.getUserId(), testHostGame.getHostUser().getUserId());
     }
 
     @Test
     void getJoinUser() {
+        assertEquals(joinUser, testJoinGame.getJoinUser());
+
     }
 
     @Test
@@ -87,9 +94,9 @@ class GameTest {
 
     @Test
     void incMoveID() {
-        int moveId = testGame.getMoveId();
-        testGame.incMoveID();
-        assertEquals(moveId+1, testGame.getMoveId());
+        int moveId = testHostGame.getMoveId();
+        testHostGame.incMoveID();
+        assertEquals(moveId+1, testHostGame.getMoveId());
     }
 
     @Test
@@ -129,22 +136,22 @@ class GameTest {
 
 //    @Test
 //    void isGameOver() {
-//        testGame.board1.shipsRemaining() = 0;
-//        testGame.board2.shipsRemaining() = 1;
-//        assertTrue(testGame.isGameOver());
+//        testHostGame.board1.shipsRemaining() = 0;
+//        testHostGame.board2.shipsRemaining() = 1;
+//        assertTrue(testHostGame.isGameOver());
 //
-//        testGame.board1.shipsRemaining() = 1;
-//        testGame.board2.shipsRemaining() = 0;
-//        assertTrue(testGame.isGameOver());
+//        testHostGame.board1.shipsRemaining() = 1;
+//        testHostGame.board2.shipsRemaining() = 0;
+//        assertTrue(testHostGame.isGameOver());
 //
-//        testGame.board1.shipsRemaining() = 1;
-//        testGame.board2.shipsRemaining() = 0;
-//        assertFalse(testGame.isGameOver());
+//        testHostGame.board1.shipsRemaining() = 1;
+//        testHostGame.board2.shipsRemaining() = 0;
+//        assertFalse(testHostGame.isGameOver());
 //    }
 
     @Test
     void getMoveId() {
-        assertEquals(-1, testGame.getMoveId());
+        assertEquals(-1, testHostGame.getMoveId());
     }
 
     @Test
@@ -158,13 +165,13 @@ class GameTest {
 
     @Test
     void isGameOpen() {
-       assertEquals(true, testGame.isGameOpen());
+       assertEquals(true, testHostGame.isGameOpen());
     }
 
     @Test
     void setGameOpen() {
-        testGame.setGameOpen(false);
-        assertEquals(false, testGame.isGameOpen());
+        testHostGame.setGameOpen(false);
+        assertEquals(false, testHostGame.isGameOpen());
     }
 
 
