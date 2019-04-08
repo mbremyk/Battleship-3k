@@ -31,6 +31,7 @@ public class Constants {
     public static final String USERS_SALT = "salt";
     public static final String USERS_TOTAL_GAMES = "total_games";
     public static final String USERS_RATIO = "ratio";
+    public static final String USERS_LOGGED_IN = "logged_in";
 
     //Board table column names
     public static final String BOARDS_TABLE = "battleship_board";
@@ -44,6 +45,7 @@ public class Constants {
     public static final String GAME_NAME = "name";
     public static final String GAME_HOST_ID = "host_id";
     public static final String GAME_JOIN_ID = "join_id";
+    public static final String GAME_WINNER_ID = "winner_id";
 
     //Action table columns names
     public static final String ACTION_TABLE = "battleship_action";

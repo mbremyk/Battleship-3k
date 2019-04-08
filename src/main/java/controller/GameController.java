@@ -94,8 +94,8 @@ public class GameController extends ViewComponent {
         gameMainPane.getChildren().addAll(board1, board2, board1Shadow, board2Shadow);
         board1.addDefaultShips(true);
         //Wait thread
-        PullThread pullThread = new PullThread(this);
-        pullThread.start();
+        Statics.setPullThread(new PullThread(this));
+        Statics.getPullThread().start();
         board2.setShipsMouseTransparent(true);
         gameMainPane.getChildren().add(mouseFollower);
         //-------------------------------------------------

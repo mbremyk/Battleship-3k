@@ -7,11 +7,21 @@
 
 package game;
 
+import database.PullThread;
 import model.BattleshipUser;
 
 public class Statics {
     private static  Game game;
     private static BattleshipUser localUser;
+    private static PullThread pullThread;
+
+    public static PullThread getPullThread() {
+        return pullThread;
+    }
+
+    public static void setPullThread(PullThread pullThread) {
+        Statics.pullThread = pullThread;
+    }
 
     public static Game getGame() {
         return game;
