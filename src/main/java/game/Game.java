@@ -5,8 +5,6 @@
  */
 
 package game;
-
-import database.Constants;
 import database.DatabaseConnector;
 import model.BattleshipUser;
 
@@ -121,6 +119,7 @@ public class Game {
         try {
             for (Iterator<String> it = actionCache.iterator(); it.hasNext(); ) {
                 String coords = it.next();
+                System.out.println(coords);
                 if (coords != null) doAction(coords);
                 it.remove();
             }
