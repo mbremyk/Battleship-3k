@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConnectionPool{
+public class ConnectionPool {
 
     private String url;
     private List<Connection> connectionPool;
     private List<Connection> usedConnections = new ArrayList<>();
     private static int INITIAL_POOL_SIZE = 2;
 
-    public ConnectionPool(String url, List<Connection> connectionPool){
+    public ConnectionPool(String url, List<Connection> connectionPool) {
         this.url = url;
         this.connectionPool = connectionPool;
     }
@@ -36,9 +36,17 @@ public class ConnectionPool{
 
     public Connection getConnection() {
         Connection connection = null;
-        if(connectionPool.size()>0) {
+        if (connectionPool.size() > 0) {
             connection = connectionPool
                     .remove(connectionPool.size() - 1);
+            try {
+                if (!connection.isValid(0)) {
+                    connection = createConnection(url);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Exception in ConnectionPool");
+            }
             usedConnections.add(connection);
         }
         return connection;
