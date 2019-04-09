@@ -91,7 +91,7 @@ public class FeedbackController extends ViewComponent{
     }
 
     /**
-     * Method to get the ma
+     * Method to get the main AnchorPane of this controller's fxml file
      *
      * @return the main AnchorPane of this controller's fxml file
      */
