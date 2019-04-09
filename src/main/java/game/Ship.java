@@ -94,26 +94,6 @@ public class Ship extends Rectangle {
             totalPositionOffsetX += positionOffsetX;
             totalPositionOffsetY += positionOffsetY;
         }
-//        positionOffsetX = 0;
-//        positionOffsetY = 0;
-    }
-
-    /**
-     * Checks if the ship is completely inside the parent Board
-     *
-     * @return true if ship is located completely inside the parent Board, else false
-     */
-    private boolean isInsideBoard() {
-//        double posX = getTileX()*Board.TILE_SIZE;//-positionOffsetX*Board.TILE_SIZE;
-//        double posY = getTileX()*Board.TILE_SIZE;//-positionOffsetY*Board.TILE_SIZE;
-//        if (posX > parentBoard.getTranslateX() && posY > parentBoard.getTranslateY()
-//                && posX + tilesX * Board.TILE_SIZE < parentBoard.getTranslateX() + parentBoard.getFitWidth()
-//                && posY + tilesY * Board.TILE_SIZE < parentBoard.getTranslateY() + parentBoard.getFitHeight()) {
-//            return true;
-//        }
-//        return false;
-
-        return false;
     }
 
     /**
@@ -189,16 +169,10 @@ public class Ship extends Rectangle {
 
     private void rotateRight() {
         rotation = (rotation + 90) % 360;
-//        int tempWidth = widthTiles;
-//        widthTiles = heightTiles;
-//        heightTiles = tempWidth;
 
         double rads = Math.toRadians(rotation);
         tilesX = (int) Math.round(Math.abs(widthTiles * Math.cos(rads) + heightTiles * Math.sin(rads)));
         tilesY = (int) Math.round(Math.abs(heightTiles * Math.cos(rads) + widthTiles * Math.sin(rads)));
-
-//        setTilePos(getTileX()+1,getTileY());//+tilesY/2);
-//        setTranslateX(getTranslateX()+Board.TILE_SIZE);
 
         offsetAdded = false;
         switch (rotation) {
@@ -217,27 +191,12 @@ public class Ship extends Rectangle {
             case 270:
                 positionOffsetX = -(widthTiles - 1);
                 positionOffsetY = widthTiles - 1 - (heightTiles - 1);
-//                positionOffsetX = -2;
-//                positionOffsetY = 1;
                 break;
         }
-//        positionOffsetX = Board.TILE_SIZE;
-//        System.out.println(positionOffsetX);
-//        System.out.println(getTranslateX());
         updateBasePosition();
         updatePosition();
 
-//        System.out.println(getTileX() + "," + getTileY() + "," + positionOffsetX + "," + positionOffsetY);
-        System.out.println(getTileX() + "," + getTileY() + "," + totalPositionOffsetX + "," + totalPositionOffsetY);
-
-//        updateSize();
-//        setRotationAxis(new Point3D(getTranslateX(),getTranslateY(),0));
-//        setRotate(rotation);
-//        setTilePos(getTileX(),getTileY());
-//        if (rotation == 90)
-//            getTransforms().add(new Rotate(90, Board.TILE_SIZE / 2, Board.TILE_SIZE / 2, 0, Rotate.Z_AXIS));
         getTransforms().add(new Rotate(90, Board.TILE_SIZE / 2, Board.TILE_SIZE / 2, 0, Rotate.Z_AXIS));
-//        getTransforms().add(new Rotate(90, Board.TILE_SIZE/(2/heightTiles), Board.TILE_SIZE/(2/heightTiles),0, Rotate.Z_AXIS));
     }
 
     private void updateSize() {
