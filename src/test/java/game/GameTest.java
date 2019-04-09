@@ -1,5 +1,6 @@
 package game;
 
+import junit.framework.Assert;
 import model.BattleshipUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,8 @@ class GameTest {
         joinUser = new BattleshipUser(2, "dolan2", "1234", "dolanmail@gmail.com", 1, 1);
         testHostGame = new Game(1, "Dolan's game", hostUser, true);
         testJoinGame = new Game(1, "Dolan's game", hostUser, false);
-
+        this.setJoinUser();
+        this.setBoards();
     }
 
     @AfterEach
@@ -58,38 +60,23 @@ class GameTest {
     }
 
     @Test
-    void setJoinUser (BattleshipUser joinUser) {
-
-    }
-
-    @Test
-    void doAction() {
-
+    void setJoinUser () {
+        testJoinGame.setJoinUser(joinUser);
     }
 
     @Test
     void addCachedAction() {
+        testHostGame.addCachedAction("01,01");
+        assertEquals("01,01", testHostGame.getActionCache().get(testHostGame.getActionCache().size()-1));
 
+        testHostGame.addCachedAction("10,10");
+        assertEquals("10,10", testHostGame.getActionCache().get(testHostGame.getActionCache().size()-1));
     }
 
     @Test
     void doCachedAction() {
-
-    }
-
-    @Test
-    void addUploadCachedActions() {
-
-    }
-
-    @Test
-    void uploadCachedActions() {
-
-    }
-
-    @Test
-    void uploadCachedActions() {
-
+        testHostGame.doCachedActions();
+//        assertEquals(0, testHostGame.getBoard1().getBoard()[0][0]);
     }
 
     @Test
@@ -101,33 +88,27 @@ class GameTest {
 
     @Test
     void isMyTurn() {
+        testHostGame.setMyTurn(true);
+        assertTrue(testHostGame.isMyTurn());
 
+        testHostGame.setMyTurn(false);
+        assertFalse(testHostGame.isMyTurn());
     }
 
+    //duplicated by isMyTurn()
     @Test
      void setMyTurn() {
+        testHostGame.setMyTurn(true);
+        assertTrue(testHostGame.isMyTurn());
 
-    }
-
-    @Test
-    void allActionsUploaded() {
-
+        testHostGame.setMyTurn(false);
+        assertFalse(testHostGame.isMyTurn());
     }
 
     @Test
     void isGameOver() {
+        //place ships on board first
 
-    }
-
-    @Test
-    void getGameResult() {
-
-    }
-
-
-    @Test
-    void move() {
-        //trenger koordinat-syntaks
     }
 
     @Test
@@ -136,7 +117,7 @@ class GameTest {
 
 //    @Test
 //    void isGameOver() {
-//        testHostGame.board1.shipsRemaining() = 0;
+//        testHostGame.getBoard1().getBoard().shipsRemaining = 0;
 //        testHostGame.board2.shipsRemaining() = 1;
 //        assertTrue(testHostGame.isGameOver());
 //
@@ -161,6 +142,7 @@ class GameTest {
 
     @Test
     void setBoards() {
+        //testHostGame.setBoards(new Board()); HJELP
     }
 
     @Test
@@ -193,5 +175,15 @@ class GameTest {
 
     @Test
     void testToString() {
+        String exp = "Game{" +
+                "gameId=1" +
+                ", hostUser=" + hostUser +
+                ", joinUser=" + joinUser +
+                ", board1=" + testHostGame.getBoard1() +
+                ", board2=" + testHostGame.getBoard2() +
+//				", databaseConnector=" + databaseConnector +
+                ", gameName='" + "Dolan's game" + '\'' +
+                ", gameOpen=" + testHostGame.isGameOpen() +
+                '}';
     }
 }

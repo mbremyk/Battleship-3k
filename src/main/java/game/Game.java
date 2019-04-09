@@ -60,6 +60,20 @@ public class Game {
         }
     }
 
+    //testing
+    public Board getBoard1() {
+        return board1;
+    }
+    //testing
+    public ArrayList<String> getActionCache() {
+        return actionCache;
+    }
+
+    //testing
+    public Board getBoard2() {
+        return board2;
+    }
+
     public int getGameId() {
         return gameId;
     }
