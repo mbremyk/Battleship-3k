@@ -33,13 +33,7 @@ public class GameController extends ViewComponent {
     private URL location;
 
     @FXML
-    private AnchorPane gameToolsPane;
-
-    @FXML
     private Text gameOpponentNameText;
-
-    @FXML
-    private AnchorPane gameAttacksPane;
 
     @FXML
     private Text gameGameNameText;
@@ -53,8 +47,6 @@ public class GameController extends ViewComponent {
     @FXML
     private AnchorPane gameMainPane;
 
-    @FXML
-    private ImageView gameOptionsImage;
 
     private MouseFollower mouseFollower;
     private Board board1;
@@ -70,14 +62,11 @@ public class GameController extends ViewComponent {
 
     @FXML
     void initialize() {
-        assert gameToolsPane != null : "fx:id=\"gameToolsPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameOpponentNameText != null : "fx:id=\"gameOpponentNameText\" was not injected: check your FXML file 'Game.fxml'.";
-        assert gameAttacksPane != null : "fx:id=\"gameAttacksPane\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameGameNameText != null : "fx:id=\"gameGameNameText\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameReadyButton != null : "fx:id=\"gameReadyButton\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameUserNameText != null : "fx:id=\"gameUserNameText\" was not injected: check your FXML file 'Game.fxml'.";
         assert gameMainPane != null : "fx:id=\"gameMainPane\" was not injected: check your FXML file 'Game.fxml'.";
-        assert gameOptionsImage != null : "fx:id=\"gameOptionsImage\" was not injected: check your FXML file 'Game.fxml'.";
         addUIComponents();
         updateText();
     }
@@ -89,8 +78,8 @@ public class GameController extends ViewComponent {
     private void addUIComponents() {
         mouseFollower = new MouseFollower();
         mouseFollower.setVisible(false);
-        board1 = new Board(gameMainPane, 250, 200);
-        board2 = new Board(gameMainPane, 650, 200);
+        board1 = new Board(gameMainPane, 50, 200);
+        board2 = new Board(gameMainPane, 450, 200);
         board1Shadow = new Rectangle(board1.getTranslateX(), board1.getTranslateY(), board1.getFitWidth(), board1.getFitHeight());
         board2Shadow = new Rectangle(board2.getTranslateX(), board2.getTranslateY(), board2.getFitWidth(), board2.getFitHeight());
         board1Shadow.setOpacity(0.5);
@@ -105,8 +94,8 @@ public class GameController extends ViewComponent {
         gameMainPane.getChildren().addAll(board1, board2, board1Shadow, board2Shadow);
         board1.addDefaultShips(true);
         //Wait thread
-        PullThread pullThread = new PullThread(this);
-        pullThread.start();
+        Statics.setPullThread(new PullThread(this));
+        Statics.getPullThread().start();
         board2.setShipsMouseTransparent(true);
         gameMainPane.getChildren().add(mouseFollower);
         //-------------------------------------------------
@@ -369,6 +358,6 @@ public class GameController extends ViewComponent {
      */
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane) gameToolsPane.getParent();
+        return (AnchorPane) gameMainPane.getParent();
     }
 }
