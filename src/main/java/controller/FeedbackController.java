@@ -1,4 +1,7 @@
-
+/**
+ * Controller class for FeedbackMenu.fxml
+ * Allows the user to write feedback and upload it to the database
+ */
 
 package controller;
 
@@ -7,8 +10,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import database.DatabaseConnector;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextFormatter;
@@ -64,23 +65,38 @@ public class FeedbackController extends ViewComponent{
         feedbackTextArea.setWrapText(true);
 
         feedbackSubmitButton.setOnAction(event -> {
-            submitButtonPressed();
+            uploadFeedback();
         });
 
     }
 
-    public void submitButtonPressed(){
+    /**
+     * Uploads the written feedback via a DatabaseConnector
+     */
+    private void uploadFeedback(){
         DatabaseConnector connector = new DatabaseConnector();
         if(connector.uploadFeedback(titleTextArea.getText(),feedbackTextArea.getText())){
             charText.setText("Thank you for your feedback!");
         }
     }
 
+    /**
+     * Signals that the text field has changed,
+     * and updates the text showing maximum characters in the text field
+     *
+     * @param newValue the new string in the message box
+     */
+    private void textFieldChange(String newValue){
+        charText.setText("" + newValue.length() + "/255 characters");
+    }
+
+    /**
+     * Method to get the ma
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) feedbackCancelButton.getParent();
-    }
-    private void textFieldChange(String newValue){
-      charText.setText("" + newValue.length() + "/255 characters");
     }
 }
