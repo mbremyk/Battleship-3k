@@ -80,6 +80,11 @@ public class HostGameController extends ViewComponent {
         return false;
     }
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) hostGameCancelButton.getParent();

@@ -85,6 +85,11 @@ public class GameResultMenuController extends ViewComponent {
             switchView("MenuTemplate", true);});
     }
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) rematchButton.getParent();

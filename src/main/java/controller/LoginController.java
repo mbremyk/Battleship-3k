@@ -48,9 +48,6 @@ public class LoginController extends ViewComponent {
     @FXML
     private TextField loginUsernameField;
 
-    /**
-     *
-     */
 
     @FXML
     void initialize() {
@@ -77,6 +74,9 @@ public class LoginController extends ViewComponent {
         });
     }
 
+    /**
+     * Checks if the inputted username exists and if the password is correct, then logs the user in
+     */
     public void loginButtonPressed() {
         BattleshipUser user = Login.login(loginUsernameField.getText(), loginPasswordField.getText());
         if (user != null) {
@@ -103,6 +103,11 @@ public class LoginController extends ViewComponent {
         }
     }
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) loginCancelButton.getParent();
