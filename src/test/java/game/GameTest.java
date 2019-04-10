@@ -1,3 +1,7 @@
+/**
+ * GameTest.java
+ * @author Grande Trym
+ */
 package game;
 
 import junit.framework.Assert;

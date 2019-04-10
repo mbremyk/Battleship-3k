@@ -1,6 +1,6 @@
 /**
  * Game.java
- *
+ * @author Thorkildsen Torje
  * @author Grande Trym
  */
 
@@ -14,9 +14,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * two boards
- * what players are playing
- * graphical logic
+ * Most of the game logic
  */
 public class Game {
     private boolean hosting; //If the local player is hosting
@@ -41,11 +39,24 @@ public class Game {
 
     private ArrayList<String> actionCache = new ArrayList<>();
     private ArrayList<String> uploadActionCache = new ArrayList<>();
-    //depricated constructor
+
+    /**
+     * @deprecated
+     * @param gameid
+     * @param gameName
+     * @param hostUser
+     */
     public Game(int gameid,String gameName, BattleshipUser hostUser) {
         this(gameid,gameName, hostUser, false);
     }
 
+    /**
+     * constructs new game either when user hosts or joins game
+     * @param gameid used as PK in database to identify game. Hosting game and joining game have the same gameid.
+     * @param gameName used to identify a game for the user. Appears in the games-table while joining and at the top during a game.
+     * @param hostUser the user hosting the game
+     * @param hosting signalizes whether the local user is hosting the game or not.
+     */
     public Game(int gameid,String gameName, BattleshipUser hostUser, boolean hosting) {
 //		databaseConnector = new DatabaseConnector(Constants.DB_URL);
         this.gameId = gameid;
@@ -60,18 +71,29 @@ public class Game {
         }
     }
 
-    //testing
+    /**
+     * helper method for unit testing
+     *
+     * @return
+     */
     public Board getBoard1() {
         return board1;
     }
-    //testing
-    public ArrayList<String> getActionCache() {
-        return actionCache;
-    }
 
-    //testing
+    /**
+     * helper method for unit testing
+     * @return
+     */
     public Board getBoard2() {
         return board2;
+    }
+
+    /**
+     * helper method for unit testing
+     * @return
+     */
+    public ArrayList<String> getActionCache() {
+        return actionCache;
     }
 
     public int getGameId() {
@@ -98,6 +120,10 @@ public class Game {
         this.joinUser = newUser;
     }
 
+    /**
+     * executes an attack action on the opponent's board
+     * @param coordinates xx,yy for where on the 10x10 board to attack
+     */
     public void doAction(String coordinates) {
         String[] coords = coordinates.split(",");
         int x = Integer.parseInt(coords[0]);
@@ -119,6 +145,10 @@ public class Game {
         }
     }
 
+    /**
+     * adds an attack action to a queue
+     * @param coords xx,yy for where on the 10x10 board to attack
+     */
     public void addCachedAction(String coords) {
         try {
             for (Iterator<String> it = actionCache.iterator(); it.hasNext(); ) {
@@ -131,6 +161,9 @@ public class Game {
         }
     }
 
+    /**
+     * sends all queued actions to be executed in doAction()
+     */
     public void doCachedActions() {
         try {
             for (Iterator<String> it = actionCache.iterator(); it.hasNext(); ) {
@@ -144,6 +177,10 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @param coords
+     */
     public void addUploadAction(String coords) {
         try {
             for (Iterator<String> it = uploadActionCache.iterator(); it.hasNext(); ) {
@@ -156,6 +193,11 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @param remove
+     * @param status
+     */
     public void uploadCachedActions(String remove, int status) {
 //        System.out.println("REUP: "+moveId);
         try {
@@ -168,6 +210,9 @@ public class Game {
         }
     }
 
+    /**
+     *
+     */
     public void uploadCachedActions() {
         DatabaseConnector db = new DatabaseConnector();
         int status = 0;
@@ -198,6 +243,11 @@ public class Game {
         this.myTurn = myTurn;
     }
 
+    /**
+     * checks if all actions are uploaded to database
+     * @return true: all actions are uploaded
+     * @return false: all actions are NOT uploaded
+     */
     public boolean allActionsUploaded(){
         for(String s: uploadActionCache){
             if(s!=null) return false;
@@ -205,6 +255,10 @@ public class Game {
         return true;
     }
 
+    /**
+     * checks if game is over
+     * @return true if game is over, otherwise false
+     */
     public boolean isGameOver() {
         boolean status = false;
         if (board1.shipsRemaining() == 0 || board2.shipsRemaining() == 0) {
@@ -217,9 +271,6 @@ public class Game {
     public int getMoveId() {
         return moveId;
     }
-
-//    public void userJoined() {
-//    }
 
     // mOtherfuckers be making method for gameover and last move id, and incomming move
     //returns 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
@@ -235,6 +286,11 @@ public class Game {
         return -1;
     }
 
+    /**
+     * gives the game two boards to play on
+     * @param board1
+     * @param board2
+     */
     public void setBoards(Board board1, Board board2) {
         this.board1 = board1;
         this.board2 = board2;
@@ -264,6 +320,10 @@ public class Game {
         this.shipsMovable = shipsMovable;
     }
 
+    /**
+     * desides loser of a game
+     * @param loser user that lost the game
+     */
     public void setLoser(BattleshipUser loser) {
         this.loser = loser;
         this.winner = Statics.getGame().getHostUser().getUserId() == loser.getUserId() ? Statics.getGame().getJoinUser() : Statics.getGame().getHostUser();
@@ -273,6 +333,10 @@ public class Game {
         return this.winner;
     }
 
+    /**
+     * standard toString()
+     * @return textual representation of the game object
+     */
     @Override
     public String toString() {
         return "Game{" +
