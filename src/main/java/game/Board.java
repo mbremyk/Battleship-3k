@@ -74,6 +74,11 @@ public class Board extends ImageView {
         });
     }
 
+    /**
+     * 
+     * @param x
+     * @param y
+     */
     public void findMousePos(double x, double y) {
         mousePosX = (int) (x / TILE_SIZE);
         mousePosY = (int) (y / TILE_SIZE);
