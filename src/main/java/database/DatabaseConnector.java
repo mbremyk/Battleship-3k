@@ -429,7 +429,7 @@ public class DatabaseConnector {
                     return true;
                 }
             } else {
-                System.out.println("NOT READY");
+//                System.out.println("NOT READY");
             }
         } catch (Exception e) {
             e.printStackTrace();
