@@ -1,3 +1,8 @@
+/**
+ * The controller for all game related objects.
+ *
+ * @Author Thorkildsen Torje
+ */
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -8,18 +13,11 @@ import java.util.ResourceBundle;
 
 import database.DatabaseConnector;
 import database.PullThread;
-import effects.DownScaler;
 import effects.Scaler;
-import effects.Shaker;
 import game.*;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import model.BattleshipUser;

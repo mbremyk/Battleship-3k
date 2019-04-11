@@ -1,7 +1,11 @@
 /**
  * Board.java
  *
- * @author
+ * Loads a grid and calculates the tile positions of the cursor.
+ * Has an ArrayList of ship objects, and can upload the positions of the ships via a DatabaseConnector
+ * Uploads and downloads attacks to/from the database
+ *
+ * @author Thorkildsen Torje
  */
 
 package game;
@@ -18,11 +22,6 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-/**
- * info on where objects are located on the board
- * attack logic
- */
-
 public class Board extends ImageView {
     public static final int SIZE = 300; //Width and height of image
     public static final int TILES = 10; //Tiles in x and y direction
@@ -32,17 +31,25 @@ public class Board extends ImageView {
     private int mousePosY = -1;
     private final AnchorPane parent;
 
-    private int[][] board;
-    /*
-    -2 = ship, attacked and destroyed
-    -1 = no ship but tile attacked
-    0 = no ship, not attacked
-    n>0 = ship number n in the ArrayList ships, not attacked
+    /**
+     * 2D-array with information about the tiles in the grid
+     *
+     * -2 = ship, attacked and destroyed
+     * -1 = no ship but tile attacked
+     * 0 = no ship, not attacked
+     * >0 = ship number n in the ArrayList ships, not attacked
      */
+    private int[][] board;
 
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
-
+    /**
+     * Initiates a new Board object that can be used to display a grid
+     *
+     * @param parent The parent AnchorPane of this object
+     * @param x The x position of this object
+     * @param y The y position of this object
+     */
     public Board(AnchorPane parent, double x, double y) {
         super(new Image("./grid10x10.png"));
         this.parent = parent;
