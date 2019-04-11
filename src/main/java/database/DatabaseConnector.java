@@ -567,7 +567,7 @@ public class DatabaseConnector {
 
 
     public boolean uploadFeedback(String title, String message) {
-        if (title == "" || message == "" || title == null || message == null) {
+        if (title.equals("") || message.equals("")) {
             return false;
         } else {
             Connection con = null;
