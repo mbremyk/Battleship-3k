@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="gameMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="800.0" style="-fx-background-color: #90caf9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
-      <ImageView fitHeight="646.0" fitWidth="800.0" layoutY="47.0" opacity="0.3" pickOnBounds="true">
+      <ImageView fitHeight="646.0" fitWidth="800.0" layoutY="47.0" opacity="0.4" pickOnBounds="true">
          <image>
             <Image url="/Water.png" />
          </image>
@@ -17,7 +17,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff212127" height="646.0" layoutX="400.0" layoutY="47.0" stroke="TRANSPARENT" strokeType="INSIDE" width="404.0" />
       <AnchorPane prefHeight="47.0" prefWidth="800.0" style="-fx-background-color: #5d99c6;">
          <children>
-            <Text fx:id="gameGameNameText" fill="WHITE" layoutX="139.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME" textAlignment="CENTER" wrappingWidth="523.0">
+            <Text fx:id="gameGameNameText" fill="WHITE" layoutX="139.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME NAME" textAlignment="CENTER" wrappingWidth="523.0">
                <font>
                   <Font name="PixelTorje" size="36.0" />
                </font>
