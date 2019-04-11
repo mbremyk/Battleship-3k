@@ -32,9 +32,6 @@ public class MainMenuController extends ViewComponent {
     @FXML
     private JFXButton mainMenuLeaderboardButton;
 
-    /**
-     * Standard JavaFX method
-     */
 
     @FXML
     void initialize() {
@@ -59,6 +56,11 @@ public class MainMenuController extends ViewComponent {
 
     }
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) mainMenuHostButton.getParent();

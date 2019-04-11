@@ -43,10 +43,6 @@ public class MenuTemplateController extends ViewComponent {
     private Text mainMenuLoggedInText;
 
 
-
-    /**
-     * Standard...
-     */
     @FXML
     void initialize() {
         assert mainMenuLoginButton != null : "fx:id=\"mainMenuLoginButton\" was not injected: check your FXML file 'MenuTemplate.fxml'.";
@@ -68,6 +64,11 @@ public class MenuTemplateController extends ViewComponent {
         });
     }
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return switchPane;

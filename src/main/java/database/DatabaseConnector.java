@@ -1,5 +1,11 @@
 /**
  * DatabaseConnector.java
+ * @Author Brevik Magnus
+ * @Author Bjerke Thomas
+ * @Author Gulaker Kristian
+ * @Author Thorkildsen Torje
+ * @Author Granli Hans Kristian Olsen
+ * @Author Grande Trym
  * <p>
  * Handles all connections with the database
  * </p>

@@ -1,7 +1,11 @@
 /**
  * Board.java
+ * <p>
+ * Loads a grid and calculates the tile positions of the cursor.
+ * Has an ArrayList of ship objects, and can upload the positions of the ships via a DatabaseConnector
+ * Uploads and downloads attacks to/from the database
  *
- * @author
+ * @author Thorkildsen Torje
  */
 
 package game;
@@ -18,11 +22,6 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-/**
- * info on where objects are located on the board
- * attack logic
- */
-
 public class Board extends ImageView {
     public static final int SIZE = 300; //Width and height of image
     public static final int TILES = 10; //Tiles in x and y direction
@@ -32,17 +31,25 @@ public class Board extends ImageView {
     private int mousePosY = -1;
     private final AnchorPane parent;
 
-    private int[][] board;
-    /*
-    -2 = ship, attacked and destroyed
-    -1 = no ship but tile attacked
-    0 = no ship, not attacked
-    n>0 = ship number n in the ArrayList ships, not attacked
+    /**
+     * 2D-array with information about the tiles in the grid
+     *
+     * -2 = ship, attacked and destroyed
+     * -1 = no ship but tile attacked
+     * 0 = no ship, not attacked
+     * >0 = ship number n in the ArrayList ships, not attacked
      */
+    private int[][] board;
 
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
-
+    /**
+     * Initiates a new Board object that can be used to display a grid
+     *
+     * @param parent the parent AnchorPane of this object
+     * @param x the x position of this object
+     * @param y the y position of this object
+     */
     public Board(AnchorPane parent, double x, double y) {
         super(new Image("./grid10x10.png"));
         this.parent = parent;
@@ -67,14 +74,23 @@ public class Board extends ImageView {
         });
     }
 
+    /**
+     * Finds the mouse's position in this Board's grid, and stores it in the class variables mousePosX and mousePosY
+     *
+     * @param x the x-position of the mouse in the board, where x=0 is the upper left corner of the board
+     * @param y the y-position of the mouse in the board, where y=0 is the upper left corner of the board
+     */
     public void findMousePos(double x, double y) {
         mousePosX = (int) (x / TILE_SIZE);
         mousePosY = (int) (y / TILE_SIZE);
     }
 
     /**
-     * @param ship
-     * @return String in database-form coordinates
+     * Registers a ship in the class variable "board", which is a 2D-array
+     * Sets grid-positions the ship occupy to the ship's index in the ship-array
+     *
+     * @param ship the ship that should be registered
+     * @return coordinates in database-form string
      */
     public String registerShip(Ship ship) {
         String ret = "";
@@ -94,7 +110,10 @@ public class Board extends ImageView {
     }
 
     /**
-     * Confirms the placements of the ships by adding them to the board
+     * Confirms the placements of the ships by adding them to the board.
+     * Uploads their coordinates to the database if no ships are overlapping.
+     *
+     * @return an ArrayList of the ships that are overlapping, null if ship placements are valid
      */
     public ArrayList<Ship> uploadShipCoordinates() {
         ArrayList<Ship> overlappingShips = checkNoShipsOverlap();
@@ -107,17 +126,14 @@ public class Board extends ImageView {
         shipCoordinates = shipCoordinates.substring(0, shipCoordinates.length() - 1);
 
         DatabaseConnector databaseConnector = new DatabaseConnector();
-//        System.out.println("Registered ships:\n" + toString());
-//        System.out.println("In database coordinates:\n" + shipCoordinates);
-        boolean uploadStatus = databaseConnector.uploadShipCoordinates(shipCoordinates);
-//        System.out.println("Board uploaded: " + uploadStatus);
+        databaseConnector.uploadShipCoordinates(shipCoordinates);
         return null;
     }
 
     /**
      * Checks if any ships are overlapping
      *
-     * @return boolean, true if no ships are overlapping and false otherwise
+     * @return true if no ships are overlapping and false otherwise
      */
     private ArrayList<Ship> checkNoShipsOverlap() {
         ArrayList<Ship> overlappingShips = null;
@@ -138,6 +154,12 @@ public class Board extends ImageView {
         return overlappingShips;
     }
 
+    /**
+     * Adds an Array of ships to an existing ArrayList
+     *
+     * @param original the original ArrayList that's getting more ships
+     * @param extra the new ships that will be added to the ArrayList
+     */
     private void addToShipArray(ArrayList original, Ship[] extra) {
         for (Ship ship : extra) {
             if (original.indexOf(ship) == -1) {
@@ -149,9 +171,9 @@ public class Board extends ImageView {
     /**
      * Checks if two ships are overlapping on the board
      *
-     * @param ship1
-     * @param ship2
-     * @return boolean, true if the ships overlap and false if not
+     * @param ship1 ship number 1
+     * @param ship2 ship number 2
+     * @return true if the ships overlap and false if not
      */
     private Ship[] shipsOverlap(Ship ship1, Ship ship2) {
         int[] pos1 = ship1.getBasePosition();
@@ -173,11 +195,11 @@ public class Board extends ImageView {
     /**
      * Registers ship coordinates from a base x and y, width and height, like the coordinates DatabaseConnector.java gives you
      *
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param shipIndex
+     * @param x the ship's upper left corner's x-position in the grid
+     * @param y the ship's upper left corner's y-position in the grid
+     * @param width the width of the ship
+     * @param height the height of the ship
+     * @param shipIndex the ship's index, which is its index in the ship ArrayList
      */
     public void registerShipCoordinates(int x, int y, int width, int height, int shipIndex) {
         for (int w = 0; w < width; w++) {
@@ -194,7 +216,7 @@ public class Board extends ImageView {
     /**
      * Adds a Ship object to the stage and registers it in the ships array
      *
-     * @return boolean, true if ship could be added and false if there was a problem (for example spaces occupied)
+     * @return true if ship could be added and false if there was a problem (for example spaces occupied)
      */
     public boolean addShip(Ship ship) {
         if (this.parent == null) return false;
@@ -216,8 +238,10 @@ public class Board extends ImageView {
     }
 
     /**
-     * @param gameid
-     * @param userid
+     * Loads ships from a game in the database based on a gameid and userid (of the game's host)
+     *
+     * @param gameid the id of the game in the database
+     * @param userid the id of the host user of the game in the database
      */
     public void loadShipsFromDatabase(int gameid, int userid) {
         DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -243,16 +267,24 @@ public class Board extends ImageView {
     }
 
     /**
-     * Attacks a spot on the board
+     * Attacks a tile on the board's grid
      *
-     * @param x
-     * @param y
-     * @return int -1 if tile already attacked, 0 if no boats, and 1 if boat
+     * @param x the x-position on the grid
+     * @param y the y-position on the grid
+     * @return -1 if tile already attacked, 0 if no boats, and 1 if boat
      */
     public int attack(int x, int y) {
         return attack(x, y, true);
     }
 
+    /**
+     * Attacks a tile on the board's grid
+     *
+     * @param x the x-position on the grid
+     * @param y the y-position on the grid
+     * @param upload true if the attack should be uploaded to the database
+     * @return -1 if tile already attacked, 0 if no boats, and 1 if boat
+     */
     public int attack(int x, int y, boolean upload) {
         Game game = Statics.getGame();
         if (!game.isBoardsReady() || game.isGameOver() && !upload) return -1;
@@ -287,10 +319,10 @@ public class Board extends ImageView {
     /**
      * Adds a square to a board that indicates if an attack has missed or hit
      *
-     * @param x
-     * @param y
-     * @param color
-     * @param image
+     * @param x the x-position on the grid
+     * @param y the y-position on the grid
+     * @param color the color of the square, set to null if an image should be used
+     * @param image the square's image, set to null if plain color
      */
     private void addTileColor(int x, int y, Color color, Image image) {
         Rectangle square = new Rectangle(Board.TILE_SIZE, Board.TILE_SIZE);
@@ -304,22 +336,37 @@ public class Board extends ImageView {
         downScaler.play();
     }
 
+    /**
+     * Adds an attack to the upload cache
+     * Will be uploaded later by the another thread
+     *
+     * @param x the x-position on the grid
+     * @param y the y-position on the grid
+     */
     private void uploadAttack(int x, int y) {
         String coordString = "";
         coordString += (x < 10) ? "0" + x : x;
         coordString += "," + ((y < 10) ? "0" + y : y);
 
-//        DatabaseConnector db = new DatabaseConnector();
-//        db.doAction(coordString);
         Statics.getGame().addUploadAction(coordString);
     }
 
+    /**
+     * Sets all ships either transparent or visible to mouse events
+     *
+     * @param transparent true if ships should be transparent to mouse events, false if they should be visible
+     */
     public void setShipsMouseTransparent(boolean transparent) {
         for (Ship ship : ships) {
             ship.setMouseTransparent(transparent);
         }
     }
 
+    /**
+     * Checks how many ships are not destroyed (are alive) and returns the amount
+     *
+     * @return the amount of ships remaining
+     */
     public int shipsRemaining() {
         if (ships.size() == 0) return -1; //If boards are not ready
         int count = 0;
@@ -329,18 +376,30 @@ public class Board extends ImageView {
         return count;
     }
 
+    /**
+     * Gets the mouse's x-position in the grid
+     *
+     * @return the class variable mousePosX, the mouse's x-position in the grid
+     */
     public int getMousePosX() {
         return mousePosX;
     }
 
+    /**
+     * Gets the mouse's y-position in the grid
+     *
+     * @return the class variable mousePosY, the mouse's y-position in the grid
+     */
     public int getMousePosY() {
         return mousePosY;
     }
 
-    public int[][] getBoard() {
-        return board;
-    }
-
+    /**
+     * Converts the class variable "board" which is a 2D-array with information about ship placement and attacked
+     * tiles to a String and returns it
+     *
+     * @return the 2D-array class variable "boards" as a String
+     */
     @Override
     public String toString() {
         String ret = "";
