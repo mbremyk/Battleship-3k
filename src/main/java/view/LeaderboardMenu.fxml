@@ -22,10 +22,7 @@
             <Font name="PixelTorje" size="36.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="leaderboardTable" layoutX="111.0" layoutY="84.0" prefHeight="255.0" prefWidth="573.0">
-        <columns>
-
-        </columns>
+      <TableView fx:id="leaderboardTable" layoutX="111.0" layoutY="84.0" prefHeight="255.0">
       </TableView>
    </children>
 </AnchorPane>
