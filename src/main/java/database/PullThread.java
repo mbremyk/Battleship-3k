@@ -55,6 +55,12 @@ public class PullThread extends Thread {
         }
         gameController.boardsReady();
 
+        try {
+            db.updateGameOver();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         boolean gameOver = game.isGameOver();
         int timer = 0;
         while ((!gameOver || !game.allActionsUploaded()) && running) {

@@ -411,8 +411,8 @@ public class DatabaseConnector {
         String query = "SELECT bb." + BOARDS_USER_ID + "," + USERS_USERNAME + " FROM " + BOARDS_TABLE + " bb JOIN " + USERS_TABLE + " bu ON bb." + BOARDS_USER_ID + "=bu." + USERS_ID + " WHERE " + BOARDS_GAME_ID + " = " + gameId;
         Connection con = null;
         try {
+            updateGameOver();
             con = connectionPool.getConnection();
-            if (con == null) return false;
             preparedStatement = con.prepareStatement(query);
             res = preparedStatement.executeQuery();
             if (res.next()) {
