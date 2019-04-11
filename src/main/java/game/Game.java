@@ -116,6 +116,10 @@ public class Game {
         return joinUser;
     }
 
+    /**
+     *
+     * @param newUser
+     */
     public void setJoinUser(BattleshipUser newUser) {
         this.joinUser = newUser;
     }
@@ -274,7 +278,11 @@ public class Game {
         return moveId;
     }
 
-    //returns 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
+    /**
+     * checks who won the game at the end of the game
+     * @return 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
+     */
+
     public int getGameResult(){
         if(isGameOver()){
             if(board1.shipsRemaining() != 0){
@@ -297,14 +305,26 @@ public class Game {
         this.board2 = board2;
     }
 
+    /**
+     *
+     * @return true if the game is joinable, false otherwise
+     */
     public boolean isGameOpen() {
         return gameOpen;
     }
 
+    /**
+     * sets game to open whenever it is waiting for user to join
+     * @param gameOpen true if the game is joinable, false otherwise
+     */
     public void setGameOpen(boolean gameOpen) {
         this.gameOpen = gameOpen;
     }
 
+    /**
+     * setter method for boardsReady object variable
+     * @param boardsReady true if both boards are uploaded to database after both players have pressed 'ready'
+     */
     public void setBoardsReady(boolean boardsReady) {
         this.boardsReady = boardsReady;
     }
