@@ -12,12 +12,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * JUnit testing of game logic in Game class
+ */
 class GameTest {
     BattleshipUser hostUser;
     BattleshipUser joinUser;
     Game testHostGame;
     Game testJoinGame;
 
+    /**
+     * sets up local test users with games and boards. Database related methods are not tested.
+     */
     @BeforeEach
     void setUp() {
         hostUser = new BattleshipUser(1, "dolan", "1234", "dolanmail@gmail.com", 1, 1);
@@ -28,46 +34,72 @@ class GameTest {
         this.setBoards();
     }
 
+    /**
+     * removes local user and game object after test is completed
+     */
     @AfterEach
     void tearDown() {
     hostUser = null;
     joinUser = null;
     testHostGame = null;
+    testJoinGame = null;
     }
 
+    /**
+     * checks that the inputed gameid is returned
+     */
     @Test
     void getGameId() {
         assertEquals(1, testHostGame.getGameId());
     }
 
+    /**
+     * checks that the inputed game name is returned
+     */
     @Test
     void getGameName() { 
         assertEquals("Dolan's game", testHostGame.getGameName());
         assertEquals("Dolan's game", testJoinGame.getGameName());
     }
 
+    /**
+     * checks that the inputed hoosting variable is returned
+     */
     @Test
     void isHosting() {
         assertTrue(testHostGame.isHosting());
         assertTrue(testHostGame.isHosting());
     }
 
+    /**
+     * checks that the set host user is returned
+     */
     @Test
     void getHostUser() {
         assertEquals(hostUser.getUserId(), testHostGame.getHostUser().getUserId());
     }
 
+    /**
+     * checks that the set join user is returned
+     */
     @Test
     void getJoinUser() {
         assertEquals(joinUser, testJoinGame.getJoinUser());
 
     }
 
+    /**
+     * checks that the joinUser can be set
+     */
     @Test
     void setJoinUser () {
         testJoinGame.setJoinUser(joinUser);
+        assertEquals(joinUser, testJoinGame.getJoinUser());
     }
 
+    /**
+     * checks if action has been added to the cache
+     */
     @Test
     void addCachedAction() {
         testHostGame.addCachedAction("01,01");
@@ -77,12 +109,18 @@ class GameTest {
         assertEquals("10,10", testHostGame.getActionCache().get(testHostGame.getActionCache().size()-1));
     }
 
+    /**
+     * checks if action is executed on board and board updates given coordinate
+     */
     @Test
     void doCachedAction() {
         testHostGame.doCachedActions();
 //        assertEquals(0, testHostGame.getBoard1().getBoard()[0][0]);
     }
 
+    /**
+     * checks if moveid is incremented
+     */
     @Test
     void incMoveID() {
         int moveId = testHostGame.getMoveId();
@@ -90,6 +128,9 @@ class GameTest {
         assertEquals(moveId+1, testHostGame.getMoveId());
     }
 
+    /**
+     * checks if set turn is returned
+     */
     @Test
     void isMyTurn() {
         testHostGame.setMyTurn(true);
@@ -109,6 +150,9 @@ class GameTest {
         assertFalse(testHostGame.isMyTurn());
     }
 
+    /**
+     * checks if
+     */
     @Test
     void isGameOver() {
         //place ships on board first
@@ -134,13 +178,18 @@ class GameTest {
 //        assertFalse(testHostGame.isGameOver());
 //    }
 
+    /**
+     * checks if set moveId is returned
+     */
     @Test
     void getMoveId() {
         assertEquals(-1, testHostGame.getMoveId());
     }
 
+
     @Test
     void getGameResult() {
+
 
     }
 
@@ -177,6 +226,9 @@ class GameTest {
     void setShipsMovable() {
     }
 
+    /**
+     * checks if correct string representation is returned
+     */
     @Test
     void testToString() {
         String exp = "Game{" +

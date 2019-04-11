@@ -146,7 +146,7 @@ public class Game {
     }
 
     /**
-     * adds an attack action to a queue
+     * adds an attack action to a cache
      * @param coords xx,yy for where on the 10x10 board to attack
      */
     public void addCachedAction(String coords) {
@@ -178,8 +178,8 @@ public class Game {
     }
 
     /**
-     *
-     * @param coords
+     * adds attack to upload cache
+     * @param coords string cordinates on the form xx,yy
      */
     public void addUploadAction(String coords) {
         try {
@@ -245,8 +245,7 @@ public class Game {
 
     /**
      * checks if all actions are uploaded to database
-     * @return true: all actions are uploaded
-     * @return false: all actions are NOT uploaded
+     * @return true if all actions are uploaded, false otherwise
      */
     public boolean allActionsUploaded(){
         for(String s: uploadActionCache){
@@ -268,11 +267,13 @@ public class Game {
         return status;
     }
 
+    /**
+     * @return the id of the current move being executed
+     */
     public int getMoveId() {
         return moveId;
     }
 
-    // mOtherfuckers be making method for gameover and last move id, and incomming move
     //returns 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
     public int getGameResult(){
         if(isGameOver()){
@@ -288,8 +289,8 @@ public class Game {
 
     /**
      * gives the game two boards to play on
-     * @param board1
-     * @param board2
+     * @param board1 the local user's board
+     * @param board2 the opponent user's board
      */
     public void setBoards(Board board1, Board board2) {
         this.board1 = board1;
