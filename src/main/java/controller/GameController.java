@@ -1,8 +1,12 @@
 /**
+ * GameController.java
+ * <p>
  * The controller for all game related objects.
+ * </p>
  *
  * @Author Thorkildsen Torje
  */
+
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -106,7 +110,7 @@ public class GameController extends ViewComponent {
         });
 
         gameMainPane.setOnMousePressed(event -> {
-           savePressedTile();
+            savePressedTile();
         });
 
         gameMainPane.setOnMouseReleased(event -> {
@@ -123,7 +127,7 @@ public class GameController extends ViewComponent {
     /**
      * Stores the x and y position of the tile that was pressed in the object variables pressedTileX and pressedTileY
      */
-    private void savePressedTile(){
+    private void savePressedTile() {
         pressedBoard = getMouseBoardNumber();
         if (pressedBoard == 1) {
             pressedTileX = board1.getMousePosX();
@@ -141,7 +145,7 @@ public class GameController extends ViewComponent {
      *
      * @return true if an attack was executed, false if not
      */
-    private boolean attack(){
+    private boolean attack() {
         int boardNumber = onSameTiles();
         if (boardNumber == 1) {
             //Could be used in the future
@@ -195,7 +199,7 @@ public class GameController extends ViewComponent {
      *
      * @return true if ship positions are valid and were uploaded to the database
      */
-    private boolean readyGame(){
+    private boolean readyGame() {
         if (!gameReady) {
             ArrayList<Ship> overlappingShips = board1.uploadShipCoordinates();
             if (overlappingShips == null) {
@@ -263,8 +267,8 @@ public class GameController extends ViewComponent {
     }
 
     /**
-     *Checks that the game has both a host and a joining player who have uploaded their boards to the database,
-     *then downloads the opponents board and starts the game
+     * Checks that the game has both a host and a joining player who have uploaded their boards to the database,
+     * then downloads the opponents board and starts the game
      *
      * @return true if both boards are ready and the game was started
      */
@@ -325,7 +329,6 @@ public class GameController extends ViewComponent {
     }
 
     /**
-     *
      * @param removeColor
      */
     private void colorMouseFollower(boolean removeColor) {

@@ -5,6 +5,7 @@
  * @Author Thorkildsen Torje
  * @Author Brevik Magnus
  */
+
 package model;
 
 public class BattleshipUser {

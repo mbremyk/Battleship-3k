@@ -1,6 +1,13 @@
 /**
+ * SignupController.java
+ *
+ * <p>
+ * Controller for the signup menu
+ * </p>
+ *
  * @Author Thorkildsen Torje
  */
+
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -140,7 +147,7 @@ public class SignupController extends ViewComponent {
             }
         } else {
             for (Node node : getParentAnchorPane().getChildren()) {
-                if (node != signupUsernameField && node != signupEmailField&& node != signupPasswordField&& node != signupConfirmPasswordField && node != signupAgreeCheckbox && node != signupTOSLink) {
+                if (node != signupUsernameField && node != signupEmailField && node != signupPasswordField && node != signupConfirmPasswordField && node != signupAgreeCheckbox && node != signupTOSLink) {
                     if (node instanceof Text) {
                         String text = ((Text) node).getText();
                         if (!text.equals("Username") && !text.equals("Email") && !text.equals("Password") && !text.equals("Confirm password")) {

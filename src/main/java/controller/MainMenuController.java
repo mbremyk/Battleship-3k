@@ -1,5 +1,9 @@
 /**
- * controller.MainMenuController.java
+ * MainMenuController.java
+ *
+ * <p>
+ * Controller for the main menu
+ * </p>
  *
  * @Author Thorkildsen Torje
  */

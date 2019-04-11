@@ -1,6 +1,10 @@
 /**
  * LoginController.java
  *
+ * <p>
+ * Controller for the login menu
+ * </p>
+ *
  * @Author Thorkildsen Torje
  */
 package controller;
@@ -88,12 +92,12 @@ public class LoginController extends ViewComponent {
         } else {
             for (Node node : getParentAnchorPane().getChildren()) {
                 if (node != loginUsernameField && node != loginPasswordField) {
-                    if(node instanceof Text){
+                    if (node instanceof Text) {
                         String text = ((Text) node).getText();
-                        if(!text.equals("Username")&&!text.equals("Password")){
+                        if (!text.equals("Username") && !text.equals("Password")) {
                             continue;
                         }
-                    }else {
+                    } else {
                         continue;
                     }
                 }

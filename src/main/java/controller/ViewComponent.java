@@ -1,7 +1,9 @@
 /**
  * controller.ViewComponent.java
+ *
  * <p>
  * Abstract class inherited by view-components that want to be able to switch the parent AnchorPane's view
+ * </p>
  *
  * @Author Thorkildsen Torje
  */
@@ -24,7 +26,7 @@ public abstract class ViewComponent {
     /**
      * Method for switching the view of the parent AnchorPane of the class who inherits this method
      *
-     * @param view the name of the fxml file you want to switch to, without path or ".fxml"
+     * @param view       the name of the fxml file you want to switch to, without path or ".fxml"
      * @param updateSize true if you want the size of the window to be exactly the size of the new view
      * @return true if the view switch went well and false if not
      */

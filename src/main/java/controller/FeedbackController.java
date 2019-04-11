@@ -1,11 +1,18 @@
 /**
+ * FeedbackController.java
+ *
+ * <p>
  * Controller class for FeedbackMenu.fxml
  * Allows the user to write feedback and upload it to the database
+ * </p>
+ *
+ * @Author Thorkildsen Torje
  */
 
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,7 +23,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-public class FeedbackController extends ViewComponent{
+public class FeedbackController extends ViewComponent {
 
     @FXML
     private ResourceBundle resources;
@@ -73,9 +80,9 @@ public class FeedbackController extends ViewComponent{
     /**
      * Uploads the written feedback via a DatabaseConnector
      */
-    private void uploadFeedback(){
+    private void uploadFeedback() {
         DatabaseConnector connector = new DatabaseConnector();
-        if(connector.uploadFeedback(titleTextArea.getText(),feedbackTextArea.getText())){
+        if (connector.uploadFeedback(titleTextArea.getText(), feedbackTextArea.getText())) {
             charText.setText("Thank you for your feedback!");
         }
     }
@@ -86,7 +93,7 @@ public class FeedbackController extends ViewComponent{
      *
      * @param newValue the new string in the message box
      */
-    private void textFieldChange(String newValue){
+    private void textFieldChange(String newValue) {
         charText.setText("" + newValue.length() + "/255 characters");
     }
 

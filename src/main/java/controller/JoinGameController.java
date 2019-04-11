@@ -1,4 +1,10 @@
 /**
+ * JoinGameController.java
+ *
+ * <p>
+ * Controller for the menu for viewing and joining a game
+ * </p>
+ *
  * @Author Thorkildsen Torje
  */
 
@@ -76,7 +82,7 @@ public class JoinGameController extends ViewComponent {
         winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
 
         refreshList();
-        joinGameGamesTable.getColumns().addAll(nameColumn,hostColumn, winsColumn);
+        joinGameGamesTable.getColumns().addAll(nameColumn, hostColumn, winsColumn);
 
         joinGameCancelButton.setOnAction(event -> {
             switchView("MainMenu");
@@ -144,7 +150,7 @@ public class JoinGameController extends ViewComponent {
             if (games[i].getJoinUser() != null) {
                 open = false;
             }
-            if(open) {
+            if (open) {
                 RowData newRow = new RowData(games[i].getGameName(), games[i].getHostUser().getUsername(), games[i].getHostUser().getWonGames());
                 gameList.add(newRow);
             }
@@ -168,12 +174,15 @@ public class JoinGameController extends ViewComponent {
         private String username;
         private int wins;
 
-        public RowData(String gameName,String username, int wins){
+        public RowData(String gameName, String username, int wins) {
             this.gameName = gameName;
             this.username = username;
             this.wins = wins;
         }
-        public String getGameName(){ return gameName; }
+
+        public String getGameName() {
+            return gameName;
+        }
 
         public String getUsername() {
             return username;

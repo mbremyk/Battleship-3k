@@ -1,5 +1,11 @@
 /**
- * @Author Kristian Gulaker
+ * GameResultMenuController.java
+ *
+ * <p>
+ * Controller for the page showing the results after a game has ended
+ * </p>
+ *
+ * @Author Gulaker Kristian William MacDonald
  */
 
 package controller;
@@ -82,7 +88,8 @@ public class GameResultMenuController extends ViewComponent {
         returnButton.setOnAction(e -> {
             DatabaseConnector connector = new DatabaseConnector();
             connector.removeGameFromDatabase(Statics.getGame());
-            switchView("MenuTemplate", true);});
+            switchView("MenuTemplate", true);
+        });
     }
 
     /**

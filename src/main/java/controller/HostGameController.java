@@ -1,6 +1,10 @@
 /**
  * HostGameController.java
  *
+ * <p>
+ * Controller for the menu for naming and hosting a game
+ * </p>
+ *
  * @Author Thorkildsen Torje
  * @Author Grande Trym
  */
@@ -55,7 +59,7 @@ public class HostGameController extends ViewComponent {
         });
 
         hostGameCreateGameButton.setOnAction(event -> {
-           createGameButtonPressed();
+            createGameButtonPressed();
         });
 
         hostGameNameField.setOnAction(event -> {
@@ -74,7 +78,7 @@ public class HostGameController extends ViewComponent {
      *
      * @return true if user is logged in and the code is executed, false otherwise
      */
-    public boolean createGameButtonPressed(){
+    public boolean createGameButtonPressed() {
         BattleshipUser user = Statics.getLocalUser();
         if (user != null) {
             DatabaseConnector databaseConnector4 = new DatabaseConnector(Constants.DB_URL);

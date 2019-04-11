@@ -1,8 +1,13 @@
 /**
+ * MenuTemplateController.java
  *
+ * <p>
+ * Controller for the template for the general menus. This is on top in the regular menu view
+ * </p>
  *
  * @Author Thorkildsen Torje
  */
+
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -53,7 +58,7 @@ public class MenuTemplateController extends ViewComponent {
         switchView("MainMenu");
 
         BattleshipUser user = Statics.getLocalUser();
-        if(user != null) mainMenuLoggedInText.setText("Logged in as "+user.getUsername());
+        if (user != null) mainMenuLoggedInText.setText("Logged in as " + user.getUsername());
 
         mainMenuSignupButton.setOnAction(event -> {
             switchView("SignupMenu");
