@@ -50,14 +50,10 @@ public class GameResultMenuController extends ViewComponent {
     @FXML
     private JFXButton returnButton;
 
-    @FXML
-    private JFXButton rematchButton;
-
 
     @FXML
     void initialize() {
         assert returnButton != null : "fx:id=\"returnButton\" was not injected: check your FXML file 'GameResultMenu.fxml'.";
-        assert rematchButton != null : "fx:id=\"rematchButton\" was not injected: check your FXML file 'GameResultMenu.fxml'.";
         assert gameResultMenuText != null : "fx:id=\"gameResultMenuText\" was not injected: check your FXML file 'GameResultMenu.fxml'.";
         assert gameResultMenuImage != null : "fx:id=\"gameResultMenuImage\" was not injected: check your FXML file 'GameResultMenu.fxml'.";
 
@@ -66,12 +62,6 @@ public class GameResultMenuController extends ViewComponent {
         if (Statics.getGame().getGameResult() == 0) {
             endText = "YOU LOST!";
             image = new Image("/skull.png");
-//            gameResultMenuImage.setFitHeight(200);
-//            gameResultMenuImage.setFitWidth(200);
-//            gameResultMenuImage.setX(300);
-//            gameResultMenuImage.setY(200);
-//            gameResultMenuText.setX(200);
-//            gameResultMenuText.setY(150);
         } else {
             endText = "YOU WON!";
             image = new Image("/trophy.png");
@@ -92,7 +82,7 @@ public class GameResultMenuController extends ViewComponent {
      */
     @Override
     protected AnchorPane getParentAnchorPane() {
-        return (AnchorPane) rematchButton.getParent();
+        return (AnchorPane) returnButton.getParent();
     }
 
 }

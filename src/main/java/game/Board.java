@@ -12,7 +12,6 @@ package game;
 
 import database.DatabaseConnector;
 import effects.DownScaler;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -30,10 +29,11 @@ public class Board extends ImageView {
     private int mousePosX = -1;
     private int mousePosY = -1;
     private final AnchorPane parent;
+    private final int boardNumber;
 
     /**
      * 2D-array with information about the tiles in the grid
-     *
+     * <p>
      * -2 = ship, attacked and destroyed
      * -1 = no ship but tile attacked
      * 0 = no ship, not attacked
@@ -46,15 +46,17 @@ public class Board extends ImageView {
     /**
      * Initiates a new Board object that can be used to display a grid
      *
-     * @param parent the parent AnchorPane of this object
-     * @param x the x position of this object
-     * @param y the y position of this object
+     * @param parent      the parent AnchorPane of this object
+     * @param x           the x position of this object
+     * @param y           the y position of this object
+     * @param boardNumber the number of this board, 1 = local user, 2 = opponent
      */
-    public Board(AnchorPane parent, double x, double y) {
+    public Board(AnchorPane parent, double x, double y, int boardNumber) {
         super(new Image("./grid10x10.png"));
         this.parent = parent;
         setTranslateX(x);
         setTranslateY(y);
+        this.boardNumber = boardNumber;
 
         board = new int[TILES][TILES];
         this.setFitWidth(SIZE);
@@ -158,7 +160,7 @@ public class Board extends ImageView {
      * Adds an Array of ships to an existing ArrayList
      *
      * @param original the original ArrayList that's getting more ships
-     * @param extra the new ships that will be added to the ArrayList
+     * @param extra    the new ships that will be added to the ArrayList
      */
     private void addToShipArray(ArrayList original, Ship[] extra) {
         for (Ship ship : extra) {
@@ -195,10 +197,10 @@ public class Board extends ImageView {
     /**
      * Registers ship coordinates from a base x and y, width and height, like the coordinates DatabaseConnector.java gives you
      *
-     * @param x the ship's upper left corner's x-position in the grid
-     * @param y the ship's upper left corner's y-position in the grid
-     * @param width the width of the ship
-     * @param height the height of the ship
+     * @param x         the ship's upper left corner's x-position in the grid
+     * @param y         the ship's upper left corner's y-position in the grid
+     * @param width     the width of the ship
+     * @param height    the height of the ship
      * @param shipIndex the ship's index, which is its index in the ship ArrayList
      */
     public void registerShipCoordinates(int x, int y, int width, int height, int shipIndex) {
@@ -280,8 +282,8 @@ public class Board extends ImageView {
     /**
      * Attacks a tile on the board's grid
      *
-     * @param x the x-position on the grid
-     * @param y the y-position on the grid
+     * @param x      the x-position on the grid
+     * @param y      the y-position on the grid
      * @param upload true if the attack should be uploaded to the database
      * @return -1 if tile already attacked, 0 if no boats, and 1 if boat
      */
@@ -319,8 +321,8 @@ public class Board extends ImageView {
     /**
      * Adds a square to a board that indicates if an attack has missed or hit
      *
-     * @param x the x-position on the grid
-     * @param y the y-position on the grid
+     * @param x     the x-position on the grid
+     * @param y     the y-position on the grid
      * @param color the color of the square, set to null if an image should be used
      * @param image the square's image, set to null if plain color
      */
@@ -331,7 +333,10 @@ public class Board extends ImageView {
         if (image != null) square.setFill(new ImagePattern(image));
         square.setTranslateX(this.getTranslateX() + x * Board.TILE_SIZE);
         square.setTranslateY(this.getTranslateY() + y * Board.TILE_SIZE);
-        parent.getChildren().add(parent.getChildren().indexOf(this), square);
+        if (boardNumber == 1) {
+            square.setOpacity(0.6);
+            parent.getChildren().add(parent.getChildren().indexOf(this) + ships.size(), square);
+        } else parent.getChildren().add(parent.getChildren().indexOf(this), square);
         DownScaler downScaler = new DownScaler(square);
         downScaler.play();
     }
