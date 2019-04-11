@@ -68,6 +68,11 @@ public class PullThread extends Thread {
             if (timer == 0) {
                 game.uploadCachedActions();
             }
+            try {
+                db.updateGameOver();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             gameOver = game.isGameOver();
             try {
                 Thread.sleep(500);

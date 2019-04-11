@@ -564,10 +564,11 @@ public class DatabaseConnector {
             return false;
         } else {
             Connection con = null;
+            PreparedStatement preparedStatement = null;
             try {
                 con = connectionPool.getConnection();
                 String update = "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, ?, ?)";
-                PreparedStatement preparedStatement = con.prepareStatement(update);
+                preparedStatement = con.prepareStatement(update);
                 preparedStatement.setString(1, title);
                 preparedStatement.setString(2, message);
                 preparedStatement.execute();
@@ -580,6 +581,7 @@ public class DatabaseConnector {
                 return false;
             } finally {
                 if (con != null) connectionPool.releaseConnection(con);
+                if (preparedStatement != null) close(preparedStatement);
             }
         }
     }
@@ -694,5 +696,28 @@ public class DatabaseConnector {
                 close(preparedStatement);
         }
         return true;
+    }
+
+    public void updateGameOver() throws Exception {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet res = null;
+        String query = "SELECT " + GAME_WINNER_ID + " FROM " + GAME_TABLE + " WHERE " + GAME_ID + " = ?";
+        try {
+            con = connectionPool.getConnection();
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, Statics.getGame().getGameId());
+            res = preparedStatement.executeQuery();
+            if (res.next() && res.getInt(GAME_WINNER_ID) != 0) {
+                Statics.getGame().setGameOver(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Could not get game over state");
+        } finally {
+            if (res != null) close(res);
+            if (preparedStatement != null) close(preparedStatement);
+            if (con != null) connectionPool.releaseConnection(con);
+        }
     }
 }
