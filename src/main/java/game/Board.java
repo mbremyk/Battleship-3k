@@ -230,7 +230,7 @@ public class Board extends ImageView {
      */
 
     public void addDefaultShips(boolean visible) {
-        addShip(new Ship(visible, 2, 5, 5, 1, 0, this));
+        addShip(new Ship(visible, 2, 5, 2, 1, 0, this));
         addShip(new Ship(visible, 5, 1, 3, 2, 0, this));
         addShip(new Ship(visible, 8, 8, 2, 1, 0, this));
         addShip(new Ship(visible, 8, 3, 3, 1, 90, this));
