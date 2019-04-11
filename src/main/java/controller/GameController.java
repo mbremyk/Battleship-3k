@@ -4,7 +4,7 @@
  * The controller for all game related objects.
  * </p>
  *
- * @Author Thorkildsen Torje
+ * @author Thorkildsen Torje
  */
 
 package controller;

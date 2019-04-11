@@ -5,7 +5,7 @@
  * Controller for the login menu
  * </p>
  *
- * @Author Thorkildsen Torje
+ * @author Thorkildsen Torje
  */
 package controller;
 

@@ -5,7 +5,7 @@
  * Controller for the template for the general menus. This is on top in the regular menu view
  * </p>
  *
- * @Author Thorkildsen Torje
+ * @author Thorkildsen Torje
  */
 
 package controller;

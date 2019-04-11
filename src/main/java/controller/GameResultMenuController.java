@@ -5,7 +5,7 @@
  * Controller for the page showing the results after a game has ended
  * </p>
  *
- * @Author Gulaker Kristian William MacDonald
+ * @author Gulaker Kristian William MacDonald
  */
 
 package controller;

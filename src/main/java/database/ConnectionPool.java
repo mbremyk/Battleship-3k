@@ -5,6 +5,8 @@
  * Connection pool class for saving, listing, and distributing connections where they are needed.
  * Used instead of opening and closing connections every time a connection is needed, as these are expensive options
  * </p>
+ *
+ * @author Bjerke Thomas
  */
 
 package database;

@@ -5,7 +5,7 @@
  * Controller for the menu for viewing and joining a game
  * </p>
  *
- * @Author Thorkildsen Torje
+ * @author Thorkildsen Torje
  */
 
 package controller;

@@ -1,14 +1,16 @@
 /**
  * DatabaseConnector.java
- * @Author Brevik Magnus
- * @Author Bjerke Thomas
- * @Author Gulaker Kristian
- * @Author Thorkildsen Torje
- * @Author Granli Hans Kristian Olsen
- * @Author Grande Trym
+ *
  * <p>
  * Handles all connections with the database
  * </p>
+ *
+ * @author Brevik Magnus
+ * @author Bjerke Thomas
+ * @author Gulaker Kristian
+ * @author Thorkildsen Torje
+ * @author Granli Hans Kristian Olsen
+ * @author Grande Trym
  */
 
 package database;
@@ -22,7 +24,6 @@ import static database.Login.saltPassword;
 
 import java.sql.*;
 import java.util.Arrays;
-import java.util.logging.*;
 
 public class DatabaseConnector {
     private String databaseUrl;
@@ -208,7 +209,7 @@ public class DatabaseConnector {
     /**
      * Loads the latest attacks from the opponent into a cache
      *
-     * @param game
+     * @param game the game
      * @return latest move_id
      */
     public int lastAction(Game game) {

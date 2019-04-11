@@ -6,7 +6,7 @@
  * Allows the user to write feedback and upload it to the database
  * </p>
  *
- * @Author Thorkildsen Torje
+ * @author Thorkildsen Torje
  */
 
 package controller;

@@ -5,7 +5,7 @@
  * Abstract class inherited by view-components that want to be able to switch the parent AnchorPane's view
  * </p>
  *
- * @Author Thorkildsen Torje
+ * @author Thorkildsen Torje
  */
 
 package controller;

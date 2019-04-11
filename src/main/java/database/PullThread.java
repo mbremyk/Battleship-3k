@@ -1,10 +1,12 @@
 /**
  * DatabaseConnector.java
+ *
+ * <p>
+ * Pulling from the sql database to check if the opponent has made any new moves
+ * </p>
+ *
  *  @author Thorkildsen Torje
  *  @author Granli Hans Kristian Olsen
- * <p>
- * Pulling from the sql database to check if the oponent has made any new moves
- * </p>
  */
 
 package database;
@@ -22,12 +24,11 @@ public class PullThread extends Thread {
     private boolean running = false;
 
     /**
+     * Initializes a new PullThread thread
      *
      * @param gameController the game's main controller, this makes us able to get the game-class as
      *                       well as calling the game to register when a new move has been made
      */
-
-    //I think we only need this one now
     public PullThread(GameController gameController) {
         this.db = new DatabaseConnector();
         this.game = Statics.getGame();
@@ -63,7 +64,7 @@ public class PullThread extends Thread {
                 db.lastAction(game);
             }
 
-            /**
+            /*
             *Does an upload check every second
              */
             timer++;
@@ -81,6 +82,9 @@ public class PullThread extends Thread {
         }
     }
 
+    /**
+     * kills the thread
+     */
     public void terminate() {
         running = false;
         this.interrupt();

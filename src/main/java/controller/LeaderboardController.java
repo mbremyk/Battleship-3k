@@ -5,7 +5,7 @@
  * Controller for viewing the leaderboard
  * </p>
  *
- * @Author Gulaker Kristian William MacDonald
+ * @author Gulaker Kristian William MacDonald
  */
 
 package controller;

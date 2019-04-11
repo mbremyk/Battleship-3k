@@ -5,8 +5,8 @@
  * Controller for the menu for naming and hosting a game
  * </p>
  *
- * @Author Thorkildsen Torje
- * @Author Grande Trym
+ * @author Thorkildsen Torje
+ * @author Grande Trym
  */
 
 package controller;
