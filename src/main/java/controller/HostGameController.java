@@ -67,6 +67,13 @@ public class HostGameController extends ViewComponent {
         });
     }
 
+
+    /**
+     * Creates a new game in the database and brings the user to the game
+     * The method returns false if the user isn't logged in
+     *
+     * @return true if user is logged in and the code is executed, false otherwise
+     */
     public boolean createGameButtonPressed(){
         BattleshipUser user = Statics.getLocalUser();
         if (user != null) {

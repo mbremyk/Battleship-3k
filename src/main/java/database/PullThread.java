@@ -76,7 +76,6 @@ public class PullThread extends Thread {
             }
 
         }
-        stop();//TODO remove this because it's depricated
     }
 
     public void terminate() {

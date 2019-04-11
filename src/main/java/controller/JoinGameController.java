@@ -91,7 +91,12 @@ public class JoinGameController extends ViewComponent {
         });
     }
 
-    public void joinButtonPressed() {
+    /**
+     * Makes the user join the selected game
+     *
+     * @return true if a game has been selected and is joined, false otherwise
+     */
+    public boolean joinButtonPressed() {
         RowData rowData = joinGameGamesTable.getSelectionModel().getSelectedItem();
         if (Statics.getLocalUser() == null) {
             System.out.println("You are not logged in");
@@ -102,12 +107,21 @@ public class JoinGameController extends ViewComponent {
             DatabaseConnector databaseConnector = new DatabaseConnector();
             if (game.isGameOpen() && databaseConnector.joinGame(game)) {
                 startGame();
+                return true;
             } else {
                 System.out.println("Could not join game");
             }
         }
+        return false;
+
     }
 
+    /**
+     * Gets a game by the name of the host user
+     *
+     * @param hostUsername the name of the host user
+     * @return the game with the specified host user, null if it doesn't exist
+     */
     public Game getGame(String hostUsername) {
         for (Game game : games) {
             if (hostUsername.equals(game.getHostUser().getUsername())) return game;
@@ -115,6 +129,9 @@ public class JoinGameController extends ViewComponent {
         return null;
     }
 
+    /**
+     * Refreshes the list of games, by reloading them from the database
+     */
     public void refreshList() {
         DatabaseConnector newConnector = new DatabaseConnector(Constants.DB_URL);
         games = newConnector.getGames();

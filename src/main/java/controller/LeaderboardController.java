@@ -68,6 +68,12 @@ public class LeaderboardController extends ViewComponent {
         leaderboardTable.getColumns().addAll(rankColumn,nameColumn,winsColumn,lossColumn);
     }
 
+    /**
+     * Sorts the leaderboard by number of wins
+     *
+     * @param users the list of users to be sorted
+     * @return a sorted list of users
+     */
     private BattleshipUser[] sortUsers(BattleshipUser[] users){
       for(int i=0; i<users.length; i++){
           int firstPlace = i;
