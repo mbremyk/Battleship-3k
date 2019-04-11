@@ -679,12 +679,12 @@ public class DatabaseConnector {
         try {
             con = connectionPool.getConnection();
             preparedStatement = con.prepareStatement(query);
-            preparedStatement.setInt(1, Statics.getGame().getGameId());
             if (Statics.getGame().getWinner() != null) {
-                preparedStatement.setInt(2, Statics.getGame().getWinner().getUserId());
+                preparedStatement.setInt(1, Statics.getGame().getWinner().getUserId());
             } else {
                 return false;
             }
+            preparedStatement.setInt(2, Statics.getGame().getGameId());
             preparedStatement.execute();
         } catch (Exception e) {
             e.printStackTrace();
