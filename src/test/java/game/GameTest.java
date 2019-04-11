@@ -10,9 +10,7 @@ import model.BattleshipUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import javax.swing.text.html.ImageView;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -132,7 +130,7 @@ class GameTest {
     }
 
     /**
-     * checks if set turn is returned
+     * checks if the turn set is returned in method
      */
     @Test
     void isMyTurn() {
@@ -192,7 +190,7 @@ class GameTest {
 
 
     /**
-     *
+     * impossible
      */
     @Test
     void getGameResult() {

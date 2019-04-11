@@ -38,7 +38,7 @@ public class HostGameController extends ViewComponent {
     private JFXButton hostGameCreateGameButton;
 
     @FXML
-    private TextField hostGameNameField;
+    private TextField hostGamejNameField;
 
     @FXML
     private PasswordField hostGamePasswordField;
