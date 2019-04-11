@@ -1,11 +1,17 @@
 /**
- * controller.MainMenuController.java
+ * MainMenuController.java
  *
- * @Author Thorkildsen Torje
+ * <p>
+ * Controller for the main menu
+ * </p>
+ *
+ * @author Thorkildsen Torje
  */
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import game.Statics;
+import model.ConfirmBox;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
@@ -32,9 +38,6 @@ public class MainMenuController extends ViewComponent {
     @FXML
     private JFXButton mainMenuLeaderboardButton;
 
-    /**
-     * Standard JavaFX method
-     */
 
     @FXML
     void initialize() {
@@ -48,7 +51,15 @@ public class MainMenuController extends ViewComponent {
             switchView("JoinGameMenu");
         });
         mainMenuHostButton.setOnAction(event -> {
-            switchView("HostGameMenu");
+            if(Statics.getLocalUser() != null) {
+                switchView("HostGameMenu");
+            }
+            else{
+                boolean login = ConfirmBox.display("You must be logged in to host a game! Log in?");
+                if(login){
+                    switchView("LoginMenu");
+                }
+            }
         });
         mainMenuLeaderboardButton.setOnAction(event -> {
             switchView("LeaderboardMenu");
@@ -59,6 +70,11 @@ public class MainMenuController extends ViewComponent {
 
     }
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) mainMenuHostButton.getParent();

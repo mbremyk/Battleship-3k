@@ -8,7 +8,6 @@
  * @Author Granli Hans Kristian Olsen
  * @Author Grande Trym
  */
-
 import game.Game;
 import database.ConnectionPool;
 import database.DatabaseConnector;
@@ -52,18 +51,7 @@ public class Main extends Application {
 			primaryStage.setResizable(false);
 
             primaryStage.setOnCloseRequest(e -> {
-                Game game = Statics.getGame();
-                if (game != null && !game.isGameOver()) {
-                    game.setMyTurn(false);
-                    game.setLoser(Statics.getLocalUser());
-                    DatabaseConnector db = new DatabaseConnector();
-                    db.uploadResults();
-                }
-                Statics.setGame(game);
-                logout();
-                if (Statics.getPullThread() != null && Statics.getPullThread().isAlive()) {
-                    Statics.getPullThread().terminate();
-                }
+               closePage();
             });
 
 		} catch (Exception e) {
@@ -86,5 +74,19 @@ public class Main extends Application {
 		}
 		launch(args);
 	}
+	public static void closePage(){
+        Game game = Statics.getGame();
+        if (game != null && !game.isGameOver()) {
+            game.setMyTurn(false);
+            game.setLoser(Statics.getLocalUser());
+            DatabaseConnector db = new DatabaseConnector();
+            db.uploadResults();
+        }
+        Statics.setGame(game);
+        logout();
+        if (Statics.getPullThread() != null && Statics.getPullThread().isAlive()) {
+            Statics.getPullThread().terminate();
+        }
+    }
 
 }

@@ -1,8 +1,16 @@
 /**
  * DatabaseConnector.java
+ *
  * <p>
  * Handles all connections with the database
  * </p>
+ *
+ * @author Brevik Magnus
+ * @author Bjerke Thomas
+ * @author Gulaker Kristian
+ * @author Thorkildsen Torje
+ * @author Granli Hans Kristian Olsen
+ * @author Grande Trym
  */
 
 package database;
@@ -16,7 +24,6 @@ import static database.Login.saltPassword;
 
 import java.sql.*;
 import java.util.Arrays;
-import java.util.logging.*;
 
 public class DatabaseConnector {
     private String databaseUrl;
@@ -202,7 +209,7 @@ public class DatabaseConnector {
     /**
      * Loads the latest attacks from the opponent into a cache
      *
-     * @param game
+     * @param game the game
      * @return latest move_id
      */
     public int lastAction(Game game) {
@@ -422,7 +429,7 @@ public class DatabaseConnector {
                     return true;
                 }
             } else {
-                System.out.println("NOT READY");
+//                System.out.println("NOT READY");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -560,7 +567,7 @@ public class DatabaseConnector {
 
 
     public boolean uploadFeedback(String title, String message) {
-        if (title == "" || message == "" || title == null || message == null) {
+        if (title.equals("") || message.equals("")) {
             return false;
         } else {
             Connection con = null;

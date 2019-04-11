@@ -18,6 +18,9 @@ import java.util.Random;
  */
 public class Game {
     private boolean hosting; //If the local player is hosting
+    /**
+     *
+     */
     private BattleshipUser hostUser;
     private BattleshipUser joinUser;
     private BattleshipUser winner;
@@ -53,7 +56,7 @@ public class Game {
     /**
      * constructs new game either when user hosts or joins game
      * @param gameid used as PK in database to identify game. Hosting game and joining game have the same gameid.
-     * @param gameName used to identify a game for the user. Appears in the games-table while joining and at the top during a game.
+     * @param gameName
      * @param hostUser the user hosting the game
      * @param hosting signalizes whether the local user is hosting the game or not.
      */
@@ -73,8 +76,7 @@ public class Game {
 
     /**
      * helper method for unit testing
-     *
-     * @return
+     * @return the local user's board
      */
     public Board getBoard1() {
         return board1;
@@ -82,7 +84,7 @@ public class Game {
 
     /**
      * helper method for unit testing
-     * @return
+     * @return the opponent user's board
      */
     public Board getBoard2() {
         return board2;
@@ -90,32 +92,56 @@ public class Game {
 
     /**
      * helper method for unit testing
-     * @return
+     * @return list of actions in the cache queued for database upload
      */
     public ArrayList<String> getActionCache() {
         return actionCache;
     }
 
+    /**
+     *
+     * @return used as PK in database to identify game. Hosting game and joining game have the same gameid.
+     */
     public int getGameId() {
         return gameId;
     }
 
+    /**
+     *
+     * @return used to identify a game to the user in the games table. also appears in-game at the top.
+     */
     public String getGameName() {
         return gameName;
     }
 
+    /**
+     *
+     * @return true if the local user is hosting, false otherwise.
+     */
     public boolean isHosting() {
         return hosting;
     }
 
+    /**
+     *
+     * @return the user hosting the game
+     */
     public BattleshipUser getHostUser() {
         return hostUser;
     }
 
+    /**
+     *
+     * @return the user that joined the game
+     */
     public BattleshipUser getJoinUser() {
         return joinUser;
     }
 
+    /**
+     * sets a new user to JoinUser
+     * @param newUser user to be set as joinUser
+     */
     public void setJoinUser(BattleshipUser newUser) {
         this.joinUser = newUser;
     }
@@ -162,7 +188,7 @@ public class Game {
     }
 
     /**
-     * sends all queued actions to be executed in doAction()
+     * sends all queued actions sequentially to be executed in doAction()
      */
     public void doCachedActions() {
         try {
@@ -194,9 +220,9 @@ public class Game {
     }
 
     /**
-     *
-     * @param remove
-     * @param status
+     * uploads cached actions to database
+     * @param remove HJELP
+     * @param status HJELP
      */
     public void uploadCachedActions(String remove, int status) {
 //        System.out.println("REUP: "+moveId);
@@ -211,7 +237,7 @@ public class Game {
     }
 
     /**
-     *
+     * HJELP
      */
     public void uploadCachedActions() {
         DatabaseConnector db = new DatabaseConnector();
@@ -231,14 +257,25 @@ public class Game {
         }
     }
 
+    /**
+     * increments moveId by one
+     */
     public void incMoveID() {
         moveId++;
     }
 
+    /**
+     *
+     * @return true if the local user has the turn, false otherwise
+     */
     public boolean isMyTurn() {
         return myTurn;
     }
 
+    /**
+     * sets myTurn
+     * @param myTurn true for turn to be passed to the local user, false for turn to be passed to opponent
+     */
     public void setMyTurn(boolean myTurn) {
         this.myTurn = myTurn;
     }
@@ -274,7 +311,10 @@ public class Game {
         return moveId;
     }
 
-    //returns 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
+    /**
+     * checks who won the game, used at the end of the game
+     * @return 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
+     */
     public int getGameResult(){
         if(isGameOver()){
             if(board1.shipsRemaining() != 0){
@@ -297,26 +337,50 @@ public class Game {
         this.board2 = board2;
     }
 
+    /**
+     * checks if game is joinable
+     * @return true if the game is joinable, false otherwise
+     */
     public boolean isGameOpen() {
         return gameOpen;
     }
 
+    /**
+     * sets game to open, used for whenever it is waiting for user to join
+     * @param gameOpen true if the game is joinable, false otherwise
+     */
     public void setGameOpen(boolean gameOpen) {
         this.gameOpen = gameOpen;
     }
 
+    /**
+     * setter method for boardsReady object variable
+     * @param boardsReady true if both boards are uploaded to database after both players have pressed 'ready'
+     */
     public void setBoardsReady(boolean boardsReady) {
         this.boardsReady = boardsReady;
     }
 
+    /**
+     * checks if both boards are initialized and both players have pressed 'ready'.
+     * @return true if both are ready, false otherwise
+     */
     public boolean isBoardsReady() {
         return boardsReady;
     }
 
+    /**
+     * checks if ships are movable or not HJELP
+     * @return true if ships are movable, false otherwise
+     */
     public boolean isShipsMovable() {
         return shipsMovable;
     }
 
+    /**
+     * sets whether ships are movable or not
+     * @param shipsMovable true for ships movable, false otherwise
+     */
     public void setShipsMovable(boolean shipsMovable) {
         this.shipsMovable = shipsMovable;
     }

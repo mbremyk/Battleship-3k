@@ -1,7 +1,11 @@
 /**
  * LoginController.java
  *
- * @Author Thorkildsen Torje
+ * <p>
+ * Controller for the login menu
+ * </p>
+ *
+ * @author Thorkildsen Torje
  */
 package controller;
 
@@ -43,21 +47,14 @@ public class LoginController extends ViewComponent {
     private JFXButton loginLoginButton;
 
     @FXML
-    private Hyperlink loginForgotPasswordLink;
-
-    @FXML
     private TextField loginUsernameField;
 
-    /**
-     *
-     */
 
     @FXML
     void initialize() {
         assert loginPasswordField != null : "fx:id=\"loginPasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert loginCancelButton != null : "fx:id=\"loginCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert loginLoginButton != null : "fx:id=\"loginLoginButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert loginForgotPasswordLink != null : "fx:id=\"loginForgotPasswordLink\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert loginUsernameField != null : "fx:id=\"loginUsernameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
 
         loginUsernameField.setOnAction(event -> {
@@ -77,6 +74,9 @@ public class LoginController extends ViewComponent {
         });
     }
 
+    /**
+     * Checks if the inputted username exists and if the password is correct, then logs the user in
+     */
     public void loginButtonPressed() {
         BattleshipUser user = Login.login(loginUsernameField.getText(), loginPasswordField.getText());
         if (user != null) {
@@ -88,12 +88,12 @@ public class LoginController extends ViewComponent {
         } else {
             for (Node node : getParentAnchorPane().getChildren()) {
                 if (node != loginUsernameField && node != loginPasswordField) {
-                    if(node instanceof Text){
+                    if (node instanceof Text) {
                         String text = ((Text) node).getText();
-                        if(!text.equals("Username")&&!text.equals("Password")){
+                        if (!text.equals("Username") && !text.equals("Password")) {
                             continue;
                         }
-                    }else {
+                    } else {
                         continue;
                     }
                 }
@@ -103,6 +103,11 @@ public class LoginController extends ViewComponent {
         }
     }
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) loginCancelButton.getParent();

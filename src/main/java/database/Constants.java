@@ -1,15 +1,16 @@
-package database;
-
 /**
- * database.Login.java
+ * Login.java
+ *
  * <p>
  * Contains database constants such as table names and column names
  * </p>
  *
- * @Author Thorkildsen Torje
- * @Author Brevik Magnus
- * @Author Hans Kristian Granli
+ * @author Thorkildsen Torje
+ * @author Brevik Magnus
+ * @author Hans Kristian Granli
  */
+
+package database;
 
 public class Constants {
     //Database connection configuration
@@ -18,7 +19,7 @@ public class Constants {
     public static final String DB_USER = "thombje";
     public static final String DB_PASSWORD = "TFWUfjmb";
     public static final String DB_NAME = "thombje";
-	public static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password=" + DB_PASSWORD;
+    public static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password=" + DB_PASSWORD;
 
     //Users table column names
     public static final String USERS_TABLE = "BattleshipUser";

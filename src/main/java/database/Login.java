@@ -1,14 +1,14 @@
 /**
  * database.Login.java
+ *
  * <p>
  * Handles registering of new users, login of existing users and salting and hashing passwords
- *
- * @Author Brevik Magnus
- * @Author Bjerke Thomas
- * @Author Gulaker Kristian
- * @Author Thorkildsen Torje
  * <p>
- * TODO Use constants from Constants.java instead of the hardcoded strings
+ *
+ * @author Brevik Magnus
+ * @author Bjerke Thomas
+ * @author Gulaker Kristian
+ * @author Thorkildsen Torje
  */
 
 package database;
@@ -140,10 +140,19 @@ public abstract class Login
 		return salt;
 	}
 
-    public static boolean logout() {
-        return databaseConnector.logout();
-    }
-	
+	/**
+	 * Logs the local user out of the database
+	 *
+	 * @return true if user was logged out successfully, false if not
+	 */
+	public static boolean logout() {
+		return databaseConnector.logout();
+	}
+
+	/**
+	 * @deprecated test method for Login class
+	 * @param args standard main args
+	 */
 	public static void main(String[] args)
 	{
 		//try{Class.forName("com.mysql.cj.jdbc.Driver");}catch(Exception e){e.printStackTrace();}
