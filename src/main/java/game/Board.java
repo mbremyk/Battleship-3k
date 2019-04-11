@@ -75,6 +75,34 @@ public class Board extends ImageView {
             mousePosY = -1;
         });
     }
+    /**
+     * constructor for testing purposes. Like the other constructor, but without anchorPane parent
+     * @param parent      the parent AnchorPane of this object
+     * @param x           the x position of this object
+     * @param y           the y position of this object
+     */
+    public Board(AnchorPane parent, double x, double y) {
+        this.parent = parent;
+        setTranslateX(x);
+        setTranslateY(y);
+
+        board = new int[TILES][TILES];
+        this.setFitWidth(SIZE);
+        this.setFitHeight(SIZE);
+
+        setOnMouseMoved(event -> {
+            findMousePos(event.getX(), event.getY());
+        });
+        setOnMouseDragged(event -> {
+            if (event.getX() > 0 && event.getY() > 0) {
+                findMousePos(event.getX(), event.getY());
+            }
+        });
+        setOnMouseExited(event -> {
+            mousePosX = -1;
+            mousePosY = -1;
+        });
+    }
 
     /**
      * Finds the mouse's position in this Board's grid, and stores it in the class variables mousePosX and mousePosY
