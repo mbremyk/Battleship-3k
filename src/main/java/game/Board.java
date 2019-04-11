@@ -85,6 +85,7 @@ public class Board extends ImageView {
         this.parent = parent;
         setTranslateX(x);
         setTranslateY(y);
+        this.boardNumber = 0;
 
         board = new int[TILES][TILES];
         this.setFitWidth(SIZE);

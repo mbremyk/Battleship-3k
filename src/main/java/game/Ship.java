@@ -1,5 +1,6 @@
 /**
- * @Author Thorkildsen Torje
+ *
+ * @author Thorkildsen Torje
  */
 
 package game;
@@ -56,7 +57,6 @@ public class Ship extends Rectangle {
         setOnMousePressed(event -> {
             startDragX = event.getSceneX()-(parentBoard.getTranslateX()+(getTileX())*Board.TILE_SIZE);
             startDragY = event.getSceneY()-(parentBoard.getTranslateY()+(getTileY())*Board.TILE_SIZE);
-            System.out.println(startDragX+","+startDragY);
         });
 
         setOnMouseClicked(event -> {
