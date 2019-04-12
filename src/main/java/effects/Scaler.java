@@ -1,3 +1,11 @@
+/**
+ * Adds a scaling effect to a Node. When play() is called this effect just about doubles the Node's scale and then
+ * shrinks it to normal size 2 times in the next 100 milliseconds.
+ *
+ * @author Thorkildsen
+ */
+
+
 package effects;
 
 import javafx.animation.ScaleTransition;
@@ -8,6 +16,11 @@ import javafx.util.Duration;
 public class Scaler {
     private ScaleTransition scaleTransition;
 
+    /**
+     * Initializes a new Scaler connected to a Node which will get the effect
+     *
+     * @param node the Node that will have the scaling effect applied to it
+     */
     public Scaler(Node node) {
         scaleTransition = new ScaleTransition(Duration.millis(100),node);
         scaleTransition.setFromX(1);
@@ -18,6 +31,9 @@ public class Scaler {
         scaleTransition.setAutoReverse(true);
     }
 
+    /**
+     * Plays the scaling effect on the Node
+     */
     public void play(){
         scaleTransition.playFromStart();
     }

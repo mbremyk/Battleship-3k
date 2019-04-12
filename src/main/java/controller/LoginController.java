@@ -16,8 +16,6 @@ import java.util.ResourceBundle;
 
 import database.Login;
 import effects.Shaker;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import game.Statics;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -98,7 +96,7 @@ public class LoginController extends ViewComponent {
                     }
                 }
                 Shaker shaker = new Shaker(node);
-                shaker.shake();
+                shaker.play();
             }
         }
     }
