@@ -28,7 +28,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static database.Constants.DB_URL;
 import static database.Login.logout;
 
 public class Main extends Application {
@@ -86,7 +85,7 @@ public class Main extends Application {
         } catch (IOException e){
             e.printStackTrace();
         } catch (PropertyNotFoundException e){
-            
+
         }
         try {
             connectionPool = ConnectionPool.create(DB_URL);
