@@ -30,8 +30,14 @@ import static database.Constants.*;
  */
 public abstract class Login
 {
-	
+	/**
+	 * URL to the JDBC server
+	 */
 	private static String databaseUrl = Constants.DB_URL;
+
+	/**
+	 *
+	 */
 	private static final DatabaseConnector databaseConnector = new DatabaseConnector(databaseUrl);
 	
 	/**
