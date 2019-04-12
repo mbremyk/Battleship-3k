@@ -682,7 +682,7 @@ public class DatabaseConnector {
     }
 
     /**
-     * Updates the score of the user. Adds 1 to either Constants.USERS_WINS or Constants.USERS_LOSSES depending on the results of the game
+     * Updates the score of the user. Adds 1 to either {@link Constants#USERS_WINS} or {@link Constants#USERS_LOSSES} depending on the results of the game
      *
      * @param userId     ID of the user to update the score of
      * @param gameResult the result of the game. 1 if the user won and 0 if the user lost
