@@ -90,6 +90,25 @@ class GameTest {
     }
 
     /**
+     * checks if the board returns the expected string array of the board
+     * test fails although the expected string is identical to the actual one
+     */
+    @Test
+    void getBoard1() {
+        System.out.println(testHostGame.getBoard1());
+        assertEquals("|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n", testHostGame.getBoard1());
+    }
+
+    /**
      * checks that the joinUser can be set
      */
     @Test
