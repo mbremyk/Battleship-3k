@@ -4,16 +4,17 @@
  */
 package game;
 
+import javafx.scene.layout.AnchorPane;
 import junit.framework.Assert;
 import model.BattleshipUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import javax.swing.text.html.ImageView;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * JUnit testing of game logic in Game class
+ * JUnit testing of game logic in Game class. Excludes testing of methods involving graphics initialization and database connection.
  */
 class GameTest {
     BattleshipUser hostUser;
@@ -30,8 +31,8 @@ class GameTest {
         joinUser = new BattleshipUser(2, "dolan2", "1234", "dolanmail@gmail.com", 1, 1);
         testHostGame = new Game(1, "Dolan's game", hostUser, true);
         testJoinGame = new Game(1, "Dolan's game", hostUser, false);
-        this.setJoinUser();
-        this.setBoards();
+        testJoinGame.setJoinUser(joinUser);
+        testJoinGame.setBoards(new Board(new AnchorPane(), 0, 0), new Board(new AnchorPane(), 0, 0));
     }
 
     /**
@@ -57,7 +58,7 @@ class GameTest {
      * checks that the inputed game name is returned
      */
     @Test
-    void getGameName() { 
+    void getGameName() {
         assertEquals("Dolan's game", testHostGame.getGameName());
         assertEquals("Dolan's game", testJoinGame.getGameName());
     }
@@ -129,7 +130,7 @@ class GameTest {
     }
 
     /**
-     * checks if set turn is returned
+     * checks if the turn set is returned in method
      */
     @Test
     void isMyTurn() {
@@ -151,7 +152,8 @@ class GameTest {
     }
 
     /**
-     * checks if
+     * checks if game is over
+     * @return true if game is over, false otherwise
      */
     @Test
     void isGameOver() {
@@ -187,22 +189,25 @@ class GameTest {
     }
 
 
+    /**
+     * impossible
+     */
     @Test
     void getGameResult() {
 
-
     }
 
-    @Test
-    void setBoards() {
-        //testHostGame.setBoards(new Board()); HJELP
-    }
-
+    /**
+     * checks if method returns isGameOpen
+     */
     @Test
     void isGameOpen() {
        assertEquals(true, testHostGame.isGameOpen());
     }
 
+    /**
+     * checks if method sets gameOpen to given value
+     */
     @Test
     void setGameOpen() {
         testHostGame.setGameOpen(false);
@@ -210,6 +215,9 @@ class GameTest {
     }
 
 
+    /**
+     * checks if method sets boardsReady to given value
+     */
     @Test
     void setBoardsReady() {
     }

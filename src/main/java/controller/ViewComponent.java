@@ -1,9 +1,11 @@
 /**
- * controller.ViewComponent.java
+ * ViewComponent.java
+ *
  * <p>
  * Abstract class inherited by view-components that want to be able to switch the parent AnchorPane's view
+ * </p>
  *
- * @Author Thorkildsen Torje
+ * @author Thorkildsen Torje
  */
 
 package controller;
@@ -24,8 +26,9 @@ public abstract class ViewComponent {
     /**
      * Method for switching the view of the parent AnchorPane of the class who inherits this method
      *
-     * @param view the name of the fxml file you want to switch to, without path or ".fxml"
-     * @return boolean, true if the view switch went well and false if not
+     * @param view       the name of the fxml file you want to switch to, without path or ".fxml"
+     * @param updateSize true if you want the size of the window to be exactly the size of the new view
+     * @return true if the view switch went well and false if not
      */
     public boolean switchView(String view, boolean updateSize) {
         AnchorPane formPane = getFormPane(view);
@@ -35,10 +38,22 @@ public abstract class ViewComponent {
         return true;
     }
 
+    /**
+     * Method for switching the view of the parent AnchorPane of the class who inherits this method
+     *
+     * @param view the name of the fxml file you want to switch to, without path or ".fxml"
+     * @return true if the view switch went well and false if not
+     */
     public boolean switchView(String view) {
         return switchView(view, false);
     }
 
+    /**
+     * Gets the main AnchorPane of an fxml file
+     *
+     * @param view the name of the fxml file you want to get the main AnchorPane of, without path or ".fxml"
+     * @return the main AnchorPane in the view
+     */
     private AnchorPane getFormPane(String view) {
         try {
             URL url = Paths.get("./src/main/java/view/" + view + ".fxml").toUri().toURL();
@@ -49,6 +64,11 @@ public abstract class ViewComponent {
         return null;
     }
 
+    /**
+     * Starts a game by loading the Game.fxml file and updating the size of the window
+     *
+     * @return true if the game starting was successful
+     */
     public boolean startGame() {
         //THIS IS FOR A NEW WINDOW
 //        try {
@@ -75,6 +95,11 @@ public abstract class ViewComponent {
         return true;
     }
 
+    /**
+     * Updates the size of the window to fit a specific AnchorPane
+     *
+     * @param formPane the AnchorPane you want the window to be resized for
+     */
     private void updateSize(AnchorPane formPane) {
         AnchorPane parent = (AnchorPane) getParentAnchorPane().getScene().getRoot();
         Window window = parent.getScene().getWindow();

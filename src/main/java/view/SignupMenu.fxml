@@ -19,16 +19,16 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="signupUsernameField" layoutX="372.0" layoutY="73.0" prefHeight="25.0" prefWidth="220.0" promptText="shrek">
+      <TextField fx:id="signupUsernameField" layoutX="372.0" layoutY="73.0" prefHeight="25.0" prefWidth="220.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="signupEmailField" layoutX="372.0" layoutY="120.0" prefHeight="25.0" prefWidth="220.0" promptText="shrek@hotmail.no">
+      <TextField fx:id="signupEmailField" layoutX="372.0" layoutY="120.0" prefHeight="25.0" prefWidth="220.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="signupPasswordField" layoutX="372.0" layoutY="169.0" prefHeight="30.0" prefWidth="220.0" promptText="1234">
+      <PasswordField fx:id="signupPasswordField" layoutX="372.0" layoutY="169.0" prefHeight="30.0" prefWidth="220.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -38,7 +38,7 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Text>
-      <PasswordField fx:id="signupConfirmPasswordField" layoutX="372.0" layoutY="219.0" prefHeight="30.0" prefWidth="220.0" promptText="1234">
+      <PasswordField fx:id="signupConfirmPasswordField" layoutX="372.0" layoutY="219.0" prefHeight="30.0" prefWidth="220.0">
          <font>
             <Font size="18.0" />
          </font>

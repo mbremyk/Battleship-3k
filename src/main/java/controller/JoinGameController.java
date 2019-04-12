@@ -1,5 +1,11 @@
 /**
- * @Author Thorkildsen Torje
+ * JoinGameController.java
+ *
+ * <p>
+ * Controller for the menu for viewing and joining a game
+ * </p>
+ *
+ * @author Thorkildsen Torje
  */
 
 package controller;
@@ -15,6 +21,8 @@ import database.Constants;
 import database.DatabaseConnector;
 import game.Game;
 import game.Statics;
+import model.ConfirmBox;
+import model.AlertBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -76,7 +84,7 @@ public class JoinGameController extends ViewComponent {
         winsColumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
 
         refreshList();
-        joinGameGamesTable.getColumns().addAll(nameColumn,hostColumn, winsColumn);
+        joinGameGamesTable.getColumns().addAll(nameColumn, hostColumn, winsColumn);
 
         joinGameCancelButton.setOnAction(event -> {
             switchView("MainMenu");
@@ -91,23 +99,40 @@ public class JoinGameController extends ViewComponent {
         });
     }
 
-    public void joinButtonPressed() {
+    /**
+     * Makes the user join the selected game
+     *
+     * @return true if a game has been selected and is joined, false otherwise
+     */
+    public boolean joinButtonPressed() {
         RowData rowData = joinGameGamesTable.getSelectionModel().getSelectedItem();
         if (Statics.getLocalUser() == null) {
-            System.out.println("You are not logged in");
+            boolean login = ConfirmBox.display("You have to log in to join a game, log in?");
+            if(login){
+                switchView("LoginMenu");
+            }
         } else if (rowData == null) {
-            System.out.println("No game has been selected");
+            AlertBox.display("You need to select a game to join!");
         } else {
             Game game = getGame(rowData.getUsername());
             DatabaseConnector databaseConnector = new DatabaseConnector();
             if (game.isGameOpen() && databaseConnector.joinGame(game)) {
                 startGame();
+                return true;
             } else {
                 System.out.println("Could not join game");
             }
         }
+        return false;
+
     }
 
+    /**
+     * Gets a game by the name of the host user
+     *
+     * @param hostUsername the name of the host user
+     * @return the game with the specified host user, null if it doesn't exist
+     */
     public Game getGame(String hostUsername) {
         for (Game game : games) {
             if (hostUsername.equals(game.getHostUser().getUsername())) return game;
@@ -115,6 +140,9 @@ public class JoinGameController extends ViewComponent {
         return null;
     }
 
+    /**
+     * Refreshes the list of games, by reloading them from the database
+     */
     public void refreshList() {
         DatabaseConnector newConnector = new DatabaseConnector(Constants.DB_URL);
         games = newConnector.getGames();
@@ -127,7 +155,7 @@ public class JoinGameController extends ViewComponent {
             if (games[i].getJoinUser() != null) {
                 open = false;
             }
-            if(open) {
+            if (open) {
                 RowData newRow = new RowData(games[i].getGameName(), games[i].getHostUser().getUsername(), games[i].getHostUser().getWonGames());
                 gameList.add(newRow);
             }
@@ -136,6 +164,11 @@ public class JoinGameController extends ViewComponent {
     }
 
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) joinGameCancelButton.getParent();
@@ -146,12 +179,15 @@ public class JoinGameController extends ViewComponent {
         private String username;
         private int wins;
 
-        public RowData(String gameName,String username, int wins){
+        public RowData(String gameName, String username, int wins) {
             this.gameName = gameName;
             this.username = username;
             this.wins = wins;
         }
-        public String getGameName(){ return gameName; }
+
+        public String getGameName() {
+            return gameName;
+        }
 
         public String getUsername() {
             return username;

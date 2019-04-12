@@ -1,6 +1,13 @@
 /**
- * @Author Thorkildsen Torje
+ * SignupController.java
+ *
+ * <p>
+ * Controller for the signup menu
+ * </p>
+ *
+ * @author Thorkildsen Torje
  */
+
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -101,6 +108,9 @@ public class SignupController extends ViewComponent {
         });
     }
 
+    /**
+     * Opens a link to our Terms of Service in an internet browser
+     */
     public void termsOfServiceClicked() {
         try {
             Desktop.getDesktop().browse(new URI("https://l.facebook.com/l.php?u=https%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1Baax3OXZ--mQsO4eGXhF-Lex8sRqVlXF1Q1liVNr_ms%2Fedit%3F" +
@@ -113,6 +123,11 @@ public class SignupController extends ViewComponent {
         }
     }
 
+    /**
+     * Checks if the input fields are valid and signs the user up by adding their user to the database.
+     * The user is logged in afterwards.
+     * If input is invalid the input fields will do a small shaking effect
+     */
     public void signupButtonClicked() {
         if (checkValidUser()) {
             //Sets userid to -1 because the user hasn't been created yet so no userid exists in the database
@@ -132,7 +147,7 @@ public class SignupController extends ViewComponent {
             }
         } else {
             for (Node node : getParentAnchorPane().getChildren()) {
-                if (node != signupUsernameField && node != signupEmailField&& node != signupPasswordField&& node != signupConfirmPasswordField && node != signupAgreeCheckbox && node != signupTOSLink) {
+                if (node != signupUsernameField && node != signupEmailField && node != signupPasswordField && node != signupConfirmPasswordField && node != signupAgreeCheckbox && node != signupTOSLink) {
                     if (node instanceof Text) {
                         String text = ((Text) node).getText();
                         if (!text.equals("Username") && !text.equals("Email") && !text.equals("Password") && !text.equals("Confirm password")) {
@@ -150,7 +165,9 @@ public class SignupController extends ViewComponent {
 
 
     /**
-     * @return
+     * Checks if the text fields have valid input for a new user and that the username is not already in use
+     *
+     * @return true if a new user can be created with the text field inputs
      */
     private boolean checkValidUser() {
         if (signupUsernameField.getText().length() > USERNAME_MAX_LENGTH) {
@@ -185,6 +202,11 @@ public class SignupController extends ViewComponent {
         return true;
     }
 
+    /**
+     * Method to get the main AnchorPane of this controller's fxml file
+     *
+     * @return the main AnchorPane of this controller's fxml file
+     */
     @Override
     protected AnchorPane getParentAnchorPane() {
         return (AnchorPane) signupCancelButton.getParent();
