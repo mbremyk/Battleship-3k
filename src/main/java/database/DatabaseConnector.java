@@ -47,7 +47,7 @@ public class DatabaseConnector {
     }
 
     public DatabaseConnector() {
-        this.databaseUrl = Constants.DB_URL;
+        this.databaseUrl = Constants.getDbUrl();
     }
 
     public ConnectionPool setConnectionPool(ConnectionPool _connectionPool) {
@@ -99,7 +99,7 @@ public class DatabaseConnector {
      * @return true if registration was successful, false if not
      */
     public boolean registerUser(String username, byte[] hashedPassword, String email, byte[] salt) {
-        String query = "INSERT INTO " + USERS_TABLE + "(" + USERS_USERNAME + "," + USERS_PASSWORD + "," + USERS_EMAIL + "," + USERS_SALT + ") VALUES(?,?,?,?)";
+        String query = "INSERT INTO " + Constants.getUsersTable() + "(" + Constants.getUsersUsername() + "," + Constants.getUsersPassword() + "," + Constants.getUsersEmail() + "," + Constants.getUsersSalt() + ") VALUES(?,?,?,?)";
         Connection con = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -131,8 +131,8 @@ public class DatabaseConnector {
      */
     public BattleshipUser getBattleshipUser(String username, String password) {
         ResultSet res = null;
-        String query = "SELECT * FROM " + USERS_TABLE + " WHERE " + USERS_USERNAME + " = ?";
-        String loginQuery = "UPDATE " + USERS_TABLE + " SET " + USERS_LOGGED_IN + " = 1 WHERE " + USERS_ID + " = ?";
+        String query = "SELECT * FROM " + Constants.getUsersTable() + " WHERE " + Constants.getUsersUsername() + " = ?";
+        String loginQuery = "UPDATE " + Constants.getUsersTable() + " SET " + Constants.getUsersLoggedIn() + " = 1 WHERE " + Constants.getUsersId() + " = ?";
         Connection con = null;
         PreparedStatement preparedStatement = null;
         PreparedStatement loginPreparedStatement = null;
@@ -144,11 +144,11 @@ public class DatabaseConnector {
             res = preparedStatement.executeQuery();
             BattleshipUser out = null;
             if (res.next()) {
-                byte[] passwordHash = res.getBytes(USERS_PASSWORD);
-                byte[] salt = res.getBytes(USERS_SALT);
+                byte[] passwordHash = res.getBytes(Constants.getUsersPassword());
+                byte[] salt = res.getBytes(Constants.getUsersSalt());
                 if (Arrays.equals(saltPassword(password, salt), passwordHash))  //password.equals(res.getString("password") for unhashed passwords
                 {
-                    out = new BattleshipUser(res.getInt(USERS_ID), username, password, res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+                    out = new BattleshipUser(res.getInt(Constants.getUsersId()), username, password, res.getString(Constants.getUsersEmail()), res.getInt(Constants.getUsersWins()), res.getInt(Constants.getUsersLosses()));
                     loginPreparedStatement = con.prepareStatement(loginQuery);
                     loginPreparedStatement.setInt(1, out.getUserId());
                     loginPreparedStatement.execute();
@@ -184,7 +184,7 @@ public class DatabaseConnector {
      */
     public BattleshipUser[] getBattleshipUsers() {
         ResultSet res = null;
-        String query = "SELECT * FROM " + USERS_TABLE;
+        String query = "SELECT * FROM " + Constants.getUsersTable();
         Connection con = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -198,8 +198,8 @@ public class DatabaseConnector {
                 for (int i = 0; i < users.length; i++) {
                     newUsers[i] = users[i];
                 }
-                newUsers[newUsers.length - 1] = new BattleshipUser(res.getInt(USERS_ID), res.getString(USERS_USERNAME), res.getString(USERS_PASSWORD),
-                        res.getString(USERS_EMAIL), res.getInt(USERS_WINS), res.getInt(USERS_LOSSES));
+                newUsers[newUsers.length - 1] = new BattleshipUser(res.getInt(Constants.getUsersId()), res.getString(Constants.getUsersUsername()), res.getString(Constants.getUsersPassword()),
+                        res.getString(Constants.getUsersEmail()), res.getInt(Constants.getUsersWins()), res.getInt(Constants.getUsersLosses()));
                 users = newUsers;
             }
             return users;
@@ -228,16 +228,16 @@ public class DatabaseConnector {
         try {
             con = connectionPool.getConnection();
             con.setAutoCommit(false);
-            String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ? " + " AND " + ACTION_USER_ID + " != ?" + " AND " + ACTION_MOVE_ID + " > ?" + " ORDER BY " + ACTION_MOVE_ID;
+            String query = "SELECT * FROM " + Constants.getActionTable() + " WHERE " + Constants.getActionGameId() + " = ? " + " AND " + Constants.getActionUserId() + " != ?" + " AND " + Constants.getActionMoveId() + " > ?" + " ORDER BY " + Constants.getActionMoveId();
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, game.getGameId());
             preparedStatement.setInt(2, Statics.getLocalUser().getUserId());
             preparedStatement.setInt(3, moveId);
             res = preparedStatement.executeQuery();
             while (res.next()) {
-                game.addCachedAction(res.getString(ACTION_COORDINATES) + "," + res.getString(ACTION_MOVE_ID));
+                game.addCachedAction(res.getString(Constants.getActionCoordinates()) + "," + res.getString(Constants.getActionMoveId()));
             }
-            String deleteQuery = "DELETE FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ? " + " AND " + ACTION_MOVE_ID + " < ?";
+            String deleteQuery = "DELETE FROM " + Constants.getActionTable() + " WHERE " + Constants.getActionGameId() + " = ? " + " AND " + Constants.getActionMoveId() + " < ?";
             deletePreparedStatement = con.prepareStatement(deleteQuery);
             deletePreparedStatement.setInt(1, game.getGameId());
             deletePreparedStatement.setInt(2, moveId);
@@ -293,12 +293,12 @@ public class DatabaseConnector {
      */
     public Game[] getGames(int hostid) {
         Game[] games;
-        String query = "SELECT " + USERS_TABLE + "." + USERS_USERNAME + "," + USERS_TABLE + "." + USERS_WINS + "," + GAME_TABLE + "." + GAME_ID + ","
-                + GAME_TABLE + "." + GAME_HOST_ID + "," + "" + GAME_TABLE + "." + GAME_JOIN_ID + ","
-                + GAME_TABLE + "." + GAME_NAME + " FROM " + USERS_TABLE + "" +
-                " INNER JOIN " + GAME_TABLE + " ON " + GAME_TABLE + "." + GAME_HOST_ID + " = " + USERS_TABLE + "." + USERS_ID;
+        String query = "SELECT " + Constants.getUsersTable() + "." + Constants.getUsersUsername() + "," + Constants.getUsersTable() + "." + Constants.getUsersWins() + "," + Constants.getGameTable() + "." + Constants.getGameId() + ","
+                + Constants.getGameTable() + "." + Constants.getGameHostId() + "," + "" + Constants.getGameTable() + "." + Constants.getGameJoinId() + ","
+                + Constants.getGameTable() + "." + Constants.getGameName() + " FROM " + Constants.getUsersTable() + "" +
+                " INNER JOIN " + Constants.getGameTable() + " ON " + Constants.getGameTable() + "." + Constants.getGameHostId() + " = " + Constants.getUsersTable() + "." + Constants.getUsersId();
 
-        if (hostid != -1) query += " WHERE " + GAME_HOST_ID + " = ?";
+        if (hostid != -1) query += " WHERE " + Constants.getGameHostId() + " = ?";
 
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -312,17 +312,17 @@ public class DatabaseConnector {
             games = new Game[0];
 
             while (res.next()) {
-                int hostId = res.getInt(GAME_HOST_ID);
-                String username = res.getString(USERS_USERNAME);
-                int hostWins = res.getInt(USERS_WINS);
+                int hostId = res.getInt(Constants.getGameHostId());
+                String username = res.getString(Constants.getUsersUsername());
+                int hostWins = res.getInt(Constants.getUsersWins());
                 BattleshipUser newHost = new BattleshipUser(hostId, username, "", "", hostWins, 0);
                 BattleshipUser newJoin;
-                Game newGame = new Game(res.getInt(GAME_ID), res.getString(GAME_NAME), newHost, hostid != -1);
-                if (res.getString(GAME_JOIN_ID) == null) {
+                Game newGame = new Game(res.getInt(Constants.getGameId()), res.getString(Constants.getGameName()), newHost, hostid != -1);
+                if (res.getString(Constants.getGameJoinId()) == null) {
                     newJoin = null;
                     newGame.setGameOpen(true);
                 } else {
-                    newJoin = new BattleshipUser(res.getInt(GAME_JOIN_ID), "", "", "");
+                    newJoin = new BattleshipUser(res.getInt(Constants.getGameJoinId()), "", "", "");
                     newGame.setGameOpen(false);
                 }
                 newGame.setJoinUser(newJoin);
@@ -354,7 +354,7 @@ public class DatabaseConnector {
      */
     public String getShipCoordinatesString(int gameid, int userid) {
         ResultSet res = null;
-        String query = "SELECT " + BOARDS_COORDINATES + " FROM " + BOARDS_TABLE + " WHERE " + BOARDS_GAME_ID + "=" + "? AND " + BOARDS_USER_ID + "= ?";
+        String query = "SELECT " + Constants.getBoardsCoordinates() + " FROM " + Constants.getBoardsTable() + " WHERE " + Constants.getBoardsGameId() + "=" + "? AND " + Constants.getBoardsUserId() + "= ?";
         String coordString = null;
         PreparedStatement preparedStatement = null;
         Connection con = null;
@@ -370,7 +370,7 @@ public class DatabaseConnector {
             res = preparedStatement.executeQuery();
 
             if (res.next()) {
-                coordString = res.getString(BOARDS_COORDINATES);
+                coordString = res.getString(Constants.getBoardsCoordinates());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -423,7 +423,7 @@ public class DatabaseConnector {
         String coordinates = null;
         ResultSet res = null;
         PreparedStatement preparedStatement = null;
-        String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ?" + " AND " + ACTION_MOVE_ID + " = ?";
+        String query = "SELECT * FROM " + Constants.getActionTable() + " WHERE " + Constants.getActionGameId() + " = ?" + " AND " + Constants.getActionMoveId() + " = ?";
         Connection con = null;
         try {
             con = connectionPool.getConnection();
@@ -434,7 +434,7 @@ public class DatabaseConnector {
             res = preparedStatement.executeQuery();
             connectionPool.releaseConnection(con);
             if (res.next()) {
-                coordinates = res.getString(ACTION_COORDINATES);
+                coordinates = res.getString(Constants.getActionCoordinates());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -457,7 +457,7 @@ public class DatabaseConnector {
         int gameId = game.getGameId();
         ResultSet res = null;
         PreparedStatement preparedStatement = null;
-        String query = "SELECT bb." + BOARDS_USER_ID + "," + USERS_USERNAME + " FROM " + BOARDS_TABLE + " bb JOIN " + USERS_TABLE + " bu ON bb." + BOARDS_USER_ID + "=bu." + USERS_ID + " WHERE " + BOARDS_GAME_ID + " = " + gameId;
+        String query = "SELECT bb." + Constants.getBoardsUserId() + "," + Constants.getUsersUsername() + " FROM " + Constants.getBoardsTable() + " bb JOIN " + Constants.getUsersTable() + " bu ON bb." + Constants.getBoardsUserId() + "=bu." + Constants.getUsersId() + " WHERE " + Constants.getBoardsGameId() + " = " + gameId;
         Connection con = null;
         try {
             updateGameOver();
@@ -491,8 +491,8 @@ public class DatabaseConnector {
      * @throws SQLException if something went wrong with the ResultSet
      */
     private void checkJoin(Game game, ResultSet res) throws SQLException {
-        if (res.getInt(BOARDS_USER_ID) != Statics.getLocalUser().getUserId()) {
-            BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID), res.getString(USERS_USERNAME));
+        if (res.getInt(Constants.getBoardsUserId()) != Statics.getLocalUser().getUserId()) {
+            BattleshipUser opponent = new BattleshipUser(res.getInt(Constants.getBoardsUserId()), res.getString(Constants.getUsersUsername()));
             if (game.getJoinUser() == null) game.setJoinUser(opponent);
             //System.out.println("READY");
         }
@@ -524,7 +524,7 @@ public class DatabaseConnector {
         PreparedStatement preparedStatement = null;
         try {
             con = connectionPool.getConnection();
-            String query = "INSERT INTO " + BOARDS_TABLE + "(" + BOARDS_GAME_ID + "," + BOARDS_USER_ID + "," + BOARDS_COORDINATES + ")VALUES(?,?,?)";
+            String query = "INSERT INTO " + Constants.getBoardsTable() + "(" + Constants.getBoardsGameId() + "," + Constants.getBoardsUserId() + "," + Constants.getBoardsCoordinates() + ")VALUES(?,?,?)";
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, gameid);
             preparedStatement.setInt(2, userid);
@@ -556,7 +556,7 @@ public class DatabaseConnector {
         PreparedStatement insertPreparedStatement = null;
         try {
             con = connectionPool.getConnection();
-            String insertQuery = "INSERT INTO " + ACTION_TABLE + "(" + ACTION_GAME_ID + "," + ACTION_MOVE_ID + "," + ACTION_USER_ID + "," + ACTION_COORDINATES + ")VALUES(?,?,?,?)";
+            String insertQuery = "INSERT INTO " + Constants.getActionTable() + "(" + Constants.getActionGameId() + "," + Constants.getActionMoveId() + "," + Constants.getActionUserId() + "," + Constants.getActionCoordinates() + ")VALUES(?,?,?,?)";
             insertPreparedStatement = con.prepareStatement(insertQuery);
             insertPreparedStatement.setInt(1, gameId);
             insertPreparedStatement.setInt(2, moveId + 1);
@@ -585,8 +585,8 @@ public class DatabaseConnector {
     public boolean createGame(String gameName) {
         BattleshipUser user = Statics.getLocalUser();
         if (user == null) return false;
-        String deleteQuery = "DELETE FROM " + GAME_TABLE + " WHERE " + GAME_HOST_ID + " = ? ";
-        String insertQuery = "INSERT INTO " + GAME_TABLE + "(" + GAME_HOST_ID + "," + GAME_NAME + ") VALUES(?,?)";
+        String deleteQuery = "DELETE FROM " + Constants.getGameTable() + " WHERE " + Constants.getGameHostId() + " = ? ";
+        String insertQuery = "INSERT INTO " + Constants.getGameTable() + "(" + Constants.getGameHostId() + "," + Constants.getGameName() + ") VALUES(?,?)";
         Connection con = null;
         PreparedStatement deletePreparedStatement = null;
         PreparedStatement insertPreparedStatement = null;
@@ -632,7 +632,7 @@ public class DatabaseConnector {
     public boolean joinGame(Game game) {
         BattleshipUser user = Statics.getLocalUser();
         if (user == null) return false;
-        String query = "UPDATE " + GAME_TABLE + " SET " + GAME_JOIN_ID + " = ? WHERE " + GAME_ID + " = " + game.getGameId() + " AND " + GAME_JOIN_ID + " IS NULL";
+        String query = "UPDATE " + Constants.getGameTable() + " SET " + Constants.getGameJoinId() + " = ? WHERE " + Constants.getGameId() + " = " + game.getGameId() + " AND " + Constants.getGameJoinId() + " IS NULL";
         PreparedStatement preparedStatement = null;
         Connection con = null;
         try {
@@ -671,7 +671,7 @@ public class DatabaseConnector {
             PreparedStatement preparedStatement = null;
             try {
                 con = connectionPool.getConnection();
-                String update = "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, ?, ?)";
+                String update = "INSERT INTO " + Constants.getFeedbackTable() + " VALUES (DEFAULT, ?, ?)";
                 preparedStatement = con.prepareStatement(update);
                 preparedStatement.setString(1, title);
                 preparedStatement.setString(2, message);
@@ -688,7 +688,7 @@ public class DatabaseConnector {
     }
 
     /**
-     * Updates the score of the user. Adds 1 to either {@link Constants#USERS_WINS} or {@link Constants#USERS_LOSSES} depending on the results of the game
+     * Updates the score of the user. Adds 1 to either {@link Constants#Constants.getUsersWins()} or {@link Constants#Constants.getUsersLosses()} depending on the results of the game
      *
      * @param userId     ID of the user to update the score of
      * @param gameResult the result of the game. 1 if the user won and 0 if the user lost
@@ -704,18 +704,18 @@ public class DatabaseConnector {
         try {
             con = connectionPool.getConnection();
             if (gameResult == 1) {
-//                query = "SELECT " + USERS_WINS + " FROM " + USERS_TABLE + "";
-                column = USERS_WINS;
+//                query = "SELECT " + Constants.getUsersWins() + " FROM " + Constants.getUsersTable + "";
+                column = Constants.getUsersWins();
             } else {
-//                query = "SELECT " + USERS_LOSSES + " FROM " + USERS_TABLE + "";
-                column = USERS_LOSSES;
+//                query = "SELECT " + Constants.getUsersLosses() + " FROM " + Constants.getUsersTable + "";
+                column = Constants.getUsersLosses();
 //            }
 //            statement = con.prepareStatement(query);
 //            res = statement.executeQuery();
 //            if(res.next()){
 //                currentValue = res.getInt(column);
             }
-            query = "UPDATE " + USERS_TABLE + " SET " + column + " = " + column + "+1" + " WHERE " + USERS_ID + " = ?";
+            query = "UPDATE " + Constants.getUsersTable() + " SET " + column + " = " + column + "+1" + " WHERE " + Constants.getUsersId() + " = ?";
             statement = con.prepareStatement(query);
             statement.setInt(1, userId);
             statement.executeUpdate();
@@ -745,7 +745,7 @@ public class DatabaseConnector {
         ResultSet res;
         try {
             con = connectionPool.getConnection();
-            query = "DELETE FROM " + GAME_TABLE + " WHERE " + GAME_ID + " = '" + game.getGameId() + "'";
+            query = "DELETE FROM " + Constants.getGameTable() + " WHERE " + Constants.getGameId() + " = '" + game.getGameId() + "'";
             statement = con.prepareStatement(query);
             statement.executeUpdate();
             return true;
@@ -762,7 +762,7 @@ public class DatabaseConnector {
     }
 
     /**
-     * Logs the local user out of the database. This has no current function, other than changing the USERS_LOGGED_IN column in the database
+     * Logs the local user out of the database. This has no current function, other than changing the Constants.getLoggedIn() column in the database
      *
      * @return true if the user was successfully logged out, false if not, or if an Exception was thrown
      */
@@ -770,7 +770,7 @@ public class DatabaseConnector {
         if (Statics.getLocalUser() != null) {
             Connection con = null;
             PreparedStatement preparedStatement = null;
-            String query = "UPDATE " + USERS_TABLE + " SET " + USERS_LOGGED_IN + " = ? WHERE " + USERS_ID + " = ?";
+            String query = "UPDATE " + Constants.getUsersTable() + " SET " + Constants.getUsersLoggedIn() + " = ? WHERE " + Constants.getUsersId() + " = ?";
             try {
                 con = connectionPool.getConnection();
                 preparedStatement = con.prepareStatement(query);
@@ -792,14 +792,14 @@ public class DatabaseConnector {
     }
 
     /**
-     * Uploads the results of the local game. Sets Constants.GAME_WINNER_ID column to the ID of the winner of the current Game
+     * Uploads the results of the local game. Sets Constants.Constants.getGameWinnerId() column to the ID of the winner of the current Game
      *
      * @return true if the results were successfully uploaded, false if not, or if an Exception was thrown
      */
     public boolean uploadResults() {
         Connection con = null;
         PreparedStatement preparedStatement = null;
-        String query = "UPDATE " + GAME_TABLE + " SET " + GAME_WINNER_ID + " = ? WHERE " + GAME_ID + " = ?";
+        String query = "UPDATE " + Constants.getGameTable() + " SET " + Constants.getGameWinnerId() + " = ? WHERE " + Constants.getGameId() + " = ?";
         try {
             con = connectionPool.getConnection();
             preparedStatement = con.prepareStatement(query);
@@ -831,13 +831,13 @@ public class DatabaseConnector {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet res = null;
-        String query = "SELECT " + GAME_WINNER_ID + " FROM " + GAME_TABLE + " WHERE " + GAME_ID + " = ?";
+        String query = "SELECT " + Constants.getGameWinnerId() + " FROM " + Constants.getGameTable() + " WHERE " + Constants.getGameId() + " = ?";
         try {
             con = connectionPool.getConnection();
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, Statics.getGame().getGameId());
             res = preparedStatement.executeQuery();
-            if (res.next() && res.getInt(GAME_WINNER_ID) != 0) {
+            if (res.next() && res.getInt(Constants.getGameWinnerId()) != 0) {
                 Statics.getGame().setGameOver(true);
             }
         } catch (Exception e) {

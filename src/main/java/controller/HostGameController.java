@@ -73,10 +73,10 @@ public class HostGameController extends ViewComponent {
     public boolean createGameButtonPressed() {
         BattleshipUser user = Statics.getLocalUser();
         if (user != null) {
-            DatabaseConnector databaseConnector4 = new DatabaseConnector(Constants.DB_URL);
+            DatabaseConnector databaseConnector = new DatabaseConnector();
             String gameName = hostGameNameField.getText();
             if (gameName.equals("")) gameName = user.getUsername() + "'s game";
-            databaseConnector4.createGame(gameName);
+            databaseConnector.createGame(gameName);
             startGame();
             return true;
         }

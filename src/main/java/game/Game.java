@@ -214,7 +214,6 @@ public class Game {
         try {
             for (Iterator<String> it = actionCache.iterator(); it.hasNext(); ) {
                 String coords = it.next();
-                System.out.println(coords);
                 if (coords != null) doAction(coords);
                 it.remove();
             }
@@ -245,7 +244,6 @@ public class Game {
      * @param status how far it got into the previous uploadCachedActions method before getting interrupted by another thread
      */
     public void uploadCachedActions(String remove, int status) {
-//        System.out.println("REUP: "+moveId);
         try {
             if (status == 2) {
                 uploadActionCache.remove(remove);
