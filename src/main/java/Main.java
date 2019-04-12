@@ -72,16 +72,12 @@ public class Main extends Application {
      * @param args standard args. ARRRGH
      */
     public static void main(String[] args) {
-        try{
+        try (InputStream in = new FileInputStream("src/main/java/dbConfig.properties");) {
             Properties p = new Properties();
-
-            InputStream in = new FileInputStream("src/main/java/dbConfig.properties");
 
             p.load(in);
 
             Constants.setDatabaseValues(p.getProperty("dbHost"), p.getProperty("dbPort"), p.getProperty("dbName"), p.getProperty("password"), p.getProperty("username"));
-
-
         } catch (FileNotFoundException e){
             System.out.println("Fil ikke funnet");
         } catch (IOException e){
