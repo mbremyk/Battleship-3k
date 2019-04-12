@@ -92,6 +92,7 @@ public class Main extends Application {
         try {
             connectionPool = ConnectionPool.create(Constants.getDbUrl());
             DatabaseConnector databaseConnector = new DatabaseConnector(Constants.getDbUrl());
+
             databaseConnector.setConnectionPool(connectionPool);
         } catch (SQLException e) {
             e.printStackTrace();
