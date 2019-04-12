@@ -10,6 +10,8 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import game.Statics;
+import model.ConfirmBox;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
@@ -49,7 +51,15 @@ public class MainMenuController extends ViewComponent {
             switchView("JoinGameMenu");
         });
         mainMenuHostButton.setOnAction(event -> {
-            switchView("HostGameMenu");
+            if(Statics.getLocalUser() != null) {
+                switchView("HostGameMenu");
+            }
+            else{
+                boolean login = ConfirmBox.display("You must be logged in to host a game! Log in?");
+                if(login){
+                    switchView("LoginMenu");
+                }
+            }
         });
         mainMenuLeaderboardButton.setOnAction(event -> {
             switchView("LeaderboardMenu");

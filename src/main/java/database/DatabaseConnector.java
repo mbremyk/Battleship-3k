@@ -26,7 +26,14 @@ import java.sql.*;
 import java.util.Arrays;
 
 public class DatabaseConnector {
+    /**
+     * The URL for the JDBC server
+     */
     private String databaseUrl;
+
+    /**
+     * The ConnectionPool from which to get Connections
+     */
     private static ConnectionPool connectionPool;
 
 
@@ -259,10 +266,21 @@ public class DatabaseConnector {
         return moveId;
     }
 
+    /**
+     * Returns the game with the given host ID
+     *
+     * @param hostid ID of the player hosting the game
+     * @return Game with the correct host ID
+     */
     public Game getGame(int hostid) {
         return getGames(hostid)[0];
     }
 
+    /**
+     * Returns all the games from the database
+     *
+     * @return Array of Games
+     */
     public Game[] getGames() {
         return getGames(-1);
     }
@@ -365,6 +383,11 @@ public class DatabaseConnector {
         return coordString;
     }
 
+    /**
+     * Method for closing AutoClosables like ResultSets and PreparedStatements and handles their Exceptions
+     *
+     * @param closeable the AutoClosable to close
+     */
     private void close(AutoCloseable closeable) {
         try {
             closeable.close();
@@ -373,6 +396,12 @@ public class DatabaseConnector {
         }
     }
 
+    /**
+     * The same as {@link #close(AutoCloseable)}
+     *
+     * @param closeable1 the AutoClosable to close
+     * @param closeable2 the AutoClosable to close
+     */
     private void close(AutoCloseable closeable1, AutoCloseable closeable2) {
         try {
             closeable1.close();
@@ -382,44 +411,55 @@ public class DatabaseConnector {
         }
     }
 
-//    public String getLastCoordinates(int moveId, int gameId) {
-//        String coordinates = null;
-//        ResultSet res = null;
-//        PreparedStatement preparedStatement = null;
-//        String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ?" + " AND " + ACTION_MOVE_ID + " = ?";
-//        Connection con = null;
-//        try {
-//            con = connectionPool.getConnection();
-//            res = preparedStatement.executeQuery();
-//            preparedStatement = con.prepareStatement(query);
-//            preparedStatement.setInt(1, gameId);
-//            preparedStatement.setInt(2, moveId);
-//            res = preparedStatement.executeQuery();
-//            connectionPool.releaseConnection(con);
-//            if (res.next()) {
-//                coordinates = res.getString(ACTION_COORDINATES);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        } finally {
-//            if (con != null) connectionPool.releaseConnection(con);
-//            if (res != null) close(res);
-//            if (preparedStatement != null) close(preparedStatement);
-//        }
-//        return coordinates;
-//    }
+    /**
+     * @param moveId ID of the move
+     * @param gameId ID of the game
+     * @return String representing the last coordinates affected
+     * @deprecated made better methods
+     */
+    public String getLastCoordinates(int moveId, int gameId) {
+        String coordinates = null;
+        ResultSet res = null;
+        PreparedStatement preparedStatement = null;
+        String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ?" + " AND " + ACTION_MOVE_ID + " = ?";
+        Connection con = null;
+        try {
+            con = connectionPool.getConnection();
+            res = preparedStatement.executeQuery();
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, gameId);
+            preparedStatement.setInt(2, moveId);
+            res = preparedStatement.executeQuery();
+            connectionPool.releaseConnection(con);
+            if (res.next()) {
+                coordinates = res.getString(ACTION_COORDINATES);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (con != null) connectionPool.releaseConnection(con);
+            if (res != null) close(res);
+            if (preparedStatement != null) close(preparedStatement);
+        }
+        return coordinates;
+    }
 
+    /**
+     * Checks if a user has joined the game
+     *
+     * @param game the Game for which to check if a user has joined
+     * @return true if a user has joined, false if not
+     */
     public boolean userJoined(Game game) {
-        //TODO clean up this code
         int gameId = game.getGameId();
         ResultSet res = null;
         PreparedStatement preparedStatement = null;
         String query = "SELECT bb." + BOARDS_USER_ID + "," + USERS_USERNAME + " FROM " + BOARDS_TABLE + " bb JOIN " + USERS_TABLE + " bu ON bb." + BOARDS_USER_ID + "=bu." + USERS_ID + " WHERE " + BOARDS_GAME_ID + " = " + gameId;
         Connection con = null;
         try {
+            updateGameOver();
             con = connectionPool.getConnection();
-            if (con == null) return false;
             preparedStatement = con.prepareStatement(query);
             res = preparedStatement.executeQuery();
             if (res.next()) {
@@ -441,14 +481,27 @@ public class DatabaseConnector {
         return false;
     }
 
+    /**
+     * Checks if there is a user in the given ResultSet for the given Game
+     *
+     * @param game Game to add user to
+     * @param res  ResultSet to get information about a user from
+     * @throws SQLException if something went wrong with the ResultSet
+     */
     private void checkJoin(Game game, ResultSet res) throws SQLException {
         if (res.getInt(BOARDS_USER_ID) != Statics.getLocalUser().getUserId()) {
             BattleshipUser opponent = new BattleshipUser(res.getInt(BOARDS_USER_ID), res.getString(USERS_USERNAME));
             if (game.getJoinUser() == null) game.setJoinUser(opponent);
-            System.out.println("READY");
+            //System.out.println("READY");
         }
     }
 
+    /**
+     * Uploads the coordinates of your ships using {@link #uploadShipCoordinates(int, int, String)}
+     *
+     * @param coordString String representing the coordinates of your ships "xx,yy,ww,hh,rrr"
+     * @return true if the coordinates were uploaded, false if not, or an Exception was thrown
+     */
     public boolean uploadShipCoordinates(String coordString) {
         Game game = Statics.getGame();
         BattleshipUser user = Statics.getLocalUser();
@@ -456,6 +509,14 @@ public class DatabaseConnector {
         return uploadShipCoordinates(game.getGameId(), user.getUserId(), coordString);
     }
 
+    /**
+     * Uploads the coordinates of your ships
+     *
+     * @param gameid      ID of the game to which the coordinates are related
+     * @param userid      ID of the user to which the coordinates are related
+     * @param coordString String representing the coordinates of your ships "xx,yy,ww,hh,rrr"
+     * @return true if the coordinates were uploaded, false if not, or an Exception was thrown
+     */
     public boolean uploadShipCoordinates(int gameid, int userid, String coordString) {
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -479,6 +540,12 @@ public class DatabaseConnector {
         return false;
     }
 
+    /**
+     * Uploads an action to the database. This currently only involves shooting at a coordinate
+     *
+     * @param coordString the coordinates to shoot at in the form "xx,yy"
+     * @return true if action was successfully uploaded, false if not, or if an Exception was thrown
+     */
     public boolean doAction(String coordString) {
         Game game = Statics.getGame();
         int gameId = game.getGameId();
@@ -507,6 +574,12 @@ public class DatabaseConnector {
         return false;
     }
 
+    /**
+     * Creates a new game and uploads it to the database, after removing games hosted by the local player
+     *
+     * @param gameName The name of the game
+     * @return true if game was successfully created and uploaded, false if not, or an Exception was thrown
+     */
     public boolean createGame(String gameName) {
         BattleshipUser user = Statics.getLocalUser();
         if (user == null) return false;
@@ -517,6 +590,7 @@ public class DatabaseConnector {
         PreparedStatement insertPreparedStatement = null;
         try {
             con = connectionPool.getConnection();
+            con.setAutoCommit(false);
             deletePreparedStatement = con.prepareStatement(deleteQuery);
             insertPreparedStatement = con.prepareStatement(insertQuery);
             deletePreparedStatement.setInt(1, user.getUserId());
@@ -524,12 +598,16 @@ public class DatabaseConnector {
             insertPreparedStatement.setInt(1, user.getUserId());
             insertPreparedStatement.setString(2, gameName);
             insertPreparedStatement.execute();
+            con.commit();
             Statics.setGame(getGame(user.getUserId()));
             return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e1) {
+            try {
+                if (con != null) con.setAutoCommit(true);
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+            e1.printStackTrace();
         } finally {
             if (con != null) connectionPool.releaseConnection(con);
             if (deletePreparedStatement != null) close(deletePreparedStatement);
@@ -538,6 +616,12 @@ public class DatabaseConnector {
         return false;
     }
 
+    /**
+     * Setting the local user as the user that has joined the specific game
+     *
+     * @param game the Game to join
+     * @return true if game was successfully joined, false if not, or if an Exception was thrown
+     */
     public boolean joinGame(Game game) {
         BattleshipUser user = Statics.getLocalUser();
         if (user == null) return false;
@@ -565,32 +649,44 @@ public class DatabaseConnector {
         return false;
     }
 
-
+    /**
+     * Uploads feedback to the database
+     *
+     * @param title   String representing the title of the feedback
+     * @param message String with the message to the developers
+     * @return true if feedback was successfully uploaded, false if not, or if an Exception was thrown
+     */
     public boolean uploadFeedback(String title, String message) {
-        if (title == "" || message == "" || title == null || message == null) {
+        if (title.equals("") || message.equals("")) {
             return false;
         } else {
             Connection con = null;
+            PreparedStatement preparedStatement = null;
             try {
                 con = connectionPool.getConnection();
                 String update = "INSERT INTO " + FEEDBACK_TABLE + " VALUES (DEFAULT, ?, ?)";
-                PreparedStatement preparedStatement = con.prepareStatement(update);
+                preparedStatement = con.prepareStatement(update);
                 preparedStatement.setString(1, title);
                 preparedStatement.setString(2, message);
                 preparedStatement.execute();
                 return true;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             } finally {
                 if (con != null) connectionPool.releaseConnection(con);
+                if (preparedStatement != null) close(preparedStatement);
             }
         }
     }
 
+    /**
+     * Updates the score of the user. Adds 1 to either Constants.USERS_WINS or Constants.USERS_LOSSES depending on the results of the game
+     *
+     * @param userId     ID of the user to update the score of
+     * @param gameResult the result of the game. 1 if the user won and 0 if the user lost
+     * @return true if the result was successfully updated, false if not, or if an Exception was thrown
+     */
     public boolean updateUserScore(int userId, int gameResult) {
         Connection con = null;
         PreparedStatement statement = null;
@@ -629,6 +725,12 @@ public class DatabaseConnector {
         }
     }
 
+    /**
+     * Removes a game from the database
+     *
+     * @param game the Game to remove from the database
+     * @return true if the Game was successfully removed, false if not, or if an Exception was thrown
+     */
     public boolean removeGameFromDatabase(Game game) {
         Connection con = null;
         PreparedStatement statement = null;
@@ -652,6 +754,11 @@ public class DatabaseConnector {
         }
     }
 
+    /**
+     * Logs the local user out of the database. This has no current function, other than changing the USERS_LOGGED_IN column in the database
+     *
+     * @return true if the user was successfully logged out, false if not, or if an Exception was thrown
+     */
     public boolean logout() {
         if (Statics.getLocalUser() != null) {
             Connection con = null;
@@ -677,6 +784,11 @@ public class DatabaseConnector {
         return true;
     }
 
+    /**
+     * Uploads the results of the local game. Sets Constants.GAME_WINNER_ID column to the ID of the winner of the current Game
+     *
+     * @return true if the results were successfully uploaded, false if not, or if an Exception was thrown
+     */
     public boolean uploadResults() {
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -684,12 +796,12 @@ public class DatabaseConnector {
         try {
             con = connectionPool.getConnection();
             preparedStatement = con.prepareStatement(query);
-            preparedStatement.setInt(1, Statics.getGame().getGameId());
             if (Statics.getGame().getWinner() != null) {
-                preparedStatement.setInt(2, Statics.getGame().getWinner().getUserId());
+                preparedStatement.setInt(1, Statics.getGame().getWinner().getUserId());
             } else {
                 return false;
             }
+            preparedStatement.setInt(2, Statics.getGame().getGameId());
             preparedStatement.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -701,5 +813,33 @@ public class DatabaseConnector {
                 close(preparedStatement);
         }
         return true;
+    }
+
+    /**
+     * Checks if there is a winner of the current Game in the database and updates the local Game object
+     *
+     * @throws Exception if something went wrong. WIIUUU WIIUUU WIIUUU
+     */
+    public void updateGameOver() throws Exception {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet res = null;
+        String query = "SELECT " + GAME_WINNER_ID + " FROM " + GAME_TABLE + " WHERE " + GAME_ID + " = ?";
+        try {
+            con = connectionPool.getConnection();
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, Statics.getGame().getGameId());
+            res = preparedStatement.executeQuery();
+            if (res.next() && res.getInt(GAME_WINNER_ID) != 0) {
+                Statics.getGame().setGameOver(true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Could not get game over state");
+        } finally {
+            if (res != null) close(res);
+            if (preparedStatement != null) close(preparedStatement);
+            if (con != null) connectionPool.releaseConnection(con);
+        }
     }
 }

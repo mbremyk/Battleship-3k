@@ -296,12 +296,20 @@ public class Game {
      * @return true if game is over, otherwise false
      */
     public boolean isGameOver() {
-        boolean status = false;
         if (board1.shipsRemaining() == 0 || board2.shipsRemaining() == 0) {
-            status = true;
+            gameOver = true;
             setMyTurn(false);
         }
-        return status;
+        return gameOver;
+    }
+
+    /**
+     * Sets the gameOver tag
+     *
+     * @param gameOver
+     */
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 
     /**
@@ -392,10 +400,20 @@ public class Game {
     public void setLoser(BattleshipUser loser) {
         this.loser = loser;
         this.winner = Statics.getGame().getHostUser().getUserId() == loser.getUserId() ? Statics.getGame().getJoinUser() : Statics.getGame().getHostUser();
+        setGameOver(true);
     }
 
+    /**
+     * Returns the
+     *
+     * @return
+     */
     public BattleshipUser getWinner() {
         return this.winner;
+    }
+
+    public BattleshipUser getLoser() {
+        return this.loser;
     }
 
     /**

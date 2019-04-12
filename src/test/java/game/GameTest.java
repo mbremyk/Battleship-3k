@@ -31,7 +31,7 @@ class GameTest {
         joinUser = new BattleshipUser(2, "dolan2", "1234", "dolanmail@gmail.com", 1, 1);
         testHostGame = new Game(1, "Dolan's game", hostUser, true);
         testJoinGame = new Game(1, "Dolan's game", hostUser, false);
-//        testJoinGame.setJoinUser();
+//        testJoinGame.setJoinUser(joinUser);
         testJoinGame.setBoards(new Board(new AnchorPane(), 0, 0), new Board(new AnchorPane(), 0, 0));
     }
 

@@ -21,6 +21,8 @@ import database.Constants;
 import database.DatabaseConnector;
 import game.Game;
 import game.Statics;
+import model.ConfirmBox;
+import model.AlertBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -105,9 +107,12 @@ public class JoinGameController extends ViewComponent {
     public boolean joinButtonPressed() {
         RowData rowData = joinGameGamesTable.getSelectionModel().getSelectedItem();
         if (Statics.getLocalUser() == null) {
-            System.out.println("You are not logged in");
+            boolean login = ConfirmBox.display("You have to log in to join a game, log in?");
+            if(login){
+                switchView("LoginMenu");
+            }
         } else if (rowData == null) {
-            System.out.println("No game has been selected");
+            AlertBox.display("You need to select a game to join!");
         } else {
             Game game = getGame(rowData.getUsername());
             DatabaseConnector databaseConnector = new DatabaseConnector();
