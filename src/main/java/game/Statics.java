@@ -1,6 +1,6 @@
 /**
  * Statics.java
- *
+ * <p>
  * Static objects to be available from the whole project
  *
  * @author Grande Trym
@@ -14,7 +14,7 @@ import database.PullThread;
 import model.BattleshipUser;
 
 public class Statics {
-    private static  Game game;
+    private static Game game;
     private static BattleshipUser localUser;
     private static PullThread pullThread;
 
@@ -50,7 +50,7 @@ public class Statics {
      *
      * @return reference to the local logged in user if there is one
      */
-    public static BattleshipUser getLocalUser(){
+    public static BattleshipUser getLocalUser() {
         return localUser;
     }
 
@@ -68,7 +68,7 @@ public class Statics {
      *
      * @param _game the new Game
      */
-    public static void setGame(Game _game){
+    public static void setGame(Game _game) {
         game = _game;
     }
 }

@@ -27,7 +27,7 @@ public class Scaler {
      * @param node the Node that will have the scaling effect applied to it
      */
     public Scaler(Node node) {
-        scaleTransition = new ScaleTransition(Duration.millis(100),node);
+        scaleTransition = new ScaleTransition(Duration.millis(100), node);
         scaleTransition.setFromX(1);
         scaleTransition.setFromY(1);
         scaleTransition.setByX(0.8);
@@ -39,7 +39,7 @@ public class Scaler {
     /**
      * Plays the scaling effect on the Node
      */
-    public void play(){
+    public void play() {
         scaleTransition.playFromStart();
     }
 }

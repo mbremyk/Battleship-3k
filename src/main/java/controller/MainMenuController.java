@@ -51,12 +51,11 @@ public class MainMenuController extends ViewComponent {
             switchView("JoinGameMenu");
         });
         mainMenuHostButton.setOnAction(event -> {
-            if(Statics.getLocalUser() != null) {
+            if (Statics.getLocalUser() != null) {
                 switchView("HostGameMenu");
-            }
-            else{
+            } else {
                 boolean login = ConfirmBox.display("You must be logged in to host a game! Log in?");
-                if(login){
+                if (login) {
                     switchView("LoginMenu");
                 }
             }

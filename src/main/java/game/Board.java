@@ -102,11 +102,13 @@ public class Board extends ImageView {
             mousePosY = -1;
         });
     }
+
     /**
      * constructor for testing purposes. Like the other constructor, but without anchorPane parent
-     * @param parent      the parent AnchorPane of this object
-     * @param x           the x position of this object
-     * @param y           the y position of this object
+     *
+     * @param parent the parent AnchorPane of this object
+     * @param x      the x position of this object
+     * @param y      the y position of this object
      */
     public Board(AnchorPane parent, double x, double y) {
         this.parent = parent;

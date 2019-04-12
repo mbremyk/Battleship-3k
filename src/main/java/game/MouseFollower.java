@@ -1,7 +1,6 @@
 /**
  * A Rectangle that displayed behind the cursor to visualize a user's next move.
  *
- *
  * @author Thorkildsen Torje
  */
 
@@ -70,11 +69,11 @@ public class MouseFollower extends Rectangle {
      *
      * @param pressed true if this object has been pressed/selected
      */
-    public void pressed(boolean pressed){
-        if(pressed){
+    public void pressed(boolean pressed) {
+        if (pressed) {
 //            setFill(Color.GRAY);
             setFill(new ImagePattern(new Image("./AttackPressed.png")));
-        }else{
+        } else {
 //            setFill(Color.WHITE);
             setFill(new ImagePattern(new Image("./AttackNotPressed.png")));
         }

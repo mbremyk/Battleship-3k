@@ -1,10 +1,12 @@
 /**
  * Game.java
+ *
  * @author Thorkildsen Torje
  * @author Grande Trym
  */
 
 package game;
+
 import database.DatabaseConnector;
 import model.BattleshipUser;
 
@@ -49,8 +51,8 @@ public class Game {
      * @param gameName
      * @param hostUser
      */
-    public Game(int gameid,String gameName, BattleshipUser hostUser) {
-        this(gameid,gameName, hostUser, false);
+    public Game(int gameid, String gameName, BattleshipUser hostUser) {
+        this(gameid, gameName, hostUser, false);
     }
 
     /**
@@ -60,7 +62,7 @@ public class Game {
      * @param hostUser the user hosting the game
      * @param hosting signalizes whether the local user is hosting the game or not.
      */
-    public Game(int gameid,String gameName, BattleshipUser hostUser, boolean hosting) {
+    public Game(int gameid, String gameName, BattleshipUser hostUser, boolean hosting) {
 //		databaseConnector = new DatabaseConnector(Constants.DB_URL);
         this.gameId = gameid;
         this.gameName = gameName;
@@ -161,11 +163,11 @@ public class Game {
             opponentMissed = true;
         }
 
-        if(mid > largestMoveIdDone){
+        if (mid > largestMoveIdDone) {
             largestMoveIdDone = mid;
         }
 
-        if(opponentMissed && moveId==largestMoveIdDone){
+        if (opponentMissed && moveId == largestMoveIdDone) {
             myTurn = true;
             opponentMissed = false;
         }
@@ -284,9 +286,9 @@ public class Game {
      * checks if all actions are uploaded to database
      * @return true if all actions are uploaded, false otherwise
      */
-    public boolean allActionsUploaded(){
-        for(String s: uploadActionCache){
-            if(s!=null) return false;
+    public boolean allActionsUploaded() {
+        for (String s : uploadActionCache) {
+            if (s != null) return false;
         }
         return true;
     }
@@ -323,12 +325,11 @@ public class Game {
      * checks who won the game, used at the end of the game
      * @return 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
      */
-    public int getGameResult(){
-        if(isGameOver()){
-            if(board1.shipsRemaining() != 0){
+    public int getGameResult() {
+        if (isGameOver()) {
+            if (board1.shipsRemaining() != 0) {
                 return 1;
-            }
-            else{
+            } else {
                 return 0;
             }
         }

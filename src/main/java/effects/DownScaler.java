@@ -25,7 +25,7 @@ public class DownScaler {
      * @param node the Node that will have the scaling effect applied to it
      */
     public DownScaler(Node node) {
-        scaleTransition = new ScaleTransition(Duration.millis(100),node);
+        scaleTransition = new ScaleTransition(Duration.millis(100), node);
         scaleTransition.setFromX(4);
         scaleTransition.setFromY(4);
         scaleTransition.setByX(-3);
@@ -35,7 +35,7 @@ public class DownScaler {
     /**
      * Plays the scaling effect on the Node
      */
-    public void play(){
+    public void play() {
         scaleTransition.playFromStart();
     }
 }

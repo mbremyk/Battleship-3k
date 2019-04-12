@@ -81,8 +81,8 @@ public class GameController extends ViewComponent {
     private void addUIComponents() {
         mouseFollower = new MouseFollower();
         mouseFollower.setVisible(false);
-        board1 = new Board(gameMainPane, 50, 200,1);
-        board2 = new Board(gameMainPane, 450, 200,2);
+        board1 = new Board(gameMainPane, 50, 200, 1);
+        board2 = new Board(gameMainPane, 450, 200, 2);
         board1Shadow = new Rectangle(board1.getTranslateX(), board1.getTranslateY(), board1.getFitWidth(), board1.getFitHeight());
         board2Shadow = new Rectangle(board2.getTranslateX(), board2.getTranslateY(), board2.getFitWidth(), board2.getFitHeight());
         board1Shadow.setOpacity(0.5);

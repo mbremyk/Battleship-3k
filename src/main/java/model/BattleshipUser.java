@@ -2,6 +2,7 @@
  * BattleShipUser.java
  * Models a the users we store information about in the database
  * #TODO remove password
+ *
  * @Author Thorkildsen Torje
  * @Author Brevik Magnus
  */
@@ -17,7 +18,7 @@ public class BattleshipUser {
     private int lostGames;
     private double ratio;
 
-    
+
     /**
      * Constructor for the BattleshipUser class
      *
@@ -36,9 +37,10 @@ public class BattleshipUser {
         this.lostGames = lostGames;
         this.ratio = calculateRatio();
     }
+
     //FOR OPPONENT
-    public BattleshipUser(int userId,String username){
-        this(userId,username,"","",0,0);
+    public BattleshipUser(int userId, String username) {
+        this(userId, username, "", "", 0, 0);
     }
 
     /**
@@ -48,14 +50,14 @@ public class BattleshipUser {
      * @param password password
      * @param email email
      */
-    public BattleshipUser(int userId,String username, String password, String email) {
+    public BattleshipUser(int userId, String username, String password, String email) {
         this(userId, username, password, email, 0, 0);
     }
 
     public int getUserId() {
         return userId;
     }
-    
+
     /**
      * Returns username
      *
@@ -64,24 +66,25 @@ public class BattleshipUser {
     public String getUsername() {
         return username;
     }
-    
+
     /**
      * Returns password
      *
      * @return String password
      */
-    public String getPassword() { return password; }
-    
+    public String getPassword() {
+        return password;
+    }
+
     /**
      * Returns email address
      *
      * @return String email
      */
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
-    
+
     /**
      * Returns the number of games the player has won
      *
@@ -90,7 +93,7 @@ public class BattleshipUser {
     public int getWonGames() {
         return wonGames;
     }
-    
+
     /**
      * Returns the number of games the player has lost
      *
@@ -99,7 +102,7 @@ public class BattleshipUser {
     public int getLostGames() {
         return lostGames;
     }
-    
+
     /**
      * Returns the ratio of games won over total games
      *
@@ -108,7 +111,7 @@ public class BattleshipUser {
     public double getRatio() {
         return ratio;
     }
-    
+
     /**
      * Calculates the ratio of games won and total games
      *
@@ -124,10 +127,10 @@ public class BattleshipUser {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj == null) return false;
-        if(obj == this) return true;
+        if (obj == null) return false;
+        if (obj == this) return true;
 
-        if(!(obj instanceof BattleshipUser)){
+        if (!(obj instanceof BattleshipUser)) {
             return false;
         }
 
