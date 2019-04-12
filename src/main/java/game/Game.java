@@ -1,10 +1,12 @@
 /**
  * Game.java
+ *
  * @author Thorkildsen Torje
  * @author Grande Trym
  */
 
 package game;
+
 import database.DatabaseConnector;
 import model.BattleshipUser;
 
@@ -17,20 +19,28 @@ import java.util.Random;
  * Most of the game logic
  */
 public class Game {
-    private boolean hosting; //If the local player is hosting
     /**
-     *
+     * true: if the local player is hosting, false otherwise
+     */
+    private boolean hosting;
+    /**
+     * user that is hosting the game
      */
     private BattleshipUser hostUser;
+    /**
+     * user that has joined the game
+     */
     private BattleshipUser joinUser;
     private BattleshipUser winner;
     private BattleshipUser loser;
     private Board board1;
     private Board board2;
     private boolean boardsReady = false;
-    //	private DatabaseConnector databaseConnector;
     private String gameName;
-    private boolean gameOpen = true; //open to join
+    /**
+     * true: game is open to join, false otherwise
+     */
+    private boolean gameOpen = true;
     private int gameId;
     private boolean gameOver = false;
     private boolean shipsMovable = true;
@@ -38,30 +48,40 @@ public class Game {
     private boolean myTurn = false;
     private int moveId = -1;
     private int largestMoveIdDone = -1;
+    /**
+     * true: opponent missed in one of the sent attacks in the last package, false otherwise
+     * helps meake sure all of the attacks have been downloaded and executed before they are deleted from database
+     */
     private boolean opponentMissed = false;
 
+    /**
+     * the opponent's attacks downloaded from the database
+     */
     private ArrayList<String> actionCache = new ArrayList<>();
+    /**
+     * the local user's attacks that need to be uploaded to the database
+     */
     private ArrayList<String> uploadActionCache = new ArrayList<>();
 
+    @Deprecated
     /**
      * @deprecated
-     * @param gameid
-     * @param gameName
-     * @param hostUser
+     * @param gameid used as PK in database to identify game. Hosting game and joining game have the same gameid.
+     * @param gameName name of the game
+     * @param hostUser the user hosting the game
      */
-    public Game(int gameid,String gameName, BattleshipUser hostUser) {
-        this(gameid,gameName, hostUser, false);
+    public Game(int gameid, String gameName, BattleshipUser hostUser) {
+        this(gameid, gameName, hostUser, false);
     }
 
     /**
      * constructs new game either when user hosts or joins game
      * @param gameid used as PK in database to identify game. Hosting game and joining game have the same gameid.
-     * @param gameName
+     * @param gameName name of the game
      * @param hostUser the user hosting the game
      * @param hosting signalizes whether the local user is hosting the game or not.
      */
-    public Game(int gameid,String gameName, BattleshipUser hostUser, boolean hosting) {
-//		databaseConnector = new DatabaseConnector(Constants.DB_URL);
+    public Game(int gameid, String gameName, BattleshipUser hostUser, boolean hosting) {
         this.gameId = gameid;
         this.gameName = gameName;
         this.hostUser = hostUser;
@@ -161,11 +181,11 @@ public class Game {
             opponentMissed = true;
         }
 
-        if(mid > largestMoveIdDone){
+        if (mid > largestMoveIdDone) {
             largestMoveIdDone = mid;
         }
 
-        if(opponentMissed && moveId==largestMoveIdDone){
+        if (opponentMissed && moveId == largestMoveIdDone) {
             myTurn = true;
             opponentMissed = false;
         }
@@ -221,8 +241,8 @@ public class Game {
 
     /**
      * uploads cached actions to database
-     * @param remove HJELP
-     * @param status HJELP
+     * @param remove the coords-string the previous uploadCachedActions got interrupted trying to remove from uploadActionCache
+     * @param status how far it got into the previous uploadCachedActions method before getting interrupted by another thread
      */
     public void uploadCachedActions(String remove, int status) {
 //        System.out.println("REUP: "+moveId);
@@ -237,7 +257,7 @@ public class Game {
     }
 
     /**
-     * HJELP
+     * tries to upload cached actions to the database
      */
     public void uploadCachedActions() {
         DatabaseConnector db = new DatabaseConnector();
@@ -284,9 +304,9 @@ public class Game {
      * checks if all actions are uploaded to database
      * @return true if all actions are uploaded, false otherwise
      */
-    public boolean allActionsUploaded(){
-        for(String s: uploadActionCache){
-            if(s!=null) return false;
+    public boolean allActionsUploaded() {
+        for (String s : uploadActionCache) {
+            if (s != null) return false;
         }
         return true;
     }
@@ -303,6 +323,10 @@ public class Game {
         return gameOver;
     }
 
+    /**
+     * Sets gameOver
+     * @param gameOver
+     */
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
@@ -318,12 +342,11 @@ public class Game {
      * checks who won the game, used at the end of the game
      * @return 1 for local user winning, 0 for local user losing, -1 for fuck up/game not ended
      */
-    public int getGameResult(){
-        if(isGameOver()){
-            if(board1.shipsRemaining() != 0){
+    public int getGameResult() {
+        if (isGameOver()) {
+            if (board1.shipsRemaining() != 0) {
                 return 1;
-            }
-            else{
+            } else {
                 return 0;
             }
         }
@@ -373,7 +396,7 @@ public class Game {
     }
 
     /**
-     * checks if ships are movable or not HJELP
+     * checks if ships are movable or not (should be movable before pressing the 'ready' button
      * @return true if ships are movable, false otherwise
      */
     public boolean isShipsMovable() {
@@ -398,10 +421,20 @@ public class Game {
         setGameOver(true);
     }
 
+    /**
+     * Returns the winner of the local Game object
+     *
+     * @return BattleshipUser winner
+     */
     public BattleshipUser getWinner() {
         return this.winner;
     }
 
+    /**
+     * Returns the loser of the local Game object
+     *
+     * @return BattleshipUser loser
+     */
     public BattleshipUser getLoser() {
         return this.loser;
     }

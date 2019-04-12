@@ -1,8 +1,7 @@
 /**
- * A Rectangle that displayed behind the cursor to visualize your next move
+ * A Rectangle that displayed behind the cursor to visualize a user's next move.
  *
- *
- * @Author Thorkildsen Torje
+ * @author Thorkildsen Torje
  */
 
 package game;
@@ -13,13 +12,26 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class MouseFollower extends Rectangle {
-    private int widthBlocks = 1;
-    private int heightBlocks = 1;
-    private double size = Board.TILE_SIZE;
-    private int currentBoardNumber = -1;
-    private int tileX = -1;
-    private int tileY = -1;
 
+    /**
+     * Width of the attack in amount of tiles in the grid, 1 if normal attack
+     */
+    private int widthBlocks = 1;
+
+    /**
+     * Height of the attack in amount of tiles in the grid, 1 if normal attack
+     */
+    private int heightBlocks = 1;
+
+    /**
+     * The width and height og the MouseFollower in pixels
+     */
+    private double size = Board.TILE_SIZE;
+
+    /**
+     * Initializes a new MouseFollower.
+     * This object can be moved by a parent AnchorPane to make it follow the mouse or something else.
+     */
     public MouseFollower() {
         setMouseTransparent(true); //Not blocking MouseEvents
         setOpacity(0.6);
@@ -53,26 +65,15 @@ public class MouseFollower extends Rectangle {
     }
 
     /**
-     *
-     * @param boardNumber What board you are currently selecting tiles on
-     * @param x Tile number x that has been selected
-     * @param y Tile number x that has been selected
-     */
-    public void setTiles(int boardNumber, int x, int y){
-        this.currentBoardNumber = boardNumber;
-        this.tileX = x;
-        this.tileY = y;
-    }
-
-    /**
      * Changes color if the object is pressed
-     * @param pressed
+     *
+     * @param pressed true if this object has been pressed/selected
      */
-    public void pressed(boolean pressed){
-        if(pressed){
+    public void pressed(boolean pressed) {
+        if (pressed) {
 //            setFill(Color.GRAY);
             setFill(new ImagePattern(new Image("./AttackPressed.png")));
-        }else{
+        } else {
 //            setFill(Color.WHITE);
             setFill(new ImagePattern(new Image("./AttackNotPressed.png")));
         }

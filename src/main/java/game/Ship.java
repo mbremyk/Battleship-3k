@@ -18,35 +18,104 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
 public class Ship extends Rectangle {
+
+    /**
+     * First element is the x-position in of the upper left corner of the Ship in the Board's grid
+     * Second element is the y-position in of the upper left corner of the Ship in the Board's grid
+     */
     private int[] basePosition;
+
+    /**
+     * Amount of tiles the Ship has in its width, which is along the x-axis if the ship's rotation is 0
+     * (what you would normally call the length of a Ship).
+     */
     private int widthTiles;
+
+    /**
+     * Amount of tiles the Ship has in its height, which is along the y-axis if the ship's rotation is 0
+     * (what you would normally call the width of a Ship).
+     */
     private int heightTiles;
+
+    /**
+     * How many tiles the Ship occupies in the x-direction in its current rotation
+     */
     private int tilesX;
+
+    /**
+     * How many tiles the Ship occupies in the y-direction in its current rotation
+     */
     private int tilesY;
+
+    /**
+     * A Ship's latest x-position-offset (in amount of tiles) to make the ship be displayed at the right position in the Board's grid
+     * when it is rotated.
+     */
     private int positionOffsetX;
+
+    /**
+     * A Ship's latest y-position-offset (in amount of tiles) to make the ship be displayed at the right position in the Board's grid
+     * when it is rotated.
+     */
     private int positionOffsetY;
+
+    /**
+     * A Ship's total x-position-offset (in amount of tiles) to make the ship be displayed at the right position in the Board's grid
+     * when it is rotated.
+     */
     private int totalPositionOffsetX = 0;
+
+    /**
+     * A Ship's total y-position-offset (in amount of tiles) to make the ship be displayed at the right position in the Board's grid
+     * when it is rotated.
+     */
     private int totalPositionOffsetY = 0;
+
+    /**
+     * True if the latest position-offset has been added to the Ship's position
+     */
     private boolean offsetAdded = true;
+
+    /**
+     * The current rotation of the Ship in degrees
+     */
     private int rotation;
+
+    /**
+     * The parent Board of the Ship
+     */
     private final Board parentBoard;
 
+    /**
+     * The x-position of the latest mouse press. Used to make dragging Ships possible.
+     */
     private double startDragX;
+
+    /**
+     * The y-position of the latest mouse press. Used to make dragging Ships possible.
+     */
     private double startDragY;
 
+    /**
+     * The amount of tiles the Ship has which have not been attacked
+     */
     private int health;
+
+    /**
+     * True if the ship has not been destroyed
+     */
     private boolean alive = true;
 
     /**
      * Initializes a ship, loads its image and updates its position, size, rotation and visibility.
      * Creates some event listeners for dragging and rotation functionality.
      *
-     * @param visible if the ship is visible
-     * @param tileX x-position in the board-grid
-     * @param tileY y-position in the board-grid
-     * @param width width in amount of tiles
-     * @param height height in amount of tiles
-     * @param rotation rotation of the ship in degrees
+     * @param visible     if the ship is visible
+     * @param tileX       x-position in the board-grid
+     * @param tileY       y-position in the board-grid
+     * @param width       width in amount of tiles
+     * @param height      height in amount of tiles
+     * @param rotation    rotation of the ship in degrees
      * @param parentBoard the board that contains the ship
      */
     public Ship(boolean visible, int tileX, int tileY, int width, int height, int rotation, Board parentBoard) {
@@ -57,7 +126,7 @@ public class Ship extends Rectangle {
         tilesX = width;
         tilesY = height;
         rotateRight(rotation / 90);
-        setTilePos(tileX,tileY);
+        setTilePos(tileX, tileY);
         setVisible(visible);
         loadImage(); //Must happen before updateSize()
         updateSize();
@@ -70,8 +139,8 @@ public class Ship extends Rectangle {
 
         //These make the Ship remember "real" position while being snapped to other tiles
         setOnMousePressed(event -> {
-            startDragX = event.getSceneX()-(parentBoard.getTranslateX()+(getTileX())*Board.TILE_SIZE);
-            startDragY = event.getSceneY()-(parentBoard.getTranslateY()+(getTileY())*Board.TILE_SIZE);
+            startDragX = event.getSceneX() - (parentBoard.getTranslateX() + (getTileX()) * Board.TILE_SIZE);
+            startDragY = event.getSceneY() - (parentBoard.getTranslateY() + (getTileY()) * Board.TILE_SIZE);
         });
 
         setOnMouseClicked(event -> {
@@ -83,8 +152,8 @@ public class Ship extends Rectangle {
 
         setOnMouseDragged(event -> {
             if (Statics.getGame().isShipsMovable() && event.getButton() == MouseButton.PRIMARY) {
-                this.setTranslateX(event.getSceneX() - startDragX+totalPositionOffsetX*Board.TILE_SIZE);
-                this.setTranslateY(event.getSceneY() - startDragY+totalPositionOffsetY*Board.TILE_SIZE);
+                this.setTranslateX(event.getSceneX() - startDragX + totalPositionOffsetX * Board.TILE_SIZE);
+                this.setTranslateY(event.getSceneY() - startDragY + totalPositionOffsetY * Board.TILE_SIZE);
                 updatePosition();
             }
         });
@@ -138,7 +207,7 @@ public class Ship extends Rectangle {
      *
      * @return the x-position of the Ship's rotation point in the grid
      */
-    public int getRotationCenterX(){
+    public int getRotationCenterX() {
         return (int) ((getTranslateX() - parentBoard.getTranslateX() + Board.TILE_SIZE / 2) / Board.TILE_SIZE);
     }
 
@@ -147,7 +216,7 @@ public class Ship extends Rectangle {
      *
      * @return the y-position of the Ship's rotation point in the grid
      */
-    public int getRotationCenterY(){
+    public int getRotationCenterY() {
         return (int) ((getTranslateY() - parentBoard.getTranslateY() + Board.TILE_SIZE / 2) / Board.TILE_SIZE);
     }
 

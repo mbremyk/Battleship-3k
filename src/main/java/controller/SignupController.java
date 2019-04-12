@@ -158,7 +158,7 @@ public class SignupController extends ViewComponent {
                     }
                 }
                 Shaker shaker = new Shaker(node);
-                shaker.shake();
+                shaker.play();
             }
         }
     }

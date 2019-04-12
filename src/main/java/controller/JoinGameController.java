@@ -108,7 +108,7 @@ public class JoinGameController extends ViewComponent {
         RowData rowData = joinGameGamesTable.getSelectionModel().getSelectedItem();
         if (Statics.getLocalUser() == null) {
             boolean login = ConfirmBox.display("You have to log in to join a game, log in?");
-            if(login){
+            if (login) {
                 switchView("LoginMenu");
             }
         } else if (rowData == null) {
