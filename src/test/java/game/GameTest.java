@@ -113,7 +113,7 @@ class GameTest {
      * checks that the joinUser can be set
      */
     @Test
-    void setJoinUser () {
+    void setJoinUser() {
         testJoinGame.setJoinUser(joinUser);
         assertEquals(joinUser, testJoinGame.getJoinUser());
     }
