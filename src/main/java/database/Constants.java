@@ -13,6 +13,13 @@
 package database;
 
 public class Constants {
+    private static String DB_HOST = "";
+    private static String DB_PORT = "";
+    private static String DB_USER = "";
+    private static String DB_PASSWORD = "";
+    private static String DB_NAME = "";
+    private static String DB_URL = "";
+
     //Database connection configuration
     public static void setDatabaseValues(String dbHost, String dbPort, String dbUser, String dbPassword, String dbName){
         DB_HOST = dbHost;
@@ -22,13 +29,6 @@ public class Constants {
         DB_NAME = dbName;
         DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password=" + DB_PASSWORD;
     }
-
-    private static String DB_HOST = "";
-    private static String DB_PORT = "";
-    private static String DB_USER = "";
-    private static String DB_PASSWORD = "";
-    private static String DB_NAME = "";
-    private static String DB_URL = "";
     /*
     private static String DB_HOST = "mysql.stud.idi.ntnu.no";
     private static String DB_PORT = "3306";
