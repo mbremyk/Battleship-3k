@@ -28,6 +28,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import database.Constants;
+
 import static database.Login.logout;
 
 public class Main extends Application {
@@ -70,7 +72,6 @@ public class Main extends Application {
      * @param args standard args. ARRRGH
      */
     public static void main(String[] args) {
-        String DB_URL = "";
         try{
             Properties p = new Properties();
 
@@ -78,8 +79,8 @@ public class Main extends Application {
 
             p.load(in);
 
-            DB_URL = "jdbc:mysql://" + p.getProperty("dbHost") + ":" + p.getProperty("dbPort") + "/" + p.getProperty("dbName") + "?user=" +
-                    p.getProperty("username")+ "&password=" + p.getProperty("password");
+            Constants.setDatabaseValues()
+
         } catch (FileNotFoundException e){
 
         } catch (IOException e){

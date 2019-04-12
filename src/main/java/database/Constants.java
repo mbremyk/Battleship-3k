@@ -14,12 +14,27 @@ package database;
 
 public class Constants {
     //Database connection configuration
-   /* public static final String DB_HOST = "mysql.stud.idi.ntnu.no";
-    public static final String DB_PORT = "3306";
-    public static final String DB_USER = "thombje";
-    public static final String DB_PASSWORD = "TFWUfjmb";
-    public static final String DB_NAME = "thombje";
-    public static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password=" + DB_PASSWORD; */
+    public static void setDatabseValues(String dbHost, String dbPort, String dbUser, String dbPassword, String dbName, String dbURL){
+        DB_HOST = dbHost;
+        DB_PORT = dbPort;
+        DB_USER = dbUser;
+        DB_PASSWORD = dbPassword;
+        DB_NAME = dbName;
+        DB_URL = dbURL;
+    }
+    public static String DB_HOST = "";
+    public static String DB_PORT = "";
+    public static String DB_USER = "";
+    public static String DB_PASSWORD = "";
+    public static String DB_NAME = "";
+    public static String DB_URL = "";
+    /*
+    public static String DB_HOST = "mysql.stud.idi.ntnu.no";
+    public static String DB_PORT = "3306";
+    public static String DB_USER = "thombje";
+    public static String DB_PASSWORD = "TFWUfjmb";
+    public static String DB_NAME = "thombje";
+    public static String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password=" + DB_PASSWORD;*/
 
     //Users table column names
     public static final String USERS_TABLE = "BattleshipUser";
