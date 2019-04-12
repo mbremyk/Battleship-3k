@@ -75,7 +75,7 @@ public class Main extends Application {
         try{
             Properties p = new Properties();
 
-            InputStream in = new FileInputStream("dbConfig.properties");
+            InputStream in = new FileInputStream("src/main/java/dbConfig.properties");
 
             p.load(in);
 
@@ -83,7 +83,7 @@ public class Main extends Application {
 
 
         } catch (FileNotFoundException e){
-
+            System.out.println("Fil ikke funnet");
         } catch (IOException e){
             e.printStackTrace();
         } catch (PropertyNotFoundException e){
