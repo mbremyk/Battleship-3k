@@ -82,7 +82,6 @@ public class Game {
      * @param hosting signalizes whether the local user is hosting the game or not.
      */
     public Game(int gameid, String gameName, BattleshipUser hostUser, boolean hosting) {
-//		databaseConnector = new DatabaseConnector(Constants.DB_URL);
         this.gameId = gameid;
         this.gameName = gameName;
         this.hostUser = hostUser;
@@ -325,8 +324,7 @@ public class Game {
     }
 
     /**
-     * Sets the gameOver tag
-     *
+     * Sets gameOver
      * @param gameOver
      */
     public void setGameOver(boolean gameOver) {
