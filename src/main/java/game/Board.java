@@ -278,6 +278,7 @@ public class Board extends ImageView {
     /**
      * Adds a Ship object to the stage and registers it in the ships array
      *
+     * @param ship the Ship to add to the ships array
      * @return true if ship could be added and false if there was a problem (for example spaces occupied)
      */
     public boolean addShip(Ship ship) {

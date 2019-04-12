@@ -1,4 +1,9 @@
-package model;
+/**
+ * ConfirmBox.java
+ * Displays a menu that allows for user input, with variable text but always yes or no option
+ * @author Gulaker Kristian
+ */
+package view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +20,13 @@ public class ConfirmBox {
 
     private static boolean answer;
 
+    /**
+     * Method to display a new window with optional outcome and message text
+     *
+     * @param message Message
+     * @return boolean answer
+     *
+     */
     public static boolean display(String message) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

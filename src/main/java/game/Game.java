@@ -19,20 +19,28 @@ import java.util.Random;
  * Most of the game logic
  */
 public class Game {
-    private boolean hosting; //If the local player is hosting
     /**
-     *
+     * true: if the local player is hosting, false otherwise
+     */
+    private boolean hosting;
+    /**
+     * user that is hosting the game
      */
     private BattleshipUser hostUser;
+    /**
+     * user that has joined the game
+     */
     private BattleshipUser joinUser;
     private BattleshipUser winner;
     private BattleshipUser loser;
     private Board board1;
     private Board board2;
     private boolean boardsReady = false;
-    //	private DatabaseConnector databaseConnector;
     private String gameName;
-    private boolean gameOpen = true; //open to join
+    /**
+     * true: game is open to join, false otherwise
+     */
+    private boolean gameOpen = true;
     private int gameId;
     private boolean gameOver = false;
     private boolean shipsMovable = true;
@@ -40,16 +48,27 @@ public class Game {
     private boolean myTurn = false;
     private int moveId = -1;
     private int largestMoveIdDone = -1;
+    /**
+     * true: opponent missed in one of the sent attacks in the last package, false otherwise
+     * helps meake sure all of the attacks have been downloaded and executed before they are deleted from database
+     */
     private boolean opponentMissed = false;
 
+    /**
+     * the opponent's attacks downloaded from the database
+     */
     private ArrayList<String> actionCache = new ArrayList<>();
+    /**
+     * the local user's attacks that need to be uploaded to the database
+     */
     private ArrayList<String> uploadActionCache = new ArrayList<>();
 
+    @Deprecated
     /**
      * @deprecated
-     * @param gameid
-     * @param gameName
-     * @param hostUser
+     * @param gameid used as PK in database to identify game. Hosting game and joining game have the same gameid.
+     * @param gameName name of the game
+     * @param hostUser the user hosting the game
      */
     public Game(int gameid, String gameName, BattleshipUser hostUser) {
         this(gameid, gameName, hostUser, false);
@@ -58,12 +77,11 @@ public class Game {
     /**
      * constructs new game either when user hosts or joins game
      * @param gameid used as PK in database to identify game. Hosting game and joining game have the same gameid.
-     * @param gameName
+     * @param gameName name of the game
      * @param hostUser the user hosting the game
      * @param hosting signalizes whether the local user is hosting the game or not.
      */
     public Game(int gameid, String gameName, BattleshipUser hostUser, boolean hosting) {
-//		databaseConnector = new DatabaseConnector(Constants.DB_URL);
         this.gameId = gameid;
         this.gameName = gameName;
         this.hostUser = hostUser;
@@ -223,8 +241,8 @@ public class Game {
 
     /**
      * uploads cached actions to database
-     * @param remove HJELP
-     * @param status HJELP
+     * @param remove the coords-string the previous uploadCachedActions got interrupted trying to remove from uploadActionCache
+     * @param status how far it got into the previous uploadCachedActions method before getting interrupted by another thread
      */
     public void uploadCachedActions(String remove, int status) {
 //        System.out.println("REUP: "+moveId);
@@ -239,7 +257,7 @@ public class Game {
     }
 
     /**
-     * HJELP
+     * tries to upload cached actions to the database
      */
     public void uploadCachedActions() {
         DatabaseConnector db = new DatabaseConnector();
@@ -306,9 +324,9 @@ public class Game {
     }
 
     /**
-     * Sets the gameOver tag
+     * Sets gameOver
      *
-     * @param gameOver
+     * @param gameOver true if the game is over, false if the game is not over
      */
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
@@ -379,7 +397,7 @@ public class Game {
     }
 
     /**
-     * checks if ships are movable or not HJELP
+     * checks if ships are movable or not (should be movable before pressing the 'ready' button
      * @return true if ships are movable, false otherwise
      */
     public boolean isShipsMovable() {

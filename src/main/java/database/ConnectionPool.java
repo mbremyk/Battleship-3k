@@ -44,7 +44,7 @@ public class ConnectionPool {
      * Initializes a new ConnectionPool with the specified url and List of connections
      *
      * @param url            String containing the URL for the JDBC connections
-     * @param connectionPool List<Connection> of an already existing set of connections
+     * @param connectionPool List of Connection of an already existing set of connections
      */
     public ConnectionPool(String url, List<Connection> connectionPool) {
         this.url = url;
@@ -55,8 +55,8 @@ public class ConnectionPool {
      * Initializes a new ConnectionPool with the specified url, List of connections and List of connections in use
      *
      * @param url             String containing the URL for the JDBC connections
-     * @param connectionPool  List<Connection> of an already existing set of connections
-     * @param usedConnections List<Connection> if an already existing set of connections in use
+     * @param connectionPool  List of Connection of an already existing set of connections
+     * @param usedConnections List of Connection if an already existing set of connections in use
      */
     public ConnectionPool(String url, List<Connection> connectionPool, List<Connection> usedConnections) {
         this.url = url;

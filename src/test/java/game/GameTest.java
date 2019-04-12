@@ -90,6 +90,25 @@ class GameTest {
     }
 
     /**
+     * checks if the board returns the expected string array of the board
+     * test fails although the expected string is identical to the actual one
+     */
+    @Test
+    void getBoard1() {
+        System.out.println(testHostGame.getBoard1());
+        assertEquals("|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n" +
+                "|0,0,0,0,0,0,0,0,0,0|\n", testHostGame.getBoard1());
+    }
+
+    /**
      * checks that the joinUser can be set
      */
     @Test
@@ -120,7 +139,7 @@ class GameTest {
     }
 
     /**
-     * checks if moveid is incremented
+     * checks if moveId is incremented
      */
     @Test
     void incMoveID() {
@@ -130,20 +149,11 @@ class GameTest {
     }
 
     /**
-     * checks if the turn set is returned in method
+     * checks if the value set is returned in method
+     * checks if the get method returns set value
      */
     @Test
-    void isMyTurn() {
-        testHostGame.setMyTurn(true);
-        assertTrue(testHostGame.isMyTurn());
-
-        testHostGame.setMyTurn(false);
-        assertFalse(testHostGame.isMyTurn());
-    }
-
-    //duplicated by isMyTurn()
-    @Test
-     void setMyTurn() {
+    void getMyTurnAndIsMyTurn() {
         testHostGame.setMyTurn(true);
         assertTrue(testHostGame.isMyTurn());
 
@@ -190,11 +200,24 @@ class GameTest {
 
 
     /**
-     * impossible
+     *
      */
     @Test
     void getGameResult() {
+        //game not over
+        assertEquals(-1, testHostGame.getGameResult());
+//        testHostGame.setGameOver(true);
+        testHostGame.getBoard1().addDefaultShips(true);
+        //
+        assertEquals(1, testHostGame.getGameResult());
+        //attacks entire board
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; i++) {
+                testHostGame.getBoard1().attack(i, j);
+            }
+        }
 
+        assertEquals(-1, testHostGame.getGameResult());
     }
 
     /**
@@ -212,26 +235,6 @@ class GameTest {
     void setGameOpen() {
         testHostGame.setGameOpen(false);
         assertEquals(false, testHostGame.isGameOpen());
-    }
-
-
-    /**
-     * checks if method sets boardsReady to given value
-     */
-    @Test
-    void setBoardsReady() {
-    }
-
-    @Test
-    void isBoardsReady() {
-    }
-
-    @Test
-    void isShipsMovable() {
-    }
-
-    @Test
-    void setShipsMovable() {
     }
 
     /**
