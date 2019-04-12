@@ -9,6 +9,7 @@
  * @Author Grande Trym
  */
 
+import com.sun.javafx.fxml.PropertyNotFoundException;
 import game.Game;
 import database.ConnectionPool;
 import database.DatabaseConnector;
@@ -20,10 +21,12 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import static database.Constants.DB_URL;
 import static database.Login.logout;
@@ -68,6 +71,23 @@ public class Main extends Application {
      * @param args standard args. ARRRGH
      */
     public static void main(String[] args) {
+        String DB_URL = "";
+        try{
+            Properties p = new Properties();
+
+            InputStream in = new FileInputStream("dbConfig.properties");
+
+            p.load(in);
+
+            DB_URL = "jdbc:mysql://" + p.getProperty("dbHost") + ":" + p.getProperty("dbPort") + "/" + p.getProperty("dbName") + "?user=" +
+                    p.getProperty("username")+ "&password=" + p.getProperty("password");
+        } catch (FileNotFoundException e){
+
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (PropertyNotFoundException e){
+            
+        }
         try {
             connectionPool = ConnectionPool.create(DB_URL);
             DatabaseConnector databaseConnector = new DatabaseConnector(DB_URL);
