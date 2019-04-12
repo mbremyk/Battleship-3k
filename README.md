@@ -12,5 +12,5 @@ Installation guide:
 -Open dbConfig.properties  
 -Add configurations for your database. For using our database send a message to magbre@stud.ntnu.no  
 -Go back to run directory  
--Dubleclick the Battleship 3k.bat file again.   
+-Doubleclick the Battleship 3k.bat file again.   
 -Enjoy your game :)  
