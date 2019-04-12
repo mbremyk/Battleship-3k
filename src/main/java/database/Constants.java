@@ -65,7 +65,7 @@ public class Constants {
     private static final String GAME_WINNER_ID = "winner_id";
 
     //Action table columns names
-    private static final String ACTION_TABLE = "battleship_action.sql";
+    private static final String ACTION_TABLE = "battleship_action";
     private static final String ACTION_GAME_ID = "game_id";
     private static final String ACTION_MOVE_ID = "move_id";
     private static final String ACTION_USER_ID = "user_id";
