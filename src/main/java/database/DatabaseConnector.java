@@ -411,6 +411,7 @@ public class DatabaseConnector {
         }
     }
 
+    @Deprecated
     /**
      * @param moveId ID of the move
      * @param gameId ID of the game
