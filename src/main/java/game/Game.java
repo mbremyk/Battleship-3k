@@ -325,7 +325,8 @@ public class Game {
 
     /**
      * Sets gameOver
-     * @param gameOver
+     *
+     * @param gameOver true if the game is over, false if the game is not over
      */
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
