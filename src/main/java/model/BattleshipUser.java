@@ -3,8 +3,8 @@
  * Models a the users we store information about in the database
  * #TODO remove password
  *
- * @Author Thorkildsen Torje
- * @Author Brevik Magnus
+ * @author Thorkildsen Torje
+ * @author Brevik Magnus
  */
 
 package model;
