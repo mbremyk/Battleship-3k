@@ -12,7 +12,12 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 public class Shaker {
+
+    /**
+     * The transition effect which applies the effect to the node
+     */
     private TranslateTransition translateTransition;
+
 
     /**
      * Initializes a new Shaker connected to a Node which will get the effect
