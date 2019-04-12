@@ -49,7 +49,7 @@ public class LeaderboardController extends ViewComponent {
         leaderboardMainMenuButton.setOnAction(event -> {
             switchView("MainMenu");
         });
-        DatabaseConnector newConnector = new DatabaseConnector(Constants.DB_URL);
+        DatabaseConnector newConnector = new DatabaseConnector();
         BattleshipUser[] users = sortUsers(newConnector.getBattleshipUsers());
         ObservableList<LeaderboardRowData> rowData = FXCollections.observableArrayList();
 
