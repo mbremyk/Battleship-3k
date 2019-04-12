@@ -13,29 +13,21 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
-import com.mysql.cj.result.Row;
 import database.Constants;
 import database.DatabaseConnector;
 import game.Game;
 import game.Statics;
-import model.ConfirmBox;
-import model.AlertBox;
+import view.ConfirmBox;
+import view.AlertBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-import model.BattleshipUser;
 
 public class JoinGameController extends ViewComponent {
 

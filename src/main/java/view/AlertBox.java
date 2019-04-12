@@ -1,4 +1,10 @@
-package model;
+/**
+ * AlertBox.java
+ * Displays an urgent variable message to user, which user must acknowledge
+ * @author Gulaker Kristian
+ *
+ */
+package view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +16,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class AlertBox {
+    /**
+     * Method to display parameter as a must-read message
+     * @param message
+     *
+     */
     public static void display(String message) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

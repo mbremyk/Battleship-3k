@@ -25,7 +25,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import model.BattleshipUser;
-import model.ConfirmBox;
 
 public class GameController extends ViewComponent {
 
