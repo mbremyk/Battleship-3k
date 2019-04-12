@@ -3,7 +3,7 @@ README for battleship-3k
 This is a project for TDAT1006 System Development with Database Project
 
 Installation guide:  
--Download Battleship-3k.zip  
+-Download DownloadThis.zip from the top directory  
 -Extract the run directory to somewhere on your computer  
 -Open the run directory  
 -Doubleclick the Battleship 3k.bat file. The program now generates a file called dbConfig.properties  
