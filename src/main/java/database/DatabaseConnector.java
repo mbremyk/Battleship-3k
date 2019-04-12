@@ -612,8 +612,8 @@ public class DatabaseConnector {
         } finally {
             try {
                 if (con != null) con.setAutoCommit(true);
-            } catch (Exception e2) {
-                e2.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             if (con != null) connectionPool.releaseConnection(con);
             if (deletePreparedStatement != null) close(deletePreparedStatement);
