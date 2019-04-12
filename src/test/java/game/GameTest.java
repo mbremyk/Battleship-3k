@@ -85,6 +85,7 @@ class GameTest {
      */
     @Test
     void getJoinUser() {
+        testJoinGame.setJoinUser(joinUser);
         assertEquals(joinUser, testJoinGame.getJoinUser());
 
     }
@@ -161,34 +162,9 @@ class GameTest {
         assertFalse(testHostGame.isMyTurn());
     }
 
-    /**
-     * checks if game is over
-     * @return true if game is over, false otherwise
-     */
-    @Test
-    void isGameOver() {
-        //place ships on board first
-
-    }
-
     @Test
     void getGameState() {
     }
-
-//    @Test
-//    void isGameOver() {
-//        testHostGame.getBoard1().getBoard().shipsRemaining = 0;
-//        testHostGame.board2.shipsRemaining() = 1;
-//        assertTrue(testHostGame.isGameOver());
-//
-//        testHostGame.board1.shipsRemaining() = 1;
-//        testHostGame.board2.shipsRemaining() = 0;
-//        assertTrue(testHostGame.isGameOver());
-//
-//        testHostGame.board1.shipsRemaining() = 1;
-//        testHostGame.board2.shipsRemaining() = 0;
-//        assertFalse(testHostGame.isGameOver());
-//    }
 
     /**
      * checks if set moveId is returned
@@ -196,28 +172,6 @@ class GameTest {
     @Test
     void getMoveId() {
         assertEquals(-1, testHostGame.getMoveId());
-    }
-
-
-    /**
-     *
-     */
-    @Test
-    void getGameResult() {
-        //game not over
-        assertEquals(-1, testJoinGame.getGameResult());
-//        testHostGame.setGameOver(true);
-        testJoinGame.getBoard1().addDefaultShips(true);
-        //
-        assertEquals(0, testJoinGame.getGameResult());
-        //attacks entire board
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; i++) {
-                testHostGame.getBoard1().attack(i, j);
-            }
-        }
-
-        assertEquals(1, testJoinGame.getGameResult());
     }
 
     /**
