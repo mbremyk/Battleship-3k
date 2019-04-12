@@ -104,7 +104,6 @@ public abstract class ViewComponent {
         AnchorPane parent = (AnchorPane) getParentAnchorPane().getScene().getRoot();
         Window window = parent.getScene().getWindow();
         double heightDiff = window.getHeight() - parent.getScene().getHeight();
-        System.out.println(heightDiff);
         window.setWidth(formPane.getPrefWidth());//+13);
         window.setHeight(formPane.getPrefHeight() + heightDiff);
     }
