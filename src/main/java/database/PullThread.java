@@ -57,6 +57,12 @@ public class PullThread extends Thread {
         }
         gameController.boardsReady();
 
+        try {
+            db.updateGameOver();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         boolean gameOver = game.isGameOver();
         int timer = 0;
         while ((!gameOver || !game.allActionsUploaded()) && running) {
@@ -72,6 +78,11 @@ public class PullThread extends Thread {
             if (timer == 0) {
                 game.uploadCachedActions();
             }
+            try {
+                db.updateGameOver();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             gameOver = game.isGameOver();
             try {
                 Thread.sleep(500);
@@ -83,7 +94,7 @@ public class PullThread extends Thread {
     }
 
     /**
-     * kills the thread
+     * Kills the thread
      */
     public void terminate() {
         running = false;
