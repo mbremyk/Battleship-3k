@@ -47,7 +47,7 @@ public class DatabaseConnector {
     }
 
     public DatabaseConnector() {
-        this.databaseUrl = Constants.DB_URL;
+        this.databaseUrl = Constants.getDbUrl();
     }
 
     public ConnectionPool setConnectionPool(ConnectionPool _connectionPool) {

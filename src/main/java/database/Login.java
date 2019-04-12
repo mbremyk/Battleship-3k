@@ -20,6 +20,7 @@ import java.security.spec.KeySpec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import game.Statics;
 import model.*;
 
@@ -82,7 +83,7 @@ public abstract class Login {
      */
     public static boolean usernameExists(String username) {
         DatabaseConnector databaseConnector = new DatabaseConnector();
-        return databaseConnector.stringExistsInColumn(username, USERS_USERNAME, USERS_TABLE);
+        return databaseConnector.stringExistsInColumn(username, Constants.getUsersUsername(), Constants.getUsersTable());
     }
 
     /**
@@ -93,7 +94,7 @@ public abstract class Login {
      */
     public static boolean emailExists(String email) {
         DatabaseConnector databaseConnector = new DatabaseConnector();
-        return databaseConnector.stringExistsInColumn(email, USERS_EMAIL, USERS_TABLE);
+        return databaseConnector.stringExistsInColumn(email, Constants.getUsersEmail(), Constants.getUsersTable());
     }
 
     /**
