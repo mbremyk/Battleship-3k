@@ -79,7 +79,8 @@ public class Main extends Application {
 
             p.load(in);
 
-            Constants.setDatabaseValues()
+            Constants.setDatabaseValues(p.getProperty("dbHost"), p.getProperty("dbPort"), p.getProperty("dbName"), p.getProperty("password"), p.getProperty("username"));
+
 
         } catch (FileNotFoundException e){
 
@@ -89,8 +90,8 @@ public class Main extends Application {
 
         }
         try {
-            connectionPool = ConnectionPool.create(DB_URL);
-            DatabaseConnector databaseConnector = new DatabaseConnector(DB_URL);
+            connectionPool = ConnectionPool.create(Constants.getDb_Url());
+            DatabaseConnector databaseConnector = new DatabaseConnector(Constants.getDb_Url());
             databaseConnector.setConnectionPool(connectionPool);
         } catch (SQLException e) {
             e.printStackTrace();

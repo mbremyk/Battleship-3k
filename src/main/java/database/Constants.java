@@ -14,13 +14,13 @@ package database;
 
 public class Constants {
     //Database connection configuration
-    public static void setDatabseValues(String dbHost, String dbPort, String dbUser, String dbPassword, String dbName, String dbURL){
+    public static void setDatabaseValues(String dbHost, String dbPort, String dbUser, String dbPassword, String dbName){
         DB_HOST = dbHost;
         DB_PORT = dbPort;
         DB_USER = dbUser;
         DB_PASSWORD = dbPassword;
         DB_NAME = dbName;
-        DB_URL = dbURL;
+        DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password=" + DB_PASSWORD;
     }
     public static String DB_HOST = "";
     public static String DB_PORT = "";
