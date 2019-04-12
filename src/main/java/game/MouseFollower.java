@@ -13,8 +13,20 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class MouseFollower extends Rectangle {
+
+    /**
+     * Width of the attack in amount of tiles in the grid, 1 if normal attack
+     */
     private int widthBlocks = 1;
+
+    /**
+     * Height of the attack in amount of tiles in the grid, 1 if normal attack
+     */
     private int heightBlocks = 1;
+
+    /**
+     * The width and height og the MouseFollower in pixels
+     */
     private double size = Board.TILE_SIZE;
 
     /**

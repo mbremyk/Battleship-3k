@@ -18,23 +18,92 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
 public class Ship extends Rectangle {
+
+    /**
+     * First element is the x-position in of the upper left corner of the Ship in the Board's grid
+     * Second element is the y-position in of the upper left corner of the Ship in the Board's grid
+     */
     private int[] basePosition;
+
+    /**
+     * Amount of tiles the Ship has in its width, which is along the x-axis if the ship's rotation is 0
+     * (what you would normally call the length of a Ship).
+     */
     private int widthTiles;
-    private int heightTiles;
+
+    /**
+     * Amount of tiles the Ship has in its height, which is along the y-axis if the ship's rotation is 0
+     * (what you would normally call the width of a Ship).
+     */
+     private int heightTiles;
+
+    /**
+     * How many tiles the Ship occupies in the x-direction in its current rotation
+     */
     private int tilesX;
+
+    /**
+     * How many tiles the Ship occupies in the y-direction in its current rotation
+     */
     private int tilesY;
+
+    /**
+     * A Ship's latest x-position-offset (in amount of tiles) to make the ship be displayed at the right position in the Board's grid
+     * when it is rotated.
+     */
     private int positionOffsetX;
+
+    /**
+     * A Ship's latest y-position-offset (in amount of tiles) to make the ship be displayed at the right position in the Board's grid
+     * when it is rotated.
+     */
     private int positionOffsetY;
+
+    /**
+     * A Ship's total x-position-offset (in amount of tiles) to make the ship be displayed at the right position in the Board's grid
+     * when it is rotated.
+     */
     private int totalPositionOffsetX = 0;
+
+    /**
+     * A Ship's total y-position-offset (in amount of tiles) to make the ship be displayed at the right position in the Board's grid
+     * when it is rotated.
+     */
     private int totalPositionOffsetY = 0;
+
+    /**
+     * True if the latest position-offset has been added to the Ship's position
+     */
     private boolean offsetAdded = true;
+
+    /**
+     * The current rotation of the Ship in degrees
+     */
     private int rotation;
+
+    /**
+     * The parent Board of the Ship
+     */
     private final Board parentBoard;
 
+    /**
+     * The x-position of the latest mouse press. Used to make dragging Ships possible.
+     */
     private double startDragX;
+
+    /**
+     * The y-position of the latest mouse press. Used to make dragging Ships possible.
+     */
     private double startDragY;
 
+    /**
+     * The amount of tiles the Ship has which have not been attacked
+     */
     private int health;
+
+    /**
+     * True if the ship has not been destroyed
+     */
     private boolean alive = true;
 
     /**

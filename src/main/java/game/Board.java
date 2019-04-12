@@ -22,13 +22,40 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 
 public class Board extends ImageView {
-    public static final int SIZE = 300; //Width and height of image
-    public static final int TILES = 10; //Tiles in x and y direction
+
+    /**
+     * Width and height of Board image
+     */
+    public static final int SIZE = 300;
+
+    /**
+     * Tiles in x and y direction/grid size
+     */
+    public static final int TILES = 10;
+
+    /**
+     * The width/height of each tile in the grid
+     */
     public static final double TILE_SIZE = SIZE / ((double) TILES); //Tiles in x and y direction
 
+    /**
+     * The current x-position of the cursor in the Board's grid, -1 if outside
+     */
     private int mousePosX = -1;
+
+    /**
+     * The current y-position of the cursor in the Board's grid, -1 if outside
+     */
     private int mousePosY = -1;
+
+    /**
+     * The parent AnchorPane of this Board
+     */
     private final AnchorPane parent;
+
+    /**
+     * The Board's number, 1 if local user and 2 if opponent
+     */
     private final int boardNumber;
 
     /**

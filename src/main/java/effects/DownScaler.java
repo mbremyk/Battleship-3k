@@ -12,7 +12,12 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 public class DownScaler {
+
+    /**
+     * The transition effect which applies the effect to the node
+     */
     private ScaleTransition scaleTransition;
+
 
     /**
      * Initializes a new DownScaler connected to a Node which will get the effect

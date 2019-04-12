@@ -14,7 +14,12 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 public class Scaler {
+
+    /**
+     * The transition effect which applies the effect to the node
+     */
     private ScaleTransition scaleTransition;
+
 
     /**
      * Initializes a new Scaler connected to a Node which will get the effect
