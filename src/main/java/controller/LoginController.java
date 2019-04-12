@@ -16,8 +16,6 @@ import java.util.ResourceBundle;
 
 import database.Login;
 import effects.Shaker;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import game.Statics;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -47,9 +45,6 @@ public class LoginController extends ViewComponent {
     private JFXButton loginLoginButton;
 
     @FXML
-    private Hyperlink loginForgotPasswordLink;
-
-    @FXML
     private TextField loginUsernameField;
 
 
@@ -58,7 +53,6 @@ public class LoginController extends ViewComponent {
         assert loginPasswordField != null : "fx:id=\"loginPasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert loginCancelButton != null : "fx:id=\"loginCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert loginLoginButton != null : "fx:id=\"loginLoginButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert loginForgotPasswordLink != null : "fx:id=\"loginForgotPasswordLink\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert loginUsernameField != null : "fx:id=\"loginUsernameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
 
         loginUsernameField.setOnAction(event -> {
@@ -102,7 +96,7 @@ public class LoginController extends ViewComponent {
                     }
                 }
                 Shaker shaker = new Shaker(node);
-                shaker.shake();
+                shaker.play();
             }
         }
     }

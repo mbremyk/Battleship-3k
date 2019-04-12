@@ -230,7 +230,7 @@ public class GameController extends ViewComponent {
             } else {
                 //FOR SHAKING THE WHOLE SCENE
 //                Shaker shaker = new Shaker(gameMainPane);
-//                shaker.shake();
+//                shaker.play();
 
                 for (Ship ship : overlappingShips) {
                     Scaler scaler = new Scaler(ship);

@@ -41,9 +41,6 @@ public class HostGameController extends ViewComponent {
     private TextField hostGameNameField;
 
     @FXML
-    private PasswordField hostGamePasswordField;
-
-    @FXML
     private JFXButton hostGameCancelButton;
 
 
@@ -51,7 +48,6 @@ public class HostGameController extends ViewComponent {
     void initialize() {
         assert hostGameCreateGameButton != null : "fx:id=\"hostGameCreateGameButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert hostGameNameField != null : "fx:id=\"hostGameNameField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
-        assert hostGamePasswordField != null : "fx:id=\"hostGamePasswordField\" was not injected: check your FXML file 'LoginMenu.fxml'.";
         assert hostGameCancelButton != null : "fx:id=\"hostGameCancelButton\" was not injected: check your FXML file 'LoginMenu.fxml'.";
 
         hostGameCancelButton.setOnAction(event -> {
@@ -63,10 +59,6 @@ public class HostGameController extends ViewComponent {
         });
 
         hostGameNameField.setOnAction(event -> {
-            createGameButtonPressed();
-        });
-
-        hostGamePasswordField.setOnAction(event -> {
             createGameButtonPressed();
         });
     }

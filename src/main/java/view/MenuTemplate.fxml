@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #90caf9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuTemplateController">
    <children>
-      <AnchorPane prefHeight="160.0" prefWidth="800.0" style="-fx-background-color: #5d99c6;">
+      <AnchorPane prefHeight="160.0" prefWidth="815.0" style="-fx-background-color: #5d99c6;">
          <children>
             <Text layoutX="223.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Battleships" textAlignment="CENTER">
                <font>

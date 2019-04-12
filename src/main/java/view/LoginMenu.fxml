@@ -47,6 +47,5 @@
             <Font name="PixelTorje" size="36.0" />
          </font>
       </JFXButton>
-      <Hyperlink fx:id="LoginForgotPasswordLink" layoutX="494.0" layoutY="185.0" text="Forgot your password?" underline="true" />
    </children>
 </AnchorPane>
