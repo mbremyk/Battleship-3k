@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Board extends ImageView {
@@ -82,7 +83,7 @@ public class Board extends ImageView {
      * @param boardNumber the number of this board, 1 = local user, 2 = opponent
      */
     public Board(AnchorPane parent, double x, double y, int boardNumber) {
-        super(new Image("./grid10x10.png"));
+        super(new Image(Paths.get("src/main/resources/grid10x10.png").toUri().toString()));
         this.parent = parent;
         setTranslateX(x);
         setTranslateY(y);
@@ -364,7 +365,7 @@ public class Board extends ImageView {
                 } else {
                     game.incMoveID();
                 }
-                addTileColor(x, y, null, new Image("./WaterTile.png"));
+                addTileColor(x, y, null, new Image(Paths.get("src/main/resources/WaterTile.png").toUri().toString()));
                 return 0;
             default:
                 ships.get(board[x][y] - 1).reduceHealth();
@@ -374,7 +375,7 @@ public class Board extends ImageView {
                 } else {
                     game.incMoveID();
                 }
-                addTileColor(x, y, null, new Image("./ExplosionTile.png"));
+                addTileColor(x, y, null, new Image(Paths.get("src/main/resources/ExplosionTile.png").toUri().toString()));
                 return 1; //HIT
         }
     }
