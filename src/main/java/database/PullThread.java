@@ -5,8 +5,8 @@
  * Pulling from the sql database to check if the opponent has made any new moves
  * </p>
  *
- *  @author Thorkildsen Torje
- *  @author Granli Hans Kristian Olsen
+ * @author Thorkildsen Torje
+ * @author Granli Hans Kristian Olsen
  */
 
 package database;
@@ -71,7 +71,7 @@ public class PullThread extends Thread {
             }
 
             /*
-            *Does an upload check every second
+             *Does an upload check every second
              */
             timer++;
             timer %= 2;

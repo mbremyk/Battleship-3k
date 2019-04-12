@@ -1,6 +1,6 @@
-.idea/
-out/
+.idea/*
+out/*
 Battleship 3k.iml
 Battleship-3k.iml
-target/
+target/*
 .gitignore
