@@ -586,12 +586,17 @@ public class DatabaseConnector {
             return true;
         } catch (Exception e1) {
             try {
-                if (con != null) con.setAutoCommit(true);
+                if (con != null) con.rollback();
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
             e1.printStackTrace();
         } finally {
+            try {
+                if (con != null) con.setAutoCommit(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (con != null) connectionPool.releaseConnection(con);
             if (deletePreparedStatement != null) close(deletePreparedStatement);
             if (insertPreparedStatement != null) close(insertPreparedStatement);
