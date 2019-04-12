@@ -303,6 +303,11 @@ public class Game {
         return gameOver;
     }
 
+    /**
+     * Sets the gameOver tag
+     *
+     * @param gameOver
+     */
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
@@ -398,6 +403,11 @@ public class Game {
         setGameOver(true);
     }
 
+    /**
+     * Returns the
+     *
+     * @return
+     */
     public BattleshipUser getWinner() {
         return this.winner;
     }

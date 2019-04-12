@@ -266,10 +266,21 @@ public class DatabaseConnector {
         return moveId;
     }
 
+    /**
+     * Returns the game with the given host ID
+     *
+     * @param hostid ID of the player hosting the game
+     * @return Game with the correct host ID
+     */
     public Game getGame(int hostid) {
         return getGames(hostid)[0];
     }
 
+    /**
+     * Returns all the games from the database
+     *
+     * @return Array of Games
+     */
     public Game[] getGames() {
         return getGames(-1);
     }
@@ -400,33 +411,39 @@ public class DatabaseConnector {
         }
     }
 
-//    public String getLastCoordinates(int moveId, int gameId) {
-//        String coordinates = null;
-//        ResultSet res = null;
-//        PreparedStatement preparedStatement = null;
-//        String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ?" + " AND " + ACTION_MOVE_ID + " = ?";
-//        Connection con = null;
-//        try {
-//            con = connectionPool.getConnection();
-//            res = preparedStatement.executeQuery();
-//            preparedStatement = con.prepareStatement(query);
-//            preparedStatement.setInt(1, gameId);
-//            preparedStatement.setInt(2, moveId);
-//            res = preparedStatement.executeQuery();
-//            connectionPool.releaseConnection(con);
-//            if (res.next()) {
-//                coordinates = res.getString(ACTION_COORDINATES);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        } finally {
-//            if (con != null) connectionPool.releaseConnection(con);
-//            if (res != null) close(res);
-//            if (preparedStatement != null) close(preparedStatement);
-//        }
-//        return coordinates;
-//    }
+    /**
+     * @param moveId ID of the move
+     * @param gameId ID of the game
+     * @return String representing the last coordinates affected
+     * @deprecated made better methods
+     */
+    public String getLastCoordinates(int moveId, int gameId) {
+        String coordinates = null;
+        ResultSet res = null;
+        PreparedStatement preparedStatement = null;
+        String query = "SELECT * FROM " + ACTION_TABLE + " WHERE " + ACTION_GAME_ID + " = ?" + " AND " + ACTION_MOVE_ID + " = ?";
+        Connection con = null;
+        try {
+            con = connectionPool.getConnection();
+            res = preparedStatement.executeQuery();
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, gameId);
+            preparedStatement.setInt(2, moveId);
+            res = preparedStatement.executeQuery();
+            connectionPool.releaseConnection(con);
+            if (res.next()) {
+                coordinates = res.getString(ACTION_COORDINATES);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (con != null) connectionPool.releaseConnection(con);
+            if (res != null) close(res);
+            if (preparedStatement != null) close(preparedStatement);
+        }
+        return coordinates;
+    }
 
     /**
      * Checks if a user has joined the game
@@ -798,6 +815,11 @@ public class DatabaseConnector {
         return true;
     }
 
+    /**
+     * Checks if there is a winner of the current Game in the database and updates the local Game object
+     *
+     * @throws Exception if something went wrong. WIIUUU WIIUUU WIIUUU
+     */
     public void updateGameOver() throws Exception {
         Connection con = null;
         PreparedStatement preparedStatement = null;
