@@ -78,15 +78,19 @@ public class Main extends Application {
             p.load(in);
 
             Constants.setDatabaseValues(p.getProperty("dbHost"), p.getProperty("dbPort"), p.getProperty("dbName"), p.getProperty("password"), p.getProperty("username"));
+
         } catch (FileNotFoundException e){
             try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("src/main/java/dbConfig.properties"), "utf-8"))) {
+                OutputStream os = new FileOutputStream("src/main/java/dbConfig.properties");
                 Properties p = new Properties();
                 p.setProperty("dbHost", "");
                 p.setProperty("dbPort", "");
                 p.setProperty("dbName", "");
                 p.setProperty("password", "");
                 p.setProperty("username", "");
+
+                p.store(os,null);
             } catch (Exception a){
                 a.printStackTrace();
             }
