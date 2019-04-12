@@ -120,7 +120,7 @@ class GameTest {
     }
 
     /**
-     * checks if moveid is incremented
+     * checks if moveId is incremented
      */
     @Test
     void incMoveID() {
@@ -130,20 +130,11 @@ class GameTest {
     }
 
     /**
-     * checks if the turn set is returned in method
+     * checks if the value set is returned in method
+     * checks if the get method returns set value
      */
     @Test
-    void isMyTurn() {
-        testHostGame.setMyTurn(true);
-        assertTrue(testHostGame.isMyTurn());
-
-        testHostGame.setMyTurn(false);
-        assertFalse(testHostGame.isMyTurn());
-    }
-
-    //duplicated by isMyTurn()
-    @Test
-     void setMyTurn() {
+    void getMyTurnAndIsMyTurn() {
         testHostGame.setMyTurn(true);
         assertTrue(testHostGame.isMyTurn());
 
