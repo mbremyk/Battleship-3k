@@ -1,2 +1,2 @@
 @echo off
-java -jar target/battleship-3k-0.x-jar-with-dependencies.jar
+java -jar out\artifacts\battleship_3k_jar\battleship-3k.jar
