@@ -86,6 +86,8 @@ public class PullThread extends Thread {
             gameOver = game.isGameOver();
             try {
                 Thread.sleep(500);
+            }catch (InterruptedException e) {
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -9,6 +9,7 @@
  * @Author Grande Trym
  */
 
+import com.sun.javafx.fxml.PropertyNotFoundException;
 import game.Game;
 import database.ConnectionPool;
 import database.DatabaseConnector;
@@ -20,12 +21,15 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
-import static database.Constants.DB_URL;
+import database.Constants;
+
 import static database.Login.logout;
 
 public class Main extends Application {
@@ -68,9 +72,35 @@ public class Main extends Application {
      * @param args standard args. ARRRGH
      */
     public static void main(String[] args) {
+        try (InputStream in = new FileInputStream("src/main/java/dbConfig.properties");) {
+            Properties p = new Properties();
+
+            p.load(in);
+
+            Constants.setDatabaseValues(p.getProperty("dbHost"), p.getProperty("dbPort"), p.getProperty("dbName"), p.getProperty("password"), p.getProperty("username"));
+
+        } catch (FileNotFoundException e){
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream("src/main/java/dbConfig.properties"), "utf-8"))) {
+                OutputStream os = new FileOutputStream("src/main/java/dbConfig.properties");
+                Properties p = new Properties();
+                p.setProperty("dbHost", "");
+                p.setProperty("dbPort", "");
+                p.setProperty("dbName", "");
+                p.setProperty("password", "");
+                p.setProperty("username", "");
+
+                p.store(os,null);
+            } catch (Exception a){
+                a.printStackTrace();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         try {
-            connectionPool = ConnectionPool.create(DB_URL);
-            DatabaseConnector databaseConnector = new DatabaseConnector(DB_URL);
+            connectionPool = ConnectionPool.create(Constants.getDbUrl());
+            DatabaseConnector databaseConnector = new DatabaseConnector(Constants.getDbUrl());
+
             databaseConnector.setConnectionPool(connectionPool);
         } catch (SQLException e) {
             e.printStackTrace();

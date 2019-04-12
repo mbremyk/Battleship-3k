@@ -29,15 +29,6 @@ import static database.Constants.*;
  * Login class
  */
 public abstract class Login {
-    /**
-     * URL to the JDBC server
-     */
-    private static String databaseUrl = Constants.DB_URL;
-
-    /**
-     *
-     */
-    private static final DatabaseConnector databaseConnector = new DatabaseConnector(databaseUrl);
 
     /**
      * Handles registering of a new user with the desired username, password, and email.
@@ -52,6 +43,7 @@ public abstract class Login {
         if (!usernameExists(username) && !emailExists(email)) {
             byte[] salt = generateSalt();
             byte[] hashedPassword = saltPassword(password, salt);
+            DatabaseConnector databaseConnector = new DatabaseConnector();
             databaseConnector.registerUser(username, hashedPassword, email, salt);
             return true;
         }
@@ -76,6 +68,7 @@ public abstract class Login {
      * @return BattleshipUser containing the information about the logged in user, or null if unsuccessful
      */
     public static BattleshipUser login(String username, String password) {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
         BattleshipUser user = databaseConnector.getBattleshipUser(username, password);
         if (user != null) Statics.setLocalUser(user);
         return user;
@@ -88,7 +81,8 @@ public abstract class Login {
      * @return boolean true if username exists, false if not
      */
     public static boolean usernameExists(String username) {
-        return databaseConnector.stringExistsInColumn(username, USERS_USERNAME, USERS_TABLE);
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        return databaseConnector.stringExistsInColumn(username, Constants.getUsersUsername(), Constants.getUsersTable());
     }
 
     /**
@@ -98,7 +92,8 @@ public abstract class Login {
      * @return boolean true if email exists, false if not
      */
     public static boolean emailExists(String email) {
-        return databaseConnector.stringExistsInColumn(email, USERS_EMAIL, USERS_TABLE);
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        return databaseConnector.stringExistsInColumn(email, Constants.getUsersEmail(), Constants.getUsersTable());
     }
 
     /**
@@ -141,6 +136,7 @@ public abstract class Login {
      * @return true if user was logged out successfully, false if not
      */
     public static boolean logout() {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
         return databaseConnector.logout();
     }
 

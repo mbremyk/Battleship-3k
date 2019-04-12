@@ -205,11 +205,11 @@ class GameTest {
     @Test
     void getGameResult() {
         //game not over
-        assertEquals(-1, testHostGame.getGameResult());
+        assertEquals(-1, testJoinGame.getGameResult());
 //        testHostGame.setGameOver(true);
-        testHostGame.getBoard1().addDefaultShips(true);
+        testJoinGame.getBoard1().addDefaultShips(true);
         //
-        assertEquals(1, testHostGame.getGameResult());
+        assertEquals(0, testJoinGame.getGameResult());
         //attacks entire board
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; i++) {
@@ -217,7 +217,7 @@ class GameTest {
             }
         }
 
-        assertEquals(-1, testHostGame.getGameResult());
+        assertEquals(1, testJoinGame.getGameResult());
     }
 
     /**

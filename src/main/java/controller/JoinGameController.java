@@ -136,7 +136,7 @@ public class JoinGameController extends ViewComponent {
      * Refreshes the list of games, by reloading them from the database
      */
     public void refreshList() {
-        DatabaseConnector newConnector = new DatabaseConnector(Constants.DB_URL);
+        DatabaseConnector newConnector = new DatabaseConnector();
         games = newConnector.getGames();
         gameList.clear();
         joinGameGamesTable.getItems().clear();

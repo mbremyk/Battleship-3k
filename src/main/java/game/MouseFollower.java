@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+import java.nio.file.Paths;
+
 public class MouseFollower extends Rectangle {
 
     /**
@@ -72,10 +74,10 @@ public class MouseFollower extends Rectangle {
     public void pressed(boolean pressed) {
         if (pressed) {
 //            setFill(Color.GRAY);
-            setFill(new ImagePattern(new Image("./AttackPressed.png")));
+            setFill(new ImagePattern(new Image(Paths.get("src/main/resources/AttackPressed.png").toUri().toString())));
         } else {
 //            setFill(Color.WHITE);
-            setFill(new ImagePattern(new Image("./AttackNotPressed.png")));
+            setFill(new ImagePattern(new Image(Paths.get("src/main/resources/AttackNotPressed.png").toUri().toString())));
         }
     }
 
