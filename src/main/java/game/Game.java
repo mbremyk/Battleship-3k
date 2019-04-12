@@ -404,14 +404,19 @@ public class Game {
     }
 
     /**
-     * Returns the
+     * Returns the winner of the local Game object
      *
-     * @return
+     * @return BattleshipUser winner
      */
     public BattleshipUser getWinner() {
         return this.winner;
     }
 
+    /**
+     * Returns the loser of the local Game object
+     *
+     * @return BattleshipUser loser
+     */
     public BattleshipUser getLoser() {
         return this.loser;
     }
