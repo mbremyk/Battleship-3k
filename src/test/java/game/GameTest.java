@@ -190,11 +190,24 @@ class GameTest {
 
 
     /**
-     * impossible
+     *
      */
     @Test
     void getGameResult() {
+        //game not over
+        assertEquals(-1, testHostGame.getGameResult());
+//        testHostGame.setGameOver(true);
+        testHostGame.getBoard1().addDefaultShips(true);
+        //
+        assertEquals(1, testHostGame.getGameResult());
+        //attacks entire board
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; i++) {
+                testHostGame.getBoard1().attack(i, j);
+            }
+        }
 
+        assertEquals(-1, testHostGame.getGameResult());
     }
 
     /**
@@ -212,26 +225,6 @@ class GameTest {
     void setGameOpen() {
         testHostGame.setGameOpen(false);
         assertEquals(false, testHostGame.isGameOpen());
-    }
-
-
-    /**
-     * checks if method sets boardsReady to given value
-     */
-    @Test
-    void setBoardsReady() {
-    }
-
-    @Test
-    void isBoardsReady() {
-    }
-
-    @Test
-    void isShipsMovable() {
-    }
-
-    @Test
-    void setShipsMovable() {
     }
 
     /**
