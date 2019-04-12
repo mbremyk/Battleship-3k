@@ -69,7 +69,7 @@ public class Board extends ImageView {
     private int[][] board;
 
     /**
-     * An ArrayList containing the ships in the board
+     * An ArrayList containing the ships in the Board
      */
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
