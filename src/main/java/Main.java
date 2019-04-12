@@ -90,7 +90,7 @@ public class Main extends Application {
         }
         try {
             connectionPool = ConnectionPool.create(DB_URL);
-            DatabaseConnector databaseConnector = new DatabaseConnector(DB_URL);
+            DatabaseConnector databaseConnector = new DatabaseConnector();
             databaseConnector.setConnectionPool(connectionPool);
         } catch (SQLException e) {
             e.printStackTrace();
