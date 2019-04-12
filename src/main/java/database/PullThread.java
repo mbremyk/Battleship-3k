@@ -94,7 +94,7 @@ public class PullThread extends Thread {
     }
 
     /**
-     * kills the thread
+     * Kills the thread
      */
     public void terminate() {
         running = false;
