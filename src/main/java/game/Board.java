@@ -125,9 +125,8 @@ public class Board extends ImageView {
      */
     public String registerShip(Ship ship) {
         String ret = "";
-//        int[] pos = ship.getBasePosition();
-        int x = ship.getRotationCenterX();
-        int y = ship.getRotationCenterY();
+        int x = ship.getTileX();
+        int y = ship.getTileY();
         int width = ship.getWidthTiles();
         int height = ship.getHeightTiles();
         int rotation = ship.getRotation();
