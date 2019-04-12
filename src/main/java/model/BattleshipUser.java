@@ -22,6 +22,7 @@ public class BattleshipUser {
     /**
      * Constructor for the BattleshipUser class
      *
+     * @param userId user ID
      * @param username username
      * @param password password
      * @param email email
@@ -46,6 +47,7 @@ public class BattleshipUser {
     /**
      * Constructor without won or lost games
      *
+     * @param userId user ID
      * @param username username
      * @param password password
      * @param email email
