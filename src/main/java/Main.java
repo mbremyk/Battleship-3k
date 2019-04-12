@@ -83,11 +83,19 @@ public class Main extends Application {
 
 
         } catch (FileNotFoundException e){
-            System.out.println("Fil ikke funnet");
-        } catch (IOException e){
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream("src/main/java/dbConfig.properties"), "utf-8"))) {
+                Properties p = new Properties();
+                p.setProperty("dbHost", "");
+                p.setProperty("dbPort", "");
+                p.setProperty("dbName", "");
+                p.setProperty("password", "");
+                p.setProperty("username", "");
+            } catch (Exception a){
+                a.printStackTrace();
+            }
+        } catch (Exception e){
             e.printStackTrace();
-        } catch (PropertyNotFoundException e){
-
         }
         try {
             connectionPool = ConnectionPool.create(Constants.getDbUrl());
