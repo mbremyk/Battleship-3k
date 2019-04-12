@@ -11,7 +11,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import game.Statics;
-import model.ConfirmBox;
+import view.ConfirmBox;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
