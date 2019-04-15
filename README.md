@@ -2,9 +2,9 @@ README for battleship-3k
   
 This is a project for TDAT1006 System Development with Database Project  
   
-/**************************************************\\  
+/\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\\  
         MAKE SURE YOUR JAVA VERSION IS 1.8  
-\\**************************************************/  
+\\\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*/  
   
 Installation guide:  
 -Download DownloadThis.zip from the top directory  
