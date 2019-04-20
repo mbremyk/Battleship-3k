@@ -17,7 +17,7 @@ Installation guide:
 -Go to run/src/main/java  
 -Open dbConfig.properties  
 -Add configurations for your database. For using our database send a message to magbre@stud.ntnu.no  
---If you want to use your own database please follow the SQL guide below
+--If you want to use your own database please follow the SQL guide below  
 -Go back to the "run" directory  
 -Double click the "Battleship 3k.bat" file again.   
 -Enjoy your game :)  
