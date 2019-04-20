@@ -22,9 +22,9 @@ Installation guide:
 -Double click the "Battleship 3k.bat" file again.   
 -Enjoy your game :)  
 
-SQL guide (do this only once):
--Open your preferred way to handle database interactions
--Make sure you are using a MySQL server with MySQL 8 or newer
--Make sure you have no tables in your database called "BattleshipUser", "battleship_game", "battleship_board", "battleship_action", or "battleship_feedback" in your database
--Copy the entire contents of "full_sql_wo_foreign_keys.sql" and run it against your database
--You should now be good to go
+SQL guide (do this only once):  
+-Open your preferred way to handle database interactions  
+-Make sure you are using a MySQL server with MySQL 8 or newer  
+-Make sure you have no tables in your database called "BattleshipUser", "battleship_game", "battleship_board", "battleship_action", or "battleship_feedback" in your database  
+-Copy the entire contents of "full_sql_wo_foreign_keys.sql" and run it against your database  
+-You should now be good to go  
