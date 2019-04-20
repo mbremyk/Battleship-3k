@@ -23,5 +23,5 @@ ALTER TABLE `BattleshipUser`
 
 ALTER TABLE `BattleshipUser`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 51;
+  AUTO_INCREMENT = 1;
 COMMIT;

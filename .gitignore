@@ -5,3 +5,4 @@ Battleship-3k.iml
 target/*
 .gitignore
 dbConfig.properties
+*.log

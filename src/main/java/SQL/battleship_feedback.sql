@@ -13,5 +13,5 @@ ALTER TABLE `battleship_feedback`
 
 ALTER TABLE `battleship_feedback`
   MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 17;
+  AUTO_INCREMENT = 1;
 COMMIT;

@@ -688,7 +688,7 @@ public class DatabaseConnector {
     }
 
     /**
-     * Updates the score of the user. Adds 1 to either {@link Constants#Constants.getUsersWins()} or {@link Constants#Constants.getUsersLosses()} depending on the results of the game
+     * Updates the score of the user. Adds 1 to either {@link Constants#getUsersWins()} or {@link Constants#getUsersLosses()} depending on the results of the game
      *
      * @param userId     ID of the user to update the score of
      * @param gameResult the result of the game. 1 if the user won and 0 if the user lost
