@@ -131,11 +131,11 @@ public class SignupController extends ViewComponent {
     public void signupButtonClicked() {
         if (checkValidUser()) {
             //Sets userid to -1 because the user hasn't been created yet so no userid exists in the database
-            BattleshipUser user = new BattleshipUser(-1, signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
-            boolean signupStatus = Login.registerUser(user);
+            boolean signupStatus = Login.registerUser(signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
             if (signupStatus) {
                 signupHelpText.setText("New user was created");
 //                    switchView("LoginMenu");
+                BattleshipUser user = Login.login(signupUsernameField.getText(),signupPasswordField.getText());
                 Statics.setLocalUser(user);
                 Scene scene = signupCancelButton.getScene();
                 Node node = scene.lookup("#mainMenuLoggedInText");
