@@ -130,7 +130,6 @@ public class SignupController extends ViewComponent {
      */
     public void signupButtonClicked() {
         if (checkValidUser()) {
-            //Sets userid to -1 because the user hasn't been created yet so no userid exists in the database
             boolean signupStatus = Login.registerUser(signupUsernameField.getText(), signupPasswordField.getText(), signupEmailField.getText());
             if (signupStatus) {
                 signupHelpText.setText("New user was created");
